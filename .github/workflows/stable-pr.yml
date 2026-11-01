@@ -40,13 +40,24 @@ jobs:
 
           [Permanent handoff](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/release/v1.0.0/docs/DEVELOPMENT_STATUS.md) · [Release review](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/release/v1.0.0/docs/RELEASE_READINESS.md).
           MD
-          existing="$(gh pr list --state open --base main --head release/v1.0.0 --json number --jq '.[0].number // empty')"
-          if [ -n "$existing" ]; then
-            gh pr edit "$existing" --title 'Energy Price Engine v1.0.0 — Stable' --body-file "$RUNNER_TEMP/stable-pr.md"
-          else
-            gh pr create --base main --head release/v1.0.0 --draft --title 'Energy Price Engine v1.0.0 — Stable' --body-file "$RUNNER_TEMP/stable-pr.md"
-          fi
-          gh pr view release/v1.0.0 --json number,url,state,isDraft,baseRefName,headRefName,headRefOid > "$RUNNER_TEMP/stable-pr.json"
+          python - <<'PYCODE'
+          import json,os,subprocess,sys
+          from pathlib import Path
+          def run(args):
+              result=subprocess.run(args,text=True,capture_output=True)
+              if result.returncode:
+                  reason=(result.stderr or result.stdout).strip()
+                  escaped=reason.replace('%','%25').replace('\r','%0D').replace('\n','%0A')
+                  print('::error title=Stable PR permission/platform gate::'+escaped)
+                  raise SystemExit(result.returncode)
+              return result.stdout.strip()
+          existing=json.loads(run(['gh','pr','list','--state','open','--base','main','--head','release/v1.0.0','--json','number']))
+          body=str(Path(os.environ['RUNNER_TEMP'])/'stable-pr.md')
+          if existing:run(['gh','pr','edit',str(existing[0]['number']),'--title','Energy Price Engine v1.0.0 — Stable','--body-file',body])
+          else:print(run(['gh','pr','create','--base','main','--head','release/v1.0.0','--draft','--title','Energy Price Engine v1.0.0 — Stable','--body-file',body]))
+          data=run(['gh','pr','view','release/v1.0.0','--json','number,url,state,isDraft,baseRefName,headRefName,headRefOid'])
+          (Path(os.environ['RUNNER_TEMP'])/'stable-pr.json').write_text(data)
+          PYCODE
       - name: Record repository merge and branch-protection gates without changing them
         run: |
           python - <<'PY'

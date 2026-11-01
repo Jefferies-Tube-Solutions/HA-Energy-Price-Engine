@@ -1,3 +1,25 @@
+# Stable PR platform gate investigation — active
+
+Source181467486bfea61148cdcc292c661e40006ec30a is committed/pushed on release/v1.0.0.
+The prepare-review workflow failed specifically at ordinary stable draft PR creation:
+https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41353330899/job/124988020176
+Its baseline/22unchangedPython check succeeded; this is not a pricing-test failure.
+The anonymous job page exposes only exit1, so this checkpoint captures the actual
+CLI response as a public error annotation. Checkpoint subject: **Expose the stable PR platform gate without bypassing permissions**.
+
+No merge, stable tag or stable release has been attempted. Main remains56cdb3c and
+all betas remain immutable. Native stable clean/upgrade and exact-main/public gates
+remain pending. Once the precise platform response is known, follow issue18's explicit
+STOP instruction if permissions/approvals/platform actions are unavailable; present
+the concrete branch and exact owner action rather than inventing release success.
+
+Observed local142tests/core on HA2026.10.3/.4,90%coverage,22browser cases,4actual-HACS
+channel cases and supported local brand fallbacks passed. Native packages built twice
+and outside-source installs are in progress/recorded logs; official hassfest running.
+Existing pricing/model/ledger/API/scheduler/JS remain byte-identical accepted beta12.
+
+---
+
 # v1.0.0 stable preparation — active, 1 November 2026
 
 Issue18 and the attached owner brief explicitly authorize a focused stable release,

@@ -1,3 +1,33 @@
+# Beta.11 final candidate checkpoint — active
+
+Previous source73fcccf;branch feat/beta5-simple-onboarding;draftPR14.
+Checkpoint subject: **Prepare cumulative beta11 native Diagnostics release candidate**.
+Owner-authorized scope is complete locally;publication still pending final CI/tag/guard.
+
+Final native EN/DA desktop/mobile and restart validation passed,with15 committed
+screenshots. All27 original IDs,3 configs and2 actual price-ledger byte hashes match
+hash-verified published beta10 after upgrade,language reloads and restart. Price
+model/sources/SQLite/config/schedule/API2/cardJS:19files byte-identical beta10.
+Four-band site:22total entities,14enabled native Diagnostic rows,all12numbers at
+2-decimal ore defaults;coherent current/next record/revision and correct VAT sum.
+Missing supplier leaves components Unknown and4 independently verified grid ranges.
+No provider calls from views,zero browser errors/warnings;controlled PE test clock,
+not owner hardware or unpatched live timing. No physical production access.
+
+Full123case matrix and90%coverage on HA2026.10.3/current.4;18card regressions;1valid/
+0invalidhassfest. Final standalone installer now also checks22native entities/14enabled
+Diagnostics outside source. Actual HACS tests use original public beta10 baseline.
+Latest Source73fcccf CI is in progress;first b91db76 had12green checks. Clean archives
+rebuilt twice matching runtime bytes;final source ID will be pinned after this commit.
+
+Next: finish exact-source CI and both-core independent installs;tag beta11 immutably;
+reuse guarded publisher with baseline/protected-file check and all prior1–10 asset
+integrity. Two fresh public verification jobs must pass before final STOP handoff.
+No stable/main merge,no production HA/Node-RED/charging controls. Beta10 updates in
+place,no reset. Real Raspberry Pi acceptance remains the owner's next step.
+
+---
+
 # Beta.11 native acceptance checkpoint — active
 
 Previous source b91db767774ccef38eab6f4d59a8d5fec62a2e15, branch

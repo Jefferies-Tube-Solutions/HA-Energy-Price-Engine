@@ -8,7 +8,7 @@ Back up first. An unreleased CM built for API1 remains incompatible with API2.
 
 Enable HACS **Show beta versions**, refresh information, select **v0.1.0-beta.11**,
 download and restart HA, then reload the app/browser. **Keep existing sites; no reset
-is needed.** Device info must show0.1.0-beta.11. Under **Diagnostic**, verify the price
+is needed.** Device info must show 0.1.0-beta.11. Under **Diagnostic**, verify the price
 period, eight component amounts, four real Radius time ranges and availability.
 The original nine entities and source/contract mappings remain. See
 [Native Diagnostics](DIAGNOSTICS.md) for the complete acceptance list.
@@ -79,6 +79,6 @@ installer; do not extract that ZIP directly into the HA config root. Do not over
 a manual package on a HACS-managed copy. Both layouts are tested outside this repo.
 
 HACS workflow tests run actual pinned HACS 2.0.5 and upstream registration, supported
-admin beta-visibility command, beta.9→.10 file update, reinstall and uninstall with
+admin beta-visibility command, beta.10→.11 file update, reinstall and uninstall with
 mocked GitHub I/O. Post-publication verification uses independently downloaded public
 source/assets. These software tests do not claim owner acceptance on PAHA02-DEV.

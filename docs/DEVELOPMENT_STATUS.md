@@ -1,3 +1,51 @@
+# Beta.12 VAT display preference — active, 1 November 2026
+
+The new owner mission and issue #17 supersede the beta.11 STOP below. The attached
+brief ends mid-sentence in section 7; the complete issue and owner authorization
+comment supply the Recorder-safety and guarded-publication requirements. Publication
+is authorized after exact-source CI, native setup/Diagnostics and integrity gates.
+Baseline is immutable beta.11 source **657bc49b091c1aa5fafa6cad0945cd693326d31c**.
+Branch `feat/beta5-simple-onboarding`; previous checkpoint `efda3b7`, existing draft
+PR #14. Main remains `56cdb3c10993179371483812cbc36f651ba3ad8e`.
+Checkpoint subject: **Add saved VAT display projection without changing canonical prices**.
+
+Implemented strictly boolean `display_including_vat`, default true for existing
+schema-4 sites, native initial-site field and normal Configure → Including VAT form.
+The enabled enum Diagnostic localizes Yes/No and Ja/Nej. Existing diagnostic rows and
+actual grid bands remain; normal four-band site now has 23 entities / 15 Diagnostic
+rows. Selected-quarter components use stored incl_vat/ex_vat; ex-VAT final sums full
+precision stored components. Actual VAT amount is unchanged in both modes. Cached
+DSO bands respect their verified VAT metadata and actual hours, including manual
+already-inclusive inputs. Unknown values remain unavailable.
+
+Display-only saves publish coordinator state without reload, provider I/O, SQLite
+writes, price recalculation, revision events or CM API2 changes. The nine primary
+sensor values/state classes keep their original fixed basis and now explicitly label
+that basis, preserving Recorder continuity and all existing unique IDs. Dashboard
+components, final graph, statistics and day tariffs follow the preference; raw-source
+Nord Pool graph stays explicitly ex VAT. Internal card schema 3 rejects stale schema-2
+JavaScript rather than silently applying old mixed-basis labels. Reload browser resources
+after upgrade. CM API remains v2 with canonical VAT-inclusive final prices.
+
+Validation observed: first full supported-core suite 136 passed / 90% coverage / two
+unchanged upstream HACS warnings; 37 focused first cases and 25 expanded VAT/dashboard
+cases passed; all 22 desktop/mobile EN/DA card browser cases passed. Official hassfest
+reports 1 valid / 0 invalid. Latest complete 139-case matrix on both locked HA cores
+2026.10.3/.4 is running; remote CI has not yet run on this checkpoint. Do not infer
+pending checks passed. Browser plugin unavailable; existing locked Playwright/system
+Chromium fallback used. No owner live installation was accessed.
+
+Next: observe final full matrix and first push CI; disposable native upgrade from
+hash-verified published beta.11, screenshot actual Yes/No Diagnostics and native
+Configure/initial field in EN/DA desktop/mobile, verify stable IDs/configs/ledger hashes
+and no I/O/revisions on toggles/restart. Then final documentation/evidence, reproducible
+clean packages and both native install layouts, exact-source CI/tag and guarded beta12
+publisher preserving main/all prior beta1–11 identities; two fresh public HACS/native
+verification jobs; final permanent STOP handoff. No stable/main merge, production HA,
+Node-RED, charging commands or unrelated features. Stop for PAHA02-DEV acceptance.
+
+---
+
 # STOP — beta.11 published and independently verified
 
 The latest authorized mission is complete. Stop for the owner's real Home Assistant

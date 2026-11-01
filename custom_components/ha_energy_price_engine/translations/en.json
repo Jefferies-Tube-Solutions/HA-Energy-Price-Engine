@@ -4,11 +4,12 @@
     "step": {
       "site": {
         "title": "1 · Site and Nord Pool",
-        "description": "Select the official Home Assistant Nord Pool integration, configured for DKK. PE automatically reads DKK/MWh excluding VAT and displays øre/kWh. DK1/DK2 use Europe/Copenhagen. Install the official source first; no legacy Nordpool integration is needed. Submitting a step saves it immediately. Closing keeps completed steps; unsent fields are not saved.",
+        "description": "Select the official Home Assistant Nord Pool integration, configured for DKK. PE automatically reads DKK/MWh excluding VAT and displays øre/kWh. DK1/DK2 use Europe/Copenhagen. Install the official source first; no legacy Nordpool integration is needed. Submitting a step saves it immediately. Closing keeps completed steps; unsent fields are not saved. The VAT display choice applies to Diagnostics and the price card. Primary sensors retain their labeled VAT basis to preserve history.",
         "data": {
           "name": "Site name",
           "nordpool_entry": "Official Nord Pool source",
-          "area": "Price area"
+          "area": "Price area",
+          "display_including_vat": "Including VAT?"
         }
       },
       "grid": {
@@ -46,7 +47,8 @@
           "grid": "Edit grid tariff",
           "supplier": "Edit supplier markup",
           "advanced": "Advanced dated rates",
-          "reset": "Reset this development site"
+          "reset": "Reset this development site",
+          "display": "Including VAT — display preference"
         }
       },
       "advanced": {
@@ -86,6 +88,13 @@
         "data": {
           "name": "Type the exact site name",
           "confirm": "Permanently delete only this site and its PE history"
+        }
+      },
+      "display": {
+        "title": "Price display",
+        "description": "Choose the VAT basis for Diagnostics and the price card. VAT amount is always visible. Primary sensors retain their labeled VAT basis to preserve history. This does not change contract rates, the tax rate or CM API. Submitting saves immediately; unsent changes are not saved.",
+        "data": {
+          "display_including_vat": "Including VAT?"
         }
       }
     },
@@ -108,11 +117,12 @@
     "step": {
       "site": {
         "title": "1 · Site and Nord Pool",
-        "description": "Select the official Home Assistant Nord Pool integration, configured for DKK. PE automatically reads DKK/MWh excluding VAT and displays øre/kWh. DK1/DK2 use Europe/Copenhagen. Install the official source first; no legacy Nordpool integration is needed. Submitting a step saves it immediately. Closing keeps completed steps; unsent fields are not saved.",
+        "description": "Select the official Home Assistant Nord Pool integration, configured for DKK. PE automatically reads DKK/MWh excluding VAT and displays øre/kWh. DK1/DK2 use Europe/Copenhagen. Install the official source first; no legacy Nordpool integration is needed. Submitting a step saves it immediately. Closing keeps completed steps; unsent fields are not saved. The VAT display choice applies to Diagnostics and the price card. Primary sensors retain their labeled VAT basis to preserve history.",
         "data": {
           "name": "Site name",
           "nordpool_entry": "Official Nord Pool source",
-          "area": "Price area"
+          "area": "Price area",
+          "display_including_vat": "Including VAT?"
         }
       },
       "grid": {
@@ -150,7 +160,8 @@
           "grid": "Edit grid tariff",
           "supplier": "Edit supplier markup",
           "advanced": "Advanced dated rates",
-          "reset": "Reset this development site"
+          "reset": "Reset this development site",
+          "display": "Including VAT — display preference"
         }
       },
       "advanced": {
@@ -190,6 +201,13 @@
         "data": {
           "name": "Type the exact site name",
           "confirm": "Permanently delete only this site and its PE history"
+        }
+      },
+      "display": {
+        "title": "Price display",
+        "description": "Choose the VAT basis for Diagnostics and the price card. VAT amount is always visible. Primary sensors retain their labeled VAT basis to preserve history. This does not change contract rates, the tax rate or CM API. Submitting saves immediately; unsent changes are not saved.",
+        "data": {
+          "display_including_vat": "Including VAT?"
         }
       }
     },
@@ -228,28 +246,28 @@
   "entity": {
     "sensor": {
       "current_spot": {
-        "name": "Current spot price"
+        "name": "Current spot price (ex VAT)"
       },
       "current_final": {
-        "name": "Current final price"
+        "name": "Current final price (incl VAT)"
       },
       "next_spot": {
-        "name": "Next-quarter spot price"
+        "name": "Next-quarter spot price (ex VAT)"
       },
       "next_final": {
-        "name": "Next-quarter final price"
+        "name": "Next-quarter final price (incl VAT)"
       },
       "average": {
-        "name": "Today's average price"
+        "name": "Today's average price (incl VAT)"
       },
       "minimum": {
-        "name": "Today's minimum price"
+        "name": "Today's minimum price (incl VAT)"
       },
       "maximum": {
-        "name": "Today's maximum price"
+        "name": "Today's maximum price (incl VAT)"
       },
       "dso": {
-        "name": "Current DSO tariff"
+        "name": "Current DSO tariff (ex VAT)"
       },
       "availability": {
         "name": "Status"
@@ -258,7 +276,7 @@
         "name": "Price period"
       },
       "component_spot": {
-        "name": "Nord Pool spot (ex VAT)"
+        "name": "Nord Pool spot"
       },
       "component_dso": {
         "name": "Applied DSO tariff"
@@ -283,6 +301,13 @@
       },
       "grid_period": {
         "name": "Grid tariff period"
+      },
+      "including_vat": {
+        "name": "Including VAT",
+        "state": {
+          "yes": "Yes",
+          "no": "No"
+        }
       }
     }
   }

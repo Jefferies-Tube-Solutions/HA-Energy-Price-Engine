@@ -27,7 +27,7 @@ async def test_independent_installed_package(hass, freezer, enable_custom_integr
     root=Path(os.environ["PE_PACKAGE_ROOT"])
     assert Path(integration.__file__).resolve().is_relative_to(root)
     manifest=json.loads((Path(integration.__file__).parent/"manifest.json").read_text())
-    assert manifest["version"]=="0.1.0-beta.11"
+    assert manifest["version"]=="0.1.0-beta.12"
     freezer.move_to("2026-10-24T10:00:00Z")
     now=datetime(2026,10,24,10,tzinfo=UTC)
     from homeassistant.core import SupportsResponse
@@ -63,8 +63,8 @@ async def test_independent_installed_package(hass, freezer, enable_custom_integr
     from homeassistant.helpers import entity_registry as er
     from homeassistant.helpers.entity import EntityCategory
     registered=er.async_entries_for_config_entry(er.async_get(hass),entry.entry_id)
-    assert len(registered)==22
-    assert len([e for e in registered if e.entity_category==EntityCategory.DIAGNOSTIC and not e.disabled_by])==14
+    assert len(registered)==23
+    assert len([e for e in registered if e.entity_category==EntityCategory.DIAGNOSTIC and not e.disabled_by])==15
     assert all(er.async_get(hass).async_get_entity_id("sensor","ha_energy_price_engine",entry.unique_id+"_component_"+k) for k in ("spot","dso","energinet_net","energinet_system","supplier","electricity_tax","vat","final"))
     result=get_api(hass).lookup(entry.unique_id,*day_bounds(date(2026,10,25)),now=now)
     assert str(result.status)=="READY" and len(result.slots)==100

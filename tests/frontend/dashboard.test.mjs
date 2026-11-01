@@ -119,3 +119,32 @@ test('producer unload clears previously Ready graphs instead of retaining stale 
  assert.equal(await card.locator('.ready').count(),0);
  assert.deepEqual(errors,[]);await page.close();
 });
+
+for (const width of [1440,390]) for (const language of ['en','da']) {
+ test(`VAT preference ${language} ${width}px: projection, raw chart and unchanged tax`, async()=>{
+  const {page,card,errors}=await open('normal-ex-vat',width,language);
+  const basisEx=language==='da'?'Eksklusive moms':'Excluding VAT';
+  const basisIncl=language==='da'?'Inklusive moms':'Including VAT';
+  assert.ok((await card.locator('header').textContent()).includes(basisEx));
+  assert.ok((await card.locator('[data-chart="final"] p').textContent()).includes(basisEx));
+  assert.ok((await card.locator('[data-table="tariffs"] p').textContent()).includes(basisEx));
+  const before=await card.locator('.inspector td.numeric').allTextContents();
+  const raw=await card.locator('[data-chart="spot"] rect.bar').first().getAttribute('aria-label');
+  const fixture=await page.evaluate(()=>window.fixture);
+  const row=fixture.days.flatMap(d=>d.slots).find(r=>r.start===fixture.current_start);
+  const formatted=new Intl.NumberFormat(language,{minimumFractionDigits:2,maximumFractionDigits:2}).format(row.final);
+  assert.equal(before.at(-1),formatted);
+  await page.evaluate(l=>window.load('normal',l),language);
+  await page.waitForFunction(()=>document.querySelector('energy-price-engine-card')._data?.display_including_vat===true);
+  assert.ok((await card.locator('header').textContent()).includes(basisIncl));
+  assert.ok((await card.locator('[data-chart="final"] p').textContent()).includes(basisIncl));
+  const after=await card.locator('.inspector td.numeric').allTextContents();
+  assert.notEqual(after[0],before[0]);
+  assert.notEqual(after.at(-1),before.at(-1));
+  assert.equal(after.at(-2),before.at(-2));
+  assert.equal(await card.locator('[data-chart="spot"] rect.bar').first().getAttribute('aria-label'),raw);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
+  assert.deepEqual(errors,[]);
+  await page.close();
+ });
+}

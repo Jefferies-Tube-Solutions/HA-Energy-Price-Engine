@@ -50,6 +50,7 @@ class Setup:
                 "area": "DK2",
                 "timezone": "Europe/Copenhagen",
                 "vat": 0.25,
+                "display_including_vat": True,
                 "dso_mode": "manual",
                 "dated_components": [],
                 "setup_step": "site",
@@ -89,7 +90,7 @@ class Setup:
         ]
         defaults = {
             **await async_source_defaults(self.hass),
-            **{k: v for k, v in self.draft.items() if v},
+            **{k: v for k, v in self.draft.items() if v or k == "display_including_vat"},
         }
         errors = {}
         areas = {
@@ -134,6 +135,9 @@ class Setup:
         }
         if len(areas) > 1:
             fields[vol.Required("area", default=value.get("area", "DK2"))] = select(sorted(areas))
+        fields[
+            vol.Required("display_including_vat", default=value.get("display_including_vat", True))
+        ] = bool
         return self._form("site", fields, errors)
 
     async def async_on_create_entry(self, result):
@@ -205,8 +209,20 @@ class Setup:
         self.draft = deepcopy(settings(self._entry))
         return self._menu(
             "review",
-            ["done", "check", "site", "grid", "supplier", "advanced", "reset"],
+            ["done", "check", "site", "grid", "supplier", "display", "advanced", "reset"],
             name=self.draft["name"],
+        )
+
+    async def async_step_display(self, user_input=None):
+        if user_input is not None:
+            return await self._save({**self.draft, **user_input}, "review")
+        return self._form(
+            "display",
+            {
+                vol.Required(
+                    "display_including_vat", default=self.draft.get("display_including_vat", True)
+                ): bool
+            },
         )
 
     async def async_step_done(self, user_input=None):

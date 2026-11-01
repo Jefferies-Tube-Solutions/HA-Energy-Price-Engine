@@ -4,11 +4,12 @@
     "step": {
       "site": {
         "title": "1 · Sted og Nord Pool",
-        "description": "Vælg den officielle Home Assistant Nord Pool-integration, konfigureret til DKK. PE læser automatisk DKK/MWh uden moms og viser øre/kWh. DK1/DK2 bruger Europe/Copenhagen. Installer først den officielle kilde; en ældre Nordpool-integration er ikke nødvendig. Et indsendt trin gemmes straks. Lukning bevarer gennemførte trin; felter, der ikke er indsendt, gemmes ikke.",
+        "description": "Vælg den officielle Home Assistant Nord Pool-integration, konfigureret til DKK. PE læser automatisk DKK/MWh uden moms og viser øre/kWh. DK1/DK2 bruger Europe/Copenhagen. Installer først den officielle kilde; en ældre Nordpool-integration er ikke nødvendig. Et indsendt trin gemmes straks. Lukning bevarer gennemførte trin; felter, der ikke er indsendt, gemmes ikke. Momsvalget gælder Diagnostik og priskortet. De almindelige sensorer beholder deres mærkede momsgrundlag af hensyn til historikken.",
         "data": {
           "name": "Stedets navn",
           "nordpool_entry": "Officiel Nord Pool-kilde",
-          "area": "Prisområde"
+          "area": "Prisområde",
+          "display_including_vat": "Vis priser inkl. moms?"
         }
       },
       "grid": {
@@ -46,7 +47,8 @@
           "grid": "Rediger nettarif",
           "supplier": "Rediger leverandørtillæg",
           "advanced": "Avancerede daterede satser",
-          "reset": "Nulstil dette udviklingssted"
+          "reset": "Nulstil dette udviklingssted",
+          "display": "Vis priser inkl. moms"
         }
       },
       "advanced": {
@@ -86,6 +88,13 @@
         "data": {
           "name": "Skriv stedets præcise navn",
           "confirm": "Slet kun dette sted og dets PE-historik permanent"
+        }
+      },
+      "display": {
+        "title": "Prisvisning",
+        "description": "Vælg momsgrundlag for Diagnostik og priskortet. Momsbeløbet vises altid. De almindelige sensorer beholder deres mærkede momsgrundlag for at bevare historikken. Dette ændrer ikke kontraktpriser, momssats eller CM API. Indsendelse gemmer straks; ikke indsendte ændringer gemmes ikke.",
+        "data": {
+          "display_including_vat": "Vis priser inkl. moms?"
         }
       }
     },
@@ -108,11 +117,12 @@
     "step": {
       "site": {
         "title": "1 · Sted og Nord Pool",
-        "description": "Vælg den officielle Home Assistant Nord Pool-integration, konfigureret til DKK. PE læser automatisk DKK/MWh uden moms og viser øre/kWh. DK1/DK2 bruger Europe/Copenhagen. Installer først den officielle kilde; en ældre Nordpool-integration er ikke nødvendig. Et indsendt trin gemmes straks. Lukning bevarer gennemførte trin; felter, der ikke er indsendt, gemmes ikke.",
+        "description": "Vælg den officielle Home Assistant Nord Pool-integration, konfigureret til DKK. PE læser automatisk DKK/MWh uden moms og viser øre/kWh. DK1/DK2 bruger Europe/Copenhagen. Installer først den officielle kilde; en ældre Nordpool-integration er ikke nødvendig. Et indsendt trin gemmes straks. Lukning bevarer gennemførte trin; felter, der ikke er indsendt, gemmes ikke. Momsvalget gælder Diagnostik og priskortet. De almindelige sensorer beholder deres mærkede momsgrundlag af hensyn til historikken.",
         "data": {
           "name": "Stedets navn",
           "nordpool_entry": "Officiel Nord Pool-kilde",
-          "area": "Prisområde"
+          "area": "Prisområde",
+          "display_including_vat": "Vis priser inkl. moms?"
         }
       },
       "grid": {
@@ -150,7 +160,8 @@
           "grid": "Rediger nettarif",
           "supplier": "Rediger leverandørtillæg",
           "advanced": "Avancerede daterede satser",
-          "reset": "Nulstil dette udviklingssted"
+          "reset": "Nulstil dette udviklingssted",
+          "display": "Vis priser inkl. moms"
         }
       },
       "advanced": {
@@ -190,6 +201,13 @@
         "data": {
           "name": "Skriv stedets præcise navn",
           "confirm": "Slet kun dette sted og dets PE-historik permanent"
+        }
+      },
+      "display": {
+        "title": "Prisvisning",
+        "description": "Vælg momsgrundlag for Diagnostik og priskortet. Momsbeløbet vises altid. De almindelige sensorer beholder deres mærkede momsgrundlag for at bevare historikken. Dette ændrer ikke kontraktpriser, momssats eller CM API. Indsendelse gemmer straks; ikke indsendte ændringer gemmes ikke.",
+        "data": {
+          "display_including_vat": "Vis priser inkl. moms?"
         }
       }
     },
@@ -228,28 +246,28 @@
   "entity": {
     "sensor": {
       "current_spot": {
-        "name": "Aktuel spotpris"
+        "name": "Aktuel spotpris (ekskl. moms)"
       },
       "current_final": {
-        "name": "Aktuel samlet pris"
+        "name": "Aktuel samlet pris (inkl. moms)"
       },
       "next_spot": {
-        "name": "Næste kvarters spotpris"
+        "name": "Næste kvarters spotpris (ekskl. moms)"
       },
       "next_final": {
-        "name": "Næste kvarters samlede pris"
+        "name": "Næste kvarters samlede pris (inkl. moms)"
       },
       "average": {
-        "name": "Dagens gennemsnitspris"
+        "name": "Dagens gennemsnitspris (inkl. moms)"
       },
       "minimum": {
-        "name": "Dagens minimumspris"
+        "name": "Dagens minimumspris (inkl. moms)"
       },
       "maximum": {
-        "name": "Dagens maksimumspris"
+        "name": "Dagens maksimumspris (inkl. moms)"
       },
       "dso": {
-        "name": "Aktuel nettarif"
+        "name": "Aktuel nettarif (ekskl. moms)"
       },
       "availability": {
         "name": "Status"
@@ -283,6 +301,13 @@
       },
       "grid_period": {
         "name": "Nettariffens tidsrum"
+      },
+      "including_vat": {
+        "name": "Inklusive moms",
+        "state": {
+          "yes": "Ja",
+          "no": "Nej"
+        }
       }
     }
   }

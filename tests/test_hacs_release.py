@@ -26,7 +26,7 @@ from tools.prepare_hacs_reference import PINS
 from .test_hacs_workflow import candidate_tree, upstream
 
 ROOT = Path(__file__).parents[1]
-TAG = "v0.1.0-beta.11"
+TAG = "v0.1.0-beta.12"
 DOMAIN = "ha_energy_price_engine"
 
 
@@ -229,7 +229,7 @@ async def test_hacs_add_discover_beta_download_update_and_reinstall(
         repo.data.selected_tag = TAG
         assert repo.version_to_download() == TAG
         installed = tmp_path / "custom_components" / DOMAIN
-        # Exercise a real beta.10 -> beta.11 filesystem update, not only a clean
+        # Exercise a real beta.11 -> beta.12 filesystem update, not only a clean
         # installation pretending to have an older installed_version field.
         if previous_asset := receipt.get("previous_hacs_asset"):
             previous_bytes = Path(previous_asset).read_bytes()
@@ -241,7 +241,7 @@ async def test_hacs_add_discover_beta_download_update_and_reinstall(
                         "git",
                         "archive",
                         "--format=zip",
-                        "150c24fa08988b6ae308dec68bb21016ffcca0b9",
+                        "657bc49b091c1aa5fafa6cad0945cd693326d31c",
                         f"custom_components/{DOMAIN}",
                     ],
                     cwd=ROOT,
@@ -250,14 +250,14 @@ async def test_hacs_add_discover_beta_download_update_and_reinstall(
             prefix = f"custom_components/{DOMAIN}/"
         installed.mkdir(parents=True, exist_ok=True)
         with zipfile.ZipFile(io.BytesIO(previous_bytes)) as previous:
-            assert json.loads(previous.read(prefix + "manifest.json"))["version"] == "0.1.0-beta.10"
+            assert json.loads(previous.read(prefix + "manifest.json"))["version"] == "0.1.0-beta.11"
             for name in previous.namelist():
                 if name.startswith(prefix) and not name.endswith("/"):
                     target = installed / name.removeprefix(prefix)
                     target.parent.mkdir(parents=True, exist_ok=True)
                     target.write_bytes(previous.read(name))
-        repo.data.installed_version = "v0.1.0-beta.10"
-        assert native_update.installed_version == "v0.1.0-beta.10"
+        repo.data.installed_version = "v0.1.0-beta.11"
+        assert native_update.installed_version == "v0.1.0-beta.11"
         assert native_update.latest_version == TAG
         from custom_components.ha_energy_price_engine.configuration import tariff_for, validate_site
         from custom_components.ha_energy_price_engine.models import PriceSlot
@@ -265,7 +265,7 @@ async def test_hacs_add_discover_beta_download_update_and_reinstall(
 
         from .helpers import model
 
-        history_engine = PriceEngine(hass, "hacs-beta10-upgrade")
+        history_engine = PriceEngine(hass, "hacs-beta11-upgrade")
         start = datetime(2026, 10, 29, 12, tzinfo=UTC)
         await history_engine.async_update(
             "hacs_history",

@@ -26,6 +26,7 @@ def validate_site(value):
         "dso_mode",
         "dated_components",
         "setup_step",
+        "display_including_vat",
     }
     if set(site) - allowed:
         raise ValueError(
@@ -45,6 +46,8 @@ def validate_site(value):
     if not isfinite(vat) or not 0 <= vat <= 1:
         raise ValueError("Invalid VAT fraction")
     site["vat"] = vat
+    if type(site.setdefault("display_including_vat", True)) is not bool:
+        raise ValueError("Including VAT must be a boolean display preference")
     if site.setdefault("dso_mode", "manual") not in {"manual", "radius_c"}:
         raise ValueError("Confirm Radius C or supply a manual grid rate")
     rules = site.setdefault("dated_components", [])

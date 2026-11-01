@@ -16,7 +16,7 @@ from homeassistant.util import dt as dt_util
 from .api import PriceAPI
 from .const import DOMAIN
 from .price_engine import day_bounds
-from .status import availability, grid_periods, quarter, statistics
+from .status import availability, display_basis, display_price, grid_periods, quarter, statistics
 
 CARD_URL = "/ha_energy_price_engine/energy-price-engine-card.js"
 COMPONENTS = ("spot", "dso", "energinet_net", "energinet_system", "supplier", "electricity_tax")
@@ -56,6 +56,7 @@ def _summary(window):
 def price_schedule(c, now=None):
     now = now or dt_util.utcnow()
     site = c.site
+    basis = display_basis(c)
     zone = ZoneInfo(site["timezone"])
     today = now.astimezone(zone).date()
     api = PriceAPI(c.hass)
@@ -84,7 +85,7 @@ def price_schedule(c, now=None):
             record = records.get(cursor)
             row = {
                 **_instant(cursor, end, zone),
-                **{k: None for k in (*COMPONENTS, "vat", "final", "stored_final")},
+                **{k: None for k in (*COMPONENTS, "vat", "final", "stored_final", "raw_spot")},
                 "status": str(result.status),
                 "reason": result.reason,
                 "raw_status": "INCOMPLETE",
@@ -107,20 +108,21 @@ def price_schedule(c, now=None):
                 row.update(
                     provenance=references[ref],
                     revision=record.revision,
-                    stored_final=record.final_price_incl_vat * 100,
+                    stored_final=display_price(record, basis) * 100,
+                    raw_spot=parts["spot"]["ex_vat"] * 100,
                 )
                 for key in COMPONENTS:
                     if key in parts:
-                        row[key] = parts[key]["ex_vat"] * 100
+                        row[key] = parts[key][basis] * 100
                 row["vat"] = sum(p["vat"] for p in parts.values()) * 100
                 if result.slots:
                     row["final"] = row["stored_final"]
                 if end <= now:
                     row.update(raw_status="READY", raw_verified_at=source.get("verified_at"))
             if fresh and cursor in raw:
-                if row["spot"] is None:
-                    row["spot"] = raw[cursor].price * 100
-                if row["spot"] == raw[cursor].price * 100:
+                if row["raw_spot"] is None:
+                    row["raw_spot"] = raw[cursor].price * 100
+                if row["raw_spot"] == raw[cursor].price * 100:
                     row.update(raw_status="READY", raw_verified_at=raw_report["verified_at"])
             rows.append(row)
             cursor = end
@@ -141,10 +143,12 @@ def price_schedule(c, now=None):
         )
     tariffs = grid_periods(c, now)
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "unit": "øre/kWh",
-        "component_basis": "ex_vat",
-        "final_basis": "incl_vat",
+        "component_basis": basis,
+        "final_basis": basis,
+        "raw_spot_basis": "ex_vat",
+        "display_including_vat": site.get("display_including_vat", True),
         "site": {k: site[k] for k in ("id", "name", "timezone", "area", "dso_mode")},
         "generated_at": now.isoformat(),
         "current_start": quarter(now)[0].isoformat(),
@@ -152,7 +156,7 @@ def price_schedule(c, now=None):
         "next_scheduled_update": c.schedule.next_update(now).isoformat(),
         "current": _summary(api.lookup(site["id"], *quarter(now), now=now)),
         "next": _summary(api.lookup(site["id"], *quarter(now, 1), now=now)),
-        "statistics": statistics(c, now),
+        "statistics": statistics(c, now, including_vat=basis == "incl_vat"),
         "availability": availability(c, now),
         "days": days,
         "dso_today": tariffs,

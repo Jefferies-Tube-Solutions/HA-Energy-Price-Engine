@@ -74,7 +74,7 @@ async def test_real_snapshot_export(
         ),
     ):
         value = price_schedule(c, now)
-        assert value["schema_version"] == 2
+        assert value["schema_version"] == 3
         assert len(value["days"][0]["slots"]) == count
         assert value["statistics"]["day_slots"] == count
         if name not in {"missing", "activation"}:
@@ -92,6 +92,12 @@ async def test_real_snapshot_export(
     if directory := os.environ.get("PE_FRONTEND_FIXTURES"):
         Path(directory).mkdir(parents=True, exist_ok=True)
         (Path(directory) / (name + ".json")).write_text(json.dumps(value))
+        if name in {"normal", "varied"}:
+            c.site["display_including_vat"] = False
+            (Path(directory) / (name + "-ex-vat.json")).write_text(
+                json.dumps(price_schedule(c, now))
+            )
+            c.site["display_including_vat"] = True
     if name == "activation" and directory:
         (Path(directory) / "activated.json").write_text(
             json.dumps(price_schedule(c, now.replace(minute=15, second=0, microsecond=0)))

@@ -1,0 +1,37 @@
+name: Update beta12 development draft
+on:
+  push:
+    branches: [feat/beta5-simple-onboarding]
+    paths: [.github/workflows/beta12-pr.yml]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  update-draft:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Update existing unmerged draft only
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/pulls/14" > "$RUNNER_TEMP/pr14.json"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          d=json.loads((Path(os.environ['RUNNER_TEMP'])/'pr14.json').read_text())
+          assert d['state']=='open' and d['draft'] and d['head']['ref']=='feat/beta5-simple-onboarding'
+          PY
+          cat > "$RUNNER_TEMP/beta12-pr.md" <<'MD'
+          Beta.12 implements #17: a saved site-level Including VAT preference in initial setup and normal Configure, plus a visible enabled Yes/No Diagnostic. Existing beta.11 sites default Yes without reset.
+
+          Native components and all actual grid bands use verified stored/cached incl_vat or ex_vat. Ex-VAT final sums the same record's full-precision components; VAT amount remains unchanged. All beta.11 rows and nine primary sensors remain. The primary sensors keep fixed labeled VAT basis for Recorder safety; dashboard values follow the preference, except the explicitly raw ex-VAT source graph. Internal card schema3 requires a browser resource reload; CM API2 is unchanged.
+
+          Display-only saves notify entities without acquisition/reload, price calculation, ledger writes, revisions or provider calls. Baseline:657bc49b091c1aa5fafa6cad0945cd693326d31c. No schema migration/reset. Native upgrade evidence, final CI and guarded publication remain pending; no owner live HA acceptance claimed.
+
+          Local first suite136 passed with90%coverage; expanded VAT/fixture25 cases and22 EN/DA desktop/mobile card cases passed; official hassfest1valid/0invalid. Full139-case two-core matrix is in progress. Follow the permanent handoff for actual current results. No main/stable or production/charging changes.
+
+          [Permanent handoff](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/feat/beta5-simple-onboarding/docs/DEVELOPMENT_STATUS.md).
+          MD
+          gh api "repos/$GITHUB_REPOSITORY/pulls/14" --method PATCH --raw-field title='Beta.12: saved VAT display preference and consistent native Diagnostics' -F body=@"$RUNNER_TEMP/beta12-pr.md" --jq '{number,html_url,draft}'

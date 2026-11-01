@@ -25,7 +25,7 @@ def price(c, offset=0, now=None):
     return PriceAPI(c.hass).lookup(c.site["id"], *quarter(now or dt_util.utcnow(), offset), now=now)
 
 
-def statistics(c, now=None):
+def statistics(c, now=None, *, including_vat=True):
     """No Recorder samples or invented past rates; average exact schedule slots."""
     now = now or dt_util.utcnow()
     first, last = day_bounds(
@@ -55,6 +55,12 @@ def statistics(c, now=None):
     }
     if selected and selected.status == Status.READY:
         values = [q.price for q in selected.slots]
+        if not including_vat:
+            records = {
+                r.start: r
+                for r in c.price_engine.lookup(c.site["id"], selected.slots[0].start, last)
+            }
+            values = [display_price(records[q.start], "ex_vat") for q in selected.slots]
         facts.update(
             used_slots=len(values),
             start=selected.slots[0].start.isoformat(),
@@ -66,8 +72,20 @@ def statistics(c, now=None):
     return facts
 
 
+def display_basis(c):
+    return "incl_vat" if c.site.get("display_including_vat", True) else "ex_vat"
+
+
+def display_price(record, basis):
+    """Project full-precision stored components; canonical prices never change."""
+    if basis == "incl_vat":
+        return record.final_price_incl_vat
+    return sum(p["ex_vat"] for p in json.loads(record.components_json)["components"].values())
+
+
 def breakdown(c, now=None):
     now = now or dt_util.utcnow()
+    basis = display_basis(c)
     for offset, label in ((0, "current_quarter"), (1, "next_quarter")):
         window = price(c, offset, now)
         if window.status != Status.READY:
@@ -81,15 +99,19 @@ def breakdown(c, now=None):
             "unit": "øre/kWh",
             "revision": row.revision,
             "source": json.loads(row.source_json),
-            "components": {k: {**p, "value_ore": p["ex_vat"] * 100} for k, p in parts.items()},
+            "component_basis": basis,
+            "final_basis": basis,
+            "components": {k: {**p, "value_ore": p[basis] * 100} for k, p in parts.items()},
             "vat_amount_ore": sum(p["vat"] for p in parts.values()) * 100,
-            "final_ore": row.final_price_incl_vat * 100,
+            "final_ore": display_price(row, basis) * 100,
         }
     day = now.astimezone(ZoneInfo(c.site["timezone"])).date()
     state = report(c, day)
     return {
         "period": "unavailable",
         "components": {},
+        "component_basis": basis,
+        "final_basis": basis,
         "reason": state.get("reason") or window.reason,
         "missing_components": state.get("missing_components", []),
         "failure_stage": state.get("failure_stage"),
@@ -214,7 +236,9 @@ def grid_periods(c, now=None):
         end = first + timedelta(minutes=15)
         part = grid.get(first)
         evidence = {
-            "value": part["ex_vat"] * 100 if part else None,
+            "value": part[display_basis(c)] * 100 if part else None,
+            "value_basis": display_basis(c),
+            **({k: part[k] for k in ("ex_vat", "vat", "incl_vat")} if part else {}),
             "status": "READY" if part else "INCOMPLETE",
             "source": part.get("source") if part else None,
             "verified_on": part.get("verified_on") if part else None,

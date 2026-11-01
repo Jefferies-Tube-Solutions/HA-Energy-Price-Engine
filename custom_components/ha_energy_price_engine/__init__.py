@@ -8,6 +8,7 @@ from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers import issue_registry as ir
 from homeassistant.loader import async_get_integration
 
+from .configuration import settings, validate_site
 from .const import DOMAIN
 from .coordinator import PriceCoordinator
 
@@ -61,9 +62,17 @@ async def async_setup_entry(hass, entry):
 
 
 async def async_update_options(hass, entry):
-    if runtime := hass.data.get(DOMAIN, {}).get(entry.entry_id):
-        runtime.settings_current = False
     waiter = hass.data.get(DOMAIN + "_save_waiters", {}).get(entry.entry_id)
+    if runtime := hass.data.get(DOMAIN, {}).get(entry.entry_id):
+        site = validate_site(settings(entry))
+        if _pricing_settings(site) == _pricing_settings(runtime.site):
+            # A saved display preference never restarts acquisition or the ledger.
+            runtime.site = site
+            runtime.async_set_updated_data(runtime.data)
+            if waiter and not waiter.done():
+                waiter.set_result(True)
+            return
+        runtime.settings_current = False
     try:
         loaded = await hass.config_entries.async_reload(entry.entry_id)
     except Exception:
@@ -72,6 +81,10 @@ async def async_update_options(hass, entry):
         raise
     if waiter and not waiter.done():
         waiter.set_result(loaded)
+
+
+def _pricing_settings(site):
+    return {k: v for k, v in site.items() if k not in {"display_including_vat", "setup_step"}}
 
 
 async def apply_settings(hass, entry, site, *, reuse_sources=False):
@@ -90,6 +103,9 @@ async def apply_settings(hass, entry, site, *, reuse_sources=False):
     try:
         had_listener = bool(entry.update_listeners)
         changed = hass.config_entries.async_update_entry(entry, title=site["name"], options=site)
+        if not changed and (runtime := hass.data.get(DOMAIN, {}).get(entry.entry_id)):
+            if _pricing_settings(site) == _pricing_settings(runtime.site):
+                return True
         if not changed or not had_listener:
             return await hass.config_entries.async_reload(entry.entry_id)
         async with asyncio.timeout(90):

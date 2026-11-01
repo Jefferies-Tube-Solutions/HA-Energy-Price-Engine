@@ -28,7 +28,7 @@ def states(hass, entry):
 
 def assert_record(values, row, scope):
     components = json.loads(row.components_json)["components"]
-    expected = {k: part["ex_vat"] * 100 for k, part in components.items()}
+    expected = {k: part["incl_vat"] * 100 for k, part in components.items()}
     expected["vat"] = sum(part["vat"] for part in components.values()) * 100
     expected["final"] = row.final_price_incl_vat * 100
     for key in COMPONENT_KINDS:
@@ -42,7 +42,7 @@ def assert_record(values, row, scope):
         assert state.attributes["verification"] == "verified"
         assert state.attributes["source"] == json.loads(row.source_json)
     assert sum(
-        float(values["component_" + k].state) for k in COMPONENT_KINDS if k != "final"
+        float(values["component_" + k].state) for k in COMPONENT_KINDS if k not in {"final", "vat"}
     ) == pytest.approx(expected["final"])
 
 
@@ -54,7 +54,7 @@ async def test_enabled_native_diagnostic_rows_current_record_and_no_read_io(
     c = entry.runtime_data
     registry = er.async_entries_for_config_entry(er.async_get(hass), entry.entry_id)
     diagnostics = [e for e in registry if e.entity_category == EntityCategory.DIAGNOSTIC]
-    assert len(registry) == 22 and len(diagnostics) == 14
+    assert len(registry) == 23 and len(diagnostics) == 15
     assert all(e.disabled_by is None for e in diagnostics)
     values = states(hass, entry)
     assert set(KINDS) <= values.keys()
@@ -134,7 +134,7 @@ async def test_owner_shaped_next_quarter_example_then_automatic_switch(
     assert values["price_period"].state == "11:30–11:45"
     row = c.price_engine.lookup("home", start, start + timedelta(minutes=15))[0]
     assert_record(values, row, "next_quarter")
-    assert float(values["component_spot"].state) == pytest.approx(174.6836)
+    assert float(values["component_spot"].state) == pytest.approx(174.6836 * 1.25)
     assert float(values["component_spot"].state) != float(values["current_spot"].state)
     assert [values["grid_period_" + str(i)].state for i in range(1, 5)] != ["unknown"] * 4
     before = list(c.price_engine.records["home"])
@@ -217,8 +217,8 @@ async def test_site_isolation_and_mixed_vat_negative_components(hass, freezer, p
         first = datetime.now(UTC)
         row = c.price_engine.lookup(c.site["id"], first, first + timedelta(minutes=15))[0]
         assert_record(states(hass, entry), row, "current_quarter")
-    assert float(states(hass, home)["component_supplier"].state) == pytest.approx(3)
-    assert float(states(hass, away)["component_supplier"].state) == pytest.approx(11.1)
+    assert float(states(hass, home)["component_supplier"].state) == pytest.approx(3.75)
+    assert float(states(hass, away)["component_supplier"].state) == pytest.approx(11.1 * 1.25)
     assert float(states(hass, home)["component_spot"].state) < 0
     assert await hass.config_entries.async_unload(home.entry_id)
     assert await hass.config_entries.async_unload(away.entry_id)
@@ -236,10 +236,10 @@ async def test_actual_ranges_not_hardcoded_and_additional_native_rows(hass, free
     entry = await setup(hass, model(dated_components=[rule("supplier", 3), *rates]))
     c = entry.runtime_data
     rows = grid_periods(c)
-    assert len(rows) == 5 and rows[0]["value"] == rows[1]["value"] == 5
+    assert len(rows) == 5 and rows[0]["value"] == rows[1]["value"] == 6.25
     assert [r["local_start"][11:16] for r in rows] == ["00:00", "07:00", "09:00", "11:00", "13:00"]
-    assert len(states(hass, entry)) == 23
-    assert float(states(hass, entry)["grid_period_5"].state) == 20
+    assert len(states(hass, entry)) == 24
+    assert float(states(hass, entry)["grid_period_5"].state) == 25
     assert states(hass, entry)["grid_period_5"].attributes["additional_periods"] == 1
     assert await hass.config_entries.async_unload(entry.entry_id)
 
@@ -261,7 +261,7 @@ async def test_next_midnight_uses_tomorrow_record_not_todays_applied_tariff(
     values = states(hass, entry)
     assert values["price_period"].state == "02/11 00:00–00:15"
     assert values["component_dso"].attributes["period"] == "next_quarter"
-    assert float(values["component_dso"].state) == pytest.approx(10.6175)
+    assert float(values["component_dso"].state) == pytest.approx(10.6175 * 1.25)
     assert float(values["dso"].state) == pytest.approx(31.8524)
     assert grid_periods(c)[-1]["local_start"].startswith("2026-11-01")
     assert await hass.config_entries.async_unload(entry.entry_id)
@@ -285,7 +285,7 @@ async def test_more_ranges_added_on_updates_then_unavailable_when_no_longer_appl
     freezer.move_to("2026-11-01T10:15:00Z")
     entry = await setup(hass, model(dso_mode="radius_c", dated_components=[rule("supplier", 3)]))
     c = entry.runtime_data
-    assert len(states(hass, entry)) == 22
+    assert len(states(hass, entry)) == 23
     records = deepcopy(DATA)
     for record in records:
         record["Price4"] = 0.2
@@ -300,8 +300,8 @@ async def test_more_ranges_added_on_updates_then_unavailable_when_no_longer_appl
         await c.async_refresh()
         await hass.async_block_till_done()
     assert len(grid_periods(c)) == 6
-    assert len(states(hass, entry)) == 24
-    assert float(states(hass, entry)["grid_period_6"].state) == pytest.approx(31.8524)
+    assert len(states(hass, entry)) == 25
+    assert float(states(hass, entry)["grid_period_6"].state) == pytest.approx(31.8524 * 1.25)
     await c.schedule.refresh_day(c.site, datetime.now(UTC).date(), datetime.now(UTC))
     await c.async_refresh()
     await hass.async_block_till_done()

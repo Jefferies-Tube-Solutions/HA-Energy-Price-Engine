@@ -13,7 +13,11 @@ from custom_components.ha_energy_price_engine.status import statistics
 async def begin(hass):
     result = await hass.config_entries.flow.async_init(DOMAIN, context={"source": "user"})
     assert result["step_id"] == "site"
-    assert {str(k) for k in result["data_schema"].schema} == {"name", "nordpool_entry"}
+    assert {str(k) for k in result["data_schema"].schema} == {
+        "name",
+        "nordpool_entry",
+        "display_including_vat",
+    }
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"], {"name": "Example site", "nordpool_entry": "np"}
     )
@@ -52,6 +56,7 @@ async def test_interruption_wrong_decimal_saved_steps_and_from_now_stats(
         "site",
         "grid",
         "supplier",
+        "display",
         "advanced",
         "reset",
     }

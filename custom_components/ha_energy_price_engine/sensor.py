@@ -2,7 +2,7 @@
 
 from zoneinfo import ZoneInfo
 
-from homeassistant.components.sensor import SensorEntity, SensorStateClass
+from homeassistant.components.sensor import SensorDeviceClass, SensorEntity, SensorStateClass
 from homeassistant.core import callback
 from homeassistant.helpers.device_registry import DeviceEntryType
 from homeassistant.helpers.entity import DeviceInfo, EntityCategory
@@ -14,6 +14,7 @@ from .const import DOMAIN
 from .status import (
     availability,
     breakdown,
+    display_basis,
     grid_periods,
     local_interval,
     price,
@@ -50,7 +51,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
     c = entry.runtime_data
     async_add_entities(
         [PriceSensor(c, kind) for kind in KINDS]
-        + [DiagnosticSensor(c, "price_period")]
+        + [DiagnosticSensor(c, "price_period"), DiagnosticSensor(c, "including_vat")]
         + [DiagnosticSensor(c, "component_" + kind) for kind in COMPONENT_KINDS]
     )
     count = 0
@@ -111,15 +112,15 @@ class PriceSensor(CoordinatorEntity, SensorEntity):
             da = self.coordinator.hass.config.language.startswith("da")
             return (
                 {
-                    "average": "Gennemsnit resten af dagen",
-                    "minimum": "Minimum resten af dagen",
-                    "maximum": "Maksimum resten af dagen",
+                    "average": "Gennemsnit resten af dagen (inkl. moms)",
+                    "minimum": "Minimum resten af dagen (inkl. moms)",
+                    "maximum": "Maksimum resten af dagen (inkl. moms)",
                 }
                 if da
                 else {
-                    "average": "Remaining-day average",
-                    "minimum": "Remaining-day minimum",
-                    "maximum": "Remaining-day maximum",
+                    "average": "Remaining-day average (incl VAT)",
+                    "minimum": "Remaining-day minimum (incl VAT)",
+                    "maximum": "Remaining-day maximum (incl VAT)",
                 }
             )[self.kind]
         return super().name
@@ -161,10 +162,11 @@ class PriceSensor(CoordinatorEntity, SensorEntity):
         if self.kind == "availability":
             return {"site_id": self.coordinator.site["id"], **availability(self.coordinator)}
         if self.kind in {"average", "minimum", "maximum"}:
-            return statistics(self.coordinator)
+            return {**statistics(self.coordinator), "vat_included": True, "value_basis": "incl_vat"}
         return {
             "site_id": self.coordinator.site["id"],
             "vat_included": self.kind.endswith("final"),
+            "value_basis": "incl_vat" if self.kind.endswith("final") else "ex_vat",
             "canonical_unit": "DKK/kWh",
         }
 
@@ -178,9 +180,12 @@ class DiagnosticSensor(PriceSensor):
     def __init__(self, coordinator, kind, index=None):
         super().__init__(coordinator, kind)
         self.index = index
-        if kind == "price_period":
+        if kind in {"price_period", "including_vat"}:
             self._attr_native_unit_of_measurement = None
             self._attr_suggested_display_precision = None
+            if kind == "including_vat":
+                self._attr_device_class = SensorDeviceClass.ENUM
+                self._attr_options = ["yes", "no"]
         elif index is not None:
             self._attr_translation_key = "grid_period"
 
@@ -216,6 +221,8 @@ class DiagnosticSensor(PriceSensor):
     @property
     def native_value(self):
         c = self.coordinator
+        if self.kind == "including_vat":
+            return "yes" if c.site.get("display_including_vat", True) else "no"
         if self.index is not None:
             row, _ = self._period()
             return row["value"] if row else None
@@ -265,11 +272,18 @@ class DiagnosticSensor(PriceSensor):
     @property
     def extra_state_attributes(self):
         c = self.coordinator
+        if self.kind == "including_vat":
+            return {
+                "site_id": c.site["id"],
+                "scope": "diagnostics_and_dashboard",
+                "primary_sensor_basis": "fixed; see each sensor label",
+                "value_basis": display_basis(c),
+            }
         if self.index is not None:
             row, rows = self._period()
             return {
                 "site_id": c.site["id"],
-                "vat_included": False,
+                "vat_included": c.site.get("display_including_vat", True),
                 "period_count": len(rows),
                 "additional_periods": max(0, len(rows) - 4),
                 "period_number": self.index + 1,
@@ -287,12 +301,8 @@ class DiagnosticSensor(PriceSensor):
             **{k: v for k, v in data.items() if k != "components"},
             "vat_included": None
             if self.kind in {"price_period", "component_vat"}
-            else self.kind == "component_final",
-            "value_basis": "vat_amount"
-            if self.kind == "component_vat"
-            else "incl_vat"
-            if self.kind == "component_final"
-            else "ex_vat",
+            else c.site.get("display_including_vat", True),
+            "value_basis": "vat_amount" if self.kind == "component_vat" else display_basis(c),
             "component": self.kind.removeprefix("component_"),
             "applied_component": data["components"].get(self.kind.removeprefix("component_")),
             "verification": "unavailable" if data["period"] == "unavailable" else "verified",

@@ -1,3 +1,37 @@
+# Beta.11 guarded publication checkpoint — in progress
+
+Release source **657bc49b091c1aa5fafa6cad0945cd693326d31c**;all12 exact-source push/PR
+checks succeeded. Immutable annotated tag **v0.1.0-beta.11**,object
+**b0bd7296a1b63e589aada4cf62420047984cd248**,points exactly to that source.
+Tag CI must also pass before upload. Branch feat/beta5-simple-onboarding,draftPR14.
+Checkpoint subject: **Guard beta11 publication with native evidence and baseline integrity**.
+
+Clean archives built twice byte-identically. All4 independent native installs passed
+(HACS/manual ZIP on HA2026.10.3 and.4),including22entities/14enabled Diagnostics.
+HACS SHA256:c5265f6a583c61c462a198548f7117070ac353e0c8958ad841e5ab3f117f424b
+Manual SHA256:ea01f317bcee3c30650906c2859500cc0a0784927f3974bf15f5a2071eb27eec
+123tests/core,90%coverage,18browser cases,15native screenshots,1valid/0invalidhassfest;
+27 original IDs/3 configs/2ledger hashes preserved after real published10 upgrade,
+locale reloads and restart. Native proof is controlled recorded/synthetic software,
+not owner Raspberry Pi acceptance. All values visible natively;no dashboard required.
+
+Publisher is pinned to exact source/tag/hashes. It requires18successful push/PR/tag
+checks,source ancestry,all19 protected runtime files matching published beta10,native
+counts/selection/restart/no-source-read evidence and screenshot hashes. Only8 scoped
+runtime paths may differ. Main56cdb3c and all prior beta1–10 tag/release/asset identities
+must remain unchanged. Clean rebuild/native installs precede beta11-only prerelease
+(latest=false);no replacement of mismatched assets. Two fresh jobs then verify actual
+public source/assets/original beta10 package,real pinned HACS and both native layouts
+on both cores. Audit records evidence and updates existing draftPR14.
+
+Publication and public verification remain pending until observed. Next: monitor
+and complete gates,fetch audit,independently download/check public bytes,record final
+STOP handoff. No further PE feature work. No main/stable/production/charging changes.
+Owner must perform real HA acceptance after verified publication. Beta10 keeps all
+sites/history/config/API2;no reset needed.
+
+---
+
 # Beta.11 final candidate checkpoint — active
 
 Previous source73fcccf;branch feat/beta5-simple-onboarding;draftPR14.

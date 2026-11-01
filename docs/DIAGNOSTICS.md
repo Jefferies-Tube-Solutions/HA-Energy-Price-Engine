@@ -3,7 +3,9 @@
 Open **Settings → Devices & services → Energy Price Engine → your device →
 Diagnostic**. No dashboard or extra YAML is needed to see how the price is calculated.
 Beta.11 restores the component rows missing in beta.10. All are enabled by default.
-The existing nine beta.10 entities keep their IDs and behavior.
+The existing nine beta.10 entities keep their IDs and behavior. The availability
+row uses the compact caption **Status** so its full label fits beside longer
+readiness guidance; user-assigned names are preserved.
 
 | Visible diagnostic | Value |
 |---|---|
@@ -16,7 +18,7 @@ The existing nine beta.10 entities keep their IDs and behavior.
 |Electricity tax|The recorded applicable tax|
 |VAT amount|Sum of the recorded component VAT amounts|
 |Verified final price|The recorded final marginal price including VAT|
-|Price availability|Current readiness and corrective guidance|
+|Status (existing price availability entity)|Current readiness and corrective guidance|
 
 All numeric rows use **øre/kWh, two decimals by default**. Internal stored amounts
 remain full-precision DKK/kWh. The six ex-VAT components plus the applied VAT amount
@@ -60,3 +62,20 @@ reload the app/browser. Keep existing sites, histories, manual overrides and CM 
 mappings. Reset is only for deliberately recreating older incompatible beta1–9 sites.
 Owner private contract values are never supplied as defaults. In particular, the
 historical EWII household0.030DKK/kWh exVAT applies only June–September2026.
+
+## Native HA evidence
+
+The validated flow is **Devices & services → Energy Price Engine → device →
+Diagnostic**, inspecting current/next/missing states, opening supplier more-info,
+and observing the automatic selected-period switch. Desktop1440×1100/mobile390×1000,
+English and Danish, had no browser errors/warnings, source requests on reads or
+framework overlays. Browser plugin was unavailable; locked Playwright/system
+Chromium was used. This is disposable software QA, not owner Raspberry Pi acceptance.
+
+[Next quarter, desktop](images/beta11/next-diagnostic-desktop.png) ·
+[Next quarter, mobile](images/beta11/next-diagnostic-mobile.png) ·
+[Current quarter](images/beta11/current-diagnostic-desktop.png) ·
+[Missing supplier with verified bands](images/beta11/missing-supplier-diagnostic-mobile.png) ·
+[Danish next quarter](images/beta11/next-diagnostic-da-mobile.png) ·
+[Supplier more-info](images/beta11/supplier-more-info-mobile.png) ·
+[Exact snapshots and image hashes](receipts/v0.1.0-beta.11-simulation.json).

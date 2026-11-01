@@ -1,0 +1,39 @@
+name: Update beta11 development draft
+on:
+  push:
+    branches: [feat/beta5-simple-onboarding]
+    paths: [.github/workflows/beta11-pr.yml]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  update-draft:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Update existing unmerged draft only
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/pulls/14" > "$RUNNER_TEMP/pr14.json"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          d=json.loads((Path(os.environ['RUNNER_TEMP'])/'pr14.json').read_text())
+          assert d['state']=='open' and d['draft'] and d['head']['ref']=='feat/beta5-simple-onboarding'
+          PY
+          cat > "$RUNNER_TEMP/beta11-pr.md" <<'MD'
+          Beta.11 fixes #16: beta.10 removed essential cost-component rows from native Device Diagnostics. Restore 13 purposeful enabled entities alongside the nine existing beta.10 entities: selected current/next price period, eight recorded numerical components and four actual daily grid ranges. Availability is reused with a compact Status caption, giving 14 native Diagnostic rows and 22 total entities on a four-band site.
+
+          Current else explicitly marked next quarter supplies every component, VAT and final from one verified stored record/revision. Day grid ranges read their separately verified prepared cache even when final history is absent. Distinct equal-price bands remain separate; additional actual ranges receive native rows; missing/stale values are Unknown. No read fetch, tariff normalization, recomposition or SQLite writes. No technical/provisional/subscription features reintroduced.
+
+          Published baseline 150c24fa08988b6ae308dec68bb21016ffcca0b9. Nineteen runtime files, including the model, adapters, ledger, scheduler, config/Options, API2 and card JavaScript, remain byte-identical. Config schema4 and API2 remain; beta.10 updates in place without reset.
+
+          Local validation:123 tests/core on HA2026.10.3 and2026.10.4,90%coverage,18 browser regressions,official hassfest1valid/0invalid. Native HA.4 desktop/mobile EN/DA screenshots show all14 rows, exact next11:30–11:45/287.42 example, four Radius ranges, supplier markup, coherent VAT and current selection switch. A hash-verified published-beta10 native upgrade preserves27 original entity IDs across3 sites, all3 site configs and both existing ledger files byte-identically through upgrade, locale reloads and restart. Zero browser errors/warnings or provider requests on reads. Source/private-rate fixtures are explicitly fictional, not owner HA acceptance.
+
+          First checkpoint b91db76 has12 successful remote push/PR checks. Final candidate CI, reproducible clean packages and guarded publication remain pending. Existing draft/main/prior releases remain preserved; no stable or production/charging control changes.
+
+          [Native Diagnostic guide](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/feat/beta5-simple-onboarding/docs/DIAGNOSTICS.md) · [Native evidence](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/feat/beta5-simple-onboarding/docs/receipts/v0.1.0-beta.11-simulation.json) · [HACS procedure](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/feat/beta5-simple-onboarding/docs/HACS_DISTRIBUTION.md) · [Permanent handoff](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/feat/beta5-simple-onboarding/docs/DEVELOPMENT_STATUS.md).
+          MD
+          gh api "repos/$GITHUB_REPOSITORY/pulls/14" --method PATCH --raw-field title='Beta.11: restore complete native Device Diagnostics and Radius periods' -F body=@"$RUNNER_TEMP/beta11-pr.md" --jq '{number,html_url,draft}'

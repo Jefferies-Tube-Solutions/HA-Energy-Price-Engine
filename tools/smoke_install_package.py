@@ -60,6 +60,12 @@ async def test_independent_installed_package(hass, freezer, enable_custom_integr
     entry=await complete_wizard(form)
     await hass.async_block_till_done()
     assert entry.state==ConfigEntryState.LOADED
+    from homeassistant.helpers import entity_registry as er
+    from homeassistant.helpers.entity import EntityCategory
+    registered=er.async_entries_for_config_entry(er.async_get(hass),entry.entry_id)
+    assert len(registered)==22
+    assert len([e for e in registered if e.entity_category==EntityCategory.DIAGNOSTIC and not e.disabled_by])==14
+    assert all(er.async_get(hass).async_get_entity_id("sensor","ha_energy_price_engine",entry.unique_id+"_component_"+k) for k in ("spot","dso","energinet_net","energinet_system","supplier","electricity_tax","vat","final"))
     result=get_api(hass).lookup(entry.unique_id,*day_bounds(date(2026,10,25)),now=now)
     assert str(result.status)=="READY" and len(result.slots)==100
     assert all(abs(r.price-.23)<1e-9 for r in result.slots)

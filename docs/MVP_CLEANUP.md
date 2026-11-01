@@ -1,3 +1,8 @@
+> Historical beta.10 inventory. Beta.11 corrects its native Diagnostic visibility
+> regression: nine primary entities are retained and 13 purposeful diagnostic
+> entities restore the complete calculation and actual grid bands. Nine was never
+> a cap on essential information. See [Native Diagnostics](DIAGNOSTICS.md).
+
 # Beta.10 MVP inventory and implementation decision
 
 Inventory recorded **before runtime implementation**, 31 October 2026 (Europe/Copenhagen).

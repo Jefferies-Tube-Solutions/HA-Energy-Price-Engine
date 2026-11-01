@@ -1,3 +1,44 @@
+# Beta.11 native acceptance checkpoint — active
+
+Previous source b91db767774ccef38eab6f4d59a8d5fec62a2e15, branch
+feat/beta5-simple-onboarding. Existing draftPR14. Primary issue16.
+Checkpoint subject: **Verify native beta10 upgrade and complete diagnostic acceptance**.
+No release/tag/main changes yet. User explicitly authorizes guarded beta11 publication.
+
+All12 remote push/PR checks on b91db76 succeeded. Final local matrix **123passed/core**,
+HA2026.10.3 and current2026.10.4 (PyPI rechecked),90%coverage,zero skips,2pinned HACS
+warnings;18card browser regressions,official hassfest1valid/0invalid,both first native
+ZIP layouts outside source passed. Added meaningful midnight-next/DSO difference and
+live extra-period growth/shrink cases. Core full suite and original read API remain.
+
+Native HA.4/frontend20260930.5 upgraded from downloaded/hash-verified published beta10.
+All27 original entity IDs across3 sites,all3 site data/options and2 actual ledger files
+remain identical through upgrade,language reloads and restart. Third site has no final
+ledger because supplier is missing;no zero/empty authoritative prices invented.
+Actual native Device Diagnostic card shows14 enabled rows/22total per four-band site:
+current or Next verified quarter,8coherent recorded components,4verified actual ranges,
+reused Status. Numeric ore/kWh2decimals;all8parts share start/end/revision/source and
+reconcile. Next11:30–11:45 example shows287.42 from explicit fictional source/contract
+fixtures,not inferred owner's EWII. Missing supplier retains4independent grid bands.
+Automatic next→current selection observed through real coordinator state publication
+with controlled PE test clock. No browser errors/warnings or extra source calls on reads.
+Fifteen committed native screenshots include real before/after,EN/DA,desktop/mobile,
+source attributes,missing/current/next/switch. No owner physical acceptance claimed.
+
+Compact native captions avoid clipping:Status reuses availability's stableID and
+state behavior;Danish Nord Pool spot shortened. Existing user-assigned names preserved.
+No technical/provisional/canonical aliases added.19 runtime files byte-identical
+published beta10,including pricing/math/SQLite/config/scheduler/API2/cardJS. Grid
+metadata snapshot is the only updater addition;request/composition policy unchanged.
+Receipt:docs/receipts/v0.1.0-beta.11-simulation.json. Guide:docs/DIAGNOSTICS.md.
+
+Next: final clean candidate/reproducible archives/native installers;latest exact-source
+CI/HACS;annotated beta11 tag;guarded publisher preserving main and beta1–10;independent
+public source/asset/HACS/native tests on both cores;permanent STOP handoff. Keep beta10
+sites in place—no reset. No stable/main/production HA/Node-RED/charging actions.
+
+---
+
 # Beta.11 native Diagnostic restoration — active, 1 November 2026
 
 Owner's latest brief and issue16 authorize the focused beta11 correction and guarded

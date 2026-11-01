@@ -229,7 +229,7 @@ async def test_hacs_add_discover_beta_download_update_and_reinstall(
         repo.data.selected_tag = TAG
         assert repo.version_to_download() == TAG
         installed = tmp_path / "custom_components" / DOMAIN
-        # Exercise a real beta.8 -> beta.9 filesystem update, not only a clean
+        # Exercise a real beta.10 -> beta.11 filesystem update, not only a clean
         # installation pretending to have an older installed_version field.
         if previous_asset := receipt.get("previous_hacs_asset"):
             previous_bytes = Path(previous_asset).read_bytes()
@@ -265,7 +265,7 @@ async def test_hacs_add_discover_beta_download_update_and_reinstall(
 
         from .helpers import model
 
-        history_engine = PriceEngine(hass, "hacs-beta8-upgrade")
+        history_engine = PriceEngine(hass, "hacs-beta10-upgrade")
         start = datetime(2026, 10, 29, 12, tzinfo=UTC)
         await history_engine.async_update(
             "hacs_history",

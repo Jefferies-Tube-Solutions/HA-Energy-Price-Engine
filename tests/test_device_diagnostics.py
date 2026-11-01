@@ -242,3 +242,70 @@ async def test_actual_ranges_not_hardcoded_and_additional_native_rows(hass, free
     assert float(states(hass, entry)["grid_period_5"].state) == 20
     assert states(hass, entry)["grid_period_5"].attributes["additional_periods"] == 1
     assert await hass.config_entries.async_unload(entry.entry_id)
+
+
+async def test_next_midnight_uses_tomorrow_record_not_todays_applied_tariff(
+    hass, freezer, price_service, radius_source
+):
+    freezer.move_to("2026-11-01T22:45:00Z")
+    now = datetime.now(UTC)
+    data = current_rate(
+        model(dso_mode="radius_c", dated_components=[]),
+        "supplier",
+        "11.1",
+        False,
+        now + timedelta(seconds=1),
+    )
+    entry = await setup(hass, data)
+    c = entry.runtime_data
+    values = states(hass, entry)
+    assert values["price_period"].state == "02/11 00:00–00:15"
+    assert values["component_dso"].attributes["period"] == "next_quarter"
+    assert float(values["component_dso"].state) == pytest.approx(10.6175)
+    assert float(values["dso"].state) == pytest.approx(31.8524)
+    assert grid_periods(c)[-1]["local_start"].startswith("2026-11-01")
+    assert await hass.config_entries.async_unload(entry.entry_id)
+
+
+async def test_more_ranges_added_on_updates_then_unavailable_when_no_longer_applicable(
+    hass, freezer, price_service, radius_source
+):
+    from copy import deepcopy
+    from unittest.mock import AsyncMock
+
+    from custom_components.ha_energy_price_engine.price_engine import day_bounds
+    from custom_components.ha_energy_price_engine.tariff_source import (
+        RADIUS_CODE,
+        RADIUS_GLN,
+        normalize_tariffs,
+    )
+
+    from .test_tariff_source import DATA
+
+    freezer.move_to("2026-11-01T10:15:00Z")
+    entry = await setup(hass, model(dso_mode="radius_c", dated_components=[rule("supplier", 3)]))
+    c = entry.runtime_data
+    assert len(states(hass, entry)) == 22
+    records = deepcopy(DATA)
+    for record in records:
+        record["Price4"] = 0.2
+    first, last = day_bounds(datetime.now(UTC).date())
+    slots, meta = normalize_tariffs(records, RADIUS_GLN, RADIUS_CODE, first, last)
+    with patch.object(
+        c.price_updater.tariffs,
+        "get",
+        AsyncMock(return_value=(slots, {**meta, "fetched_at": datetime.now(UTC).isoformat()})),
+    ):
+        await c.schedule.refresh_day(c.site, datetime.now(UTC).date(), datetime.now(UTC))
+        await c.async_refresh()
+        await hass.async_block_till_done()
+    assert len(grid_periods(c)) == 6
+    assert len(states(hass, entry)) == 24
+    assert float(states(hass, entry)["grid_period_6"].state) == pytest.approx(31.8524)
+    await c.schedule.refresh_day(c.site, datetime.now(UTC).date(), datetime.now(UTC))
+    await c.async_refresh()
+    await hass.async_block_till_done()
+    assert len(grid_periods(c)) == 4
+    assert states(hass, entry)["grid_period_6"].state == "unknown"
+    assert states(hass, entry)["grid_period_6"].attributes["period_count"] == 4
+    assert await hass.config_entries.async_unload(entry.entry_id)

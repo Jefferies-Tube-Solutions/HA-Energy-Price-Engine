@@ -252,13 +252,13 @@
         "name": "Aktuel nettarif"
       },
       "availability": {
-        "name": "Pristilgængelighed"
+        "name": "Status"
       },
       "price_period": {
         "name": "Prisens tidsrum"
       },
       "component_spot": {
-        "name": "Nord Pool spot (uden moms)"
+        "name": "Nord Pool spot"
       },
       "component_dso": {
         "name": "Anvendt nettarif"

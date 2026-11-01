@@ -252,7 +252,7 @@
         "name": "Current DSO tariff"
       },
       "availability": {
-        "name": "Price availability"
+        "name": "Status"
       },
       "price_period": {
         "name": "Price period"

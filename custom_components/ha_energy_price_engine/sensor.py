@@ -285,7 +285,14 @@ class DiagnosticSensor(PriceSensor):
         return {
             "site_id": c.site["id"],
             **{k: v for k, v in data.items() if k != "components"},
-            "vat_included": self.kind == "component_final",
+            "vat_included": None
+            if self.kind in {"price_period", "component_vat"}
+            else self.kind == "component_final",
+            "value_basis": "vat_amount"
+            if self.kind == "component_vat"
+            else "incl_vat"
+            if self.kind == "component_final"
+            else "ex_vat",
             "component": self.kind.removeprefix("component_"),
             "applied_component": data["components"].get(self.kind.removeprefix("component_")),
             "verification": "unavailable" if data["period"] == "unavailable" else "verified",

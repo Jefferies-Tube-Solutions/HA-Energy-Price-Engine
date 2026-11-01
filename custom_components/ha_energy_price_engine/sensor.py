@@ -1,4 +1,6 @@
-"""Nine native MVP sensors per site, with full precision and compact diagnostics."""
+"""Primary prices plus the complete native diagnostic calculation and grid bands."""
+
+from zoneinfo import ZoneInfo
 
 from homeassistant.components.sensor import SensorEntity, SensorStateClass
 from homeassistant.core import callback
@@ -6,9 +8,18 @@ from homeassistant.helpers.device_registry import DeviceEntryType
 from homeassistant.helpers.entity import DeviceInfo, EntityCategory
 from homeassistant.helpers.event import async_track_utc_time_change
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from homeassistant.util import dt as dt_util
 
 from .const import DOMAIN
-from .status import availability, price, source_value, statistics
+from .status import (
+    availability,
+    breakdown,
+    grid_periods,
+    local_interval,
+    price,
+    source_value,
+    statistics,
+)
 
 KINDS = (
     "current_spot",
@@ -23,8 +34,39 @@ KINDS = (
 )
 
 
+COMPONENT_KINDS = (
+    "spot",
+    "dso",
+    "energinet_net",
+    "energinet_system",
+    "supplier",
+    "electricity_tax",
+    "vat",
+    "final",
+)
+
+
 async def async_setup_entry(hass, entry, async_add_entities):
-    async_add_entities([PriceSensor(entry.runtime_data, kind) for kind in KINDS])
+    c = entry.runtime_data
+    async_add_entities(
+        [PriceSensor(c, kind) for kind in KINDS]
+        + [DiagnosticSensor(c, "price_period")]
+        + [DiagnosticSensor(c, "component_" + kind) for kind in COMPONENT_KINDS]
+    )
+    count = 0
+
+    @callback
+    def add_periods():
+        nonlocal count
+        needed = max(4, len(grid_periods(c)))
+        if needed > count:
+            async_add_entities(
+                [DiagnosticSensor(c, "grid_period_" + str(i + 1), i) for i in range(count, needed)]
+            )
+            count = needed
+
+    add_periods()
+    entry.async_on_unload(c.async_add_listener(add_periods))
 
 
 class PriceSensor(CoordinatorEntity, SensorEntity):
@@ -124,4 +166,127 @@ class PriceSensor(CoordinatorEntity, SensorEntity):
             "site_id": self.coordinator.site["id"],
             "vat_included": self.kind.endswith("final"),
             "canonical_unit": "DKK/kWh",
+        }
+
+
+class DiagnosticSensor(PriceSensor):
+    """Numbers from ONE stored record; day grid bands use their own verified cache."""
+
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+    _attr_state_class = None
+
+    def __init__(self, coordinator, kind, index=None):
+        super().__init__(coordinator, kind)
+        self.index = index
+        if kind == "price_period":
+            self._attr_native_unit_of_measurement = None
+            self._attr_suggested_display_precision = None
+        elif index is not None:
+            self._attr_translation_key = "grid_period"
+
+    def _period(self):
+        rows = grid_periods(self.coordinator)
+        return rows[self.index] if self.index < len(rows) else None, rows
+
+    @property
+    def name(self):
+        c = self.coordinator
+        da = c.hass.config.language.startswith("da")
+        if self.index is not None:
+            row, _ = self._period()
+            label = "Radius" if c.site["dso_mode"] == "radius_c" else "Net" if da else "DSO"
+            time = (
+                local_interval(
+                    dt_util.parse_datetime(row["start"]),
+                    dt_util.parse_datetime(row["end"]),
+                    c.site["timezone"],
+                )["time_range"]
+                if row
+                else ("utilgængelig" if da else "unavailable")
+            )
+            return f"{label} {self.index + 1} · {time}"
+        if self.kind == "price_period":
+            part = breakdown(c)
+            if part["period"] == "current_quarter":
+                return "Aktuelt kvarter" if da else "Current quarter"
+            if part["period"] == "next_quarter":
+                return "Næste verificerede kvarter" if da else "Next verified quarter"
+        return super().name
+
+    @property
+    def native_value(self):
+        c = self.coordinator
+        if self.index is not None:
+            row, _ = self._period()
+            return row["value"] if row else None
+        data = breakdown(c)
+        if self.kind == "price_period":
+            if data["period"] == "unavailable":
+                da = c.hass.config.language.startswith("da")
+                if missing := data["missing_components"]:
+                    names = {
+                        "supplier": ("supplier markup", "leverandørtillæg"),
+                        "dso": ("DSO tariff", "nettarif"),
+                        "energinet_net": ("Energinet network", "Energinet net"),
+                        "energinet_system": ("Energinet system", "Energinet system"),
+                        "electricity_tax": ("electricity tax", "elafgift"),
+                    }
+                    return ("Manglende: " if da else "Missing: ") + ", ".join(
+                        names.get(key, (key, key))[int(da)] for key in missing
+                    )
+                if data.get("failure_stage") == "storage":
+                    return (
+                        "Lagerfejl — kontroller gendannelse"
+                        if da
+                        else "Storage error — check recovery"
+                    )
+                return (
+                    "Kilde utilgængelig — kontroller priser"
+                    if da
+                    else "Source unavailable — Check prices"
+                )
+            first, last = dt_util.parse_datetime(data["start"]), dt_util.parse_datetime(data["end"])
+            value = local_interval(first, last, c.site["timezone"])["time_range"]
+            if (
+                first.astimezone(ZoneInfo(c.site["timezone"])).date()
+                != dt_util.now().astimezone(ZoneInfo(c.site["timezone"])).date()
+            ):
+                value = first.astimezone(ZoneInfo(c.site["timezone"])).strftime("%d/%m ") + value
+            return value
+        if data["period"] == "unavailable":
+            return None
+        component = self.kind.removeprefix("component_")
+        if component == "vat":
+            return data["vat_amount_ore"]
+        if component == "final":
+            return data["final_ore"]
+        return data["components"].get(component, {}).get("value_ore")
+
+    @property
+    def extra_state_attributes(self):
+        c = self.coordinator
+        if self.index is not None:
+            row, rows = self._period()
+            return {
+                "site_id": c.site["id"],
+                "vat_included": False,
+                "period_count": len(rows),
+                "additional_periods": max(0, len(rows) - 4),
+                "period_number": self.index + 1,
+                **(
+                    row
+                    or {
+                        "status": "INCOMPLETE",
+                        "reason": "No verified grid range at this index; use Check prices if expected",
+                    }
+                ),
+            }
+        data = breakdown(c)
+        return {
+            "site_id": c.site["id"],
+            **{k: v for k, v in data.items() if k != "components"},
+            "vat_included": self.kind == "component_final",
+            "component": self.kind.removeprefix("component_"),
+            "applied_component": data["components"].get(self.kind.removeprefix("component_")),
+            "verification": "unavailable" if data["period"] == "unavailable" else "verified",
         }

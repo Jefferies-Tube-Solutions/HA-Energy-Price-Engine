@@ -85,7 +85,16 @@ def breakdown(c, now=None):
             "vat_amount_ore": sum(p["vat"] for p in parts.values()) * 100,
             "final_ore": row.final_price_incl_vat * 100,
         }
-    return {"period": "unavailable", "components": {}}
+    day = now.astimezone(ZoneInfo(c.site["timezone"])).date()
+    state = report(c, day)
+    return {
+        "period": "unavailable",
+        "components": {},
+        "reason": state.get("reason") or window.reason,
+        "missing_components": state.get("missing_components", []),
+        "failure_stage": state.get("failure_stage"),
+        "action": state.get("required_action"),
+    }
 
 
 def source_value(c, kind, now=None):
@@ -157,3 +166,85 @@ def availability(c, now=None):
         "next_check": c.schedule.next_update(now).isoformat(),
     }
     return facts
+
+
+def local_interval(start, end, timezone):
+    """Readable local clock range; exact dated/offset identities remain available."""
+    first, last = start.astimezone(ZoneInfo(timezone)), end.astimezone(ZoneInfo(timezone))
+    finish = (
+        "24:00"
+        if last.date() > first.date() and last.hour == last.minute == 0
+        else last.strftime("%H:%M")
+    )
+    # A repeated DST hour can have identical local clocks but distinct UTC identities.
+    begin = first.strftime("%H:%M")
+    if first.date() == last.date() and last.replace(tzinfo=None) <= first.replace(tzinfo=None):
+        begin += first.strftime("%z")
+        finish += last.strftime("%z")
+    return {
+        "start": start.isoformat(),
+        "end": end.isoformat(),
+        "local_start": first.isoformat(timespec="minutes"),
+        "local_end": last.isoformat(timespec="minutes"),
+        "time_range": begin + "–" + finish,
+    }
+
+
+def grid_periods(c, now=None):
+    """Today's actual contiguous grid bands, independent of final-price coverage.
+
+    Only inspect the prepared update-time cache. Never normalize tariffs, fetch a
+    source or calculate a final price here. Distinct nonadjacent equal rates and
+    explicitly configured local-hour bands retain separate rows.
+    """
+    now = now or dt_util.utcnow()
+    today = now.astimezone(ZoneInfo(c.site["timezone"])).date()
+    metadata = c.price_updater.grid_sources.get(str(today), {})
+    stamp = dt_util.parse_datetime(metadata.get("verified_at") or "")
+    if not stamp or stamp.tzinfo is None or not 0 <= (now - stamp).total_seconds() <= 86400:
+        return []
+    if report(c, today).get("failure_stage") == "grid":
+        return []
+    grid = c.price_updater.grid_slots.get(str(today), {})
+    if not grid:
+        return []
+    first, last = day_bounds(today, c.site["timezone"])
+    periods, previous_band = [], None
+    while first < last:
+        end = first + timedelta(minutes=15)
+        part = grid.get(first)
+        evidence = {
+            "value": part["ex_vat"] * 100 if part else None,
+            "status": "READY" if part else "INCOMPLETE",
+            "source": part.get("source") if part else None,
+            "verified_on": part.get("verified_on") if part else None,
+            "verified_at": metadata.get("fetched_at"),
+            "valid_from": part.get("valid_from") if part else None,
+            "valid_to": part.get("valid_to") if part else None,
+        }
+        band = (
+            evidence,
+            part.get("hours") if part else None,
+            part.get("effective_after") if part else None,
+        )
+        if periods and band == previous_band:
+            periods[-1].update(
+                end=end.isoformat(),
+                local_end=end.astimezone(ZoneInfo(c.site["timezone"])).isoformat(
+                    timespec="minutes"
+                ),
+            )
+        else:
+            periods.append(
+                {
+                    **{
+                        k: v
+                        for k, v in local_interval(first, end, c.site["timezone"]).items()
+                        if k != "time_range"
+                    },
+                    **evidence,
+                }
+            )
+        previous_band = band
+        first = end
+    return periods

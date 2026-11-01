@@ -1,3 +1,38 @@
+# Beta.11 native Diagnostic restoration — active, 1 November 2026
+
+Owner's latest brief and issue16 authorize the focused beta11 correction and guarded
+prerelease publication. They supersede the historical beta10 STOP below.
+Published cumulative baseline:150c24fa08988b6ae308dec68bb21016ffcca0b9.
+Branch:feat/beta5-simple-onboarding; previous handoff7d0405c, existing draftPR14.
+Runtime was byte-identical published beta10 before work. Main remains56cdb3c.
+Checkpoint subject: **Restore native component and verified grid-period diagnostics**.
+
+Implemented13 purposeful enabled diagnostic entities alongside the nine existing
+beta10 entities: selected current/next period,8stored components,4actual day bands.
+Availability is reused, giving14 native Diagnostic rows/22total for a four-band site.
+All components share one verified stored record/revision. Day grid bands use prepared
+cache independently of final history, preserving separated equal rates and explicit
+hour bands. Additional actual ranges get native rows; missing ranges remain Unknown.
+Grid verification metadata is retained atomically with its prepared cache, without
+changing tariff math, source requests, persistence schema or API2. Dashboard reuses
+this same day-band view. EN/DA labels;2-decimal ore values;exact full-precision records.
+
+Local121tests passed on HA2026.10.3,90%coverage,zero skips,2upstream HACS warnings.
+New9diagnostic cases cover enabled native rows/coherent current,next287.42example,
+automatic current switch,empty final history,negative/mixed VAT,site isolation,
+DST/day tariffs,no read fetch/SQL/math,extra bands and missing/stale sources.
+Current-core suite,18browser regressions and official hassfest are running; native
+beta10 baseline/disposable upgrade evidence is in progress,not yet claimed passed.
+Docs/README now state native Diagnostic components are essential,not attributes/card.
+
+Next: native beta10→11 upgrade with9IDs/ledger preservation,actual device-page EN/DA
+screenshots and current/next/missing/range/precision acceptance;final full matrix,
+HACS beta10→11/native ZIP tests,remote exact-source CI/reproducible builds;guarded
+beta11-only prerelease and independent public verification. No main/stable/owner
+HA/Node-RED/charging actions. Physical Raspberry Pi acceptance remains owner work.
+
+---
+
 # STOP — beta.10 published and independently verified
 
 Latest authorized mission is complete. Do not start another beta, merge main,

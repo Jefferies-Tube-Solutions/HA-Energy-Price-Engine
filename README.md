@@ -5,14 +5,15 @@ electricity prices. It combines official Nord Pool spot prices with grid tariffs
 Energinet charges, your supplier markup, electricity tax and VAT. Negative prices,
 DK1/DK2, Europe/Copenhagen and 92/96/100-quarter days are supported.
 
-**v0.1.0-beta.10 is a breaking development beta.** Recreate older beta sites after
-backing up. API v2 replaces v1; unreleased EV Charge Manager requires an adapter
-update. No production cutover, charging control or stable release is implied.
+**v0.1.0-beta.11 restores complete native Device Diagnostics.** Update beta.10 in
+place after backup; existing sites, IDs, SQLite history and API v2 remain. Older
+beta1–9 sites still require explicit recreation. No production cutover, charging
+control or stable release is implied.
 
 ## Install and configure
 
 1. Follow [HACS installation and reset](docs/HACS_DISTRIBUTION.md). Enable **Show beta
-   versions**, explicitly select **v0.1.0-beta.10**, download and restart HA.
+   versions**, explicitly select **v0.1.0-beta.11**, download and restart HA.
 2. Add the **official Home Assistant Nord Pool integration** for DK1 or DK2. A legacy
    HACS Nordpool integration is not required and must not shadow the official domain.
 3. Under **Settings → Devices & services → Add integration**, select **Energy Price
@@ -27,8 +28,10 @@ update. No production cutover, charging control or stable release is implied.
 Current raw spot, current final, next-quarter raw, next-quarter final, today's
 average/minimum/maximum, current DSO tariff, and price availability. Ordinary prices
 use **øre/kWh, two decimals**; calculations and the API keep full precision.
-Availability attributes and the card expose the component breakdown, source,
-coverage, revision, reason and corrective action without dozens of extra entities.
+The native **Diagnostic** section now has the selected current/next price period,
+all eight numerical price components and four actual Radius day ranges, plus the
+existing availability row. These 13 purposeful additional entities are enabled by
+default. [Native Diagnostics](docs/DIAGNOSTICS.md) works without installing a dashboard.
 
 Daily statistics use the calculated schedule immediately, including past and future
 quarters when all applicable rates are verified. A newly entered rate starts next

@@ -253,6 +253,36 @@
       },
       "availability": {
         "name": "Price availability"
+      },
+      "price_period": {
+        "name": "Price period"
+      },
+      "component_spot": {
+        "name": "Nord Pool spot (ex VAT)"
+      },
+      "component_dso": {
+        "name": "Applied DSO tariff"
+      },
+      "component_energinet_net": {
+        "name": "Energinet network"
+      },
+      "component_energinet_system": {
+        "name": "Energinet system"
+      },
+      "component_supplier": {
+        "name": "Supplier markup"
+      },
+      "component_electricity_tax": {
+        "name": "Electricity tax"
+      },
+      "component_vat": {
+        "name": "VAT amount"
+      },
+      "component_final": {
+        "name": "Verified final price"
+      },
+      "grid_period": {
+        "name": "Grid tariff period"
       }
     }
   }

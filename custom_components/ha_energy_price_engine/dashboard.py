@@ -16,7 +16,7 @@ from homeassistant.util import dt as dt_util
 from .api import PriceAPI
 from .const import DOMAIN
 from .price_engine import day_bounds
-from .status import availability, quarter, statistics
+from .status import availability, grid_periods, quarter, statistics
 
 CARD_URL = "/ha_energy_price_engine/energy-price-engine-card.js"
 COMPONENTS = ("spot", "dso", "energinet_net", "energinet_system", "supplier", "electricity_tax")
@@ -139,39 +139,7 @@ def price_schedule(c, now=None):
                 "affected_period": report.get("affected_period"),
             }
         )
-    tariffs = []
-    grid = c.price_updater.grid_slots.get(str(today), {})
-    report = c.schedule.days.get(site["id"], {}).get(str(today), {})
-    for slot in days[0]["slots"]:
-        part = (
-            grid.get(dt_util.parse_datetime(slot["start"]))
-            if report.get("failure_stage") not in {"source", "grid"}
-            else None
-        )
-        evidence = {
-            "value": part["ex_vat"] * 100 if part else None,
-            "status": "READY" if part else "INCOMPLETE",
-            "source": part.get("source") if part else None,
-            "verified_on": part.get("verified_on") if part else None,
-            "verified_at": report.get("grid_source", {}).get("fetched_at"),
-            "valid_from": part.get("valid_from") if part else None,
-            "valid_to": part.get("valid_to") if part else None,
-        }
-        previous = (
-            {
-                k: v
-                for k, v in tariffs[-1].items()
-                if k not in {"start", "end", "local_start", "local_end"}
-            }
-            if tariffs
-            else None
-        )
-        if tariffs and previous == evidence:
-            tariffs[-1].update(end=slot["end"], local_end=slot["local_end"])
-        else:
-            tariffs.append(
-                {**{k: slot[k] for k in ("start", "end", "local_start", "local_end")}, **evidence}
-            )
+    tariffs = grid_periods(c, now)
     return {
         "schema_version": 2,
         "unit": "øre/kWh",

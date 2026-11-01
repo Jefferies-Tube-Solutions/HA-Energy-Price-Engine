@@ -19,6 +19,7 @@ class PriceUpdater:
         self.tariffs = TariffSource(hass, engine.entry_id)
         self.raw_slots = {}
         self.grid_slots = {}
+        self.grid_sources = {}
         self.lock = Lock()
         self.on_change = on_change
 
@@ -29,6 +30,7 @@ class PriceUpdater:
             cutoff = str(now.astimezone(ZoneInfo(site["timezone"])).date() - timedelta(days=1))
             self.raw_slots = {d: v for d, v in self.raw_slots.items() if d >= cutoff}
             self.grid_slots = {d: v for d, v in self.grid_slots.items() if d >= cutoff}
+            self.grid_sources = {d: v for d, v in self.grid_sources.items() if d >= cutoff}
             return report
 
     async def _day(self, site, day, now, force):
@@ -100,7 +102,7 @@ class PriceUpdater:
                     raise ValueError("Radius verification timestamp is invalid or future-dated")
                 if source["dso"].get("warning"):
                     raise ValueError(source["dso"]["warning"])
-            self.grid_slots[str(day)] = {}
+            grid = {}
             from .price_components import resolved_dso
 
             cursor = first
@@ -109,8 +111,13 @@ class PriceUpdater:
 
                 part = resolved_dso(PriceSlot(cursor, cursor + timedelta(minutes=15), 0), tariff)
                 if part is not None:
-                    self.grid_slots[str(day)][cursor] = part
+                    grid[cursor] = part
                 cursor += timedelta(minutes=15)
+            self.grid_slots[str(day)] = grid
+            self.grid_sources[str(day)] = {
+                **source.get("dso", {}),
+                "verified_at": source.get("dso", {}).get("fetched_at", now.isoformat()),
+            }
             stage = "composition"
             before = {r.start: r.revision for r in self.engine.records.get(key, ())}
             result = await self.engine.async_update(key, slots, tariff, source, now)

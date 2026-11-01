@@ -39,6 +39,8 @@ async def price_service(hass):
         if values["failure"]:
             raise HomeAssistantError("Synthetic provider outage")
         result = response(date.fromisoformat(call.data["date"]), values["amount"])
+        if transform := values.get("transform"):
+            result["DK2"] = transform(call, result["DK2"])
         if values["partial"]:
             result["DK2"] = result["DK2"][:1]
         if values["empty"]:

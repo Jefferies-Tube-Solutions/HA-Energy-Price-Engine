@@ -40,7 +40,7 @@ async def test_native_multisite_nine_entities_device_version_and_read_only_api(
     assert {s.site_id for s in api.sites()} == {"home", "away"}
     registry = er.async_get(hass)
     entities = er.async_entries_for_config_entry(registry, home.entry_id)
-    assert len(entities) == 9 and all(e.domain == "sensor" for e in entities)
+    assert len(entities) == 22 and all(e.domain == "sensor" for e in entities)
     assert not any(e.disabled for e in entities)
     devices = dr.async_entries_for_config_entry(dr.async_get(hass), home.entry_id)
     assert (
@@ -145,7 +145,7 @@ async def test_restart_sqlite_and_redacted_diagnostics(hass, freezer, price_serv
     assert await hass.config_entries.async_reload(entry.entry_id)
     await hass.async_block_till_done()
     assert entry.runtime_data.price_engine.records["home"] == before
-    assert len(er.async_entries_for_config_entry(er.async_get(hass), entry.entry_id)) == 9
+    assert len(er.async_entries_for_config_entry(er.async_get(hass), entry.entry_id)) == 22
     assert await hass.config_entries.async_unload(entry.entry_id)
 
 

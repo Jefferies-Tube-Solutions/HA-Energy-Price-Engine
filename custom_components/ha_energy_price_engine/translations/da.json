@@ -253,6 +253,36 @@
       },
       "availability": {
         "name": "Pristilgængelighed"
+      },
+      "price_period": {
+        "name": "Prisens tidsrum"
+      },
+      "component_spot": {
+        "name": "Nord Pool spot (uden moms)"
+      },
+      "component_dso": {
+        "name": "Anvendt nettarif"
+      },
+      "component_energinet_net": {
+        "name": "Energinet net"
+      },
+      "component_energinet_system": {
+        "name": "Energinet system"
+      },
+      "component_supplier": {
+        "name": "Leverandørtillæg"
+      },
+      "component_electricity_tax": {
+        "name": "Elafgift"
+      },
+      "component_vat": {
+        "name": "Momsbeløb"
+      },
+      "component_final": {
+        "name": "Verificeret samlet pris"
+      },
+      "grid_period": {
+        "name": "Nettariffens tidsrum"
       }
     }
   }

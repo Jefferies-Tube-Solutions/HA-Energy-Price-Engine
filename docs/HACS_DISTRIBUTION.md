@@ -46,7 +46,7 @@ stopped-HA full backup restore is the supported way to return to a prior beta.
 1. HACS → three-dot menu → **Custom repositories**: add
    `https://github.com/NicolaiTandrup/HA-Energy-Price-Engine`, category **Integration**.
    The existing approved main bootstrap contains HACS-compatible integration files.
-   Beta.10 does not require another main merge or a stable release.
+   Beta.11 does not require another main merge or a stable release.
 2. Enable **Show beta versions**, select **v0.1.0-beta.11**, download, restart HA.
    Do not select main or an older beta when following this guide.
 3. Add official **Nord Pool** in Devices & services for DK1/DK2 (DKK). PE reads its
@@ -71,7 +71,7 @@ stopped-HA full backup restore is the supported way to return to a prior beta.
 
 ## Manual ZIP fallback
 
-Download `ha_energy_price_engine-manual.zip` and `SHA256SUMS` from the exact beta.10
+Download `ha_energy_price_engine-manual.zip` and `SHA256SUMS` from the exact beta.11
 prerelease, verify SHA256, and extract into the development HA configuration folder.
 The result must be `custom_components/ha_energy_price_engine/manifest.json` (one
 level). Restart HA. The HACS ZIP instead contains files at its root for HACS's

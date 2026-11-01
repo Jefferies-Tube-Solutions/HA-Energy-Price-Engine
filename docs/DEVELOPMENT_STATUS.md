@@ -1,3 +1,99 @@
+# STOP — beta.11 published and independently verified
+
+The latest authorized mission is complete. Stop for the owner's real Home Assistant
+acceptance. Do not start another beta, merge main, publish stable or change production
+HA, Node-RED or charging controls without a new owner request. The disposable QA HA
+server has been stopped. Owner acceptance boxes and issue acceptance remain pending.
+
+Branch: `feat/beta5-simple-onboarding`. Existing [PR #14](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/pull/14)
+remains draft and unmerged; its title and body describe the published beta.11.
+Final checkpoint subject: **Record verified beta11 publication and permanent handoff**.
+Previous audit commit: `319539c`. A document cannot contain its own final commit SHA.
+
+## Immutable release and integrity
+
+- [v0.1.0-beta.11 prerelease](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/releases/tag/v0.1.0-beta.11).
+- Exact source: **657bc49b091c1aa5fafa6cad0945cd693326d31c**.
+- Annotated tag object: **b0bd7296a1b63e589aada4cf62420047984cd248**.
+- [Publisher run 41303061005](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303061005):
+  publication, both fresh public verification jobs and audit all succeeded. All 16
+  checks on publisher checkpoint `bfa6483` succeeded. All 18 exact-source push/PR/tag
+  checks passed before upload. The final documentation checkpoint's own checks run
+  after its push and must be observed before reporting final completion.
+- Main remains **56cdb3c10993179371483812cbc36f651ba3ad8e**. All prior beta1–10
+  tag objects, release IDs and asset IDs/sizes/digests were verified unchanged.
+  Beta.11 is a prerelease, not stable or latest. No existing assets were replaced.
+- HACS ZIP SHA256: `c5265f6a583c61c462a198548f7117070ac353e0c8958ad841e5ab3f117f424b`.
+- Manual ZIP SHA256: `ea01f317bcee3c30650906c2859500cc0a0784927f3974bf15f5a2071eb27eec`.
+- Two clean builds produced identical archive bytes. Independent public downloads
+  outside the publisher verified both archives, manifest source/version and retired
+  module absence. BUILD_MANIFEST.json and SHA256SUMS are release assets.
+- [Publication receipt](receipts/v0.1.0-beta.11.json) records completed publisher
+  checks, both public verification receipts and the separate public download proof.
+  **Publication blockers: none.**
+
+## Completed scope and validation
+
+Issue #16's native Diagnostic regression is fixed: selected current/next local period,
+eight coherent stored price components, four actual daily grid ranges and Status
+are enabled native rows. A normal four-band site has **14 Diagnostic rows and 22
+entities**, preserving all nine original beta.10 entities. Numeric rows default to
+**øre/kWh with two decimals**. Components/VAT/final share one record and revision;
+next-quarter fallback switches to current automatically. Missing inputs stay Unknown.
+Verified grid bands remain visible without a final-price ledger. Distinct equal-price
+bands, missing/additional ranges, seasonal changes and DST are represented truthfully.
+No dashboard is required to inspect the calculation or the supplier markup.
+
+Nineteen protected runtime files are byte-identical to published beta.10, including
+pricing math, adapters, SQLite, configuration/Options, scheduler, API2 and card JS.
+Only eight scoped runtime paths differ. Grid metadata is published atomically with
+its prepared cache; presentation reads add no provider fetches, price recomposition
+or SQL writes. Config schema 4, API2, price revisions, the nine primary entities and
+13:05/13:20/13:40/23:59/00:01 Copenhagen refreshes are preserved.
+
+- **123 tests per core**, HA **2026.10.3 / 2026.10.4**, **90% coverage**, zero skips.
+  The only two warnings are unchanged deprecations in pinned upstream HACS code.
+- **18 card browser regressions** passed; official hassfest: **1 valid / 0 invalid**.
+  HACS, Ruff, translations, packaging and exact-source CI passed.
+- Actual pinned HACS 2.0.5/upstream add, beta visibility, beta.10→11 file update,
+  reinstall and uninstall were exercised with mocked GitHub I/O. Fresh public jobs
+  on both cores independently downloaded actual public source/main/assets and the
+  original beta.10 ZIP, then ran HACS and both native package layouts outside source.
+- **15 actual native screenshots**, EN/DA, desktop 1440×1100 and mobile 390×1000,
+  cover before/after, current/next, missing supplier with four grid ranges, supplier
+  more-info, two-decimal values and automatic selection. Browser errors/warnings: zero.
+- Upgrade from downloaded, hash-verified published beta.10 preserved **27 original
+  entity IDs across three sites, all three site configurations and both ledger files
+  byte-for-byte** through upgrade, locale reloads and restart. The third site's missing
+  supplier correctly produces no authoritative final ledger.
+- [Native proof](receipts/v0.1.0-beta.11-simulation.json) and
+  [Diagnostics/screenshots](DIAGNOSTICS.md) use controlled recorded/synthetic software
+  fixtures, not owner private rates or physical Raspberry Pi acceptance. Browser plugin
+  was unavailable, so locked Playwright/system Chromium was used. Historical cloud
+  persistence benchmarks do not establish Raspberry Pi performance.
+
+## Owner installation and remaining limits
+
+For beta.10: back up development HA, enable HACS **Show beta versions**, refresh,
+select **v0.1.0-beta.11**, download, restart HA and reload the app/browser.
+**Keep existing sites, history and mappings; no beta.10 reset is needed.** Confirm
+Device info shows 0.1.0-beta.11, then open the native device Diagnostic section.
+Follow the [complete installation procedure](HACS_DISTRIBUTION.md) and unchecked
+[owner acceptance checklist](BETA_ACCEPTANCE.md). Older incompatible beta1–9 sites
+retain their separately documented explicit reset procedure; do not apply it to beta.10.
+
+Real PAHA02-DEV/Pi acceptance and actual private-contract/source checks remain owner
+work. No future EWII or summer-house contract is inferred; documented 0.030 DKK/kWh
+ex VAT applies only June–September 2026. Native QA's fictional supplier rate is not a
+contract default. Existing explicit user entity-disable/precision choices are retained.
+Four standard range rows show Unknown when absent, and extra actual ranges gain rows.
+
+Final documentation-only erratum changes the manual fallback reference from beta.10
+to beta.11 in the current branch guide; release tag and all published bytes remain
+immutable. No further implementation is pending. Stop after final handoff CI.
+
+---
+
 # Beta.11 guarded publication checkpoint — in progress
 
 Release source **657bc49b091c1aa5fafa6cad0945cd693326d31c**;all12 exact-source push/PR

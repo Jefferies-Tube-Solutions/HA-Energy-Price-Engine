@@ -103,7 +103,90 @@
     "html_url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303061005",
     "head_sha": "bfa6483a29163f0364cbaea48a76203870d5639d",
     "publication_and_both_verification_jobs": "success",
-    "workflow_final_conclusion": "pending audit completion"
+    "workflow_final_conclusion": "success",
+    "final_conclusion_verified_at": "2026-11-01T11:50:42.327171+00:00",
+    "observed_check_results": [
+      {
+        "name": "hassfest",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303064801/job/124837836106"
+      },
+      {
+        "name": "hacs",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303064801/job/124837835940"
+      },
+      {
+        "name": "independent beta install",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303064818/job/124837836118"
+      },
+      {
+        "name": "tests (fixture-supported-ha-2026.10.3)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303064779/job/124837836198"
+      },
+      {
+        "name": "tests (current-ha-2026.10.4)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303064779/job/124837836212"
+      },
+      {
+        "name": "dashboard browser desktop and mobile",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303064779/job/124837836060"
+      },
+      {
+        "name": "publish",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303061005/job/124837824920"
+      },
+      {
+        "name": "Verify public beta.11 (ha-2026.10.3)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303061005/job/124837976379"
+      },
+      {
+        "name": "Verify public beta.11 (ha-2026.10.4)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303061005/job/124837976320"
+      },
+      {
+        "name": "Record verified beta.11 publication",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303061005/job/124838160505"
+      },
+      {
+        "name": "tests (fixture-supported-ha-2026.10.3)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303060922/job/124837824881"
+      },
+      {
+        "name": "tests (current-ha-2026.10.4)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303060922/job/124837824796"
+      },
+      {
+        "name": "dashboard browser desktop and mobile",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303060922/job/124837824526"
+      },
+      {
+        "name": "independent beta install",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303060920/job/124837824599"
+      },
+      {
+        "name": "hassfest",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303060919/job/124837824855"
+      },
+      {
+        "name": "hacs",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41303060919/job/124837824617"
+      }
+    ]
   },
   "exact_source_checks": [
     {
@@ -927,5 +1010,16 @@
     "The standard four rows show truthful missing/additional ranges when the verified schedule differs; extra rows remain unavailable on days where they do not apply.",
     "Existing explicit HA entity-disable or display-precision choices remain user-owned."
   ],
-  "production_controls_touched": false
+  "production_controls_touched": false,
+  "outside_publisher_public_download": {
+    "public_assets_downloaded": true,
+    "source": "657bc49b091c1aa5fafa6cad0945cd693326d31c",
+    "archive_hashes": {
+      "ha_energy_price_engine.zip": "c5265f6a583c61c462a198548f7117070ac353e0c8958ad841e5ab3f117f424b",
+      "ha_energy_price_engine-manual.zip": "ea01f317bcee3c30650906c2859500cc0a0784927f3974bf15f5a2071eb27eec"
+    },
+    "retired_modules_absent": true,
+    "verified_at": "2026-11-01T11:50:42.327210+00:00"
+  },
+  "publication_blockers": []
 }

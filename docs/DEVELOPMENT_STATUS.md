@@ -1,3 +1,41 @@
+# Beta.12 guarded publication — in progress
+
+Release source **e506ccfc40b61413bd83e3ce60081a60d517348f**; all12 exact-source push/PR
+checks succeeded. Immutable annotated tag **v0.1.0-beta.12**, object
+**48479de326ad6386085ee228a5bee951e0d194cb**, points to that exact source and is pushed.
+Tag CI is required before upload. Branch feat/beta5-simple-onboarding, draft PR14.
+Checkpoint subject: **Guard beta12 publication with VAT projection and history integrity**.
+
+All implementation and native acceptance are complete. 139 tests/core on HA2026.10.3/.4,
+90%coverage,22 card browser cases,18 actual native screenshots,official hassfest1valid/
+0invalid. All66 original IDs,3 original site data/other settings and2 ledger hashes
+survive public beta11 upgrade,Yes/No saves,locale reloads and restart. All3 No preferences
+persist. No provider I/O, price writes/revisions or primary sensor/statistics-basis changes
+from the toggle. No browser errors/warnings. QA server stopped; owner Pi acceptance pending.
+
+Clean final archives rebuilt twice byte-identically. Both layouts installed outside
+source on both locked cores (4checks). HACS SHA256:
+211384a19c513009414acbde19f4eed55656ea957611b3211c2b5cfd62d0a5c8
+Manual SHA256:
+78eaebde562f59d7b25b514ba3c0cfc42ff1030393777d246347c119a18d4ed3
+
+Publisher requires18 successful exact-source push/PR/tag checks,exact source/tag/hash,
+beta11 ancestry and18 protected identical payload files,only11 allowed runtime paths,
+all native receipt/18image/runtime hashes and coherent Yes/No/VAT/primary-history/restart
+assertions. Main56cdb3c and every beta1–11 tag/release/asset identity must remain unchanged.
+Only beta12 prerelease/latest=false may be created; mismatching assets are never replaced.
+Two fresh jobs independently download public source/main/assets/original beta11 ZIP,
+verify SHA256,actual pinned HACS update/reinstall/uninstall and both native layouts on
+both cores. Audit records public evidence and updates existing draftPR14.
+
+Next: monitor gates/publication/public jobs,fetch audit,independently download public
+bytes,record final STOP handoff and observe final checkpoint CI. Publication is not
+claimed successful until observed. No further feature work. Keep beta10/11 sites/history;
+no reset, but reload browser/card resources for schema3. CM API2 stays canonical inclVAT.
+No stable/main merge,production HA,Node-RED or charging actions. Stop for PAHA02-DEV.
+
+---
+
 # Beta.12 native acceptance and final candidate — active
 
 Previous source **31738037d72a63fdbee8bae7d78fd8b88ebec100**, branch

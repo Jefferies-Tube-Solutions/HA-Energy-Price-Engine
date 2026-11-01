@@ -1,3 +1,97 @@
+# STOP — v1.0.0 blocked by GitHub PR-creation policy
+
+The owner-authorized stable task is paused at an explicit platform release gate.
+**No stable PR, main merge, v1.0.0 tag or stable release was created.** Do not claim
+publication or tag stale main. Follow issue18's STOP instruction until the owner
+unblocks ordinary PR creation; never bypass approvals or repository policy.
+
+Prepared branch: **release/v1.0.0**, based exactly on accepted published beta.12
+**e506ccfc40b61413bd83e3ce60081a60d517348f**. Existing development branch
+feat/beta5-simple-onboarding/cumulative draftPR14 and every beta release/tag remain
+preserved. Main is still **56cdb3c10993179371483812cbc36f651ba3ad8e** (old beta.1).
+Final checkpoint subject: **Record the stable PR policy blocker and resumable handoff**.
+Previous tested diagnostic checkpoint:48746c8b43d419a3bae705de70b37c60b4143fdc.
+A document cannot contain its own final commit SHA; observe final push CI before stopping.
+
+## Exact blocker and owner action
+
+[Failed ordinary review job](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41353553959/job/124988697580)
+reports:
+
+> pull request create failed: GraphQL: GitHub Actions is not permitted to create or approve pull requests (createPullRequest)
+
+The accepted-baseline/all22Python-files guard succeeded. Six ordinary CI checks all
+passed; only the separate PR-creation job failed. This is a GitHub Actions repository
+permission gate, not a pricing test failure. Branch-protection/required-review metadata
+has not yet been read because that step follows PR creation. No bypass or repository
+permission changes were attempted. [Machine-readable blocker](receipts/v1.0.0-blocker.json).
+
+Recommended owner action: [create a draft PR](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/compare/main...release/v1.0.0?expand=1)
+with **base main / head release/v1.0.0**, then rerun the failed stable review workflow.
+This preserves existing permission settings. Alternatively, the owner may explicitly
+enable Settings → Actions → General → Workflow permissions → **Allow GitHub Actions
+to create and approve pull requests**, then rerun. Neither option is approval to skip
+native QA, required reviews or exact-main release gates. Stable publication itself was
+already conditionally authorized by the owner; no repeated chat approval is needed.
+
+## Completed and observed
+
+- All22 runtime Python modules, bundled JavaScript, pricing/model/source adapters,
+  SQLite schema/revisions, API2, scheduler, settings behavior and entity identities
+  remain byte-identical accepted beta.12. Only runtime manifest1.0.0 and three neutral
+  reset-translation files differ. No feature or arithmetic changes.
+- Stable user-neutral README/install/update/compatibility docs, API2 stability policy,
+  separate legacy-beta reset guide, readiness review, acceptance checklist and notes
+  are prepared. Product1.0.0 is distinct from API2; CM's unreleased v1 adapter remains
+  separate work. No CM repository files were changed.
+- **142 tests/core**, HA2026.10.3/.4, **90%coverage**,zero skips,two unchanged HACS
+  deprecations; **22 EN/DA desktop/mobile browser cases** passed.
+- Four actual pinned HACS2.0.5/upstream cases (two pins × visibility on/off) verify
+  fresh stable without beta opt-in, source-recorded beta12 filesystem upgrade, native
+  HA updater off/on state, cache restoration, newer-main SHA rejection, later-beta
+  filtering, reinstall/uninstall and separate-ledger byte retention. GitHub I/O is
+  fixture-based; public stable discovery is not yet testable before publication.
+- HA's supported authenticated local brand route passes icon/logo/dark fallbacks from
+  the bundled icon. External HACS brand/catalog admission remains a separate owner
+  submission; no global HACS patch or automatic Marketplace listing is claimed.
+- Official hassfest: **1valid/0invalid**; remote HACS metadata/Ruff/tests/browser/package
+  validation all succeeded on48746c8. Only prepare-review fails for the explicit gate.
+- Clean candidate181467486bfea61148cdcc292c661e40006ec30a built twice byte-identically;
+  HACS/manual layouts independently installed outside source on HA2026.10.3.
+  Candidate HACS ZIP SHA256:ddbd7d09b27bd28af48e5b33bbc870bed80f797d411c1e83505bf8db90aa10c2
+  Candidate manual ZIP SHA256:3cde8b261e378160555fdb2d335cc897d022bcb55d96adcf06e7da2c6735fa1d
+  These are candidate artifacts, not published stable assets; final main provenance
+  must be rebuilt and verified after the ordinary merge.
+
+## Exact resume sequence
+
+1. After owner PR creation or explicit Actions setting change, rerun stable-pr job;
+   fetch the normal PR/protection receipt. Preserve PR14 and all previous releases.
+2. Complete mandatory disposable native clean install and hash-verified public beta12
+   upgrade/restart. Preserve69 existing entity IDs,3 original sites,2 ledger byte hashes,
+   VAT preferences, Recorder basis and canonical API2. Capture stable1.0.0 Device info,
+   all Diagnostic rows, EN/DA desktop/mobile and card. No stable native QA server has
+   been started in this paused mission; do not imply that this gate passed.
+3. Finish reviewed candidate/native receipt and exact-source CI. Honor any branch rules/
+   required approvals. Merge normally; never force or bypass policy.
+4. Confirm the actual resulting main commit and run all required CI against it. A merge
+   made with GITHUB_TOKEN may require explicit supported workflow dispatch for main CI;
+   do not assume an Actions-originated push starts new workflows automatically.
+5. Extend publication safely for stable: exact main/source CI, source/runtime/native
+   evidence, prior beta1–12 preservation, reproducible archives, immutable v1.0.0,
+   non-prerelease/latest. No stable publication workflow has been added yet.
+6. Independently verify public source/tag/assets/checksums, actual HACS stable selection
+   (beta visibility off, no false SHA) and both native layouts on both cores. Record
+   final public receipt/permanent STOP handoff, then owner real-HA verification.
+
+Native stable upgrade/history evidence, repository review/merge, actual-main CI and
+public verification remain unrun due this early gate. No production HA, PAHA02-DEV,
+Node-RED, Tesla/Easee, charging or cutover actions occurred. No issues were closed.
+Public tariffs retain real expiry dates; EWII0.030DKK/kWh exVAT remains Jun–Sep2026 only.
+Stop until the owner resolves the named GitHub policy gate.
+
+---
+
 # Stable PR platform gate investigation — active
 
 Source181467486bfea61148cdcc292c661e40006ec30a is committed/pushed on release/v1.0.0.

@@ -2,8 +2,8 @@
 
 Open **Settings → Devices & services → Energy Price Engine → your device →
 Diagnostic**. No dashboard or extra YAML is needed to see how the price is calculated.
-Beta.12 preserves the approved beta.11 component rows and adds a saved VAT display choice. All are enabled by default.
-The existing nine beta.10 entities keep their IDs and behavior. The availability
+Version1.0.0 retains the complete calculation rows and saved VAT display preference. All are enabled by default.
+The nine primary entities keep their IDs and behavior. The availability
 row uses the compact caption **Status** so its full label fits beside longer
 readiness guidance; user-assigned names are preserved.
 

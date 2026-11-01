@@ -5,7 +5,7 @@ Resources**, add this JavaScript module (enable Advanced mode on your HA profile
 Resources is hidden):
 
 ```yaml
-url: /ha_energy_price_engine/energy-price-engine-card.js?v=0.1.0-beta.10
+url: /ha_energy_price_engine/energy-price-engine-card.js?v=1.0.0
 type: module
 ```
 
@@ -72,10 +72,10 @@ Actual VAT amount remains informational and unchanged in both modes. Labels stat
 selected basis. The separate **Raw Nord Pool spot** graph is always ex VAT and is
 clearly labeled; it can remain available without a complete final-price record.
 
-The nine primary sensor values and their Recorder state classes retain beta.11
+The nine primary sensor values and their Recorder state classes retain stable fixed
 semantics: spot and current DSO exclude VAT; final and statistical sensors include VAT.
 Their names and metadata state that fixed basis. This avoids switching long-term
 statistics under an existing identity. Diagnostic numeric entities have no statistics
 state class. No reset, historical reprice, price revision or API2 value change occurs.
 After upgrading, reload app/browser resources: internal dashboard schema3 requires the
-bundled beta.12 JavaScript and rejects older schema2 clients instead of mislabeling data.
+bundled version1.0.0 JavaScript and rejects older schema2 clients instead of mislabeling data.

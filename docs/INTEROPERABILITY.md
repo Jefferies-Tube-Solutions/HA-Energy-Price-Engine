@@ -1,9 +1,8 @@
 # Unreleased EV Charge Manager handoff — API v2
 
 **CM has not been changed or declared compatible by this PE mission.** Its existing
-v1 adapter must be updated before pairing with PE beta.10. The owner explicitly
-allows this break; do not retain a v1 producer shim merely to pass earlier consumer
-suites. Immutable historical CM references were inspected, not edited. No CM controls
+v1 adapter must be updated before pairing with PE v1.0.0. PE stable v1.0.0 publishes API v2. Update and validate the consumer separately;
+do not add a v1 producer shim to disguise incompatibility. Immutable historical CM references were inspected, not edited. No CM controls
 or live HA were accessed. These are concrete required source changes for CM review.
 
 Inspected reference: CM PR #26 `5ef7115a9599e1ff25019e91b3737500853b9a38`,

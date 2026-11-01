@@ -1,0 +1,74 @@
+name: Stable release review PR and repository gates
+on:
+  push:
+    branches: [release/v1.0.0]
+    paths: [.github/workflows/stable-pr.yml]
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  prepare-review:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Verify accepted baseline and preserve development history
+        run: |
+          git merge-base --is-ancestor e506ccfc40b61413bd83e3ce60081a60d517348f HEAD
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          baseline='e506ccfc40b61413bd83e3ce60081a60d517348f'
+          for p in Path('custom_components/ha_energy_price_engine').glob('*.py'):
+              assert p.read_bytes()==subprocess.check_output(['git','show',baseline+':'+str(p)])
+          assert json.loads(Path('custom_components/ha_energy_price_engine/manifest.json').read_text())['version']=='1.0.0'
+          PY
+      - name: Create reviewable stable PR through ordinary repository permissions
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/stable-pr.md" <<'MD'
+          Promote the owner-accepted published beta.12 (`e506ccfc40b61413bd83e3ce60081a60d517348f`) to stable **1.0.0**, publishing the existing read-only **API v2**. Resolves the no-stable-release HACS SHA fallback through a real stable release; no HACS patch or version spoofing.
+
+          All 22 runtime Python modules, pricing math, sources, ledger/schema, scheduler, configuration behavior, API2 and bundled card JavaScript remain byte-identical beta.12. Runtime changes are manifest version and neutral reset translations. Preserve IDs, rates, history, revisions and VAT/Recorder semantics. Existing cumulative draftPR14/development branch and every beta release/tag remain intact.
+
+          Actual pinned HACS2.0.5/upstream tests now cover fresh stable without beta opt-in, beta.12→1.0.0 file update, stable/beta visibility/cache, later main SHA, future beta filtering, reinstall/uninstall and ledger preservation. Public README/setup/API2/compatibility documentation is prepared for ordinary users. Local HA supports bundled icon/logo/dark fallbacks; external HACS brands/catalog admission remains a separate owner submission.
+
+          Release readiness review, full two-core regression, native published-beta.12 upgrade/restart proof, exact-main CI and final public verification are mandatory. Current results and remaining gates are in the permanent handoff. This PR stays draft until these pre-merge gates pass. Do not merge or publish stable based solely on this PR creation job. No production HA, Node-RED, CM repository or charging changes.
+
+          [Permanent handoff](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/release/v1.0.0/docs/DEVELOPMENT_STATUS.md) · [Release review](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/release/v1.0.0/docs/RELEASE_READINESS.md).
+          MD
+          existing="$(gh pr list --state open --base main --head release/v1.0.0 --json number --jq '.[0].number // empty')"
+          if [ -n "$existing" ]; then
+            gh pr edit "$existing" --title 'Energy Price Engine v1.0.0 — Stable' --body-file "$RUNNER_TEMP/stable-pr.md"
+          else
+            gh pr create --base main --head release/v1.0.0 --draft --title 'Energy Price Engine v1.0.0 — Stable' --body-file "$RUNNER_TEMP/stable-pr.md"
+          fi
+          gh pr view release/v1.0.0 --json number,url,state,isDraft,baseRefName,headRefName,headRefOid > "$RUNNER_TEMP/stable-pr.json"
+      - name: Record repository merge and branch-protection gates without changing them
+        run: |
+          python - <<'PY'
+          import json,os,subprocess
+          from pathlib import Path
+          def api(path):return json.loads(subprocess.check_output(['gh','api',path]))
+          repo=os.environ['GITHUB_REPOSITORY'];meta=api('repos/'+repo);main=api('repos/'+repo+'/branches/main')
+          report={'repository':repo,'default_branch':meta['default_branch'],'main_sha':main['commit']['sha'],'main_protected':main['protected'],'allow_merge_commit':meta.get('allow_merge_commit'),'allow_squash_merge':meta.get('allow_squash_merge'),'allow_rebase_merge':meta.get('allow_rebase_merge'),'stable_pr':json.loads((Path(os.environ['RUNNER_TEMP'])/'stable-pr.json').read_text()),'production_touched':False}
+          if main['protected']:
+              result=subprocess.run(['gh','api','repos/'+repo+'/branches/main/protection'],capture_output=True,text=True)
+              report['protection_readable']=result.returncode==0
+              report['protection']=json.loads(result.stdout) if result.returncode==0 else {'error':result.stderr.strip()}
+          else:report['protection_readable']=True;report['protection']=None
+          result=subprocess.run(['gh','api','repos/'+repo+'/rulesets'],capture_output=True,text=True)
+          report['rulesets_readable']=result.returncode==0
+          report['rulesets']=json.loads(result.stdout) if result.returncode==0 else {'error':result.stderr.strip()}
+          Path('docs/receipts/v1.0.0-repository.json').write_text(json.dumps(report,indent=2)+'\n')
+          print('::notice title=Stable review PR::'+report['stable_pr']['url'])
+          print('Protected main:',report['main_protected'],'Protection readable:',report['protection_readable'])
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/receipts/v1.0.0-repository.json
+          git commit -m 'docs: record stable review PR and repository merge gates'
+          git push origin HEAD:refs/heads/release/v1.0.0

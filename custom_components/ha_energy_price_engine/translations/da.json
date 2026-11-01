@@ -47,7 +47,7 @@
           "grid": "Rediger nettarif",
           "supplier": "Rediger leverandørtillæg",
           "advanced": "Avancerede daterede satser",
-          "reset": "Nulstil dette udviklingssted",
+          "reset": "Nulstil dette sted",
           "display": "Vis priser inkl. moms"
         }
       },
@@ -84,7 +84,7 @@
       },
       "reset": {
         "title": "Nulstil dette sted",
-        "description": "Sted: **{name}**. Den inkompatible beta.10 kræver, at ældre beta-steder oprettes på ny. Tag først backup. Handlingen stopper og fjerner dette sted, dets PE SQLite-historik, revisioner og PE-filer. Andre steder, Recorder og uvedkommende HA-data slettes ikke. Skriv stedets præcise navn, og bekræft. Almindelig Slet i HA bevarer PE-historikfiler.",
+        "description": "Sted: **{name}**. Tag først backup. Handlingen stopper og fjerner dette sted, dets PE SQLite-historik, revisioner og PE-filer. Andre steder, Recorder og uvedkommende HA-data slettes ikke. Skriv stedets præcise navn, og bekræft. Almindelig Slet i HA bevarer PE-historikfiler.",
         "data": {
           "name": "Skriv stedets præcise navn",
           "confirm": "Slet kun dette sted og dets PE-historik permanent"
@@ -160,7 +160,7 @@
           "grid": "Rediger nettarif",
           "supplier": "Rediger leverandørtillæg",
           "advanced": "Avancerede daterede satser",
-          "reset": "Nulstil dette udviklingssted",
+          "reset": "Nulstil dette sted",
           "display": "Vis priser inkl. moms"
         }
       },
@@ -197,7 +197,7 @@
       },
       "reset": {
         "title": "Nulstil dette sted",
-        "description": "Sted: **{name}**. Den inkompatible beta.10 kræver, at ældre beta-steder oprettes på ny. Tag først backup. Handlingen stopper og fjerner dette sted, dets PE SQLite-historik, revisioner og PE-filer. Andre steder, Recorder og uvedkommende HA-data slettes ikke. Skriv stedets præcise navn, og bekræft. Almindelig Slet i HA bevarer PE-historikfiler.",
+        "description": "Sted: **{name}**. Tag først backup. Handlingen stopper og fjerner dette sted, dets PE SQLite-historik, revisioner og PE-filer. Andre steder, Recorder og uvedkommende HA-data slettes ikke. Skriv stedets præcise navn, og bekræft. Almindelig Slet i HA bevarer PE-historikfiler.",
         "data": {
           "name": "Skriv stedets præcise navn",
           "confirm": "Slet kun dette sted og dets PE-historik permanent"

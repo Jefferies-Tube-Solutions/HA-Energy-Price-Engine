@@ -47,7 +47,7 @@
           "grid": "Edit grid tariff",
           "supplier": "Edit supplier markup",
           "advanced": "Advanced dated rates",
-          "reset": "Reset this development site",
+          "reset": "Reset this site",
           "display": "Including VAT — display preference"
         }
       },
@@ -84,7 +84,7 @@
       },
       "reset": {
         "title": "Reset this site",
-        "description": "Site: **{name}**. Breaking beta.10 requires recreating older beta sites. Back up first. This action stops and removes this site, its PE SQLite history, revisions and PE files. It does not delete other sites, Recorder or unrelated HA data. Type the exact site name and confirm. Normal HA Delete retains PE history files.",
+        "description": "Site: **{name}**. Back up first. This action stops and removes this site, its PE SQLite history, revisions and PE files. It does not delete other sites, Recorder or unrelated HA data. Type the exact site name and confirm. Normal HA Delete retains PE history files.",
         "data": {
           "name": "Type the exact site name",
           "confirm": "Permanently delete only this site and its PE history"
@@ -160,7 +160,7 @@
           "grid": "Edit grid tariff",
           "supplier": "Edit supplier markup",
           "advanced": "Advanced dated rates",
-          "reset": "Reset this development site",
+          "reset": "Reset this site",
           "display": "Including VAT — display preference"
         }
       },
@@ -197,7 +197,7 @@
       },
       "reset": {
         "title": "Reset this site",
-        "description": "Site: **{name}**. Breaking beta.10 requires recreating older beta sites. Back up first. This action stops and removes this site, its PE SQLite history, revisions and PE files. It does not delete other sites, Recorder or unrelated HA data. Type the exact site name and confirm. Normal HA Delete retains PE history files.",
+        "description": "Site: **{name}**. Back up first. This action stops and removes this site, its PE SQLite history, revisions and PE files. It does not delete other sites, Recorder or unrelated HA data. Type the exact site name and confirm. Normal HA Delete retains PE history files.",
         "data": {
           "name": "Type the exact site name",
           "confirm": "Permanently delete only this site and its PE history"

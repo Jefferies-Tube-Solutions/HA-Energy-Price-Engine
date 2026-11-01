@@ -1,7 +1,8 @@
-# Read-only Python price API v2
+# Stable read-only Python price API v2
 
-Beta.10 removes v1. No compatibility shim, HTTP service, producer-entry alias or
-consumer calculation is needed. PE alone fetches, verifies, calculates and stores
+Energy Price Engine 1.0.0 publishes API v2 as its stable producer contract. Product
+version 1.0.0 and API version 2 are separate. Version1 is unsupported; there is no
+compatibility shim, HTTP price service or consumer-side price calculation. PE alone fetches, verifies, calculates and stores
 prices. Calls below are synchronous immutable memory-index reads; they do not fetch,
 compose tariffs, access SQLite or write. `get_api(hass, version=1)` raises ValueError.
 
@@ -65,3 +66,16 @@ Events do not turn a nonREADY range into READY and are never charging commands.
 Contract regressions use real HA producer/source/SQLite runtimes, independent-site
 isolation, revisions, unload, unavailable ranges, no-I/O guards, DST and variable-cost
 consumption. Old CM v1 is intentionally incompatible; see [CM handoff](INTEROPERABILITY.md).
+
+
+## Compatibility policy
+
+Product 1.0.x preserves API v2 field meanings, units, VAT-inclusive canonical prices,
+readiness rules, site identities and revision semantics. A future incompatible API
+requires an explicit new API version and documented consumer migration, rather than
+silently changing version2. Consumers must request version2 and fail closed on errors.
+The live display VAT preference never changes quotes or their stored revisions.
+
+The unreleased CM v1 adapter is not yet compatible. Its separate v2 migration and
+consumer validation do not block PE's independent stable producer release and do not
+authorize enabling charging controls. No CM repository files were changed here.

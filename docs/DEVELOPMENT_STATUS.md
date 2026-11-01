@@ -1,3 +1,52 @@
+# Beta.12 native acceptance and final candidate — active
+
+Previous source **31738037d72a63fdbee8bae7d78fd8b88ebec100**, branch
+`feat/beta5-simple-onboarding`, existing draft PR14, issue17. All13 remote first-source
+checks succeeded. Checkpoint subject: **Verify beta11 native upgrade and VAT display acceptance**.
+Owner authorization permits guarded beta12 publication after all mandatory gates.
+
+Implementation is complete: saved strict boolean default Yes in initial/native setup
+and normal Configure, enabled translated Yes/No row, all beta11 Diagnostics retained,
+selected stored incl/ex-VAT components/final and cached day bands, unchanged actual VAT.
+Nine primary sensor values/state classes remain fixed and explicitly labeled for
+Recorder continuity. The card follows the preference except the clearly raw ex-VAT
+source graph; internal card schema3 requires browser reload. CM API2 stays canonical.
+Pure preference saves make no provider requests, integration reloads, SQLite writes,
+reprice/revision events or readiness changes. Config schema4 and stable IDs remain.
+
+**139 tests/core**, supported/current HA2026.10.3/.4, **90%coverage**, zero skips,
+only2 unchanged upstream HACS warnings. **22 EN/DA desktop/mobile card tests** pass.
+Official hassfest:1valid/0invalid. Two clean candidate builds are byte-identical;
+HACS/manual installs outside source pass on both locked cores (4 independent checks).
+
+**18 actual native screenshots** from fresh hash-verified public beta11 → installed
+beta12. All66 original registry/entity IDs across3 sites, original site data and all
+other merged configuration properties, and2 price-ledger byte hashes survive upgrade,
+Yes/No saves, locale reloads and restart. All3 No preferences persist after restart;
+Configure reopens unchecked. All15 native Diagnostic rows/23total entities enabled.
+Yes287.42/No229.94 ore fixture shares the same stored quarter/revision and actual
+VAT57.48 in both modes. Current-ready and missing-final/verified-grid views pass.
+English/Danish, desktop1440x1200/mobile390x1200; no browser errors/warnings, no source
+requests from reads/toggles. Actual native card No/served JS hash also verified.
+Receipt:docs/receipts/v0.1.0-beta.12-simulation.json; images:docs/images/beta12.
+
+Evidence uses controlled recorded public/fictional private data and a QA-only relative
+timer mapping for the historical presentation clock. HA wall/auth clock is unchanged.
+The initial timer prototype was discarded before the clean baseline. This is not owner
+Pi acceptance. Optional unrelated camera-library/background DNS limitations are stated
+in the receipt. QA HA server is stopped. No live owner HA/Node-RED/charging access.
+Eighteen runtime payload files (including all producer math/ledger/adapters/scheduler/
+API2) are byte-identical beta11; only11 scoped presentation/settings paths differ.
+
+Next: observe final-candidate CI; clean final builds and exact-source both-layout
+installs; annotated immutable beta12 tag; guarded publisher pinning source/tag/hashes,
+source ancestry and native receipt, preserving main and every beta1–11 identity/asset.
+Fresh public HACS beta11→12/native installs on both cores and audit must pass, then
+final STOP handoff and owner PAHA02-DEV acceptance. No stable/main merge or unrelated
+features. No publication yet; do not claim pending exact-source/public checks passed.
+
+---
+
 # Beta.12 VAT display preference — active, 1 November 2026
 
 The new owner mission and issue #17 supersede the beta.11 STOP below. The attached

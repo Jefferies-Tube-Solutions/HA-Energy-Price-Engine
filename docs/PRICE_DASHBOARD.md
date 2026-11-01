@@ -45,7 +45,7 @@ expiry, confirm new documented rates under Advanced. Missing rates are never zer
 The card is read-only and uses authenticated HA WebSocket commands filtered by
 entity read permissions. It reads precomputed prices/cached source snapshots,
 without provider requests, tariff recomposition or SQLite writes. Its two-day
-schema is internal v2; Python consumer API v2 is documented separately.
+schema is internal v3; Python consumer API v2 is documented separately.
 
 ## Native software screenshots
 
@@ -61,3 +61,21 @@ schema is internal v2; Python consumer API v2 is documented separately.
 These are actual disposable Home Assistant screens using recorded public tariffs and
 fictional private rates, not owner installation screenshots. The
 [simulation receipt](receipts/v0.1.0-beta.10-simulation.json) records hashes and results.
+
+
+## VAT display and Recorder history
+
+Configure → **Including VAT** controls the card's stored components, final graph,
+statistics and verified DSO day bands. Default Yes uses each component's `incl_vat`;
+No uses `ex_vat`. Ex-VAT final sums unrounded stored components from the same quarter.
+Actual VAT amount remains informational and unchanged in both modes. Labels state the
+selected basis. The separate **Raw Nord Pool spot** graph is always ex VAT and is
+clearly labeled; it can remain available without a complete final-price record.
+
+The nine primary sensor values and their Recorder state classes retain beta.11
+semantics: spot and current DSO exclude VAT; final and statistical sensors include VAT.
+Their names and metadata state that fixed basis. This avoids switching long-term
+statistics under an existing identity. Diagnostic numeric entities have no statistics
+state class. No reset, historical reprice, price revision or API2 value change occurs.
+After upgrading, reload app/browser resources: internal dashboard schema3 requires the
+bundled beta.12 JavaScript and rejects older schema2 clients instead of mislabeling data.

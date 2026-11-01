@@ -2,15 +2,16 @@
 
 Open **Settings → Devices & services → Energy Price Engine → your device →
 Diagnostic**. No dashboard or extra YAML is needed to see how the price is calculated.
-Beta.11 restores the component rows missing in beta.10. All are enabled by default.
+Beta.12 preserves the approved beta.11 component rows and adds a saved VAT display choice. All are enabled by default.
 The existing nine beta.10 entities keep their IDs and behavior. The availability
 row uses the compact caption **Status** so its full label fits beside longer
 readiness guidance; user-assigned names are preserved.
 
 | Visible diagnostic | Value |
 |---|---|
+|Including VAT|Yes / No (Danish Ja / Nej), saved in initial setup or normal Configure|
 |Current quarter / Next verified quarter|Local clock range of the selected verified stored record|
-|Nord Pool spot (ex VAT)|That record's raw spot component|
+|Nord Pool spot|That record's spot component in the selected VAT basis|
 |Applied DSO tariff|That record's grid component|
 |Radius 1–4 · actual clock range|Today's independently verified grid schedule|
 |Energinet network / system|The two recorded national components|
@@ -21,8 +22,11 @@ readiness guidance; user-assigned names are preserved.
 |Status (existing price availability entity)|Current readiness and corrective guidance|
 
 All numeric rows use **øre/kWh, two decimals by default**. Internal stored amounts
-remain full-precision DKK/kWh. The six ex-VAT components plus the applied VAT amount
-reconcile to the final price before rounding. Independently rounded rows can differ
+remain full-precision DKK/kWh. With **Including VAT = Yes** (default), six component amounts use each stored
+`incl_vat` value and sum to the VAT-inclusive final. With **No**, they use stored
+`ex_vat` and sum to the VAT-exclusive final. **VAT amount** always shows the actual
+stored tax amount, unchanged; in No mode it is informational. Do not add VAT a second
+time in Yes mode. Independently rounded rows can differ
 slightly from the displayed final. Negative spot/VAT amounts remain signed.
 
 When the current final price is unavailable but the next quarter is READY, the period
@@ -57,11 +61,29 @@ shows the calculation and grid bands. The optional bundled Lovelace card adds gr
 and today/tomorrow tables. All three views share the same stored/cached price data;
 none replaces native Diagnostic visibility.
 
-Beta.10 → beta.11 is an in-place update: back up, select beta.11 in HACS, restart and
+Beta.10/11 → beta.12 is an in-place update: back up, select beta.12 in HACS, restart and
 reload the app/browser. Keep existing sites, histories, manual overrides and CM API2
 mappings. Reset is only for deliberately recreating older incompatible beta1–9 sites.
 Owner private contract values are never supplied as defaults. In particular, the
 historical EWII household0.030DKK/kWh exVAT applies only June–September2026.
+
+## VAT presentation and history safety
+
+Set **Including VAT?** during the normal Site/source setup step; default Yes. For an
+existing site, open **Configure → Including VAT — display preference** (not Advanced).
+Submitting saves immediately; closing an unsubmitted form leaves the saved value.
+The preference persists through restart and defaults Yes for beta.11 entries lacking
+it. It is strictly boolean and separate from source-rate `vat_included`, the actual
+VAT fraction, canonical ledger data and CM API2. Changing it does not reload sources,
+request providers, write/reprice the ledger or change price revisions/readiness.
+
+The new enabled **Including VAT** enum row displays Yes/No, localized Ja/Nej. A normal
+four-band site has 15 Diagnostic rows / 23 total entities. All beta.11 identities are
+preserved. The nine primary sensor values keep their fixed basis (spot/DSO ex VAT,
+final/statistics incl VAT), with explicit names/metadata, preserving Recorder continuity.
+The dashboard follows the preference except the explicitly raw ex-VAT spot graph.
+Grid periods project verified cache components, respecting already-inclusive inputs
+and different VAT rates rather than multiplying arbitrary source rates by 1.25.
 
 ## Native HA evidence
 
@@ -79,3 +101,21 @@ Chromium was used. This is disposable software QA, not owner Raspberry Pi accept
 [Danish next quarter](images/beta11/next-diagnostic-da-mobile.png) ·
 [Supplier more-info](images/beta11/supplier-more-info-mobile.png) ·
 [Exact snapshots and image hashes](receipts/v0.1.0-beta.11-simulation.json).
+
+
+Beta.12 native Yes/No evidence and restart/upgrade results are recorded in
+[the beta.12 simulation receipt](receipts/v0.1.0-beta.12-simulation.json).
+These use disposable HA with recorded public tariffs and fictional private values;
+they are separate from the owner's PAHA02-DEV acceptance.
+
+
+[Beta.12 including VAT, mobile](images/beta12/next-yes-en-mobile.png) ·
+[Excluding VAT, mobile](images/beta12/next-no-en-mobile.png) ·
+[Danish Ja](images/beta12/next-yes-da-mobile.png) ·
+[Danish Nej](images/beta12/next-no-da-mobile.png) ·
+[Initial native setup](images/beta12/initial-setup-en-desktop.png) ·
+[Configure No](images/beta12/configure-en-no.png) ·
+[Current quarter No](images/beta12/current-no-en-mobile.png) ·
+[Missing final with verified grid ranges](images/beta12/missing-final-no-en-mobile.png) ·
+[No after restart](images/beta12/restarted-no-da-mobile.png) ·
+[Native card No](images/beta12/native-card-no-da-desktop.png).

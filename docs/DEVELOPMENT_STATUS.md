@@ -1,3 +1,115 @@
+# STOP — beta.12 published and independently verified
+
+The authorized beta.12 mission is complete. Stop for the owner's PAHA02-DEV acceptance.
+Do not start another beta, merge main, publish stable or change production HA, Node-RED
+or charging controls without a new owner request. The disposable QA server is stopped.
+Owner acceptance boxes and issue #17 acceptance remain pending; no issue was closed.
+
+Branch: `feat/beta5-simple-onboarding`; existing [PR #14](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/pull/14)
+remains draft/unmerged, updated with the published beta.12 and verification evidence.
+Final checkpoint subject: **Record verified beta12 publication and permanent handoff**.
+Previous audit commit: `ed9322d`. A document cannot contain its own final commit SHA.
+
+## Immutable release and integrity
+
+- [v0.1.0-beta.12 prerelease](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/releases/tag/v0.1.0-beta.12).
+- Exact source: **e506ccfc40b61413bd83e3ce60081a60d517348f**.
+- Annotated tag object: **48479de326ad6386085ee228a5bee951e0d194cb**.
+- [Publisher 41345007270](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345007270):
+  publication, both independent public verification jobs and audit all succeeded.
+  All16 checks on publisher checkpoint `e54572d` succeeded. All18 exact-source
+  push/PR/tag checks passed before upload. Observe the final handoff commit's own
+  checks after push before reporting final completion; do not infer pending CI passed.
+- Main remains **56cdb3c10993179371483812cbc36f651ba3ad8e**. All prior beta1–11
+  tag objects, release IDs and asset IDs/sizes/digests were verified unchanged before
+  and after publication. Beta.12 is prerelease/latest=false; no assets were replaced.
+- HACS ZIP SHA256: `211384a19c513009414acbde19f4eed55656ea957611b3211c2b5cfd62d0a5c8`.
+- Manual ZIP SHA256: `78eaebde562f59d7b25b514ba3c0cfc42ff1030393777d246347c119a18d4ed3`.
+- Two clean final builds were byte-identical. Four independent native installs passed
+  (HACS/manual layouts on HA2026.10.3/.4), outside the repository source tree.
+  Separate public downloads verified BUILD_MANIFEST/SHA256SUMS/both ZIPs and all
+  public tag runtime bytes, including the new Diagnostic and retired-module absence.
+- [Publication receipt](receipts/v0.1.0-beta.12.json) records completed publisher
+  checks, both public receipts and the outside-publisher download proof.
+  **Publication blockers: none.**
+
+## Completed focused scope
+
+A strictly boolean `display_including_vat` defaults Yes for initial and existing
+beta.11 sites. Native first setup includes the checkbox in Site/source, and normal
+Configure offers Including VAT directly. Saved Yes/No survives restart; source-rate
+`vat_included`, physical VAT rate and canonical values remain separate. A new enabled
+translated enum shows Including VAT — Yes/No / Inklusive moms — Ja/Nej natively.
+
+All approved beta.11 component/period/status rows remain. A normal four-band site has
+**15 Diagnostic rows / 23 entities**. Component and applied DSO values use the selected
+stored quarter's incl_vat/ex_vat; ex-VAT final sums unrounded stored components. Actual
+VAT amount stays unchanged in both modes and is informational in No. Grid rows use
+verified cache values and actual local ranges/DST, including already-inclusive manual
+rates and differing VAT metadata. Current/next coherence and fail-closed Unknown remain.
+
+The nine primary sensor values/state classes retain their original fixed VAT basis,
+now explicitly labeled, preserving Recorder continuity and existing IDs. The card's
+components, final graph, statistics and tariffs follow the choice; the separately
+labeled raw-source Nord Pool graph stays ex VAT. Internal card schema3 requires a
+browser/resource reload; **CM API2 remains canonical VAT-inclusive**. Diagnostic numeric
+entities have no long-term statistics state class; older Recorder samples keep the
+basis displayed at the time, with basis metadata. No historical samples are rewritten.
+
+Preference-only saves publish visible state without integration reload, acquisition,
+price calculation, SQLite writes, revision events or readiness changes. Eighteen
+payload files including all producer math, ledger, adapters, scheduler and API2 are
+byte-identical published beta.11 source657bc49b091c1aa5fafa6cad0945cd693326d31c. Only11
+scoped settings/presentation paths differ. Config schema4, revisions, site isolation
+and 13:05/13:20/13:40/23:59/00:01 Copenhagen refreshes are preserved.
+
+## Observed validation
+
+- **139 tests/core**, HA **2026.10.3 / 2026.10.4**, **90%coverage**, zero skips;
+  only2 unchanged upstream HACS deprecations. Strict booleans, defaults, saved No,
+  interruption/restart, current/next, mixed VAT, inclusive inputs, negative prices,
+  missing inputs/DST and API/ledger/revision/primary-state-class invariance passed.
+- **22 EN/DA desktop/mobile card browser regressions** passed. Official hassfest:
+  **1 valid / 0 invalid**; HACS, Ruff, translations, packaging and CI passed.
+- Actual pinned HACS2.0.5/upstream registration, beta visibility, beta11→12 update,
+  reinstall and uninstall passed with mocked GitHub I/O. Fresh public jobs on both
+  locked cores independently downloaded source/main/assets/original public beta11
+  ZIP, verified SHA256 and ran actual HACS plus both native installed layouts.
+- **18 actual native screenshots**, EN/DA desktop1440x1200/mobile390x1200, cover
+  native initial setup/default Yes, normal Configure, Yes/No, current/next/missing,
+  all real grid bands, installed card and restart. No browser errors or warnings.
+- Upgrade from hash-verified public beta.11 preserved **66 original registry/entity
+  IDs, all3 original site data and other merged settings, and both2 ledger files
+  byte-for-byte** through toggles, locale reloads and restart. All3 No preferences
+  persist; Configure reopens unchecked. Source requests from read/toggle assertions:0.
+  Actual served JavaScript matches the package hash. Fixture final287.42 incl/229.94
+  ex shares one quarter/revision and VAT57.48, unchanged in both modes.
+- [Native receipt](receipts/v0.1.0-beta.12-simulation.json) and
+  [guide/screenshots](DIAGNOSTICS.md) explicitly use controlled recorded/synthetic
+  software, fictional private rates and QA-only relative timer mapping. HA wall/auth
+  clock is unchanged. The timer prototype was discarded before the clean baseline.
+  Browser plugin was unavailable; locked Playwright/system Chromium was used.
+  Environment camera/DNS limitations are recorded. No physical Pi validation is claimed;
+  historical cloud benchmarks do not establish Raspberry Pi performance.
+
+## Owner update and remaining limits
+
+Back up PAHA02-DEV, enable HACS **Show beta versions**, refresh, select
+**v0.1.0-beta.12**, download and restart HA. Reload browser/app and cached card resources.
+**Keep beta.10/11 sites, history and mappings; no reset is needed.** Verify Device info
+0.1.0-beta.12, then native device Diagnostic. Configure → Including VAT saves the
+preference. Follow the [installation guide](HACS_DISTRIBUTION.md) and unchecked
+[owner acceptance checklist](BETA_ACCEPTANCE.md). Older incompatible beta1–9 sites
+retain their separate explicit reset procedure; do not apply it to beta.10/11.
+
+Actual contract/source values and real PAHA02-DEV/Pi/mobile acceptance remain owner
+work. No future EWII or summer-house terms are inferred; documented0.030DKK/kWh exVAT
+remains June–September2026 only. Existing explicit entity-disable/display-precision
+choices are retained. Different/missing/additional grid ranges stay truthful.
+No further implementation is pending. Stop after observing final handoff CI.
+
+---
+
 # Beta.12 guarded publication — in progress
 
 Release source **e506ccfc40b61413bd83e3ce60081a60d517348f**; all12 exact-source push/PR

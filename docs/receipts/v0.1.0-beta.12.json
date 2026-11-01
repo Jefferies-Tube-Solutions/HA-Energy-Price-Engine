@@ -108,7 +108,90 @@
     "html_url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345007270",
     "head_sha": "e54572db3aaa98195c200f0b144085dfdcfdc74e",
     "publication_and_both_verification_jobs": "success",
-    "workflow_final_conclusion": "pending audit completion"
+    "workflow_final_conclusion": "success",
+    "final_conclusion_verified_at": "2026-11-01T20:10:17.391108+00:00",
+    "observed_check_results": [
+      {
+        "name": "independent beta install",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345011969/job/124962865752"
+      },
+      {
+        "name": "hassfest",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345011947/job/124962865458"
+      },
+      {
+        "name": "hacs",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345011947/job/124962865765"
+      },
+      {
+        "name": "tests (fixture-supported-ha-2026.10.3)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345011948/job/124962865711"
+      },
+      {
+        "name": "tests (current-ha-2026.10.4)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345011948/job/124962865874"
+      },
+      {
+        "name": "dashboard browser desktop and mobile",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345011948/job/124962865352"
+      },
+      {
+        "name": "publish",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345007270/job/124962852659"
+      },
+      {
+        "name": "Verify public beta.12 (ha-2026.10.3)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345007270/job/124963368798"
+      },
+      {
+        "name": "Verify public beta.12 (ha-2026.10.4)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345007270/job/124963368895"
+      },
+      {
+        "name": "Record verified beta.12 publication",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345007270/job/124963596808"
+      },
+      {
+        "name": "tests (fixture-supported-ha-2026.10.3)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345007152/job/124962852459"
+      },
+      {
+        "name": "tests (current-ha-2026.10.4)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345007152/job/124962852333"
+      },
+      {
+        "name": "dashboard browser desktop and mobile",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345007152/job/124962852363"
+      },
+      {
+        "name": "independent beta install",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345007140/job/124962852028"
+      },
+      {
+        "name": "hassfest",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345007137/job/124962852073"
+      },
+      {
+        "name": "hacs",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41345007137/job/124962852116"
+      }
+    ]
   },
   "exact_source_checks": [
     {
@@ -930,7 +1013,23 @@
     "Private rates remain configured values; no future EWII or summer-house contract inference.",
     "Beta10/11 updates in place; older incompatible beta1–9 sites still require explicit reset/recreation.",
     "The standard four rows show truthful missing/additional ranges when the verified schedule differs; extra rows remain unavailable on days where they do not apply.",
-    "Existing explicit HA entity-disable or display-precision choices remain user-owned."
+    "Existing explicit HA entity-disable or display-precision choices remain user-owned.",
+    "Reload cached browser/card resources: internal dashboard schema3 requires the beta12 bundled JavaScript; CM API2 is unchanged.",
+    "Primary sensor/Recorder values retain their fixed labeled VAT basis. Diagnostic Recorder samples retain the basis displayed at the time; no diagnostic long-term statistics state class or historical sample rewrite is introduced."
   ],
-  "production_controls_touched": false
+  "production_controls_touched": false,
+  "outside_publisher_public_download": {
+    "public_assets_downloaded": true,
+    "source": "e506ccfc40b61413bd83e3ce60081a60d517348f",
+    "archive_hashes": {
+      "ha_energy_price_engine.zip": "211384a19c513009414acbde19f4eed55656ea957611b3211c2b5cfd62d0a5c8",
+      "ha_energy_price_engine-manual.zip": "78eaebde562f59d7b25b514ba3c0cfc42ff1030393777d246347c119a18d4ed3"
+    },
+    "sha256sums_verified": true,
+    "public_tag_runtime_bytes_verified": true,
+    "native_vat_diagnostic_in_both_layouts": true,
+    "retired_modules_absent": true,
+    "verified_at": "2026-11-01T20:10:17.391266+00:00"
+  },
+  "publication_blockers": []
 }

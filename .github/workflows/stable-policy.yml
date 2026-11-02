@@ -1,0 +1,42 @@
+name: Verify existing stable PR19 and repository policy
+on:
+  push:
+    branches: [release/v1.0.0]
+    paths: [.github/workflows/stable-policy.yml]
+permissions:
+  contents: write
+  pull-requests: read
+jobs:
+  policy:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Read existing PR and enforced policies; never create or approve a PR
+        run: |
+          python - <<'PY'
+          import json,os,subprocess
+          from pathlib import Path
+          def api(path):return json.loads(subprocess.check_output(['gh','api',path],text=True))
+          repo=os.environ['GITHUB_REPOSITORY'];meta=api('repos/'+repo);main=api('repos/'+repo+'/branches/main');pr=api('repos/'+repo+'/pulls/19')
+          assert pr['state']=='open' and pr['head']['ref']=='release/v1.0.0' and pr['base']['ref']=='main'
+          assert pr['head']['sha']==os.environ['GITHUB_SHA']
+          review=json.loads(subprocess.check_output(['gh','pr','view','19','--json','reviewDecision,mergeStateStatus,reviewRequests,latestReviews'],text=True))
+          report={'repository':repo,'pr':{k:pr[k] for k in ('number','html_url','state','draft')},'pr_head_sha':pr['head']['sha'],'pr_base_sha':pr['base']['sha'],'main_sha':main['commit']['sha'],'main_protected':main['protected'],'allow_merge_commit':meta.get('allow_merge_commit'),'allow_squash_merge':meta.get('allow_squash_merge'),'allow_rebase_merge':meta.get('allow_rebase_merge'),'review':review,'policy_changed':False,'pr_created_by_this_workflow':False,'main_modified':False}
+          if main['protected']:
+              report['protection']=api('repos/'+repo+'/branches/main/protection')
+          else:report['protection']=None
+          report['rulesets']=api('repos/'+repo+'/rulesets')
+          report['active_main_rules']=api('repos/'+repo+'/rules/branches/main')
+          Path('docs/receipts/v1.0.0-repository.json').write_text(json.dumps(report,indent=2)+'\n')
+          print('::notice title=Existing stable review::'+pr['html_url'])
+          print('Main protected:',main['protected'],'Review decision:',review.get('reviewDecision'),'Active rules:',len(report['active_main_rules']))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/receipts/v1.0.0-repository.json
+          git commit -m 'docs: record current PR19 and ordinary repository review gates'
+          git push origin HEAD:refs/heads/release/v1.0.0

@@ -1,3 +1,34 @@
+# v1.0.0 completion resumed — 2 November 2026
+
+Owner created existing draft PR19 through normal permissions and explicitly requests
+completion through public stable publication, not merely PR merge. Do not create
+another PR or rerun the obsolete failed PR-creation workflow. The previous STOP below
+is historical and superseded by this instruction.
+
+Verified release head766ecfc70f19c5eec5f4d8e75f76aa1cab178782, clean release/v1.0.0;
+all12 push/PR checks succeeded. Main remains56cdb3c; stable tag/release absent. Issue18,
+PR19 and current owner authorization read. All22 runtime Python modules/JS remain
+accepted beta12. Checkpoint subject: **Resume PR19 stable validation and read current repository gates**.
+
+New stable-policy workflow only reads existing PR19/current branch protection/review
+rules and records its receipt. It never creates/approves PRs or alters policy/main.
+Native QA is starting from a freshly downloaded/hash-verified actual public beta12
+package in an isolated local HA, with three fictional sites and mixed saved VAT choices.
+The only provider data is recorded/synthetic and source methods are mocked. The test
+clock/timer mapping remains QA-only; auth/wall clock stays unmodified. No owner HA,
+Node-RED, EV or charging controls are accessed.
+
+Next: finish public-beta12→stable native upgrade/restart,69 IDs/3 settings/2 ledgers,
+complete Diagnostics/EN/DA/mobile/desktop/card and clean setup evidence. Record proof,
+run candidate CI, honor repository review/approval gates and mark PR19 ready. Use a
+normal merge, confirm exact actual main SHA, run mandatory exact-main CI, then guarded
+immutable v1.0.0 non-prerelease/latest plus all assets/provenance. Independent public
+HACS stable installation/update and source/assets/checksums must pass before the final
+STOP handoff. No general release confirmation is needed; only actual enforced gates
+can require owner interaction. No publication has happened at this checkpoint.
+
+---
+
 # STOP — v1.0.0 blocked by GitHub PR-creation policy
 
 The owner-authorized stable task is paused at an explicit platform release gate.

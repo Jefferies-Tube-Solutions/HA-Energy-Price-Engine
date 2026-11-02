@@ -89,7 +89,7 @@ def prior_integrity():
 def wait_checks(source, copies=1, *, main=False):
     required = REQUIRED | ({"stable main integrity"} if main else set())
     for _ in range(80):
-        checks = api(f"commits/{source}/check-runs?per_page=100")["check_runs"]
+        checks = api(f"commits/{source}/check-runs?per_page=100&filter=all")["check_runs"]
         relevant = [
             c
             for c in checks
@@ -230,7 +230,13 @@ def validate_main():
                 )
                 break
             except RuntimeError as error:
-                if "HTTP 404" not in str(error) or attempt == 9:
+                if (
+                    not any(
+                        text in str(error)
+                        for text in ("HTTP 404", "does not have 'workflow_dispatch' trigger")
+                    )
+                    or attempt == 9
+                ):
                     raise
                 time.sleep(3)
         run = None

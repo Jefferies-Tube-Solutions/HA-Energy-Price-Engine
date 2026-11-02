@@ -1,3 +1,24 @@
+# v1.0.0 reviewed publisher activated — final gates running
+
+Native acceptance and tooling checkpoint304429e5b9194936217a6098c8a9db15b8c62576
+passed all12 push/PR checks: both142-test cores,22 browser cases, hassfest, HACS and
+independent packaging. Routine review found no accepted runtime/API changes and no
+confirmed pricing or compatibility blocker. Source guard/native proof passed locally.
+Release-orchestration checks exercised12 source/7 exact-main job counting, pending
+child-job exclusion and rejection of a failed security check. Prior12 receipts have
+complete immutable tag/release/archive identifiers.
+
+Checkpoint subject: **Activate reviewed v1.0.0 stable publication through existing PR19**.
+The publisher now waits for all12 checks on this new exact source before touching
+PR19/main. It re-reads ordinary review/protection rules; no approval/policy bypass.
+Then it marks the existing owner PR ready and merges, dispatches all seven exact-main
+checks, freezes annotated v1.0.0 and publishes public stable/latest assets only if
+those gates pass. Two fresh public verification jobs and audit must also pass.
+Stop only after public downloads, actual HACS stable installation/update and final
+permanent handoff are verified. No new PE feature or production operation is authorized.
+
+---
+
 # v1.0.0 native acceptance complete — publication pending
 
 Branch release/v1.0.0; previous observed HEAD aeccc983766f5519cbb5eca00b6f03bbdfdae00d.

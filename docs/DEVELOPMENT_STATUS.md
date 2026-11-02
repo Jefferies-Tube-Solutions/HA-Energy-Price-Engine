@@ -1,3 +1,29 @@
+# v1.1 beta metadata and channel validation complete locally
+
+Branch feat/v1.1-beta1-dashboard; previous feature commit
+b40acbadc95aa01a934d49acbcc857f7017b8661 passed all six remote CI checks.
+Checkpoint subject: **Validate beta metadata and preserve the stable HACS channel**.
+Manifest version is now1.1.0-beta.1. All152 tests per HA2026.10.3/.4 passed locally,
+91%coverage,zero skips,two unchanged upstream HACS deprecations. Ruff passes. The35
+frontend cases remain green; backend functions producing dashboard data are AST-
+identical stable and all other pricing/source/API/SQLite/config/entity modules are
+byte-identical. The source guard enforces that narrow runtime surface.
+
+New actual pinned HACS beta tests cover explicit opt-in and release selection, stable
+as the default, native update state, stable→beta file replacement, independent SQLite
+file retention, reinstall/uninstall and channel isolation. Stable HACS regressions
+now load the immutable actual stable source instead of relabeling beta code as1.0.0.
+Package smoke tests support an explicit expected version and verify the automatic
+resource for versions declaring lovelace. No package/user source arithmetic changed.
+
+Next: clean beta packages; native storage-resource cold start/manual1.0 upgrade,
+fresh browser paired units and restarts; durable evidence/docs; ordinary beta PR
+creation and guarded prerelease. Original public stable ZIP was downloaded again and
+its SHA verified; latest still redirects to1.0.0. Native QA stays on isolated localhost
+with recorded/synthetic providers. No owner system was contacted.
+
+---
+
 # v1.1 paired display units implemented
 
 Branch feat/v1.1-beta1-dashboard; resource commit a794c8c67d2c91d896bd5b60ebc6130a695af97e

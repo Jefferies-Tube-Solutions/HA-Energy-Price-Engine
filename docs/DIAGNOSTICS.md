@@ -61,7 +61,8 @@ shows the calculation and grid bands. The optional bundled Lovelace card adds gr
 and today/tomorrow tables. All three views share the same stored/cached price data;
 none replaces native Diagnostic visibility.
 
-Beta.10/11 → beta.12 is an in-place update: back up, select beta.12 in HACS, restart and
+Beta.12 → v1.0.0 is an in-place update: back up, select v1.0.0 in HACS with beta
+visibility off, restart and
 reload the app/browser. Keep existing sites, histories, manual overrides and CM API2
 mappings. Reset is only for deliberately recreating older incompatible beta1–9 sites.
 Owner private contract values are never supplied as defaults. In particular, the
@@ -119,3 +120,28 @@ they are separate from the owner's PAHA02-DEV acceptance.
 [Missing final with verified grid ranges](images/beta12/missing-final-no-en-mobile.png) ·
 [No after restart](images/beta12/restarted-no-da-mobile.png) ·
 [Native card No](images/beta12/native-card-no-da-desktop.png).
+
+
+## Stable v1.0.0 acceptance evidence
+
+[Native stable receipt](receipts/v1.0.0-simulation.json) records 30 screenshot hashes
+and real HA2026.10.4 fresh setup, actual public beta.12 package upgrade and restart.
+All69 original entity IDs, three effective site configurations and mixed Yes/No VAT
+choices survived; both price-ledger files remained byte-identical and SQLite integrity
+checks passed. The clean manual ZIP setup also retained23 IDs, its No preference and
+ledger after restart. A fictional3.75øre including-VAT supplier input correctly showed
+3.00øre in excluding-VAT Diagnostics. No owner private contract is inferred.
+
+[Version1.0.0](images/v1.0.0/stable-device-version-desktop.png) ·
+[Next quarter No](images/v1.0.0/stable-next-no-en-mobile.png) ·
+[Danish Ja](images/v1.0.0/stable-next-yes-da-mobile.png) ·
+[Missing final, verified grid](images/v1.0.0/stable-missing-no-en-mobile.png) ·
+[Automatic next→current](images/v1.0.0/stable-switched-current-no-da-mobile.png) ·
+[Fresh setup](images/v1.0.0/stable-fresh-site-desktop.png) ·
+[Fresh Diagnostics](images/v1.0.0/stable-fresh-diagnostic-mobile.png) ·
+[Fresh restart](images/v1.0.0/stable-fresh-restarted-mobile.png) ·
+[Upgrade restart](images/v1.0.0/stable-restarted-no-da-mobile.png).
+
+These are isolated recorded/synthetic software checks, separate from owner hardware
+acceptance. Public HACS stable channel verification follows publication; a local
+manual/native install alone does not establish public HACS discovery.

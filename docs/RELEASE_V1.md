@@ -40,6 +40,13 @@ private inputs, real HA lifecycle/HTTP/flows, actual pinned HACS with GitHub tra
 fixtures, and real SQLite disk recovery. Disposable native browser QA is separate from
 owner live/Pi acceptance. No public-provider uptime or hardware performance is inferred.
 
+Native HA2026.10.4 evidence includes30 hashed desktop/mobile EN/DA screenshots, fresh
+manual setup and an upgrade from the hash-verified actual published beta.12 HACS ZIP.
+All69 existing entity IDs, three effective site settings/mixed VAT preferences and
+both SQLite ledger files survived update and restart. A fresh site also retained its
+23 entities, No VAT display preference and inclusive-source supplier rate after restart.
+[Native evidence](receipts/v1.0.0-simulation.json).
+
 ## Known limits
 
 Private supplier terms must be configured and verified by the site owner. Bundled

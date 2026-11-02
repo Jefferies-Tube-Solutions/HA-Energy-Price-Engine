@@ -1,3 +1,39 @@
+# v1.0.0 native acceptance complete — publication pending
+
+Branch release/v1.0.0; previous observed HEAD aeccc983766f5519cbb5eca00b6f03bbdfdae00d.
+Checkpoint subject: **Record stable native acceptance and guarded exact-main promotion**.
+Existing owner PR19 is the only release PR. Policy receipt
+[records](receipts/v1.0.0-repository.json) main unprotected, no rulesets/required reviews;
+normal readiness/merge must re-read and honor actual live gates. No policy changes.
+
+Native HA2026.10.4 fresh installation, actual public beta12→stable update and both
+restarts passed. [Receipt](receipts/v1.0.0-simulation.json):30 final screenshots;69
+original IDs/three effective site settings and mixed VAT preferences preserved;two
+original price-ledger byte hashes identical; all three tested SQLite files integrity=ok.
+Fresh setup began with zero PE entries; interrupted setup resumed without duplicate
+site, saved No and fictional3.75øre includingVAT→3.00øre exVAT Diagnostics persisted
+with23 IDs and one identical ledger. Complete15 Diagnostics/site, EN/DA, desktop/mobile,
+current/next/missing states, automatic next→current and served card bytes validated.
+No source requests from reads/preference saves; zero browser errors/warnings. Both
+disposable HA instances stopped; no owner systems accessed.
+
+All22 Python modules/card JS remain byte-identical accepted beta12. Source guard checks
+that freeze plus every screenshot/runtime digest. Required existing CI job names are
+preserved. New stable-main dispatch validates the exact actual merged main SHA; guarded
+promotion only marks/merges existing PR19 after all12 source checks and normal gates.
+It requires seven exact-main checks, clean reproducible known package hashes, preserved
+prior12 betas and annotated immutable tag before stable/latest publication. Independent
+public jobs on both cores then download source/assets, run actual pinned HACS stable
+install/update with beta visibility off/on and independently install both ZIP layouts.
+
+Next: observe this checkpoint CI, activate reviewed publisher, wait all12 final source
+checks, mark PR19 ready/merge normally, run exact-main CI, publish v1.0.0 public latest
+stable, verify public HACS/assets, update same permanent handoff and STOP.
+No stable merge/tag/release exists yet. Publication already owner-authorized subject to
+these gates; no general approval request is needed.
+
+---
+
 # v1.0.0 completion resumed — 2 November 2026
 
 Owner created existing draft PR19 through normal permissions and explicitly requests

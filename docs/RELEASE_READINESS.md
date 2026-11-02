@@ -27,11 +27,14 @@ to beta.12. Manifest version and reset translations are the only runtime differe
 
 ## Evidence and pending gates
 
-First supported-core run:142passed,90%coverage,zero skips,two unchanged HACS deprecations.
+Supported/current cores:142passed each,90%coverage,zero skips,two unchanged HACS deprecations.
 Four actual-HACS cases cover two pins × beta visibility on/off, including fresh stable
 and real beta.12 filesystem update. Native local-brand HTTP tests verify fallback
-responses. Current-core suite,22-browser matrix, official hassfest, native clean/upgrade
-proof, exact-main CI and final public verification must be observed before publication.
+responses. All12 exact-source CI checks passed on766ecfc and e27dac9;22 browser
+cases and official hassfest succeeded. [Native stable proof](receipts/v1.0.0-simulation.json)
+records30 images,69 preserved IDs/three sites/two byte-identical ledgers, fresh setup
+and both restarts. Newly committed release tooling must pass source CI; exact-main CI
+and final public stable HACS verification remain mandatory.
 The permanent handoff records later results; pending work is never treated as passed.
 
 No actual public provider queries or owner hardware are used by software fixtures.

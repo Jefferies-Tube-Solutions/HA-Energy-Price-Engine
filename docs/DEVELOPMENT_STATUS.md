@@ -1,3 +1,94 @@
+# v1.1.0-beta.1 — Issue20 development started
+
+New owner task supersedes the completed v1.0.0 STOP below. Dedicated branch
+feat/v1.1-beta1-dashboard starts from exact stable tag/main
+19af5bf4412c5f3cc3b3e07c6d756da372f81ba6, annotated object
+76f1a4a6e7471ae7c8c80ef1d899fab5dfc4737e. Issue20 read; remote main/tag verified
+unchanged, no existing v1.1 branch. Stable final handoff and receipts retained from
+release/v1.0.0. User explicitly authorizes a reviewable PR and v1.1.0-beta.1
+prerelease after all gates, not main merge or stable promotion.
+
+Checkpoint subject: **Register bundled card through the native Lovelace resource collection**.
+Global setup registers the optional card via supported storage collection APIs, awaits
+async_get_info before listing, derives version from installed metadata, adopts one
+exact local PE path in place, preserves unrelated IDs/order, serializes concurrent
+registration and logs actionable duplicate/YAML/failure instructions. Resources persist
+when one site unloads. Manifest declares lovelace dependency for supported setup order.
+No extra JS injection, direct storage edits, price code or API changes.
+
+Next: implement optional per-card ore_kwh/dkk_kwh projection and shared concurrent
+read requests; add paired desktop/tablet/mobile, precision/DST/gap/VAT tests; native
+cold-load/fresh/upgrade/restart proof; docs/two-card YAML; beta metadata and packaging;
+full two-core CI and usual guarded PR/publication. GitHub Actions PR creation was
+disabled during v1.0.0; recheck the ordinary v1.1 PR action after concrete work. Never
+bypass that gate. Main and latest stable must remain v1.0.0. Owner PAHA02-DEV acceptance
+is separate; no production HA, Node-RED or charging controls will be accessed.
+
+---
+
+# STOP — v1.0.0 Stable publicly published and verified
+
+Mission complete on 2 November 2026. [Public stable release](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/releases/tag/v1.0.0)
+is non-draft, non-prerelease and latest. Existing owner PR19 was marked ready and
+merged normally after all 12 final-source checks and ordinary repository gate review.
+No required review/protection rule was bypassed and no new PR was created.
+
+Final main / immutable v1.0.0 commit: **19af5bf4412c5f3cc3b3e07c6d756da372f81ba6**.
+Reviewed branch source: d9fed5953471728d0fea8b9e67006859266ffabf; trees match exactly.
+Annotated tag object:76f1a4a6e7471ae7c8c80ef1d899fab5dfc4737e. Release ID431957547.
+[All seven exact-main checks passed](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41522824022).
+[Publisher, both public verification jobs and final audit passed](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41522410438).
+
+The accepted beta.12 engine remains frozen: all 22 Python modules and card JS are
+byte-identical e506ccfc40b61413bd83e3ce60081a60d517348f; API v2 unchanged. Tests passed
+142 per HA2026.10.3/.4, 90% coverage, zero skips, two known upstream HACS deprecations;
+22 EN/DA desktop/mobile browser cases, official hassfest, HACS and packaging passed.
+[Native receipt](receipts/v1.0.0-simulation.json): 30 screenshots, fresh setup and
+actual public beta.12→stable upgrade, both HA restarts, all 69 original test entity
+IDs/three effective site settings/mixed VAT choices and two byte-identical ledgers
+preserved. Fresh setup retained 23 IDs, No preference, inclusive supplier input and
+one identical ledger after restart. All tested SQLite integrity checks returned ok.
+
+The independent public jobs downloaded actual stable assets, tag source, main source
+and original beta.12 asset. Actual pinned HACS2.0.5/upstream code passed four channel
+cases per core: fresh custom-repository registration and installation with beta
+visibility off, beta.12 filesystem/history update, stable updater/cache/WebSocket
+state, no newer-main SHA or future-beta leakage, reinstall/uninstall. GitHub transport
+uses the independently downloaded public metadata/bytes; no owner HA is accessed.
+Both public ZIP layouts also installed outside source on both cores, including four
+additional local installs from anonymous public downloads.
+
+[Publication receipt](receipts/v1.0.0.json) records exact source, asset IDs/digests,
+provenance, CI and public HACS evidence. [Anonymous download receipt](receipts/v1.0.0-local-public.json)
+confirms all four assets HTTP200, source/payload equivalence and latest redirect.
+SHA-256:
+
+```text
+ddbd7d09b27bd28af48e5b33bbc870bed80f797d411c1e83505bf8db90aa10c2  ha_energy_price_engine.zip
+3cde8b261e378160555fdb2d335cc897d022bcb55d96adcf06e7da2c6735fa1d  ha_energy_price_engine-manual.zip
+```
+
+HACS on PAHA02-DEV: keep/add this repository as Integration, turn Show beta versions
+off, refresh, download v1.0.0, restart HA and reload app/browser/card resources.
+Keep existing beta.12 sites, IDs, rates, overrides, VAT preference and history.
+Device info must show1.0.0. Follow [the exact guide](HACS_DISTRIBUTION.md) and
+[owner verification checklist](ACCEPTANCE.md); owner live acceptance stays unchecked.
+
+No publication blocker remains. External HACS default-catalog/brands submissions are
+separate owner work, not prerequisites for custom-repository installation. CM's
+unreleased API-v1 consumer migration remains separate. Private rates and public-rate
+validity still require real evidence; software/cloud tests establish neither public
+provider uptime nor Raspberry Pi performance. No production HA, Node-RED, vehicle,
+charger or CM repository/control was changed. Both disposable native HA instances
+are stopped. All prior beta tags/releases and development PR history were preserved.
+
+This final handoff/receipt commit is only on release/v1.0.0; main/tag remain immutable
+at the source above. Checkpoint subject: **Finalize verified v1.0.0 stable publication and permanent handoff**.
+Observe its ordinary documentation-checkpoint CI before stopping. No further feature,
+merge, tag move, release or production action is authorized by this completed mission.
+
+---
+
 # v1.0.0 reviewed publisher activated — final gates running
 
 Native acceptance and tooling checkpoint304429e5b9194936217a6098c8a9db15b8c62576

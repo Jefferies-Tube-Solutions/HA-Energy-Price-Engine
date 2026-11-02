@@ -10,6 +10,7 @@
   "config_flow": true,
   "dependencies": [
     "http",
+    "lovelace",
     "websocket_api"
   ],
   "documentation": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine",

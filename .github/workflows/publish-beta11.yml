@@ -1,0 +1,231 @@
+name: Publish authorized PE beta.11
+on:
+  push:
+    branches: [feat/beta5-simple-onboarding]
+    paths: [.github/workflows/publish-beta11.yml]
+permissions:
+  contents: write
+  checks: read
+  actions: read
+  pull-requests: write
+concurrency:
+  group: publish-pe-v0.1.0-beta.11
+  cancel-in-progress: false
+env:
+  PE_SOURCE: 657bc49b091c1aa5fafa6cad0945cd693326d31c
+  PE_TAG: v0.1.0-beta.11
+  PE_TAG_OBJECT: b0bd7296a1b63e589aada4cf62420047984cd248
+  PE_HACS_SHA: c5265f6a583c61c462a198548f7117070ac353e0c8958ad841e5ab3f117f424b
+  PE_MANUAL_SHA: ea01f317bcee3c30650906c2859500cc0a0784927f3974bf15f5a2071eb27eec
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: v0.1.0-beta.11
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14.8'
+      - uses: astral-sh/setup-uv@v6
+      - name: Guard exact source, CI, immutable tag, main and prior releases
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$PE_SOURCE"
+          test "$(git cat-file -t "$PE_TAG")" = tag
+          test "$(git rev-parse "$PE_TAG")" = "$PE_TAG_OBJECT"
+          test "$(git rev-parse "$PE_TAG^{commit}")" = "$PE_SOURCE"
+          python - <<'PY'
+          import json,os,subprocess,time
+          from collections import Counter
+          from pathlib import Path
+          repo=os.environ['GITHUB_REPOSITORY'];source=os.environ['PE_SOURCE']
+          def api(path):return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
+          required={'hassfest','hacs','independent beta install','tests (fixture-supported-ha-2026.10.3)','tests (current-ha-2026.10.4)','dashboard browser desktop and mobile'}
+          for attempt in range(30):
+              checks=api(f'commits/{source}/check-runs?per_page=100')['check_runs']
+              if any(c['status']=='completed' and c['conclusion']!='success' for c in checks):raise SystemExit('Exact-source CI failed; no publication')
+              counts=Counter(c['name'] for c in checks if c['status']=='completed' and c['conclusion']=='success')
+              if len(checks)>=18 and all(counts[name]>=3 for name in required) and all(c['status']=='completed' and c['conclusion']=='success' for c in checks):break
+              time.sleep(10)
+          else:raise SystemExit('Exact-source push/PR/tag CI pending; no publication')
+          assert api('commits/main')['sha']=='56cdb3c10993179371483812cbc36f651ba3ad8e'
+          pr=api('pulls/14');assert pr['state']=='open' and pr['draft'] and pr['head']['ref']=='feat/beta5-simple-onboarding'
+          assert json.loads(Path('custom_components/ha_energy_price_engine/manifest.json').read_text())['version']=='0.1.0-beta.11'
+          baseline='150c24fa08988b6ae308dec68bb21016ffcca0b9'
+          subprocess.run(['git','merge-base','--is-ancestor',baseline,source],check=True)
+          import hashlib
+          proof=json.loads(Path('docs/receipts/v0.1.0-beta.11-simulation.json').read_text())
+          assert proof['native_diagnostics_per_site']==14 and proof['native_entity_count_per_four_band_site']==22
+          assert proof['original_entity_ids_preserved']==27 and proof['price_ledgers_byte_identical']==2
+          assert proof['native_next_to_current_switch'] and proof['restart']['restarted'] and proof['restart']['danish_next_quarter']
+          assert not proof['errors'] and not proof['warnings'] and len(proof['screenshots'])==15
+          assert proof['source_counts_before_views']==proof['source_counts_after_views']
+          for path,digest in proof['screenshots'].items():assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==digest
+          for path,digest in proof['unchanged_beta10_runtime_sha256'].items():
+              current=Path('custom_components/ha_energy_price_engine')/path
+              original=subprocess.check_output(['git','show',baseline+':'+str(current)])
+              assert current.read_bytes()==original and hashlib.sha256(original).hexdigest()==digest
+          allowed={'dashboard.py','manifest.json','price_update.py','sensor.py','status.py','strings.json','translations/en.json','translations/da.json'}
+          prefix='custom_components/ha_energy_price_engine/'
+          changed=subprocess.check_output(['git','diff','--name-only',baseline,source,'--',prefix],text=True).splitlines()
+          assert all(path.removeprefix(prefix) in allowed for path in changed)
+          for number in range(1,11):
+              tag=f'v0.1.0-beta.{number}';prior=json.loads(Path(f'docs/receipts/{tag}.json').read_text());release=api('releases/tags/'+tag)
+              assert release['id']==prior['release_id'] and release['prerelease'] and not release['draft']
+              assert api('git/ref/tags/'+tag)['object']['sha']==prior.get('tag_object',prior.get('annotated_tag_object'))
+              assets={a['name']:a for a in release['assets']}
+              for name,digest in prior.get('archive_hashes',prior.get('archive_sha256')).items():assert assets[name]['digest']=='sha256:'+digest
+              for asset in prior.get('assets',[]):
+                  assert all(assets[asset['name']].get(k)==asset[k] for k in ('id','size','digest') if k in asset)
+          PY
+      - name: Rebuild and independently install both immutable layouts
+        run: |
+          set -euo pipefail
+          uv venv
+          uv pip sync --require-hashes requirements-ha-current.lock
+          uv run --no-project python tools/build_beta.py
+          python - <<'PY'
+          import json,os,hashlib,re
+          from pathlib import Path
+          m=json.loads(Path('dist/BUILD_MANIFEST.json').read_text())
+          expected={'ha_energy_price_engine.zip':os.environ['PE_HACS_SHA'],'ha_energy_price_engine-manual.zip':os.environ['PE_MANUAL_SHA']}
+          assert m['commit']==os.environ['PE_SOURCE'] and not m['dirty'] and m['archives']==expected
+          for name,digest in expected.items():assert hashlib.sha256((Path('dist')/name).read_bytes()).hexdigest()==digest
+          notes=Path('docs/RELEASE_BETA11.md').read_text()
+          base=f'https://github.com/{os.environ["GITHUB_REPOSITORY"]}/blob/{os.environ["PE_TAG"]}/docs/'
+          notes=re.sub(r'\]\((?!https?://)([^)]+)\)',lambda m:']('+base+m[1]+')',notes)
+          notes+='\n\nExact source: `'+os.environ['PE_SOURCE']+'`. Annotated tag: `'+os.environ['PE_TAG']+'` (`'+os.environ['PE_TAG_OBJECT']+'`).\n\n```text\n'+Path('dist/SHA256SUMS').read_text()+'```\n'
+          (Path(os.environ['RUNNER_TEMP'])/'beta11-notes.md').write_text(notes)
+          PY
+          uv run --no-project python tools/smoke_install_package.py dist/ha_energy_price_engine.zip
+          uv run --no-project python tools/smoke_install_package.py dist/ha_energy_price_engine-manual.zip
+      - name: Publish authorized beta11 prerelease without replacing assets
+        run: |
+          set -euo pipefail
+          if gh release view "$PE_TAG" >/dev/null 2>&1; then
+            python - <<'PY'
+          import json,os,subprocess
+          r=json.loads(subprocess.check_output(['gh','api',f'repos/{os.environ["GITHUB_REPOSITORY"]}/releases/tags/{os.environ["PE_TAG"]}']))
+          assert r['prerelease'] and not r['draft'] and r['tag_name']==os.environ['PE_TAG']
+          assets={a['name']:a for a in r['assets']};m=json.load(open('dist/BUILD_MANIFEST.json'))
+          assert set(assets)=={*m['archives'],'BUILD_MANIFEST.json','SHA256SUMS'}
+          for name,digest in m['archives'].items():assert assets[name]['digest']=='sha256:'+digest
+          print('Existing immutable beta11 matches; no release or asset mutation')
+          PY
+          else
+            gh release create "$PE_TAG" --target "$PE_SOURCE" dist/ha_energy_price_engine.zip dist/ha_energy_price_engine-manual.zip dist/BUILD_MANIFEST.json dist/SHA256SUMS --prerelease --latest=false --verify-tag --title 'v0.1.0-beta.11 — restore native Device Diagnostics and actual Radius periods' --notes-file "$RUNNER_TEMP/beta11-notes.md"
+          fi
+          gh api "repos/$GITHUB_REPOSITORY/releases/tags/$PE_TAG" --jq '{html_url,tag_name,draft,prerelease,assets:[.assets[].name]}'
+  verify-public:
+    name: Verify public beta.11 (${{ matrix.target }})
+    needs: publish
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: ha-2026.10.3
+            lockfile: requirements-dev.lock
+          - target: ha-2026.10.4
+            lockfile: requirements-ha-current.lock
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: v0.1.0-beta.11
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14.8'
+      - uses: astral-sh/setup-uv@v6
+      - name: Prepare independent locked core and pinned actual HACS
+        run: |
+          uv venv
+          uv pip sync --require-hashes ${{ matrix.lockfile }}
+          uv run --no-project python tools/prepare_hacs_reference.py
+      - name: Download and verify public source, assets and actual HACS/native installs
+        run: uv run --no-project python tools/verify_public_release.py --expected-commit "$PE_SOURCE" --output "$RUNNER_TEMP/public-beta11"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pe-beta11-public-${{ matrix.target }}
+          path: ${{ runner.temp }}/public-beta11/PUBLIC_RELEASE_RECEIPT.json
+          if-no-files-found: error
+  audit:
+    name: Record verified beta.11 publication
+    needs: [publish, verify-public]
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: feat/beta5-simple-onboarding
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: pe-beta11-public-*
+          path: public-verification
+      - name: Record independent public verification and preserve prior releases
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os,subprocess,urllib.request
+          from pathlib import Path
+          from datetime import UTC,datetime
+          repo=os.environ['GITHUB_REPOSITORY'];source=os.environ['PE_SOURCE'];tag=os.environ['PE_TAG']
+          def api(path):return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
+          receipts={p.parent.name:json.loads(p.read_text()) for p in Path('public-verification').rglob('PUBLIC_RELEASE_RECEIPT.json')}
+          expected={'ha_energy_price_engine.zip':os.environ['PE_HACS_SHA'],'ha_energy_price_engine-manual.zip':os.environ['PE_MANUAL_SHA']}
+          assert len(receipts)==2
+          for receipt in receipts.values():
+              assert receipt['source_commit']==source and receipt['archive_hashes']==expected and receipt['isolated_hacs_and_native_install']=='passed'
+          assert api('commits/main')['sha']=='56cdb3c10993179371483812cbc36f651ba3ad8e'
+          prior=[]
+          for number in range(1,11):
+              oldtag=f'v0.1.0-beta.{number}';previous=json.loads(Path(f'docs/receipts/{oldtag}.json').read_text());r=api('releases/tags/'+oldtag)
+              assert r['id']==previous['release_id'] and r['prerelease'] and not r['draft']
+              assert api('git/ref/tags/'+oldtag)['object']['sha']==previous.get('tag_object',previous.get('annotated_tag_object'))
+              assets={a['name']:a for a in r['assets']}
+              for name,digest in previous.get('archive_hashes',previous.get('archive_sha256')).items():assert assets[name]['digest']=='sha256:'+digest
+              for asset in previous.get('assets',[]):assert all(assets[asset['name']].get(k)==asset[k] for k in ('id','size','digest') if k in asset)
+              prior.append({'tag':oldtag,'release_id':r['id'],'tag_and_asset_integrity_preserved':True})
+          release=api('releases/tags/'+tag);assert release['prerelease'] and not release['draft']
+          tag_object=api('git/ref/tags/'+tag)['object']['sha'];assert tag_object==os.environ['PE_TAG_OBJECT']
+          checks=api(f'commits/{source}/check-runs?per_page=100')['check_runs'];assert len(checks)>=18 and all(c['conclusion']=='success' for c in checks)
+          jobs=api(f'actions/runs/{os.environ["GITHUB_RUN_ID"]}/jobs')['jobs'];done=[j for j in jobs if j['name'].startswith(('publish','Verify public'))]
+          assert len(done)==3 and all(j['conclusion']=='success' for j in done)
+          with urllib.request.urlopen(urllib.request.Request(release['html_url'],headers={'User-Agent':'PE-beta11-public-verification'}),timeout=30) as response:status=response.status
+          assert status==200
+          report={'schema':1,'verified_at':datetime.now(UTC).isoformat(),'tag':tag,'source_commit':source,'tag_object':tag_object,'main_commit':'56cdb3c10993179371483812cbc36f651ba3ad8e','main_unmerged':True,'previous_releases_preserved':True,'prior_releases':prior,'release_url':release['html_url'],'release_id':release['id'],'draft':False,'prerelease':True,'unauthenticated_release_page_http':status,'archive_hashes':expected,'assets':[{k:a.get(k) for k in ('name','id','size','digest','browser_download_url')} for a in release['assets']],'publisher':{'id':int(os.environ['GITHUB_RUN_ID']),'html_url':f'https://github.com/{repo}/actions/runs/{os.environ["GITHUB_RUN_ID"]}','head_sha':os.environ['GITHUB_SHA'],'publication_and_both_verification_jobs':'success','workflow_final_conclusion':'pending audit completion'},'exact_source_checks':[{'name':c['name'],'id':c['id'],'conclusion':c['conclusion'],'url':c['html_url']} for c in checks],'validation':{'ha_cores':['2026.10.3','2026.10.4'],'producer_cases_per_core':123,'producer_coverage_percent':90,'browser_regressions':18,'native_screenshots':15,'skips':0,'warnings':'Two deprecations in pinned upstream HACS code','public_verification':'Fresh jobs on both locked cores independently download metadata/source/main/assets and the original beta10 HACS ZIP; test actual pinned HACS2.0.5/upstream add/beta visibility/beta10-to11 update/reinstall/uninstall and both native ZIP layouts outside source','simulation_receipt':'docs/receipts/v0.1.0-beta.11-simulation.json'},'public_verification_receipts':receipts,'owner_acceptance':False,'remaining_limitations':['Owner real Raspberry Pi/PAHA02-DEV acceptance remains separate from controlled recorded/synthetic native HA QA.','Private rates remain configured values; no future EWII or summer-house contract inference.','Beta10 updates in place; older incompatible beta1–9 sites still require explicit reset/recreation.','The standard four rows show truthful missing/additional ranges when the verified schedule differs; extra rows remain unavailable on days where they do not apply.','Existing explicit HA entity-disable or display-precision choices remain user-owned.'],'production_controls_touched':False}
+          Path('docs/receipts/v0.1.0-beta.11.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/receipts/v0.1.0-beta.11.json
+          git commit -m 'docs: record independent public beta11 verification on both cores'
+          git push origin HEAD:refs/heads/feat/beta5-simple-onboarding
+      - name: Update existing draft PR with the verified breaking prerelease
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/beta11-pr-final.md" <<'MD'
+          Published and independently verified **v0.1.0-beta.11**: https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/releases/tag/v0.1.0-beta.11
+
+          Exact immutable source **657bc49b091c1aa5fafa6cad0945cd693326d31c**. Addresses the beta.10 native Diagnostic regression in #16; owner real-HA acceptance remains pending. No stable/main merge or production/charging actions.
+
+          Native device Diagnostic now has the selected Current quarter or Next verified quarter/time range, eight recorded numerical components, four actual daily grid ranges and Status. All enabled by default, two-decimal ore/kWh, one stored record/revision for components/VAT/final. Thirteen purposeful additions preserve all nine beta.10 entities. Day DSO bands remain visible without final-price history; equal-price distinct ranges remain separate, missing values stay Unknown and extra actual bands gain native rows.
+
+          Model/source adapters/SQLite/config/Options/scheduler/API2/card JS: nineteen files byte-identical published beta.10 source150c24fa08988b6ae308dec68bb21016ffcca0b9. No additional provider requests, normalization, recomposition or SQL writes from reads. No provisional/technical/subscription/invoice features. Beta.10 updates in place: keep sites and history, no reset.
+
+          Validation:123 tests/core on supported/current HA2026.10.3/.4,90%coverage,zero skips;18 browser regressions;official hassfest/HACS/Ruff;actual pinned HACS2.0.5/upstream beta10→11 file upgrade,reinstall/uninstall;both native ZIP layouts outside source. Fifteen actual native EN/DA desktop/mobile screenshots show all14 Diagnostic rows, exact next11:30–11:45/287.42 fixture,current switch,missing supplier with four real ranges and numerical precision. Published-beta10 native upgrade preserves27 original IDs,3 site configs and2 ledger files byte-identically through locale reloads and restart. Zero browser errors/warnings or source calls on views. All native private data/clock are explicitly synthetic,not owner acceptance.
+
+          Guarded publication verified exact-source push/PR/tag CI, annotated tag, native evidence/protected baseline files, reproducible hashes and unchanged main/all beta1–10 release/tag/asset identities. Fresh public jobs on both cores independently downloaded source/assets/original beta10 ZIP, tested real HACS flows and installed both native packages.
+
+          [Diagnostics/screenshots](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/v0.1.0-beta.11/docs/DIAGNOSTICS.md) · [Native proof](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/v0.1.0-beta.11/docs/receipts/v0.1.0-beta.11-simulation.json) · [Public receipt](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/feat/beta5-simple-onboarding/docs/receipts/v0.1.0-beta.11.json) · [HACS](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/v0.1.0-beta.11/docs/HACS_DISTRIBUTION.md) · [Owner checklist](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/blob/v0.1.0-beta.11/docs/BETA_ACCEPTANCE.md).
+
+          HACS: Show beta versions → beta.11 → download/restart/reload. Open native device Diagnostic; no dashboard required. Real Pi/private-contract acceptance remains owner work. Stop after verified beta.11. No merge/stable, issue acceptance/closure or physical control changes.
+          MD
+          gh api "repos/$GITHUB_REPOSITORY/pulls/14" --method PATCH --raw-field title='Beta.11: restore complete native Device Diagnostics and Radius periods' -F body=@"$RUNNER_TEMP/beta11-pr-final.md" --jq '{number,html_url,draft}'

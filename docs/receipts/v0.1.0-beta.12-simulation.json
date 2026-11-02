@@ -1,0 +1,207 @@
+{
+  "schema": 1,
+  "target": "v0.1.0-beta.12",
+  "baseline_commit": "657bc49b091c1aa5fafa6cad0945cd693326d31c",
+  "baseline_public_hacs_sha256": "c5265f6a583c61c462a198548f7117070ac353e0c8958ad841e5ab3f117f424b",
+  "tested_runtime_source_commit": "31738037d72a63fdbee8bae7d78fd8b88ebec100",
+  "tested_runtime_sha256": {
+    "LICENSE": "283a5f80ddd97f9c1f853d3b84b5e066b3aaa45ae6a6321e6fccfb0ec2780fb1",
+    "__init__.py": "a95ceeed109a3f33350a786bb6227e733eb647e7baf136f6ebe850d364996ae2",
+    "api.py": "163fb8403525c44ad8b7eb13159f7471fd7097e59afc45d61c639f96f54ee94d",
+    "brand/icon.png": "8814c04c7c1615b4e8469e094e83ad572b425041c537891caf52c38d4d020f44",
+    "charging_cost.py": "2f44d1f7fb257334faa1e4e06d44c1768ca4f7a405d93344161c365ccfee2180",
+    "config_flow.py": "f74a988866ebc6ab4e383b7fd075db87999fdb2c73cb9803b7c3a8997d3a6537",
+    "configuration.py": "485c7adc4126afc85f7652d1b6f2861323a4e56942af80988a8249902e49dd61",
+    "const.py": "6c38f66a8d6ab5079f04841c0c62b274e01b159de563b0c0d687a428df61172f",
+    "coordinator.py": "71025f77827688b5c1c7c350c709ddd5041a86bfb199b5757b17c0ac76ddf8e7",
+    "dashboard.py": "5e072eb7756ab58dc299366f90129ca5558bcb6f57799e3de0b8d7cd8d674d92",
+    "data/supplier_offers.json": "13507c02cd77ec69349fa4229dbaa264718695e389d87b0c970b7f14c8769fc7",
+    "diagnostics.py": "cb5a412f67bcda485840ec31398ff0d813559b58cb9a1994bb6d2efa7330b7fd",
+    "ledger.py": "3fb161f450aa0e329e386c99e8498c7624f502415a0673edaaee98d76bf8acf4",
+    "localization.py": "e4c260b1109be2e2dd1e684e26f004ec4a104562fdd0bd5a2e4e122d0fbe9f79",
+    "manifest.json": "1957fb600adf9e7ab3ea65e8b28add36509ce13a3aafe5d5d5848abbd8707053",
+    "models.py": "dff2a4fa066aa23cfef7614a050a308f0ae54f8f0403d6eaa7a8d9973763f91d",
+    "money.py": "bbc47ca7ce74bb319edb170a28f754c9e7258c940c5a5f67e647283e765c1766",
+    "price_components.py": "f959606039fb6da0e50727a746c39e6b6f78c93f8c0b6e057ab193454a263a13",
+    "price_engine.py": "9d2fbdaab509a8d6a123cc5ac6e8ca039996eb409f8d60571f79b50ad7cb63f2",
+    "price_schedule.py": "5e8c3f67bef8f2b512be5c4ef3a36f15461d563388007583c2b190574661d584",
+    "price_update.py": "994ee2b86d2088771aa2c816ad15225b45b312277630b25708b11fc7797242e2",
+    "prices.py": "88ad3e664dbc1441d64537a9060fbf39d268f4f9abf7b112d36367ffaf06e4b0",
+    "sensor.py": "31586a3e64cf6411d300c6dba1673eb439d5701967918d70d4ee19b63d9f6d07",
+    "site_lifecycle.py": "bf812fbe86261c91bd1394bf560fec67ee39f42625afc1965c244fb7bf8faa84",
+    "status.py": "5f497d20b4141fa33d0b874b0d977c43a4edd0ddd368b1438e640931052d5c03",
+    "strings.json": "0a293277a20e92beb2e56ad250f5ce7dec4fb3aba4b5cec6b59b8db5f7eec0be",
+    "tariff_source.py": "dfdf30b8da837403da51998f2dc61c2cd8c940702404672af29254054fba73e5",
+    "translations/da.json": "b09a987d1e7e6fc18a190c634958a3c225a0fe01a1a3b42a04c3a14d703c1940",
+    "translations/en.json": "0a293277a20e92beb2e56ad250f5ce7dec4fb3aba4b5cec6b59b8db5f7eec0be",
+    "www/energy-price-engine-card.js": "01e89a872a7024ba82c5362d7b2f3f707ef1965c1b7778b479ee43f7e964a8e6"
+  },
+  "ha_core": "2026.10.4",
+  "ha_frontend": "20260930.5",
+  "python": "3.14.8",
+  "synthetic": true,
+  "owner_acceptance": false,
+  "browser_path": "Browser plugin not available; locked Playwright1.64.1/system Chromium",
+  "flow": "Native Site setup → Including VAT checkbox; Configure → display → save Yes/No; native device Diagnostic → coherent current/next/missing rows; locale/restart; native bundled card",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "width": 390,
+      "height": 1200
+    }
+  ],
+  "qa_clock": "Recorded PE presentation/source clock 2026-11-01T10:15Z; publication delays mapped relatively to unchanged HA wall/auth clock to avoid firing already-past synthetic timers. All clock/timer adapters live only in the disposable QA harness, never shipped code.",
+  "private_rate": "Fictional supplier 11.1 ore/kWh ex VAT for QA only; no owner EWII/future/summer-house inference.",
+  "native_diagnostics_per_site": 15,
+  "native_entity_count_per_four_band_site": 23,
+  "original_entity_ids_preserved": 66,
+  "site_configurations_preserved": 3,
+  "price_ledgers_byte_identical": 2,
+  "existing_site_data_unchanged": true,
+  "existing_merged_settings_unchanged_except_display_preference": true,
+  "primary_values_and_state_classes_preserved": true,
+  "source_counts_before_views_and_toggles": {
+    "spot": 18,
+    "grid": 18
+  },
+  "source_counts_after_views_and_toggles": {
+    "spot": 18,
+    "grid": 18
+  },
+  "explicit_locale_reloads_excluded_from_no_fetch_claim": true,
+  "yes": {
+    "period": "next_quarter",
+    "start": "2026-11-01T10:30:00+00:00",
+    "end": "2026-11-01T10:45:00+00:00",
+    "revision": 1,
+    "including": true,
+    "components": {
+      "spot": 218.3545,
+      "dso": 39.8155,
+      "energinet_net": 5.375,
+      "energinet_system": 9,
+      "supplier": 13.875,
+      "electricity_tax": 1
+    },
+    "vat": 57.484,
+    "final": 287.42
+  },
+  "no": {
+    "period": "next_quarter",
+    "start": "2026-11-01T10:30:00+00:00",
+    "end": "2026-11-01T10:45:00+00:00",
+    "revision": 1,
+    "including": false,
+    "components": {
+      "spot": 174.6836,
+      "dso": 31.8524,
+      "energinet_net": 4.3,
+      "energinet_system": 7.2,
+      "supplier": 11.1,
+      "electricity_tax": 0.8
+    },
+    "vat": 57.484,
+    "final": 229.936
+  },
+  "current_no": {
+    "period": "current_quarter",
+    "start": "2026-11-01T10:15:00+00:00",
+    "end": "2026-11-01T10:30:00+00:00",
+    "revision": 1,
+    "including": false,
+    "components": {
+      "spot": 182.8,
+      "dso": 31.8524,
+      "energinet_net": 4.3,
+      "energinet_system": 7.2,
+      "supplier": 11.1,
+      "electricity_tax": 0.8
+    },
+    "vat": 59.5131,
+    "final": 238.0524
+  },
+  "vat_amount_unchanged": true,
+  "missing_final_keeps_four_verified_grid_ranges": true,
+  "native_initial_default_yes": true,
+  "native_configure_yes_no": true,
+  "restart": {
+    "restarted": true,
+    "persisted_no_all_three_sites": true,
+    "configure_no_persisted": true,
+    "original_ids_preserved": 66,
+    "no_duplicate_entities": true,
+    "total_entities": 69,
+    "danish_next_quarter": true,
+    "errors": [],
+    "warnings": []
+  },
+  "ledger_sha256_before": {
+    "ha_energy_price_engine.01QAPE11000000000000000002.ledger.sqlite3": "6fd127e6ea6175a20e3bac846dd630dabb200d279acdd19cf0c25eef6f67c082",
+    "ha_energy_price_engine.01QAPE11000000000000000001.ledger.sqlite3": "a953db2777883308fc2bab2b63fdfaa84cd46f6f4f84015730ec8b3e89d7081e"
+  },
+  "ledger_sha256_after_restart": {
+    "ha_energy_price_engine.01QAPE11000000000000000002.ledger.sqlite3": "6fd127e6ea6175a20e3bac846dd630dabb200d279acdd19cf0c25eef6f67c082",
+    "ha_energy_price_engine.01QAPE11000000000000000001.ledger.sqlite3": "a953db2777883308fc2bab2b63fdfaa84cd46f6f4f84015730ec8b3e89d7081e"
+  },
+  "native_card": {
+    "passed": true,
+    "sourceSHA256": "01e89a872a7024ba82c5362d7b2f3f707ef1965c1b7778b479ee43f7e964a8e6",
+    "schema": 3,
+    "preference": false,
+    "sourceCountsUnchanged": true,
+    "errors": [],
+    "warnings": []
+  },
+  "screenshots": {
+    "docs/images/beta12/initial-setup-en-desktop.png": "eab80224779bf4880cd18b1c37a11007f16447a9b373fd83d700c8fb4ffc67b9",
+    "docs/images/beta12/next-yes-en-desktop.png": "db59db07d71ea359a596967f4c9988e03070cb9fa50b71efdeeb7bd515aeef33",
+    "docs/images/beta12/next-yes-en-mobile.png": "c688d290a45dc03e55d97a560db6322b24eab1150ce2b4063ce6864166a44482",
+    "docs/images/beta12/configure-en-no.png": "9af20938223ed8d87233dc37b226c22e55dc673bc709127d0a394ee0c733b9fb",
+    "docs/images/beta12/next-no-en-desktop.png": "ac0c492dea8720588e28193c6dfb2bf8e634b91cfbb54f6a0c0b182217323e61",
+    "docs/images/beta12/next-no-en-mobile.png": "44f16639113e7db2c18f9a064eff33fb027c0f73519017218a0d609a68190e16",
+    "docs/images/beta12/current-no-en-mobile.png": "da3616fa3471eb142a346a202ef9c6dad04e481fe559bb18d734e878dab4b3f8",
+    "docs/images/beta12/missing-final-no-en-mobile.png": "b8d5fc3e8d009ddd9ba29646b33825592ee7dbeca61afe8749079ae558881b68",
+    "docs/images/beta12/next-no-da-mobile.png": "34b10d4390e9f953ee47ba168c8c3a2151e544c7674f60de4c04245d8939ecfc",
+    "docs/images/beta12/next-no-da-desktop.png": "1b9c8c7a64f6e67ebaaddbf9902fee92d130dba30de13aa621f750d73de9a41a",
+    "docs/images/beta12/configure-da-yes.png": "119357e26400b954d148c31832ad23bf1178723b6143f41d7bc9e1c717e5439e",
+    "docs/images/beta12/next-yes-da-mobile.png": "8a6c257e8991f9b1a923001bfdb3f3ab4c9c85c16cc40e1cd7beb295b0c2ff63",
+    "docs/images/beta12/next-yes-da-desktop.png": "18745b7687d862f38ce772fd5dc9586bba41c1bfdd20a90f4db1f5a0532b166d",
+    "docs/images/beta12/beta11-before-desktop.png": "da27c54c9e85f80553fe82f805e14b9f4f25f7bd57f814cde81da063636e7c5f",
+    "docs/images/beta12/beta11-before-mobile.png": "30a5578cf6dfd4e028755630bdd2f77b8e7230d387cfdb028bbdd7a89068858a",
+    "docs/images/beta12/restarted-no-da-desktop.png": "cd76e699baebae7707bf859d994d0d6b3cde65319d89e2b27417e527a92d859c",
+    "docs/images/beta12/restarted-no-da-mobile.png": "34b10d4390e9f953ee47ba168c8c3a2151e544c7674f60de4c04245d8939ecfc",
+    "docs/images/beta12/native-card-no-da-desktop.png": "f726a8f38e822686780f735c6325a58d2b1e7d6ddcbf2e346c78da484488ebce"
+  },
+  "unchanged_beta11_runtime_sha256": {
+    "api.py": "163fb8403525c44ad8b7eb13159f7471fd7097e59afc45d61c639f96f54ee94d",
+    "brand/icon.png": "8814c04c7c1615b4e8469e094e83ad572b425041c537891caf52c38d4d020f44",
+    "charging_cost.py": "2f44d1f7fb257334faa1e4e06d44c1768ca4f7a405d93344161c365ccfee2180",
+    "const.py": "6c38f66a8d6ab5079f04841c0c62b274e01b159de563b0c0d687a428df61172f",
+    "coordinator.py": "71025f77827688b5c1c7c350c709ddd5041a86bfb199b5757b17c0ac76ddf8e7",
+    "data/supplier_offers.json": "13507c02cd77ec69349fa4229dbaa264718695e389d87b0c970b7f14c8769fc7",
+    "diagnostics.py": "cb5a412f67bcda485840ec31398ff0d813559b58cb9a1994bb6d2efa7330b7fd",
+    "ledger.py": "3fb161f450aa0e329e386c99e8498c7624f502415a0673edaaee98d76bf8acf4",
+    "localization.py": "e4c260b1109be2e2dd1e684e26f004ec4a104562fdd0bd5a2e4e122d0fbe9f79",
+    "models.py": "dff2a4fa066aa23cfef7614a050a308f0ae54f8f0403d6eaa7a8d9973763f91d",
+    "money.py": "bbc47ca7ce74bb319edb170a28f754c9e7258c940c5a5f67e647283e765c1766",
+    "price_components.py": "f959606039fb6da0e50727a746c39e6b6f78c93f8c0b6e057ab193454a263a13",
+    "price_engine.py": "9d2fbdaab509a8d6a123cc5ac6e8ca039996eb409f8d60571f79b50ad7cb63f2",
+    "price_schedule.py": "5e8c3f67bef8f2b512be5c4ef3a36f15461d563388007583c2b190574661d584",
+    "price_update.py": "994ee2b86d2088771aa2c816ad15225b45b312277630b25708b11fc7797242e2",
+    "prices.py": "88ad3e664dbc1441d64537a9060fbf39d268f4f9abf7b112d36367ffaf06e4b0",
+    "site_lifecycle.py": "bf812fbe86261c91bd1394bf560fec67ee39f42625afc1965c244fb7bf8faa84",
+    "tariff_source.py": "dfdf30b8da837403da51998f2dc61c2cd8c940702404672af29254054fba73e5"
+  },
+  "errors": [],
+  "warnings": [],
+  "qa_environment_notes": [
+    "The optional unrelated HA camera turbojpeg library is absent in the cloud UI venv.",
+    "HA can log unrelated background DNS failures in this restricted environment; no browser errors/warnings or actual PE provider calls occurred during read/toggle assertions.",
+    "A timer-clock prototype was discarded before the clean published-beta11 baseline. Only the fresh corrected harness run supplies evidence."
+  ],
+  "physical_raspberry_pi_validated": false,
+  "production_or_charging_controls_touched": false
+}

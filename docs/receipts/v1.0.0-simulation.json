@@ -1,0 +1,167 @@
+{
+  "version": "1.0.0",
+  "baseline_commit": "e506ccfc40b61413bd83e3ce60081a60d517348f",
+  "baseline_hacs_sha256": "211384a19c513009414acbde19f4eed55656ea957611b3211c2b5cfd62d0a5c8",
+  "runtime_files_sha256": {
+    "LICENSE": "283a5f80ddd97f9c1f853d3b84b5e066b3aaa45ae6a6321e6fccfb0ec2780fb1",
+    "__init__.py": "a95ceeed109a3f33350a786bb6227e733eb647e7baf136f6ebe850d364996ae2",
+    "api.py": "163fb8403525c44ad8b7eb13159f7471fd7097e59afc45d61c639f96f54ee94d",
+    "brand/icon.png": "8814c04c7c1615b4e8469e094e83ad572b425041c537891caf52c38d4d020f44",
+    "charging_cost.py": "2f44d1f7fb257334faa1e4e06d44c1768ca4f7a405d93344161c365ccfee2180",
+    "config_flow.py": "f74a988866ebc6ab4e383b7fd075db87999fdb2c73cb9803b7c3a8997d3a6537",
+    "configuration.py": "485c7adc4126afc85f7652d1b6f2861323a4e56942af80988a8249902e49dd61",
+    "const.py": "6c38f66a8d6ab5079f04841c0c62b274e01b159de563b0c0d687a428df61172f",
+    "coordinator.py": "71025f77827688b5c1c7c350c709ddd5041a86bfb199b5757b17c0ac76ddf8e7",
+    "dashboard.py": "5e072eb7756ab58dc299366f90129ca5558bcb6f57799e3de0b8d7cd8d674d92",
+    "data/supplier_offers.json": "13507c02cd77ec69349fa4229dbaa264718695e389d87b0c970b7f14c8769fc7",
+    "diagnostics.py": "cb5a412f67bcda485840ec31398ff0d813559b58cb9a1994bb6d2efa7330b7fd",
+    "ledger.py": "3fb161f450aa0e329e386c99e8498c7624f502415a0673edaaee98d76bf8acf4",
+    "localization.py": "e4c260b1109be2e2dd1e684e26f004ec4a104562fdd0bd5a2e4e122d0fbe9f79",
+    "manifest.json": "8e4232d78a25e19986108294abfcecdce56be7cfe7a97f3cfabc798197531233",
+    "models.py": "dff2a4fa066aa23cfef7614a050a308f0ae54f8f0403d6eaa7a8d9973763f91d",
+    "money.py": "bbc47ca7ce74bb319edb170a28f754c9e7258c940c5a5f67e647283e765c1766",
+    "price_components.py": "f959606039fb6da0e50727a746c39e6b6f78c93f8c0b6e057ab193454a263a13",
+    "price_engine.py": "9d2fbdaab509a8d6a123cc5ac6e8ca039996eb409f8d60571f79b50ad7cb63f2",
+    "price_schedule.py": "5e8c3f67bef8f2b512be5c4ef3a36f15461d563388007583c2b190574661d584",
+    "price_update.py": "994ee2b86d2088771aa2c816ad15225b45b312277630b25708b11fc7797242e2",
+    "prices.py": "88ad3e664dbc1441d64537a9060fbf39d268f4f9abf7b112d36367ffaf06e4b0",
+    "sensor.py": "31586a3e64cf6411d300c6dba1673eb439d5701967918d70d4ee19b63d9f6d07",
+    "site_lifecycle.py": "bf812fbe86261c91bd1394bf560fec67ee39f42625afc1965c244fb7bf8faa84",
+    "status.py": "5f497d20b4141fa33d0b874b0d977c43a4edd0ddd368b1438e640931052d5c03",
+    "strings.json": "39726d247f2fc15d029f80e345e3b336d7b8214a147028321b76f28c2a23250d",
+    "tariff_source.py": "dfdf30b8da837403da51998f2dc61c2cd8c940702404672af29254054fba73e5",
+    "translations/da.json": "ffcbc4a537f136368a67af0e6fc7855e31eeb6179ec78e021c1015861e2b2502",
+    "translations/en.json": "39726d247f2fc15d029f80e345e3b336d7b8214a147028321b76f28c2a23250d",
+    "www/energy-price-engine-card.js": "01e89a872a7024ba82c5362d7b2f3f707ef1965c1b7778b479ee43f7e964a8e6"
+  },
+  "environment": {
+    "core": "2026.10.4",
+    "frontend": "20260930.5",
+    "browser": "Playwright 1.64.1/system Chromium; browser plugin unavailable",
+    "viewports": [
+      "1440x1200",
+      "390x1200"
+    ],
+    "languages": [
+      "en",
+      "da"
+    ],
+    "clock": "2026-11-01T10:15Z -> 10:35Z; QA PE clock only, auth/wall unchanged",
+    "providers": "Recorded Radius and synthetic official Nord Pool service; fictional private rates only",
+    "isolation": "Two disposable localhost HA config directories; no owner HA, vehicle or control access"
+  },
+  "upgrade": {
+    "original_entity_ids_preserved": 69,
+    "original_site_settings_preserved": 3,
+    "price_ledgers_byte_identical": 2,
+    "saved_vat_choices_preserved": true,
+    "canonical_prices_and_primary_recorder_basis_unchanged": true,
+    "no_provider_requests_from_reads_or_preference_saves": true,
+    "diagnostic_rows_per_four_band_site": 15,
+    "automatic_next_to_current_selection": true,
+    "saved_vat_choices": {
+      "qa_next": false,
+      "qa_current": true,
+      "qa_missing": false
+    },
+    "storage_note": "Merged data/options identical; Configure saves a full duplicate of existing data into options without changing effective settings"
+  },
+  "restart": {
+    "upgraded_sites_and_ids_preserved": true,
+    "vat_choices_preserved": true,
+    "ledger_bytes_preserved": true
+  },
+  "fresh": {
+    "native_setup_complete": true,
+    "no_beta_visibility_required": true,
+    "installation_layout": "Manual ZIP extracted into clean config directory; actual HACS stable channel checked separately",
+    "version": "1.0.0",
+    "entities": 23,
+    "including_vat": false,
+    "supplier_input_vat_included": true,
+    "fictional_supplier_including_vat_ore": 3.75,
+    "diagnostic_supplier_ex_vat_ore": 3.0,
+    "interrupted_setup_resumed": true,
+    "restart_persisted": true,
+    "ledger_bytes_preserved": true
+  },
+  "served_card_matches_package": true,
+  "upgrade_ledger_sha256": {
+    "ha_energy_price_engine.01QAPE11000000000000000002.ledger.sqlite3": "6fd127e6ea6175a20e3bac846dd630dabb200d279acdd19cf0c25eef6f67c082",
+    "ha_energy_price_engine.01QAPE11000000000000000001.ledger.sqlite3": "a953db2777883308fc2bab2b63fdfaa84cd46f6f4f84015730ec8b3e89d7081e"
+  },
+  "fresh_ledger_sha256": {
+    "ha_energy_price_engine.01M6EZ5P4DZ7KVGD6Q0SH0H909.ledger.sqlite3": "8f55a376fffa471506305f835bef49537abd47ba58a24326d22071d851dbc12c"
+  },
+  "sqlite_integrity_check": {
+    "ha_energy_price_engine.01QAPE11000000000000000002.ledger.sqlite3": "ok",
+    "ha_energy_price_engine.01QAPE11000000000000000001.ledger.sqlite3": "ok",
+    "ha_energy_price_engine.01M6EZ5P4DZ7KVGD6Q0SH0H909.ledger.sqlite3": "ok"
+  },
+  "native_snapshots": {
+    "nextNo": {
+      "period": "next_quarter",
+      "start": "2026-11-01T10:30:00+00:00",
+      "end": "2026-11-01T10:45:00+00:00",
+      "revision": 1,
+      "final": 229.936,
+      "vat": 57.484,
+      "including": false
+    },
+    "nextYes": {
+      "period": "next_quarter",
+      "start": "2026-11-01T10:30:00+00:00",
+      "end": "2026-11-01T10:45:00+00:00",
+      "revision": 1,
+      "final": 287.42,
+      "vat": 57.484,
+      "including": true
+    },
+    "currentYes": {
+      "period": "current_quarter",
+      "start": "2026-11-01T10:15:00+00:00",
+      "end": "2026-11-01T10:30:00+00:00",
+      "revision": 1,
+      "final": 297.5655,
+      "vat": 59.5131,
+      "including": true
+    },
+    "missingFinalPreservesVerifiedGrid": true
+  },
+  "screenshots": {
+    "docs/images/v1.0.0/stable-device-version-desktop.png": "607df4571c17b95cb2e172be85c020d17f3b94b45f4270960e22adf392eddbc0",
+    "docs/images/v1.0.0/stable-next-no-en-desktop.png": "ac0c492dea8720588e28193c6dfb2bf8e634b91cfbb54f6a0c0b182217323e61",
+    "docs/images/v1.0.0/stable-next-no-en-mobile.png": "44f16639113e7db2c18f9a064eff33fb027c0f73519017218a0d609a68190e16",
+    "docs/images/v1.0.0/stable-device-version-mobile.png": "2cd79f8a0bce2fa29bbe44c0493034a40ea65486d1d9a66792d1cf1c0591d9e6",
+    "docs/images/v1.0.0/stable-configure-en-yes.png": "d9433de6a763ef3f72a1d7e047cb4d73db0124f1662ff890d3ddaba0ec352214",
+    "docs/images/v1.0.0/stable-next-yes-en-mobile.png": "c688d290a45dc03e55d97a560db6322b24eab1150ce2b4063ce6864166a44482",
+    "docs/images/v1.0.0/stable-next-yes-en-desktop.png": "db59db07d71ea359a596967f4c9988e03070cb9fa50b71efdeeb7bd515aeef33",
+    "docs/images/v1.0.0/stable-current-yes-en-mobile.png": "8a2697c48fd510e373f6d16bff4f4b4aa8420708f33b4cc90b9b4abde35384d5",
+    "docs/images/v1.0.0/stable-missing-no-en-mobile.png": "b8d5fc3e8d009ddd9ba29646b33825592ee7dbeca61afe8749079ae558881b68",
+    "docs/images/v1.0.0/stable-card-no-en-mobile.png": "1bddd3a9b0eb83104163a76b2d1683d7f321d9ac6dd91be084a0adae42a43ebc",
+    "docs/images/v1.0.0/stable-card-no-en-desktop.png": "db85e0694a3a5c4d82aa7f6c35bfe0bed0cf102a91491f204e3d44b6f5a7cb2c",
+    "docs/images/v1.0.0/stable-next-no-da-desktop.png": "1b9c8c7a64f6e67ebaaddbf9902fee92d130dba30de13aa621f750d73de9a41a",
+    "docs/images/v1.0.0/stable-next-no-da-mobile.png": "34b10d4390e9f953ee47ba168c8c3a2151e544c7674f60de4c04245d8939ecfc",
+    "docs/images/v1.0.0/stable-configure-da-yes.png": "ddbfdd29f2dc40aba3c54a258c957d1b101ec289c7d0ffbd668f93d39c8aad0e",
+    "docs/images/v1.0.0/stable-next-yes-da-desktop.png": "18745b7687d862f38ce772fd5dc9586bba41c1bfdd20a90f4db1f5a0532b166d",
+    "docs/images/v1.0.0/stable-next-yes-da-mobile.png": "8a6c257e8991f9b1a923001bfdb3f3ab4c9c85c16cc40e1cd7beb295b0c2ff63",
+    "docs/images/v1.0.0/stable-switched-current-no-da-mobile.png": "d5a07b8433e2da1a338af71a4816274867c2cbf1247b973b707a5ce9c44cfe0f",
+    "docs/images/v1.0.0/stable-fresh-site-desktop.png": "b4c2dd69f0d0f3208244ca0b080c583c0682942c4cfb713600dd9202938c19bd",
+    "docs/images/v1.0.0/stable-fresh-site-mobile.png": "7e999b1e0bcaf17d2109fb0b657fd054fd7bb34cd7a8640107143091f60c8884",
+    "docs/images/v1.0.0/stable-fresh-supplier-mobile.png": "14f60e7847ee054298415e32c2c56348ee6a2b2cf248c1bb458a89959360fd8c",
+    "docs/images/v1.0.0/stable-fresh-saved-mobile.png": "6ff2ecd9df838ac083d74c1f523af3e778b2b33fe073a8f19187394ca73336d2",
+    "docs/images/v1.0.0/stable-fresh-diagnostic-mobile.png": "e4138b0fdca3ba7f35e03cdfbec937350c00c2651ebd5ed2efcb0f7cd2700f4a",
+    "docs/images/v1.0.0/stable-fresh-device-desktop.png": "781efc640fdfb4b9d283c79d4ca667b702f34db4a6bec5376d38dd79f82e347a",
+    "docs/images/v1.0.0/stable-fresh-diagnostic-desktop.png": "e4138b0fdca3ba7f35e03cdfbec937350c00c2651ebd5ed2efcb0f7cd2700f4a",
+    "docs/images/v1.0.0/beta12-baseline-desktop.png": "ac0c492dea8720588e28193c6dfb2bf8e634b91cfbb54f6a0c0b182217323e61",
+    "docs/images/v1.0.0/beta12-baseline-mobile.png": "44f16639113e7db2c18f9a064eff33fb027c0f73519017218a0d609a68190e16",
+    "docs/images/v1.0.0/stable-restarted-no-da-desktop.png": "e273dd7b19133d222263425756ffc4b45186022da12082f983ae1202fab2bf5f",
+    "docs/images/v1.0.0/stable-restarted-no-da-mobile.png": "34b10d4390e9f953ee47ba168c8c3a2151e544c7674f60de4c04245d8939ecfc",
+    "docs/images/v1.0.0/stable-fresh-restarted-desktop.png": "c8d5ffe0ce3691e4bed7f4124fe2461c3732089256548f680158b7a902af074e",
+    "docs/images/v1.0.0/stable-fresh-restarted-mobile.png": "e99a2de94a0e19af63c58d3c9e55bea046c1d57646e81577eab308f43f55fed4"
+  },
+  "errors": [],
+  "warnings": [],
+  "owner_acceptance": false,
+  "production_or_charging_controls_touched": false
+}

@@ -1,0 +1,28 @@
+{
+  "repository": "NicolaiTandrup/HA-Energy-Price-Engine",
+  "pr": {
+    "number": 19,
+    "html_url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/pull/19",
+    "state": "open",
+    "draft": true
+  },
+  "pr_head_sha": "e27dac96cb0f6144d78f88c910a52e8a368657b4",
+  "pr_base_sha": "56cdb3c10993179371483812cbc36f651ba3ad8e",
+  "main_sha": "56cdb3c10993179371483812cbc36f651ba3ad8e",
+  "main_protected": false,
+  "allow_merge_commit": true,
+  "allow_squash_merge": true,
+  "allow_rebase_merge": true,
+  "review": {
+    "latestReviews": [],
+    "mergeStateStatus": "UNSTABLE",
+    "reviewDecision": "",
+    "reviewRequests": []
+  },
+  "policy_changed": false,
+  "pr_created_by_this_workflow": false,
+  "main_modified": false,
+  "protection": null,
+  "rulesets": [],
+  "active_main_rules": []
+}

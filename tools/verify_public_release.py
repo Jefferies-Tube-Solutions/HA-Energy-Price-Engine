@@ -1,4 +1,4 @@
-"""Independently download/verify the public PE prerelease and run real isolated HACS.
+"""Independently download/verify the public PE stable release and run real isolated HACS.
 
 Read-only network access; no publishing, repository settings or live HA access.
 """
@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = "NicolaiTandrup/HA-Energy-Price-Engine"
-TAG = "v0.1.0-beta.1"
+TAG = "v1.0.0"
 DOMAIN = "ha_energy_price_engine"
 
 
@@ -51,16 +51,16 @@ def download(url, destination, asset_id=None):
 def verify(output, expected_commit):
     output.mkdir(parents=True, exist_ok=True)
     release = api(f"repos/{REPOSITORY}/releases/tags/{TAG}")
-    assert release["prerelease"] is True and release["draft"] is False
+    assert release["prerelease"] is False and release["draft"] is False
     assert release["tag_name"] == TAG
+    assert api(f"repos/{REPOSITORY}/releases/latest")["id"] == release["id"]
     source_commit = api(f"repos/{REPOSITORY}/commits/{TAG}")["sha"]
     assert source_commit == expected_commit, "Public tag differs from validated source"
     repository = api(f"repos/{REPOSITORY}")
     assert repository["default_branch"] == "main"
-    assert api(f"repos/{REPOSITORY}/commits/main")["sha"] == expected_commit, (
-        "Main advanced since release validation"
-    )
+    main_commit = api(f"repos/{REPOSITORY}/commits/main")["sha"]
     main_tree = api(f"repos/{REPOSITORY}/git/trees/main?recursive=1")
+    assert main_commit == expected_commit, "Stable tag must point to the tested main commit"
     assert f"custom_components/{DOMAIN}/manifest.json" in {p["path"] for p in main_tree["tree"]}
     asset_map = {a["name"]: a for a in release["assets"]}
     required = {f"{DOMAIN}.zip", f"{DOMAIN}-manual.zip", "BUILD_MANIFEST.json", "SHA256SUMS"}
@@ -101,10 +101,25 @@ def verify(output, expected_commit):
                 for p in archive.namelist()
             }
             assert actual == manifest["runtime_files"], "Published ZIP differs from source payload"
+    main_source = output / "public-main-source.zip"
+    download(f"https://codeload.github.com/{REPOSITORY}/zip/{main_commit}", main_source)
+    prior = api(f"repos/{REPOSITORY}/releases/tags/v0.1.0-beta.12")
+    prior_asset = next(a for a in prior["assets"] if a["name"] == f"{DOMAIN}.zip")
+    prior_path = output / "previous-beta12.zip"
+    download(prior_asset["browser_download_url"], prior_path, prior_asset["id"])
+    prior_receipt = json.loads((ROOT / "docs/receipts/v0.1.0-beta.12.json").read_text())
+    expected_prior = prior_receipt.get("archive_hashes", prior_receipt.get("archive_sha256"))[
+        f"{DOMAIN}.zip"
+    ]
+    assert hashlib.sha256(prior_path.read_bytes()).hexdigest() == expected_prior
     receipt = {
+        "previous_hacs_asset": str(prior_path.resolve()),
+        "main_archive": str(main_source.resolve()),
         "verified_at": datetime.now(UTC).isoformat(),
         "repository": repository,
         "release": release,
+        "releases": api(f"repos/{REPOSITORY}/releases?per_page=100"),
+        "main_commit": main_commit,
         "source_commit": source_commit,
         "source_archive": str(source.resolve()),
         "source_archive_url": source_url,

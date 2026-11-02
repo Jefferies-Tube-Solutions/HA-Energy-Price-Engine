@@ -1,84 +1,95 @@
 # Home Assistant Energy Price Engine
 
-**v0.1.0-beta.1 — read-only native Home Assistant beta.**
-Install the exact [published prerelease](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/releases/tag/v0.1.0-beta.1)
-through HACS as category **Integration**, then configure **Energy Price Engine**
-under Devices & services. Follow the [exact PAHA02-DEV HACS procedure](docs/HACS_DISTRIBUTION.md).
-The release page and verification receipt establish publication/source identity;
-do not substitute a moving development branch for the selected beta version.
-No stable release, CM publication or production/control cutover is authorized.
+Energy Price Engine (PE) is a native Home Assistant integration that calculates and
+stores verified 15-minute electricity prices for **DK1 and DK2**. It combines
+Nord Pool spot prices, grid tariffs, Energinet charges, your supplier markup,
+electricity tax and VAT into a transparent marginal price per kWh.
 
-The standalone `ha_energy_price_engine` owns electricity price retrieval, tariff
-verification, calculation, permanent 15-minute final prices and publishing. EV
-Charge Manager, heating and batteries consume the read-only API. There are no
-vehicle or charging controls here. The tested EV PR #11/#12 pricing implementation
-is reused with [provenance retained](docs/PROVENANCE.md).
+**Version 1.0.0** provides persistent price history and a stable read-only **API v2**.
+PE works independently of EV Charge Manager and sends no vehicle or charging commands.
 
-**[Installation and native setup](docs/BETA_SETUP.md)** ·
-**[Beta acceptance / migration / rollback](docs/BETA_ACCEPTANCE.md)** ·
-[API v1](docs/API.md) · [Storage/recovery](docs/ADR-002-ledger-storage.md) ·
-[Measured performance](docs/PERFORMANCE.md) · [Permanent handoff](docs/DEVELOPMENT_STATUS.md)
+## Installation
 
-Add one independent site per entry in **Settings → Devices & services → Energy
-Price Engine**. Configure sources, supplier contracts, grid tariff class, dated
-rates, units, VAT, time-of-use hours, locks/fallbacks and fixed subscriptions in native
-Options. Sites have stable IDs and no hardcoded count limit; no private contract is
-copied to another site. Safe discovery suggests only an unambiguous official Nord
-Pool entry for confirmation, and rejects a legacy custom component shadowing it.
+Requires Home Assistant 2026.10 or later and the official **Nord Pool** integration,
+configured for DK1/DK2 and DKK. Tested Home Assistant versions are 2026.10.3 and
+2026.10.4. A legacy Nordpool integration is not required; it must not shadow the
+official `nordpool` integration.
 
-Final inclusive DKK/kWh prices use immutable UTC quarters, 92/96/100-slot local DST
-days, negative prices, transactional SQLite persistence, revision/correction history
-and read-only indexed lookups. Valid preview JSON ledgers migrate once; corrupted
-history blocks writes instead of being discarded. Native backup, diagnostics and
-repair flows expose actual applied sources/values and readiness. Missing prices
-never become zero; subscriptions never affect marginal slot ranking.
+1. In HACS, open **Custom repositories**, add
+   `https://github.com/NicolaiTandrup/HA-Energy-Price-Engine` as an **Integration**.
+2. Keep **Show beta versions off** for the stable channel. Download **v1.0.0** and
+   restart Home Assistant. A custom repository does not require Marketplace admission.
+3. In **Settings → Devices & services → Add integration**, select **Energy Price Engine**.
+4. Name the site, select the official Nord Pool source and choose whether to display
+   prices including VAT. Confirm **Radius C** only if your connection uses that product;
+   otherwise enter your verified grid rate. Enter your actual supplier markup in
+   **øre/kWh**, specifying whether the entered rate already includes VAT.
+5. Each submitted step saves immediately. **Configure** resumes setup or changes
+   settings later. Create a separate entry for every independently configured site.
 
-Copenhagen refreshes remain **13:05**, conditional **13:20 / 13:40 / 23:59**, and
-unconditional **00:01**, plus startup and bounded source-event recovery. Reads do
-not fetch providers or recalculate tariffs. Consumers must check complete READY
-coverage and explicit site identity. Actual PE+CM #15/#16 runtime conformance is
-exercised with synthetic observations and no control calls.
+[Complete installation and update guide](docs/HACS_DISTRIBUTION.md) ·
+[Manual installation](docs/HACS_DISTRIBUTION.md#manual-installation).
 
-The documented EWII **household** markup is **0.030 DKK/kWh excluding VAT for
-June–September 2026 only**. It is not an October/current default or a summer-house
-rate. Enter actual verified per-site terms. National baselines are explicitly bounded;
-future supplier/TSO/tax rules are not invented. Recorded legacy comparisons replace
-any requirement to co-run the legacy HACS broker and official Nord Pool integration.
+## Prices and Diagnostics
 
-## Candidate package and validation
+Nine primary entities show current/next spot and final prices, today's
+average/minimum/maximum, current grid tariff and availability. Values default to
+**øre/kWh with two decimals**; calculations and API values retain full precision.
+Negative prices and 92/96/100-quarter daylight saving days are supported.
 
-The prerelease provides reproducible HACS-root and manual-install ZIPs, file/commit metadata and
-SHA-256 checksums, then installs them **outside the repository source tree** in a
-fresh HA harness. Use the published release assets and SHA256SUMS. HACS downloads the exact selected
-tag's integration directory; public source and assets are independently compared.
-CI artifacts are development receipts and do not replace a published version.
+Open the native **device → Diagnostic** section to see the selected current or next
+verified quarter, every price component, four actual Radius day ranges and rates,
+VAT amount, verified final price, availability and **Including VAT — Yes/No**.
+A four-band site has 15 Diagnostic rows. No dashboard is needed to inspect the price.
 
-Tests cover native multi-site flows/upgrades, real official HA Nord Pool service
-plumbing with a mocked market client, units/VAT, overrides/time bands, source failures,
-SQLite interruption/corruption/recovery, exact historical revisions, JSON contract
-fixtures, actual PE+CM runtime interaction and archive installation. CI targets the
-fixture-supported HA 2026.10.3 and current 2026.10.4 with documented test scaffolding.
-Cloud scale benchmarks do **not** establish Raspberry Pi performance. Consult the
-handoff for exact current counts/CI and the acceptance guide for remaining live gates.
+The saved VAT preference controls Diagnostics and the bundled card. Each component
+uses its stored VAT-inclusive or VAT-exclusive value. Actual VAT amount remains visible
+and unchanged in both modes. The nine primary sensors retain their explicitly labeled
+VAT basis to preserve Recorder history; API v2 always returns canonical final prices
+including VAT. See [Diagnostics](docs/DIAGNOSTICS.md).
 
-## Development
+## Today and tomorrow dashboard
 
-Read AGENTS.md and the existing handoff first. Use this isolated checkout, Python
-3.14.8, hash-verified locks and pinned read-only consumer exports:
+The bundled read-only card shows separate raw spot and final-price graphs, every
+quarter, verified grid periods and a component/source inspector. It follows the VAT
+preference; the clearly labeled raw Nord Pool graph remains excluding VAT.
 
-```sh
-uv venv --python 3.14.8
-uv pip sync --require-hashes requirements-dev.lock
-.venv/bin/python tools/prepare_consumer_refs.py
-.venv/bin/python tools/prepare_hacs_reference.py
-.venv/bin/pytest --cov=custom_components.ha_energy_price_engine -W error::ResourceWarning
-.venv/bin/ruff check custom_components tests tools
-.venv/bin/ruff format --check custom_components tests tools
-.venv/bin/python tools/test_two_runtime.py --consumer pr15
-.venv/bin/python tools/test_two_runtime.py --consumer pr16
-docker run --rm -v "$PWD:/github/workspace" ghcr.io/home-assistant/hassfest
-.venv/bin/python tools/build_beta.py
-```
+[Add the bundled dashboard](docs/PRICE_DASHBOARD.md). After an update, reload the
+browser/app and card resource. Daily statistics use complete verified schedule data,
+including future quarters. When earlier rates are unverified, statistics explicitly
+cover the remaining day. Unknown history is never invented.
 
-No running HA service, secret, live Node-RED change or hardware access is needed for
-the development tests. No merge, release publication or live deployment is performed.
+## Verification and operation
+
+PE owns retrieval, verification, calculation, persistence and price publishing.
+Missing or stale inputs produce **Unavailable**, never an invented zero. Availability
+reports the affected period and corrective action. Tomorrow may be unpublished while
+today is ready; each requested API window must be fully verified to be READY.
+
+Source refresh checks occur at **13:05, 13:20, 13:40, 23:59 and 00:01** Copenhagen
+time, with conditional retries and restart recovery. The SQLite ledger retains
+historical prices and revisions; back up Home Assistant and monitor storage capacity.
+[Persistence and recovery](docs/PERFORMANCE.md).
+
+Supplier terms are private site settings and are never guessed. Bundled national
+charges have verified effective dates: Energinet network/system defaults expire on
+1 January 2027; electricity tax defaults expire on 1 January 2028. New rates require
+verified documentation. The historical EWII household markup of 0.030 DKK/kWh ex VAT
+applies only June–September 2026; it is not a current or future default.
+
+## Consumers and support
+
+The [stable read-only Python API v2](docs/API.md) exposes immutable full-precision
+DKK/kWh prices and readiness. Product version **1.0.0** and API version **2** are separate.
+The unreleased EV Charge Manager consumer still needs its own
+[API v1→v2 migration](docs/INTEROPERABILITY.md); PE installation does not enable charging.
+
+PE models variable electricity cost. It does not reconstruct invoices, allocate
+subscriptions, infer heating eligibility or control vehicles. Hardware performance
+and private contract/source acceptance depend on the installation; cloud benchmarks
+are not Raspberry Pi guarantees.
+
+[Release and compatibility notes](docs/RELEASE_V1.md) ·
+[Troubleshooting and limitations](docs/COMPATIBILITY.md) ·
+[Implementation provenance](docs/PROVENANCE.md) ·
+[Report a problem](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/issues).

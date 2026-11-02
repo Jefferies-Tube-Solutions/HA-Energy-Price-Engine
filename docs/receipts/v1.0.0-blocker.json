@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "target": "v1.0.0",
+  "status": "blocked_before_pr_creation",
+  "observed_at": "2026-11-01T21:49:23.770964+00:00",
+  "accepted_baseline": "e506ccfc40b61413bd83e3ce60081a60d517348f",
+  "main_unchanged": "56cdb3c10993179371483812cbc36f651ba3ad8e",
+  "branch": "release/v1.0.0",
+  "diagnostic_checkpoint": "48746c8b43d419a3bae705de70b37c60b4143fdc",
+  "failed_run_url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41353553959",
+  "failed_job_url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41353553959/job/124988697580",
+  "github_error": "pull request create failed: GraphQL: GitHub Actions is not permitted to create or approve pull requests (createPullRequest)",
+  "failed_action": "Create a draft pull request release/v1.0.0 → main using GITHUB_TOKEN",
+  "policy_bypassed": false,
+  "pr_created": false,
+  "merge_attempted": false,
+  "stable_tag_created": false,
+  "stable_release_published": false,
+  "required_owner_action": {
+    "recommended": "Manually create a draft PR with base main and head release/v1.0.0; then rerun the failed review workflow and resume the remaining gates.",
+    "compare_url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/compare/main...release/v1.0.0?expand=1",
+    "alternative": "Owner may explicitly enable repository Settings → Actions → General → Workflow permissions → Allow GitHub Actions to create and approve pull requests, then rerun. No permission change was attempted."
+  },
+  "validation": {
+    "tests_per_core": 142,
+    "cores": [
+      "2026.10.3",
+      "2026.10.4"
+    ],
+    "coverage_percent": 90,
+    "browser_cases": 22,
+    "hassfest_valid": 1,
+    "hassfest_invalid": 0,
+    "native_brand_http_fallbacks": [
+      "icon.png",
+      "logo.png",
+      "dark_icon.png",
+      "dark_logo@2x.png"
+    ],
+    "hacs_pins_visibility_cases": 4,
+    "all_runtime_python_and_card_js_byte_identical_to_beta12": true,
+    "outside_source_candidate_installs": [
+      "HACS ZIP on HA2026.10.3",
+      "Manual ZIP on HA2026.10.3"
+    ],
+    "candidate_package_source": "181467486bfea61148cdcc292c661e40006ec30a",
+    "candidate_archive_sha256": {
+      "ha_energy_price_engine.zip": "ddbd7d09b27bd28af48e5b33bbc870bed80f797d411c1e83505bf8db90aa10c2",
+      "ha_energy_price_engine-manual.zip": "3cde8b261e378160555fdb2d335cc897d022bcb55d96adcf06e7da2c6735fa1d"
+    },
+    "remote_validation_checks": [
+      {
+        "name": "independent beta install",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41353553956/job/124988697497"
+      },
+      {
+        "name": "prepare-review",
+        "status": "This job failed",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41353553959/job/124988697580"
+      },
+      {
+        "name": "tests (fixture-supported-ha-2026.10.3)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41353553916/job/124988697676"
+      },
+      {
+        "name": "tests (current-ha-2026.10.4)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41353553916/job/124988697415"
+      },
+      {
+        "name": "dashboard browser desktop and mobile",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41353553916/job/124988697684"
+      },
+      {
+        "name": "hassfest",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41353553788/job/124988696912"
+      },
+      {
+        "name": "hacs",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41353553788/job/124988697114"
+      }
+    ]
+  },
+  "pending_gates": [
+    "Native clean-install and hash-verified public beta12-to-stable update/restart/registry/history/VAT evidence",
+    "Repository protection/approval checks and ordinary reviewed PR merge",
+    "Actual resulting main source SHA and full exact-main CI",
+    "Immutable stable tag and non-prerelease/latest publication preserving all prior beta identities/assets",
+    "Independent public source/assets/checksums and HACS stable discovery/update verification"
+  ],
+  "repository_protection_read": false,
+  "production_or_charging_changes": false
+}

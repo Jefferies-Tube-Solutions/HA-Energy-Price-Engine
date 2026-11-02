@@ -1,0 +1,2082 @@
+{
+  "schema": 1,
+  "synthetic": true,
+  "owner_acceptance": false,
+  "baseline_source": "150c24fa08988b6ae308dec68bb21016ffcca0b9",
+  "baseline_package_sha256": "899ee061423092260258e22b248f0fecbe80322f9bfb3c4d4d3ac5ece3529df5",
+  "homeassistant": "2026.10.4",
+  "frontend": "20260930.5",
+  "browser": "System Chromium via locked Playwright1.64.1; Browser plugin not available",
+  "clock": "Controlled PE presentation/source clock, 2026-11-01 11:15 Copenhagen; HA auth/system clock unchanged",
+  "viewports": [
+    [
+      1440,
+      1100
+    ],
+    [
+      390,
+      1000
+    ]
+  ],
+  "languages": [
+    "en",
+    "da"
+  ],
+  "native_entity_count_per_four_band_site": 22,
+  "native_diagnostics_per_site": 14,
+  "original_entity_ids_preserved": 27,
+  "pricing_site_configs_preserved": 3,
+  "price_ledgers_byte_identical": 2,
+  "missing_supplier_ledger": "No final records or invented empty-price file",
+  "original_ledger_hashes": {
+    "ha_energy_price_engine.01QAPE11000000000000000002.ledger.sqlite3": "6fd127e6ea6175a20e3bac846dd630dabb200d279acdd19cf0c25eef6f67c082",
+    "ha_energy_price_engine.01QAPE11000000000000000001.ledger.sqlite3": "a953db2777883308fc2bab2b63fdfaa84cd46f6f4f84015730ec8b3e89d7081e"
+  },
+  "unchanged_beta10_runtime_sha256": {
+    "__init__.py": "24c794b82841ab42d9174442c845c4c45cf4f3d6c252f64ddbd302768c64f1a5",
+    "api.py": "163fb8403525c44ad8b7eb13159f7471fd7097e59afc45d61c639f96f54ee94d",
+    "charging_cost.py": "2f44d1f7fb257334faa1e4e06d44c1768ca4f7a405d93344161c365ccfee2180",
+    "config_flow.py": "da118f130058ae06b80fd7e3cb6af766b5b82be9fd6b81456a3541969fbcbb2c",
+    "configuration.py": "8546fbac01b188062df6b09b2ac4e54f8df369b67e35b41f52ffc606ef9ec735",
+    "const.py": "6c38f66a8d6ab5079f04841c0c62b274e01b159de563b0c0d687a428df61172f",
+    "coordinator.py": "71025f77827688b5c1c7c350c709ddd5041a86bfb199b5757b17c0ac76ddf8e7",
+    "diagnostics.py": "cb5a412f67bcda485840ec31398ff0d813559b58cb9a1994bb6d2efa7330b7fd",
+    "ledger.py": "3fb161f450aa0e329e386c99e8498c7624f502415a0673edaaee98d76bf8acf4",
+    "localization.py": "e4c260b1109be2e2dd1e684e26f004ec4a104562fdd0bd5a2e4e122d0fbe9f79",
+    "models.py": "dff2a4fa066aa23cfef7614a050a308f0ae54f8f0403d6eaa7a8d9973763f91d",
+    "money.py": "bbc47ca7ce74bb319edb170a28f754c9e7258c940c5a5f67e647283e765c1766",
+    "price_components.py": "f959606039fb6da0e50727a746c39e6b6f78c93f8c0b6e057ab193454a263a13",
+    "price_engine.py": "9d2fbdaab509a8d6a123cc5ac6e8ca039996eb409f8d60571f79b50ad7cb63f2",
+    "price_schedule.py": "5e8c3f67bef8f2b512be5c4ef3a36f15461d563388007583c2b190574661d584",
+    "prices.py": "88ad3e664dbc1441d64537a9060fbf39d268f4f9abf7b112d36367ffaf06e4b0",
+    "site_lifecycle.py": "bf812fbe86261c91bd1394bf560fec67ee39f42625afc1965c244fb7bf8faa84",
+    "tariff_source.py": "dfdf30b8da837403da51998f2dc61c2cd8c940702404672af29254054fba73e5",
+    "www/energy-price-engine-card.js": "8d906fb8470e0e977b0788a194e6bf873c7e45758b29ee6546d93ca2f0bfa2ec"
+  },
+  "next_native_amounts": [
+    "31.85 øre/kWh",
+    "0.80 øre/kWh",
+    "4.30 øre/kWh",
+    "7.20 øre/kWh",
+    "174.68 øre/kWh",
+    "10.62 øre/kWh",
+    "31.85 øre/kWh",
+    "95.56 øre/kWh",
+    "31.85 øre/kWh",
+    "11.10 øre/kWh",
+    "57.48 øre/kWh",
+    "287.42 øre/kWh"
+  ],
+  "component_record_snapshots": {
+    "nextParts": {
+      "spot": {
+        "entity_id": "sensor.qa_next_quarter_nord_pool_spot_ex_vat",
+        "state": "174.6836",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "next_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "spot",
+          "applied_component": {
+            "ex_vat": 1.746836,
+            "id": "spot",
+            "incl_vat": 2.183545,
+            "vat": 0.436709,
+            "value_ore": 174.6836
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Nord Pool spot (ex VAT)"
+        },
+        "last_changed": "2026-11-01T11:15:54.645573+00:00",
+        "last_reported": "2026-11-01T11:15:54.645573+00:00",
+        "last_updated": "2026-11-01T11:15:54.645573+00:00",
+        "context": {
+          "id": "01M6BD5E4NMNTJXCGEEPMFY9Y0",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "dso": {
+        "entity_id": "sensor.qa_next_quarter_applied_dso_tariff",
+        "state": "31.8524",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "next_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "dso",
+          "applied_component": {
+            "ex_vat": 0.318524,
+            "id": "dso",
+            "incl_vat": 0.398155,
+            "source": "Verified Radius C Datahub tariff",
+            "vat": 0.079631,
+            "value_ore": 31.852399999999996
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Applied DSO tariff"
+        },
+        "last_changed": "2026-11-01T11:15:54.645993+00:00",
+        "last_reported": "2026-11-01T11:15:54.645993+00:00",
+        "last_updated": "2026-11-01T11:15:54.645993+00:00",
+        "context": {
+          "id": "01M6BD5E4N5KJBZVZJQ2V9ENTD",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "energinet_net": {
+        "entity_id": "sensor.qa_next_quarter_energinet_network",
+        "state": "4.3",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "next_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "energinet_net",
+          "applied_component": {
+            "ex_vat": 0.043,
+            "hours": [],
+            "id": "energinet_net",
+            "incl_vat": 0.05374999999999999,
+            "locked": false,
+            "source": "Rate specified by owner: Manager issue #8",
+            "unit": "DKK/kWh",
+            "valid_from": "2026-01-01",
+            "valid_to": "2027-01-01",
+            "vat": 0.010749999999999996,
+            "verified_on": "2026-10-23",
+            "value_ore": 4.3
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Energinet network"
+        },
+        "last_changed": "2026-11-01T11:15:54.646358+00:00",
+        "last_reported": "2026-11-01T11:15:54.646358+00:00",
+        "last_updated": "2026-11-01T11:15:54.646358+00:00",
+        "context": {
+          "id": "01M6BD5E4PQDWY9F98133B0B3Z",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "energinet_system": {
+        "entity_id": "sensor.qa_next_quarter_energinet_system",
+        "state": "7.2",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "next_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "energinet_system",
+          "applied_component": {
+            "ex_vat": 0.072,
+            "hours": [],
+            "id": "energinet_system",
+            "incl_vat": 0.09,
+            "locked": false,
+            "source": "Rate specified by owner: Manager issue #8",
+            "unit": "DKK/kWh",
+            "valid_from": "2026-01-01",
+            "valid_to": "2027-01-01",
+            "vat": 0.018000000000000002,
+            "verified_on": "2026-10-23",
+            "value_ore": 7.199999999999999
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Energinet system"
+        },
+        "last_changed": "2026-11-01T11:15:54.646735+00:00",
+        "last_reported": "2026-11-01T11:15:54.646735+00:00",
+        "last_updated": "2026-11-01T11:15:54.646735+00:00",
+        "context": {
+          "id": "01M6BD5E4PWMJ6Q5ZBHSMTG4S1",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "supplier": {
+        "entity_id": "sensor.qa_next_quarter_supplier_markup",
+        "state": "11.1",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "next_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "supplier",
+          "applied_component": {
+            "effective_after": "2026-11-01T10:30:00+00:00",
+            "ex_vat": 0.111,
+            "hours": [],
+            "id": "supplier",
+            "incl_vat": 0.13875,
+            "locked": true,
+            "source": "Fictional QA supplier only; not owner EWII terms",
+            "unit": "DKK/kWh",
+            "valid_from": "2026-11-01",
+            "valid_to": "2027-01-01",
+            "vat": 0.02775000000000001,
+            "verified_on": "2026-11-01",
+            "value_ore": 11.1
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Supplier markup"
+        },
+        "last_changed": "2026-11-01T11:15:54.647120+00:00",
+        "last_reported": "2026-11-01T11:15:54.647120+00:00",
+        "last_updated": "2026-11-01T11:15:54.647120+00:00",
+        "context": {
+          "id": "01M6BD5E4QG0MDP6C22NK1H1TF",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "electricity_tax": {
+        "entity_id": "sensor.qa_next_quarter_electricity_tax",
+        "state": "0.8",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "next_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "electricity_tax",
+          "applied_component": {
+            "ex_vat": 0.008,
+            "hours": [],
+            "id": "electricity_tax",
+            "incl_vat": 0.01,
+            "locked": false,
+            "source": "Rate specified by owner: Manager issue #8",
+            "unit": "DKK/kWh",
+            "valid_from": "2026-01-01",
+            "valid_to": "2028-01-01",
+            "vat": 0.002,
+            "verified_on": "2026-10-23",
+            "value_ore": 0.8
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Electricity tax"
+        },
+        "last_changed": "2026-11-01T11:15:54.647480+00:00",
+        "last_reported": "2026-11-01T11:15:54.647480+00:00",
+        "last_updated": "2026-11-01T11:15:54.647480+00:00",
+        "context": {
+          "id": "01M6BD5E4QAJRY1PAHV6GWP248",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "vat": {
+        "entity_id": "sensor.qa_next_quarter_vat_amount",
+        "state": "57.484",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "next_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": null,
+          "value_basis": "vat_amount",
+          "component": "vat",
+          "applied_component": null,
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter VAT amount"
+        },
+        "last_changed": "2026-11-01T11:15:54.648059+00:00",
+        "last_reported": "2026-11-01T11:15:54.648059+00:00",
+        "last_updated": "2026-11-01T11:15:54.648059+00:00",
+        "context": {
+          "id": "01M6BD5E4RR6B9H3CTFZHKNWZB",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "final": {
+        "entity_id": "sensor.qa_next_quarter_verified_final_price",
+        "state": "287.42",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "next_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": true,
+          "value_basis": "incl_vat",
+          "component": "final",
+          "applied_component": null,
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Verified final price"
+        },
+        "last_changed": "2026-11-01T11:15:54.648440+00:00",
+        "last_reported": "2026-11-01T11:15:54.648440+00:00",
+        "last_updated": "2026-11-01T11:15:54.648440+00:00",
+        "context": {
+          "id": "01M6BD5E4RCWVTMEK2DB6GA15D",
+          "parent_id": null,
+          "user_id": null
+        }
+      }
+    },
+    "currentParts": {
+      "spot": {
+        "entity_id": "sensor.qa_current_quarter_nord_pool_spot_ex_vat",
+        "state": "182.8",
+        "attributes": {
+          "site_id": "qa_current",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:15:00+00:00",
+          "end": "2026-11-01T10:30:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 59.513099999999994,
+          "final_ore": 297.56550000000004,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "spot",
+          "applied_component": {
+            "ex_vat": 1.828,
+            "id": "spot",
+            "incl_vat": 2.285,
+            "vat": 0.457,
+            "value_ore": 182.8
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Current quarter Nord Pool spot (ex VAT)"
+        },
+        "last_changed": "2026-11-01T11:15:54.734726+00:00",
+        "last_reported": "2026-11-01T11:15:54.734726+00:00",
+        "last_updated": "2026-11-01T11:15:54.734726+00:00",
+        "context": {
+          "id": "01M6BD5E7EGFNDKC8BC5XXRXM2",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "dso": {
+        "entity_id": "sensor.qa_current_quarter_applied_dso_tariff",
+        "state": "31.8524",
+        "attributes": {
+          "site_id": "qa_current",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:15:00+00:00",
+          "end": "2026-11-01T10:30:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 59.513099999999994,
+          "final_ore": 297.56550000000004,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "dso",
+          "applied_component": {
+            "ex_vat": 0.318524,
+            "id": "dso",
+            "incl_vat": 0.398155,
+            "source": "Verified Radius C Datahub tariff",
+            "vat": 0.079631,
+            "value_ore": 31.852399999999996
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Current quarter Applied DSO tariff"
+        },
+        "last_changed": "2026-11-01T11:15:54.737762+00:00",
+        "last_reported": "2026-11-01T11:15:54.737762+00:00",
+        "last_updated": "2026-11-01T11:15:54.737762+00:00",
+        "context": {
+          "id": "01M6BD5E7H30E85EC571T02B6R",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "energinet_net": {
+        "entity_id": "sensor.qa_current_quarter_energinet_network",
+        "state": "4.3",
+        "attributes": {
+          "site_id": "qa_current",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:15:00+00:00",
+          "end": "2026-11-01T10:30:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 59.513099999999994,
+          "final_ore": 297.56550000000004,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "energinet_net",
+          "applied_component": {
+            "ex_vat": 0.043,
+            "hours": [],
+            "id": "energinet_net",
+            "incl_vat": 0.05374999999999999,
+            "locked": false,
+            "source": "Rate specified by owner: Manager issue #8",
+            "unit": "DKK/kWh",
+            "valid_from": "2026-01-01",
+            "valid_to": "2027-01-01",
+            "vat": 0.010749999999999996,
+            "verified_on": "2026-10-23",
+            "value_ore": 4.3
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Current quarter Energinet network"
+        },
+        "last_changed": "2026-11-01T11:15:54.738235+00:00",
+        "last_reported": "2026-11-01T11:15:54.738235+00:00",
+        "last_updated": "2026-11-01T11:15:54.738235+00:00",
+        "context": {
+          "id": "01M6BD5E7JH1HBRJYJSEMC0TFK",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "energinet_system": {
+        "entity_id": "sensor.qa_current_quarter_energinet_system",
+        "state": "7.2",
+        "attributes": {
+          "site_id": "qa_current",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:15:00+00:00",
+          "end": "2026-11-01T10:30:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 59.513099999999994,
+          "final_ore": 297.56550000000004,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "energinet_system",
+          "applied_component": {
+            "ex_vat": 0.072,
+            "hours": [],
+            "id": "energinet_system",
+            "incl_vat": 0.09,
+            "locked": false,
+            "source": "Rate specified by owner: Manager issue #8",
+            "unit": "DKK/kWh",
+            "valid_from": "2026-01-01",
+            "valid_to": "2027-01-01",
+            "vat": 0.018000000000000002,
+            "verified_on": "2026-10-23",
+            "value_ore": 7.199999999999999
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Current quarter Energinet system"
+        },
+        "last_changed": "2026-11-01T11:15:54.738547+00:00",
+        "last_reported": "2026-11-01T11:15:54.738547+00:00",
+        "last_updated": "2026-11-01T11:15:54.738547+00:00",
+        "context": {
+          "id": "01M6BD5E7JWD7BJ3A91JZ7TG1C",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "supplier": {
+        "entity_id": "sensor.qa_current_quarter_supplier_markup",
+        "state": "11.1",
+        "attributes": {
+          "site_id": "qa_current",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:15:00+00:00",
+          "end": "2026-11-01T10:30:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 59.513099999999994,
+          "final_ore": 297.56550000000004,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "supplier",
+          "applied_component": {
+            "ex_vat": 0.111,
+            "hours": [],
+            "id": "supplier",
+            "incl_vat": 0.13875,
+            "locked": true,
+            "source": "Fictional QA supplier only; not owner EWII terms",
+            "unit": "DKK/kWh",
+            "valid_from": "2026-11-01",
+            "valid_to": "2027-01-01",
+            "vat": 0.02775000000000001,
+            "verified_on": "2026-11-01",
+            "value_ore": 11.1
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Current quarter Supplier markup"
+        },
+        "last_changed": "2026-11-01T11:15:54.738950+00:00",
+        "last_reported": "2026-11-01T11:15:54.738950+00:00",
+        "last_updated": "2026-11-01T11:15:54.738950+00:00",
+        "context": {
+          "id": "01M6BD5E7JT7KNKBPZ8AHK356X",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "electricity_tax": {
+        "entity_id": "sensor.qa_current_quarter_electricity_tax",
+        "state": "0.8",
+        "attributes": {
+          "site_id": "qa_current",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:15:00+00:00",
+          "end": "2026-11-01T10:30:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 59.513099999999994,
+          "final_ore": 297.56550000000004,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "electricity_tax",
+          "applied_component": {
+            "ex_vat": 0.008,
+            "hours": [],
+            "id": "electricity_tax",
+            "incl_vat": 0.01,
+            "locked": false,
+            "source": "Rate specified by owner: Manager issue #8",
+            "unit": "DKK/kWh",
+            "valid_from": "2026-01-01",
+            "valid_to": "2028-01-01",
+            "vat": 0.002,
+            "verified_on": "2026-10-23",
+            "value_ore": 0.8
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Current quarter Electricity tax"
+        },
+        "last_changed": "2026-11-01T11:15:54.739295+00:00",
+        "last_reported": "2026-11-01T11:15:54.739295+00:00",
+        "last_updated": "2026-11-01T11:15:54.739295+00:00",
+        "context": {
+          "id": "01M6BD5E7KRH03W4FRNCXQZVWQ",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "vat": {
+        "entity_id": "sensor.qa_current_quarter_vat_amount",
+        "state": "59.5131",
+        "attributes": {
+          "site_id": "qa_current",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:15:00+00:00",
+          "end": "2026-11-01T10:30:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 59.513099999999994,
+          "final_ore": 297.56550000000004,
+          "vat_included": null,
+          "value_basis": "vat_amount",
+          "component": "vat",
+          "applied_component": null,
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Current quarter VAT amount"
+        },
+        "last_changed": "2026-11-01T11:15:54.739787+00:00",
+        "last_reported": "2026-11-01T11:15:54.739787+00:00",
+        "last_updated": "2026-11-01T11:15:54.739787+00:00",
+        "context": {
+          "id": "01M6BD5E7K9W38KFW8KHCMKJGC",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "final": {
+        "entity_id": "sensor.qa_current_quarter_verified_final_price",
+        "state": "297.5655",
+        "attributes": {
+          "site_id": "qa_current",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:15:00+00:00",
+          "end": "2026-11-01T10:30:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 59.513099999999994,
+          "final_ore": 297.56550000000004,
+          "vat_included": true,
+          "value_basis": "incl_vat",
+          "component": "final",
+          "applied_component": null,
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Current quarter Verified final price"
+        },
+        "last_changed": "2026-11-01T11:15:54.740208+00:00",
+        "last_reported": "2026-11-01T11:15:54.740208+00:00",
+        "last_updated": "2026-11-01T11:15:54.740208+00:00",
+        "context": {
+          "id": "01M6BD5E7MRKZ68R0AASMWQGK0",
+          "parent_id": null,
+          "user_id": null
+        }
+      }
+    },
+    "switchedParts": {
+      "spot": {
+        "entity_id": "sensor.qa_next_quarter_nord_pool_spot_ex_vat",
+        "state": "174.6836",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "spot",
+          "applied_component": {
+            "ex_vat": 1.746836,
+            "id": "spot",
+            "incl_vat": 2.183545,
+            "vat": 0.436709,
+            "value_ore": 174.6836
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Nord Pool spot (ex VAT)"
+        },
+        "last_changed": "2026-11-01T11:15:54.645573+00:00",
+        "last_reported": "2026-11-01T11:16:04.533973+00:00",
+        "last_updated": "2026-11-01T11:16:04.533973+00:00",
+        "context": {
+          "id": "01M6BD5QSN93AD02NCHRMJS168",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "dso": {
+        "entity_id": "sensor.qa_next_quarter_applied_dso_tariff",
+        "state": "31.8524",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "dso",
+          "applied_component": {
+            "ex_vat": 0.318524,
+            "id": "dso",
+            "incl_vat": 0.398155,
+            "source": "Verified Radius C Datahub tariff",
+            "vat": 0.079631,
+            "value_ore": 31.852399999999996
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Applied DSO tariff"
+        },
+        "last_changed": "2026-11-01T11:15:54.645993+00:00",
+        "last_reported": "2026-11-01T11:16:04.534136+00:00",
+        "last_updated": "2026-11-01T11:16:04.534136+00:00",
+        "context": {
+          "id": "01M6BD5QSPBEFBPZFEKDA3MMZP",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "energinet_net": {
+        "entity_id": "sensor.qa_next_quarter_energinet_network",
+        "state": "4.3",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "energinet_net",
+          "applied_component": {
+            "ex_vat": 0.043,
+            "hours": [],
+            "id": "energinet_net",
+            "incl_vat": 0.05374999999999999,
+            "locked": false,
+            "source": "Rate specified by owner: Manager issue #8",
+            "unit": "DKK/kWh",
+            "valid_from": "2026-01-01",
+            "valid_to": "2027-01-01",
+            "vat": 0.010749999999999996,
+            "verified_on": "2026-10-23",
+            "value_ore": 4.3
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Energinet network"
+        },
+        "last_changed": "2026-11-01T11:15:54.646358+00:00",
+        "last_reported": "2026-11-01T11:16:04.534285+00:00",
+        "last_updated": "2026-11-01T11:16:04.534285+00:00",
+        "context": {
+          "id": "01M6BD5QSPA7V7FNF1VJ49696C",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "energinet_system": {
+        "entity_id": "sensor.qa_next_quarter_energinet_system",
+        "state": "7.2",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "energinet_system",
+          "applied_component": {
+            "ex_vat": 0.072,
+            "hours": [],
+            "id": "energinet_system",
+            "incl_vat": 0.09,
+            "locked": false,
+            "source": "Rate specified by owner: Manager issue #8",
+            "unit": "DKK/kWh",
+            "valid_from": "2026-01-01",
+            "valid_to": "2027-01-01",
+            "vat": 0.018000000000000002,
+            "verified_on": "2026-10-23",
+            "value_ore": 7.199999999999999
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Energinet system"
+        },
+        "last_changed": "2026-11-01T11:15:54.646735+00:00",
+        "last_reported": "2026-11-01T11:16:04.534429+00:00",
+        "last_updated": "2026-11-01T11:16:04.534429+00:00",
+        "context": {
+          "id": "01M6BD5QSPZ61QAVAADWSDM82N",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "supplier": {
+        "entity_id": "sensor.qa_next_quarter_supplier_markup",
+        "state": "11.1",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "supplier",
+          "applied_component": {
+            "effective_after": "2026-11-01T10:30:00+00:00",
+            "ex_vat": 0.111,
+            "hours": [],
+            "id": "supplier",
+            "incl_vat": 0.13875,
+            "locked": true,
+            "source": "Fictional QA supplier only; not owner EWII terms",
+            "unit": "DKK/kWh",
+            "valid_from": "2026-11-01",
+            "valid_to": "2027-01-01",
+            "vat": 0.02775000000000001,
+            "verified_on": "2026-11-01",
+            "value_ore": 11.1
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Supplier markup"
+        },
+        "last_changed": "2026-11-01T11:15:54.647120+00:00",
+        "last_reported": "2026-11-01T11:16:04.534568+00:00",
+        "last_updated": "2026-11-01T11:16:04.534568+00:00",
+        "context": {
+          "id": "01M6BD5QSP7T2GT2PXT8RWJ9K4",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "electricity_tax": {
+        "entity_id": "sensor.qa_next_quarter_electricity_tax",
+        "state": "0.8",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": false,
+          "value_basis": "ex_vat",
+          "component": "electricity_tax",
+          "applied_component": {
+            "ex_vat": 0.008,
+            "hours": [],
+            "id": "electricity_tax",
+            "incl_vat": 0.01,
+            "locked": false,
+            "source": "Rate specified by owner: Manager issue #8",
+            "unit": "DKK/kWh",
+            "valid_from": "2026-01-01",
+            "valid_to": "2028-01-01",
+            "vat": 0.002,
+            "verified_on": "2026-10-23",
+            "value_ore": 0.8
+          },
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Electricity tax"
+        },
+        "last_changed": "2026-11-01T11:15:54.647480+00:00",
+        "last_reported": "2026-11-01T11:16:04.534757+00:00",
+        "last_updated": "2026-11-01T11:16:04.534757+00:00",
+        "context": {
+          "id": "01M6BD5QSPSE8G3G7N1D8TRGB0",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "vat": {
+        "entity_id": "sensor.qa_next_quarter_vat_amount",
+        "state": "57.484",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": null,
+          "value_basis": "vat_amount",
+          "component": "vat",
+          "applied_component": null,
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter VAT amount"
+        },
+        "last_changed": "2026-11-01T11:15:54.648059+00:00",
+        "last_reported": "2026-11-01T11:16:04.534896+00:00",
+        "last_updated": "2026-11-01T11:16:04.534896+00:00",
+        "context": {
+          "id": "01M6BD5QSP0FP2NGG6M5EFQ0RH",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "final": {
+        "entity_id": "sensor.qa_next_quarter_verified_final_price",
+        "state": "287.42",
+        "attributes": {
+          "site_id": "qa_next",
+          "period": "current_quarter",
+          "start": "2026-11-01T10:30:00+00:00",
+          "end": "2026-11-01T10:45:00+00:00",
+          "unit": "øre/kWh",
+          "revision": 1,
+          "source": {
+            "area": "DK2",
+            "config_entry": "01QAPE1100000000000000000NP",
+            "dso": {
+              "charge_type": "D03",
+              "effective_ranges": [
+                {
+                  "from": "2026-10-01T00:00:00+02:00",
+                  "to": "2027-04-01T00:00:00+02:00"
+                }
+              ],
+              "effective_versions": [
+                "2026-10-01T00:00:00+02:00"
+              ],
+              "fetched_at": "2026-11-01T10:15:00+00:00",
+              "gln": "5790000705689",
+              "product": "DT_C_01",
+              "provider": "DatahubPricelist",
+              "unit": "DKK/kWh",
+              "url": "https://api.energidataservice.dk/dataset/DatahubPricelist",
+              "vat_included": false,
+              "version": "acdb122231038ae8a68bfa77ec17f4534c3e0e45d28bce1e8a3268d11dc51230"
+            },
+            "input_unit": "DKK/MWh",
+            "input_vat": "excluded",
+            "kind": "nordpool",
+            "verified_at": "2026-11-01T10:15:00+00:00"
+          },
+          "vat_amount_ore": 57.484,
+          "final_ore": 287.42,
+          "vat_included": true,
+          "value_basis": "incl_vat",
+          "component": "final",
+          "applied_component": null,
+          "verification": "verified",
+          "unit_of_measurement": "øre/kWh",
+          "friendly_name": "QA Next quarter Verified final price"
+        },
+        "last_changed": "2026-11-01T11:15:54.648440+00:00",
+        "last_reported": "2026-11-01T11:16:04.535613+00:00",
+        "last_updated": "2026-11-01T11:16:04.535613+00:00",
+        "context": {
+          "id": "01M6BD5QSQ1NFBSS79YKQ0EAAT",
+          "parent_id": null,
+          "user_id": null
+        }
+      }
+    }
+  },
+  "missing_site_component_states": {
+    "price_period": {
+      "entity_id": "sensor.qa_missing_supplier_price_period",
+      "state": "Missing: supplier markup",
+      "attributes": {
+        "site_id": "qa_missing",
+        "period": "unavailable",
+        "reason": "Some intervals lack a verified tariff or contract",
+        "missing_components": [
+          "supplier"
+        ],
+        "failure_stage": "configuration",
+        "action": "Configure the affected component and its actual effective period; earlier unknown rates are never assumed",
+        "vat_included": null,
+        "value_basis": "ex_vat",
+        "component": "price_period",
+        "applied_component": null,
+        "verification": "unavailable",
+        "friendly_name": "QA Missing supplier Price period"
+      },
+      "last_changed": "2026-11-01T11:15:54.789529+00:00",
+      "last_reported": "2026-11-01T11:15:54.789529+00:00",
+      "last_updated": "2026-11-01T11:15:54.789529+00:00",
+      "context": {
+        "id": "01M6BD5E95FYP904QQWR7AVXGS",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "component_spot": {
+      "entity_id": "sensor.qa_missing_supplier_nord_pool_spot_ex_vat",
+      "state": "unknown",
+      "attributes": {
+        "site_id": "qa_missing",
+        "period": "unavailable",
+        "reason": "Some intervals lack a verified tariff or contract",
+        "missing_components": [
+          "supplier"
+        ],
+        "failure_stage": "configuration",
+        "action": "Configure the affected component and its actual effective period; earlier unknown rates are never assumed",
+        "vat_included": false,
+        "value_basis": "ex_vat",
+        "component": "spot",
+        "applied_component": null,
+        "verification": "unavailable",
+        "unit_of_measurement": "øre/kWh",
+        "friendly_name": "QA Missing supplier Nord Pool spot (ex VAT)"
+      },
+      "last_changed": "2026-11-01T11:15:54.790009+00:00",
+      "last_reported": "2026-11-01T11:15:54.790009+00:00",
+      "last_updated": "2026-11-01T11:15:54.790009+00:00",
+      "context": {
+        "id": "01M6BD5E96G2DWC0EY7J00C2BK",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "component_dso": {
+      "entity_id": "sensor.qa_missing_supplier_applied_dso_tariff",
+      "state": "unknown",
+      "attributes": {
+        "site_id": "qa_missing",
+        "period": "unavailable",
+        "reason": "Some intervals lack a verified tariff or contract",
+        "missing_components": [
+          "supplier"
+        ],
+        "failure_stage": "configuration",
+        "action": "Configure the affected component and its actual effective period; earlier unknown rates are never assumed",
+        "vat_included": false,
+        "value_basis": "ex_vat",
+        "component": "dso",
+        "applied_component": null,
+        "verification": "unavailable",
+        "unit_of_measurement": "øre/kWh",
+        "friendly_name": "QA Missing supplier Applied DSO tariff"
+      },
+      "last_changed": "2026-11-01T11:15:54.790298+00:00",
+      "last_reported": "2026-11-01T11:15:54.790298+00:00",
+      "last_updated": "2026-11-01T11:15:54.790298+00:00",
+      "context": {
+        "id": "01M6BD5E96VVVK3PVMPX6ZNMCN",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "component_energinet_net": {
+      "entity_id": "sensor.qa_missing_supplier_energinet_network",
+      "state": "unknown",
+      "attributes": {
+        "site_id": "qa_missing",
+        "period": "unavailable",
+        "reason": "Some intervals lack a verified tariff or contract",
+        "missing_components": [
+          "supplier"
+        ],
+        "failure_stage": "configuration",
+        "action": "Configure the affected component and its actual effective period; earlier unknown rates are never assumed",
+        "vat_included": false,
+        "value_basis": "ex_vat",
+        "component": "energinet_net",
+        "applied_component": null,
+        "verification": "unavailable",
+        "unit_of_measurement": "øre/kWh",
+        "friendly_name": "QA Missing supplier Energinet network"
+      },
+      "last_changed": "2026-11-01T11:15:54.790557+00:00",
+      "last_reported": "2026-11-01T11:15:54.790557+00:00",
+      "last_updated": "2026-11-01T11:15:54.790557+00:00",
+      "context": {
+        "id": "01M6BD5E96YVRVMVXBYKMCSA4A",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "component_energinet_system": {
+      "entity_id": "sensor.qa_missing_supplier_energinet_system",
+      "state": "unknown",
+      "attributes": {
+        "site_id": "qa_missing",
+        "period": "unavailable",
+        "reason": "Some intervals lack a verified tariff or contract",
+        "missing_components": [
+          "supplier"
+        ],
+        "failure_stage": "configuration",
+        "action": "Configure the affected component and its actual effective period; earlier unknown rates are never assumed",
+        "vat_included": false,
+        "value_basis": "ex_vat",
+        "component": "energinet_system",
+        "applied_component": null,
+        "verification": "unavailable",
+        "unit_of_measurement": "øre/kWh",
+        "friendly_name": "QA Missing supplier Energinet system"
+      },
+      "last_changed": "2026-11-01T11:15:54.790812+00:00",
+      "last_reported": "2026-11-01T11:15:54.790812+00:00",
+      "last_updated": "2026-11-01T11:15:54.790812+00:00",
+      "context": {
+        "id": "01M6BD5E964966VR3DAW1HSXXN",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "component_supplier": {
+      "entity_id": "sensor.qa_missing_supplier_supplier_markup",
+      "state": "unknown",
+      "attributes": {
+        "site_id": "qa_missing",
+        "period": "unavailable",
+        "reason": "Some intervals lack a verified tariff or contract",
+        "missing_components": [
+          "supplier"
+        ],
+        "failure_stage": "configuration",
+        "action": "Configure the affected component and its actual effective period; earlier unknown rates are never assumed",
+        "vat_included": false,
+        "value_basis": "ex_vat",
+        "component": "supplier",
+        "applied_component": null,
+        "verification": "unavailable",
+        "unit_of_measurement": "øre/kWh",
+        "friendly_name": "QA Missing supplier Supplier markup"
+      },
+      "last_changed": "2026-11-01T11:15:54.791085+00:00",
+      "last_reported": "2026-11-01T11:15:54.791085+00:00",
+      "last_updated": "2026-11-01T11:15:54.791085+00:00",
+      "context": {
+        "id": "01M6BD5E97SFRBPKRNQGZ49S75",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "component_electricity_tax": {
+      "entity_id": "sensor.qa_missing_supplier_electricity_tax",
+      "state": "unknown",
+      "attributes": {
+        "site_id": "qa_missing",
+        "period": "unavailable",
+        "reason": "Some intervals lack a verified tariff or contract",
+        "missing_components": [
+          "supplier"
+        ],
+        "failure_stage": "configuration",
+        "action": "Configure the affected component and its actual effective period; earlier unknown rates are never assumed",
+        "vat_included": false,
+        "value_basis": "ex_vat",
+        "component": "electricity_tax",
+        "applied_component": null,
+        "verification": "unavailable",
+        "unit_of_measurement": "øre/kWh",
+        "friendly_name": "QA Missing supplier Electricity tax"
+      },
+      "last_changed": "2026-11-01T11:15:54.791338+00:00",
+      "last_reported": "2026-11-01T11:15:54.791338+00:00",
+      "last_updated": "2026-11-01T11:15:54.791338+00:00",
+      "context": {
+        "id": "01M6BD5E972KDYSJ4DPTA77DNK",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "component_vat": {
+      "entity_id": "sensor.qa_missing_supplier_vat_amount",
+      "state": "unknown",
+      "attributes": {
+        "site_id": "qa_missing",
+        "period": "unavailable",
+        "reason": "Some intervals lack a verified tariff or contract",
+        "missing_components": [
+          "supplier"
+        ],
+        "failure_stage": "configuration",
+        "action": "Configure the affected component and its actual effective period; earlier unknown rates are never assumed",
+        "vat_included": null,
+        "value_basis": "vat_amount",
+        "component": "vat",
+        "applied_component": null,
+        "verification": "unavailable",
+        "unit_of_measurement": "øre/kWh",
+        "friendly_name": "QA Missing supplier VAT amount"
+      },
+      "last_changed": "2026-11-01T11:15:54.791697+00:00",
+      "last_reported": "2026-11-01T11:15:54.791697+00:00",
+      "last_updated": "2026-11-01T11:15:54.791697+00:00",
+      "context": {
+        "id": "01M6BD5E97XDGNANPKH080TQWS",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "component_final": {
+      "entity_id": "sensor.qa_missing_supplier_verified_final_price",
+      "state": "unknown",
+      "attributes": {
+        "site_id": "qa_missing",
+        "period": "unavailable",
+        "reason": "Some intervals lack a verified tariff or contract",
+        "missing_components": [
+          "supplier"
+        ],
+        "failure_stage": "configuration",
+        "action": "Configure the affected component and its actual effective period; earlier unknown rates are never assumed",
+        "vat_included": true,
+        "value_basis": "incl_vat",
+        "component": "final",
+        "applied_component": null,
+        "verification": "unavailable",
+        "unit_of_measurement": "øre/kWh",
+        "friendly_name": "QA Missing supplier Verified final price"
+      },
+      "last_changed": "2026-11-01T11:15:54.791977+00:00",
+      "last_reported": "2026-11-01T11:15:54.791977+00:00",
+      "last_updated": "2026-11-01T11:15:54.791977+00:00",
+      "context": {
+        "id": "01M6BD5E97QG9EM9MRPT86TB8H",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "grid_period_1": {
+      "entity_id": "sensor.qa_missing_supplier_radius_1_00_00_06_00",
+      "state": "10.6175",
+      "attributes": {
+        "site_id": "qa_missing",
+        "vat_included": false,
+        "period_count": 4,
+        "additional_periods": 0,
+        "period_number": 1,
+        "start": "2026-10-31T23:00:00+00:00",
+        "end": "2026-11-01T05:00:00+00:00",
+        "local_start": "2026-11-01T00:00+01:00",
+        "local_end": "2026-11-01T06:00+01:00",
+        "value": 10.6175,
+        "status": "READY",
+        "source": "Verified Radius C Datahub tariff",
+        "verified_on": null,
+        "verified_at": "2026-11-01T10:15:00+00:00",
+        "valid_from": null,
+        "valid_to": null,
+        "unit_of_measurement": "øre/kWh",
+        "friendly_name": "QA Missing supplier Radius 1 · 00:00–06:00"
+      },
+      "last_changed": "2026-11-01T11:15:54.796297+00:00",
+      "last_reported": "2026-11-01T11:15:54.796297+00:00",
+      "last_updated": "2026-11-01T11:15:54.796297+00:00",
+      "context": {
+        "id": "01M6BD5E9C3Y58ZCXEFZDXG4Q2",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "grid_period_2": {
+      "entity_id": "sensor.qa_missing_supplier_radius_2_06_00_17_00",
+      "state": "31.8524",
+      "attributes": {
+        "site_id": "qa_missing",
+        "vat_included": false,
+        "period_count": 4,
+        "additional_periods": 0,
+        "period_number": 2,
+        "start": "2026-11-01T05:00:00+00:00",
+        "end": "2026-11-01T16:00:00+00:00",
+        "local_start": "2026-11-01T06:00+01:00",
+        "local_end": "2026-11-01T17:00+01:00",
+        "value": 31.852399999999996,
+        "status": "READY",
+        "source": "Verified Radius C Datahub tariff",
+        "verified_on": null,
+        "verified_at": "2026-11-01T10:15:00+00:00",
+        "valid_from": null,
+        "valid_to": null,
+        "unit_of_measurement": "øre/kWh",
+        "friendly_name": "QA Missing supplier Radius 2 · 06:00–17:00"
+      },
+      "last_changed": "2026-11-01T11:15:54.798901+00:00",
+      "last_reported": "2026-11-01T11:15:54.798901+00:00",
+      "last_updated": "2026-11-01T11:15:54.798901+00:00",
+      "context": {
+        "id": "01M6BD5E9EJXN2YC6B55VSPQA4",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "grid_period_3": {
+      "entity_id": "sensor.qa_missing_supplier_radius_3_17_00_21_00",
+      "state": "95.5573",
+      "attributes": {
+        "site_id": "qa_missing",
+        "vat_included": false,
+        "period_count": 4,
+        "additional_periods": 0,
+        "period_number": 3,
+        "start": "2026-11-01T16:00:00+00:00",
+        "end": "2026-11-01T20:00:00+00:00",
+        "local_start": "2026-11-01T17:00+01:00",
+        "local_end": "2026-11-01T21:00+01:00",
+        "value": 95.5573,
+        "status": "READY",
+        "source": "Verified Radius C Datahub tariff",
+        "verified_on": null,
+        "verified_at": "2026-11-01T10:15:00+00:00",
+        "valid_from": null,
+        "valid_to": null,
+        "unit_of_measurement": "øre/kWh",
+        "friendly_name": "QA Missing supplier Radius 3 · 17:00–21:00"
+      },
+      "last_changed": "2026-11-01T11:15:54.810968+00:00",
+      "last_reported": "2026-11-01T11:15:54.810968+00:00",
+      "last_updated": "2026-11-01T11:15:54.810968+00:00",
+      "context": {
+        "id": "01M6BD5E9T5FD7C1B2S8A3TMJ1",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "grid_period_4": {
+      "entity_id": "sensor.qa_missing_supplier_radius_4_21_00_24_00",
+      "state": "31.8524",
+      "attributes": {
+        "site_id": "qa_missing",
+        "vat_included": false,
+        "period_count": 4,
+        "additional_periods": 0,
+        "period_number": 4,
+        "start": "2026-11-01T20:00:00+00:00",
+        "end": "2026-11-01T23:00:00+00:00",
+        "local_start": "2026-11-01T21:00+01:00",
+        "local_end": "2026-11-02T00:00+01:00",
+        "value": 31.852399999999996,
+        "status": "READY",
+        "source": "Verified Radius C Datahub tariff",
+        "verified_on": null,
+        "verified_at": "2026-11-01T10:15:00+00:00",
+        "valid_from": null,
+        "valid_to": null,
+        "unit_of_measurement": "øre/kWh",
+        "friendly_name": "QA Missing supplier Radius 4 · 21:00–24:00"
+      },
+      "last_changed": "2026-11-01T11:15:54.813444+00:00",
+      "last_reported": "2026-11-01T11:15:54.813444+00:00",
+      "last_updated": "2026-11-01T11:15:54.813444+00:00",
+      "context": {
+        "id": "01M6BD5E9XA03MNMSW9ZCRJATV",
+        "parent_id": null,
+        "user_id": null
+      }
+    }
+  },
+  "source_counts_before_views": {
+    "spot": 12,
+    "grid": 12
+  },
+  "source_counts_after_views": {
+    "spot": 12,
+    "grid": 12
+  },
+  "native_next_to_current_switch": true,
+  "restart": {
+    "restarted": true,
+    "entity_count": 66,
+    "duplicate_entities": false,
+    "danish_next_quarter": true,
+    "errors": []
+  },
+  "screenshots": {
+    "docs/images/beta11/next-diagnostic-desktop.png": "fd6c89c9f3babb98784ed6598d71726e0c17390e49d75f0a1252bd1f32867947",
+    "docs/images/beta11/next-device-desktop.png": "330735699d515ac26d2edcc8143b20e32891e5301a1c283aa148c4077cd2e9d7",
+    "docs/images/beta11/next-diagnostic-mobile.png": "31dade762949c43c1726f070187219bc05dfea75281a7dc29a5692eb2e3fa65f",
+    "docs/images/beta11/next-device-mobile.png": "919b8ab975ac3297d06a8ec989e92610ba7996a6d04761655520e4107b9d7e1b",
+    "docs/images/beta11/supplier-more-info-mobile.png": "9fd05eddac84cb4a20361b608a16e2b047071b8ee1147e1babb35bc007b27db9",
+    "docs/images/beta11/missing-supplier-diagnostic-mobile.png": "eb8fca136192d3ef3502fcbe27e7b0d4ac4f5f202b7c1548921cf51dacd941a9",
+    "docs/images/beta11/current-diagnostic-desktop.png": "f69cb7bf705b53f0bfe37890517205b99d1e2db6509f8a5400fd7c0843e27b18",
+    "docs/images/beta11/current-diagnostic-mobile.png": "6f7f7400a1a9c05cba81bc3df99e0bc99891e69e827c69fa78d9f13677873a46",
+    "docs/images/beta11/switched-current-diagnostic-mobile.png": "5e8762ea7e4741f045e00ce335655d87592a13116c5602e037fbd2ce079c20de",
+    "docs/images/beta11/diagnostic-da-mobile.png": "29abac8d29e3c41ac79ac6d55166053dac43e3ebe93f13ee37ae4e356250a337",
+    "docs/images/beta11/diagnostic-da-desktop.png": "69402d1712f8630f45d1fa1e253ea488be4a1505c6fd7e7740008955c35d6423",
+    "docs/images/beta11/beta10-before-desktop.png": "be6407b9352c40f372680eb74f9f3d6b8eecffb467bb7dc6ed956edf0e1d7ead",
+    "docs/images/beta11/beta10-before-mobile.png": "e6609329ffacd1c9b676f0c0f778633fb15007e74b49749a01129077a3cc8d0b",
+    "docs/images/beta11/next-diagnostic-da-mobile.png": "66fdeb126b507b274a8dada22607b54e4ea830f6fb60d33417ab72272510fecc",
+    "docs/images/beta11/next-diagnostic-da-desktop.png": "d0f2387bcf54e833cd56e953fc586ce402808ea80f820115ebb855412b93373f"
+  },
+  "errors": [],
+  "warnings": [],
+  "validation": {
+    "tests_per_core": 123,
+    "cores": [
+      "2026.10.3",
+      "2026.10.4"
+    ],
+    "coverage_percent": 90,
+    "browser_cases": 18,
+    "hassfest": "1 valid/0 invalid",
+    "first_remote_checkpoint": "b91db767774ccef38eab6f4d59a8d5fec62a2e15:12successful checks",
+    "final_source_ci": "pending final candidate",
+    "skips": 0
+  },
+  "scope": "Actual native HA device pages and a real published-beta10-to-candidate upgrade, with recorded public grid tariffs and explicitly fictional private rates/read services. No owner installation or charging controls. The fictional11.1ore supplier and selected spot174.6836ore are test fixtures, not inferred owner EWII terms."
+}

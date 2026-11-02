@@ -5774,7 +5774,30 @@
     "id": 41522410438,
     "html_url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41522410438",
     "publication_and_public_jobs": "success",
-    "workflow_final_conclusion": "pending audit completion"
+    "workflow_final_conclusion": "success",
+    "final_observed_at": "2026-11-02T20:56:29.678898+00:00",
+    "completed_jobs": [
+      {
+        "name": "publish stable",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41522410438/job/125541486099"
+      },
+      {
+        "name": "Verify public stable (ha-2026.10.3)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41522410438/job/125544321610"
+      },
+      {
+        "name": "Verify public stable (ha-2026.10.4)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41522410438/job/125544321534"
+      },
+      {
+        "name": "Record verified stable publication",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41522410438/job/125544878750"
+      }
+    ]
   },
   "validation": {
     "cores": [
@@ -5788,5 +5811,9 @@
   },
   "owner_final_verification": false,
   "production_or_charging_controls_touched": false,
-  "catalog_admission_claimed": false
+  "catalog_admission_claimed": false,
+  "independent_anonymous_public_receipt": {
+    "path": "docs/receipts/v1.0.0-local-public.json",
+    "sha256": "4f49523be20dfbd82079f9cc6242b125f7c0cbd739d45340dc8ad29bba947284"
+  }
 }

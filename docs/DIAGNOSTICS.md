@@ -143,5 +143,5 @@ ledger after restart. A fictional3.75øre including-VAT supplier input correctly
 [Upgrade restart](images/v1.0.0/stable-restarted-no-da-mobile.png).
 
 These are isolated recorded/synthetic software checks, separate from owner hardware
-acceptance. Public HACS stable channel verification follows publication; a local
-manual/native install alone does not establish public HACS discovery.
+acceptance. [Public stable HACS verification](receipts/v1.0.0.json) and
+[anonymous package downloads](receipts/v1.0.0-local-public.json) also passed on both cores.

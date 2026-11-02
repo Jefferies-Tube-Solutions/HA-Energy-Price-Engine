@@ -1,0 +1,24 @@
+name: Prepare ordinary v1.1 beta review PR
+on:
+  push:
+    branches: [feat/v1.1-beta1-dashboard]
+    paths: [.github/workflows/prepare-v11.yml]
+permissions:
+  contents: read
+  pull-requests: write
+  checks: read
+jobs:
+  review:
+    name: ordinary beta PR gate
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14.8'
+      - name: Verify native/source/stable gates and create or reuse one draft review PR normally
+        run: python tools/prepare_v11_pr.py

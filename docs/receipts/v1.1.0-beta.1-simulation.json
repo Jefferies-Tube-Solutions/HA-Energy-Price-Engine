@@ -1,0 +1,149 @@
+{
+  "version": "1.1.0-beta.1",
+  "baseline_commit": "19af5bf4412c5f3cc3b3e07c6d756da372f81ba6",
+  "baseline_hacs_sha256": "ddbd7d09b27bd28af48e5b33bbc870bed80f797d411c1e83505bf8db90aa10c2",
+  "native_core": "2026.10.4",
+  "frontend": "20260930.5",
+  "browser": "Browser plugin unavailable; locked Playwright1.64.1/system Chromium",
+  "viewports": [
+    1440,
+    820,
+    390
+  ],
+  "source_scope": "Disposable localhost HA, recorded Radius and synthetic official Nord Pool service, fictional private rates; no owner HA, Node-RED or charging controls",
+  "qa_clock": "2026-11-01T10:15Z; PE-only clock and relative timer mapping; HA wall/auth clock unchanged",
+  "fresh_cold_start": true,
+  "upgrade_manual_resource": true,
+  "restart": true,
+  "original_entity_ids_preserved": 69,
+  "original_site_settings_preserved": 3,
+  "ledger_bytes_preserved": 2,
+  "fresh_entity_ids_preserved": 23,
+  "fresh_vat_preference": false,
+  "fresh_supplier_input_vat_included": true,
+  "two_units_independent": true,
+  "native_schedules_preserved": true,
+  "native_reload_resource_unchanged": true,
+  "no_provider_requests_from_card_reads": true,
+  "upgrade_resources_before": [
+    {
+      "id": "51c133a44728462b89855fe8f73a1d5c",
+      "url": "/local/qa-before.js",
+      "type": "module"
+    },
+    {
+      "id": "bb8adaa4bb4b43338be1e849e16495e4",
+      "url": "/ha_energy_price_engine/energy-price-engine-card.js?v=1.0.0",
+      "type": "module"
+    },
+    {
+      "id": "1cf47b3ba4c8471d881b39f2b423dfc3",
+      "url": "/local/qa-after.js",
+      "type": "module"
+    }
+  ],
+  "upgrade_resources_after": [
+    {
+      "id": "51c133a44728462b89855fe8f73a1d5c",
+      "url": "/local/qa-before.js",
+      "type": "module"
+    },
+    {
+      "id": "bb8adaa4bb4b43338be1e849e16495e4",
+      "url": "/ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0-beta.1",
+      "type": "module"
+    },
+    {
+      "id": "1cf47b3ba4c8471d881b39f2b423dfc3",
+      "url": "/local/qa-after.js",
+      "type": "module"
+    }
+  ],
+  "fresh_resource": {
+    "id": "c71f626a3c87465ca508bc58618d48ad",
+    "url": "/ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0-beta.1",
+    "type": "module"
+  },
+  "served_module_requests": [
+    "http://127.0.0.1:8130/ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0-beta.1",
+    "http://127.0.0.1:8131/ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0-beta.1",
+    "http://127.0.0.1:8130/ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0-beta.1",
+    "http://127.0.0.1:8131/ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0-beta.1"
+  ],
+  "upgrade_ledger_sha256": {
+    "ha_energy_price_engine.01QAPE11000000000000000001.ledger.sqlite3": "a953db2777883308fc2bab2b63fdfaa84cd46f6f4f84015730ec8b3e89d7081e",
+    "ha_energy_price_engine.01QAPE11000000000000000002.ledger.sqlite3": "6fd127e6ea6175a20e3bac846dd630dabb200d279acdd19cf0c25eef6f67c082"
+  },
+  "fresh_ledger_sha256": {
+    "ha_energy_price_engine.01M6F6C2QAXQ04WKS72CVJDKP7.ledger.sqlite3": "5cf4d6b8987a64d2b7fbcafc900333ededc17d7d4e10cfd5e75d8cad9a17b0ed"
+  },
+  "sqlite_integrity": "All three actual PE ledgers checked read-only after shutdown:ok",
+  "runtime_files_sha256": {
+    "LICENSE": "283a5f80ddd97f9c1f853d3b84b5e066b3aaa45ae6a6321e6fccfb0ec2780fb1",
+    "__init__.py": "a95ceeed109a3f33350a786bb6227e733eb647e7baf136f6ebe850d364996ae2",
+    "api.py": "163fb8403525c44ad8b7eb13159f7471fd7097e59afc45d61c639f96f54ee94d",
+    "brand/icon.png": "8814c04c7c1615b4e8469e094e83ad572b425041c537891caf52c38d4d020f44",
+    "charging_cost.py": "2f44d1f7fb257334faa1e4e06d44c1768ca4f7a405d93344161c365ccfee2180",
+    "config_flow.py": "f74a988866ebc6ab4e383b7fd075db87999fdb2c73cb9803b7c3a8997d3a6537",
+    "configuration.py": "485c7adc4126afc85f7652d1b6f2861323a4e56942af80988a8249902e49dd61",
+    "const.py": "6c38f66a8d6ab5079f04841c0c62b274e01b159de563b0c0d687a428df61172f",
+    "coordinator.py": "71025f77827688b5c1c7c350c709ddd5041a86bfb199b5757b17c0ac76ddf8e7",
+    "dashboard.py": "afb90f88761b33552b4161d477b63dc3806ca90b4bb86923567085e55a22cbe2",
+    "data/supplier_offers.json": "13507c02cd77ec69349fa4229dbaa264718695e389d87b0c970b7f14c8769fc7",
+    "diagnostics.py": "cb5a412f67bcda485840ec31398ff0d813559b58cb9a1994bb6d2efa7330b7fd",
+    "ledger.py": "3fb161f450aa0e329e386c99e8498c7624f502415a0673edaaee98d76bf8acf4",
+    "localization.py": "e4c260b1109be2e2dd1e684e26f004ec4a104562fdd0bd5a2e4e122d0fbe9f79",
+    "lovelace_resource.py": "b46a2e0093096d70991dc73c29d09ae1614cfac42ef15d94863d55ef07f8ceb8",
+    "manifest.json": "a133bb7d42bb07bfa1a443fab0ad2db040eeea951c5b20437326efe1b9199dcf",
+    "models.py": "dff2a4fa066aa23cfef7614a050a308f0ae54f8f0403d6eaa7a8d9973763f91d",
+    "money.py": "bbc47ca7ce74bb319edb170a28f754c9e7258c940c5a5f67e647283e765c1766",
+    "price_components.py": "f959606039fb6da0e50727a746c39e6b6f78c93f8c0b6e057ab193454a263a13",
+    "price_engine.py": "9d2fbdaab509a8d6a123cc5ac6e8ca039996eb409f8d60571f79b50ad7cb63f2",
+    "price_schedule.py": "5e8c3f67bef8f2b512be5c4ef3a36f15461d563388007583c2b190574661d584",
+    "price_update.py": "994ee2b86d2088771aa2c816ad15225b45b312277630b25708b11fc7797242e2",
+    "prices.py": "88ad3e664dbc1441d64537a9060fbf39d268f4f9abf7b112d36367ffaf06e4b0",
+    "sensor.py": "31586a3e64cf6411d300c6dba1673eb439d5701967918d70d4ee19b63d9f6d07",
+    "site_lifecycle.py": "bf812fbe86261c91bd1394bf560fec67ee39f42625afc1965c244fb7bf8faa84",
+    "status.py": "5f497d20b4141fa33d0b874b0d977c43a4edd0ddd368b1438e640931052d5c03",
+    "strings.json": "39726d247f2fc15d029f80e345e3b336d7b8214a147028321b76f28c2a23250d",
+    "tariff_source.py": "dfdf30b8da837403da51998f2dc61c2cd8c940702404672af29254054fba73e5",
+    "translations/da.json": "ffcbc4a537f136368a67af0e6fc7855e31eeb6179ec78e021c1015861e2b2502",
+    "translations/en.json": "39726d247f2fc15d029f80e345e3b336d7b8214a147028321b76f28c2a23250d",
+    "www/energy-price-engine-card.js": "0fdaf48f07f23b2f1aa6e2f1b48d8dfd0d85f553ba6bb2353ea08f93849277de"
+  },
+  "archive_hashes": {
+    "ha_energy_price_engine.zip": "0c492c7a9ddd2dfdf07f1fc6549349b578a117c85c4bcc0e9d35bfdaea1d4b26",
+    "ha_energy_price_engine-manual.zip": "482748d001f3dce2ab16d145a65883ccbe2d53a93871f303813d308a7a1b32b5"
+  },
+  "screenshots": {
+    "docs/images/v1.1.0-beta.1/stable-baseline-native.png": "88af014047905147b1318b086384a99bb927519b135fcdc6a421b32e60f5b230",
+    "docs/images/v1.1.0-beta.1/upgrade-ore-1440.png": "7444b8f2733b91663933206a1430ab5c3c0d3bef524149be739414a3032ebf9c",
+    "docs/images/v1.1.0-beta.1/upgrade-dkk-1440.png": "184b1b54201785ce5b2843631a768823cf08a05f5f1ab16adde92994805b1ccb",
+    "docs/images/v1.1.0-beta.1/upgrade-ore-820.png": "a9d1d08c4ef25efa8985a93fbce1f9b7baa5d5a5417de6f166ffb896ba824d15",
+    "docs/images/v1.1.0-beta.1/upgrade-dkk-820.png": "8dc64449667cd1de0f9e553cfd8b2f969394a1a51f86e5cf47833bc893e68add",
+    "docs/images/v1.1.0-beta.1/upgrade-ore-390.png": "9a858f355eec7ec5663616b1cc516cb76c124e6d8403ad2c6b90eb870d2b7819",
+    "docs/images/v1.1.0-beta.1/upgrade-dkk-390.png": "533c12b499cc9ace54d174feed6fe38fde2efa5ad4c7ce1ac5b9061d7be216c7",
+    "docs/images/v1.1.0-beta.1/upgrade-device-version.png": "8f93b6842011c014f78a519d75b2eeaa13a631a46f3d0e9ee4643d3833e65b2b",
+    "docs/images/v1.1.0-beta.1/fresh-ore-1440.png": "6398f76b2d96b15858dabc7079a470ae09da2777e9c7204220146f09640285ec",
+    "docs/images/v1.1.0-beta.1/fresh-dkk-1440.png": "901830eb7f91ebbebefa8377e42a58dca273bfd67f663466e0bec0618877825e",
+    "docs/images/v1.1.0-beta.1/fresh-ore-390.png": "2e2b2a087d42240df7267946f131d1da97a97cf3614e40dd2145b36921b77638",
+    "docs/images/v1.1.0-beta.1/fresh-dkk-390.png": "2e2b2a087d42240df7267946f131d1da97a97cf3614e40dd2145b36921b77638",
+    "docs/images/v1.1.0-beta.1/upgrade-restarted-ore-1440.png": "92f3d7fb12833fb8d9d1da6835db7e95f570a10811363be3453807f009f3e455",
+    "docs/images/v1.1.0-beta.1/upgrade-restarted-dkk-1440.png": "46803d2a9fcc0038c2ce8d2597aa6284ba0cf44175b471269be731a6c37f39f3",
+    "docs/images/v1.1.0-beta.1/upgrade-restarted-ore-390.png": "88dd9f213782fab777dce28d5e53c89282a2c54db3644490b65a82f995c2ad26",
+    "docs/images/v1.1.0-beta.1/upgrade-restarted-dkk-390.png": "f1ff32ecb790a72d220206f8dc0030152fb811fc566f3f955214b03064ab24b0",
+    "docs/images/v1.1.0-beta.1/fresh-restarted-ore-1440.png": "9eec62d4b63bd6dc0591fa11e603daf0ef107c55198200824b753e399c6e27d1",
+    "docs/images/v1.1.0-beta.1/fresh-restarted-dkk-1440.png": "20b46517f987645ba52368059d3010789d5f63309e061e68f9fa4a6104561e4c",
+    "docs/images/v1.1.0-beta.1/fresh-restarted-ore-390.png": "d091f308be9f22b3783a4a09a0738821b04bc02a569d979b79bd39a6bca1bf85",
+    "docs/images/v1.1.0-beta.1/fresh-restarted-dkk-390.png": "969b1dfd2efa084d5d0a72eebd2941c3568c65e09a467b17bbfe79954b3514fb"
+  },
+  "errors": [],
+  "warnings": [],
+  "owner_acceptance": false,
+  "production_or_charging_controls_touched": false,
+  "qa_notes": [
+    "Temporary harness corrected for HA shadow DOM, account number format, unordered site enumeration and confirmed local HTTP port trials; no corresponding shipped-code change.",
+    "Optional non-PE turbojpeg/camera import warning in the disposable frontend environment; PE browser console had zero errors/warnings.",
+    "All native HA instances stopped after evidence collection."
+  ]
+}

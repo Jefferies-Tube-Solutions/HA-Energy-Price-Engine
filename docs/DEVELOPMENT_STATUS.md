@@ -1,3 +1,66 @@
+# v1.1.0-beta.1 implementation and native acceptance ready for review
+
+Branch feat/v1.1-beta1-dashboard. Previous checkpoint
+59725898e6ab7719d5fe58fbf82a736e01891546 contains beta metadata; source starts
+from immutable stable19af5bf4412c5f3cc3b3e07c6d756da372f81ba6.
+Checkpoint subject: **Record v1.1 native acceptance and prepare the ordinary beta review PR**.
+
+Completed locally:160 tests per HA2026.10.3/.4,91%coverage,zero skips,two known
+upstream HACS deprecations;35 Playwright browser cases; Ruff and formatting; four
+independent clean ZIP installations (both layouts on both cores). New release-gate
+tests reject any failed/pending security check, mutated stable/main/latest identity
+and changed stable asset. Source guard/native hashes pass. Core pricing/source/API2/
+SQLite/config/sensors remain byte-identical stable; dashboard data-producing and
+permission functions are AST-identical. No canonical data or sensor-unit change.
+
+[Native receipt](receipts/v1.1.0-beta.1-simulation.json) records20 hashed images.
+Fresh beta boot loads the storage resource before the first dashboard visit, and a
+fresh browser renders both units without Resource UI setup. Actual public v1.0.0
+HACS ZIP upgrade adopts the manual PE resource in place, preserving its ID, both
+unrelated resources/order,69 entity IDs/three site settings/mixed VAT preferences,
+canonical schedules and two byte-identical PE ledgers. Native single-site reload
+keeps the global resource. Both actual HA restarts preserve resource identity,69+23
+entity IDs, VAT and all three ledger byte hashes; SQLite integrity=ok. Fresh site
+uses fictional3.75øre inclusive supplier input and No VAT display; no private terms
+are inferred. No provider requests from reads or unit changes; zero browser errors/
+warnings. QA harness corrections (shadow DOM, locale, site ordering, confirmed HTTP
+port trial) were confined to temporary files. All disposable HA instances are stopped.
+
+All runtime hashes match clean candidate5972589; candidate archives:
+
+```text
+0c492c7a9ddd2dfdf07f1fc6549349b578a117c85c4bcc0e9d35bfdaea1d4b26  ha_energy_price_engine.zip
+482748d001f3dce2ab16d145a65883ccbe2d53a93871f303813d308a7a1b32b5  ha_energy_price_engine-manual.zip
+```
+
+README/AGENTS/dashboard/HACS docs, complete two-card YAML and release notes are
+prepared. Current work adds ordinary PR preparation, a guarded prerelease helper
+and independent public verifier. [Inactive publisher template](contracts/publish-v11-workflow.yml)
+is reviewable but cannot publish by itself. The preparation action only creates or
+reuses one draft review PR. No approval, merge, tag, release or policy change occurs
+at this checkpoint. It will fail visibly if repository Actions PR creation is disabled.
+
+Next: observe this exact-source CI and ordinary PR gate. If creation is permitted,
+verify the open PR/current review policy, push a tested final source checkpoint and
+wait all12 push/PR checks. Build twice and compare native proof hashes, create one
+annotated v1.1.0-beta.1 tag at that exact source, push normally and wait all18 push/
+PR/tag checks. Populate the inactive template's PE_SOURCE/PE_TAG_OBJECT and copy it
+to .github/workflows/publish-v11.yml in an automation-only commit with this handoff.
+The helper enforces frozen source/native proof, open reviewable PR, exact tag/CI,
+reproducibility, main/latest stable1.0.0 and all13 prior release identities. Fresh
+public jobs on both cores must verify metadata/assets/checksums/source, actual HACS
+stable/beta channels and both native ZIP layouts; final audit and anonymous local
+downloads precede STOP. No retagging, asset replacement or main merge is allowed.
+
+If the ordinary PR gate is rejected, finish unaffected CI/evidence, record its exact
+job/error and owner comparison URL, and leave this concrete checkpoint unpublished.
+Do not route around GitHub permissions or repeat a general release approval request.
+The user already authorizes prerelease publication after gates; PAHA02-DEV acceptance
+before any future stable promotion stays owner work. Main/latest stable remain
+v1.0.0; no production HA, Node-RED, CM or charging control was touched.
+
+---
+
 # v1.1 beta metadata and channel validation complete locally
 
 Branch feat/v1.1-beta1-dashboard; previous feature commit

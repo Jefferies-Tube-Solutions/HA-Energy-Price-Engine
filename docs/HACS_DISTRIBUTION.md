@@ -1,5 +1,19 @@
 # Install and update Energy Price Engine
 
+## Opt-in v1.1.0-beta.1
+
+The dedicated Issue20 prerelease adds automatic card resources and independent
+øre/DKK card units. Keep v1.0.0 for stable use. Once the prerelease is published,
+HACS → Energy Price Engine → Show beta versions → explicitly select **v1.1.0-beta.1**
+→ download → restart HA → reload the app/browser. Enabling visibility alone need not
+change HACS's selected download version. No site reset, history migration or second
+HACS dashboard repository is required. Main and latest stable stay v1.0.0.
+
+Storage-mode Lovelace automatically receives exactly one installed-version module;
+an existing single manual PE URL is updated in place. YAML resources stay user-managed.
+[One-card quick start, two-card YAML and troubleshooting](PRICE_DASHBOARD.md) ·
+[Prerelease notes and scope](RELEASE_V11_BETA1.md) · [Current publication status](DEVELOPMENT_STATUS.md).
+
 ## Fresh HACS installation
 
 1. Install HACS using its supported instructions and back up Home Assistant.

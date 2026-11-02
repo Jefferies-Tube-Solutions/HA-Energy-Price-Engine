@@ -122,3 +122,28 @@ async def test_multisite_unload_retains_single_global_resource(hass, price_servi
     assert await hass.config_entries.async_unload(one.entry_id)
     assert resources.async_items() == before and two.runtime_data.price_engine.records
     assert await hass.config_entries.async_unload(two.entry_id)
+
+
+async def test_native_yaml_mode_keeps_resources_and_still_serves_card(
+    hass, hass_storage, price_service, hass_client, caplog
+):
+    from homeassistant.setup import async_setup_component
+
+    from .test_integration import setup
+
+    items = [
+        {"url": "/local/owner-card.js", "type": "module"},
+        {"url": CARD_URL + "?v=1.0.0", "type": "module"},
+    ]
+    assert await async_setup_component(
+        hass, "lovelace", {"lovelace": {"resource_mode": "yaml", "resources": items}}
+    )
+    resources = hass.data[LOVELACE_DATA].resources
+    entry = await setup(hass)
+    assert entry.runtime_data.price_engine.records
+    assert resources.async_items() == items
+    assert "lovelace_resources" not in hass_storage
+    assert "YAML-managed" in caplog.text and "?v=1.1.0-beta.1" in caplog.text
+    response = await (await hass_client()).get(CARD_URL)
+    assert response.status == 200 and "energy-price-engine-card" in await response.text()
+    assert await hass.config_entries.async_unload(entry.entry_id)

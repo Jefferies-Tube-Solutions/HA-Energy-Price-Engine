@@ -1,0 +1,97 @@
+name: Publish authorized PE v1.1.0-beta.1
+on:
+  push:
+    branches: [feat/v1.1-beta1-dashboard]
+    paths: [.github/workflows/publish-v11.yml]
+permissions:
+  contents: write
+  checks: read
+  actions: read
+  pull-requests: read
+concurrency:
+  group: publish-pe-v1.1.0-beta.1
+  cancel-in-progress: false
+env:
+  PE_SOURCE: REPLACE_VERIFIED_SOURCE
+  PE_TAG_OBJECT: REPLACE_IMMUTABLE_TAG_OBJECT
+  GH_TOKEN: ${{ github.token }}
+jobs:
+  publish:
+    name: publish beta v1.1
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: v1.1.0-beta.1
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14.8'
+      - uses: astral-sh/setup-uv@v6
+      - name: Verify reviewed source, all push/PR/tag checks, native evidence and prior stable/beta integrity; publish without merging
+        run: python tools/publish_v11.py publish
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pe-v11-promotion-state
+          path: ${{ runner.temp }}/pe-v11-state.json
+          if-no-files-found: error
+  verify-public:
+    name: Verify public v1.1 beta (${{ matrix.target }})
+    needs: publish
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: ha-2026.10.3
+            lockfile: requirements-dev.lock
+          - target: ha-2026.10.4
+            lockfile: requirements-ha-current.lock
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: v1.1.0-beta.1
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14.8'
+      - uses: astral-sh/setup-uv@v6
+      - name: Prepare independent locked core and actual pinned HACS
+        run: |
+          uv venv
+          uv pip sync --require-hashes ${{ matrix.lockfile }}
+          uv run --no-project python tools/prepare_hacs_reference.py
+      - name: Download public beta, stable and main; test both HACS channels and native ZIP layouts
+        run: uv run --no-project python tools/verify_public_beta.py --expected-commit "$PE_SOURCE" --output "$RUNNER_TEMP/public-v11"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pe-v11-public-${{ matrix.target }}
+          path: ${{ runner.temp }}/public-v11/PUBLIC_BETA_RECEIPT.json
+          if-no-files-found: error
+  audit:
+    name: Record verified v1.1 beta
+    needs: [publish, verify-public]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: feat/v1.1-beta1-dashboard
+          fetch-depth: 0
+      - uses: actions/download-artifact@v5
+        with:
+          name: pe-v11-promotion-state
+          path: ${{ runner.temp }}
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: pe-v11-public-*
+          path: public-verification
+      - name: Recheck public verification, prior versions, unchanged main/latest stable and open unmerged review PR
+        run: python tools/publish_v11.py audit
+      - name: Preserve public receipt on the beta branch only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/receipts/v1.1.0-beta.1.json
+          git commit -m 'docs: record verified public v1.1.0-beta.1 prerelease'
+          git push origin HEAD:refs/heads/feat/v1.1-beta1-dashboard

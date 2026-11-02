@@ -1,0 +1,80 @@
+{
+  "version": "1.1.0-beta.1",
+  "observed_at": "2026-11-02T22:56:50.354637+00:00",
+  "branch": "feat/v1.1-beta1-dashboard",
+  "tested_source_commit": "8e74c241595e6bb957b899f5c4c16399c8476356",
+  "ordinary_ci": [
+    {
+      "name": "hassfest",
+      "status": "This job succeeded",
+      "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41540637352/job/125603586874"
+    },
+    {
+      "name": "hacs",
+      "status": "This job succeeded",
+      "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41540637352/job/125603586592"
+    },
+    {
+      "name": "tests (fixture-supported-ha-2026.10.3)",
+      "status": "This job succeeded",
+      "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41540637070/job/125603586207"
+    },
+    {
+      "name": "tests (current-ha-2026.10.4)",
+      "status": "This job succeeded",
+      "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41540637070/job/125603586210"
+    },
+    {
+      "name": "dashboard browser desktop and mobile",
+      "status": "This job succeeded",
+      "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41540637070/job/125603585905"
+    },
+    {
+      "name": "independent beta install",
+      "status": "This job succeeded",
+      "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41540636999/job/125603585844"
+    }
+  ],
+  "blocked_gate": {
+    "name": "ordinary beta PR gate",
+    "status": "This job failed",
+    "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41540637126/job/125603585753"
+  },
+  "error": "pull request create failed: GraphQL: GitHub Actions is not permitted to create or approve pull requests (createPullRequest)",
+  "owner_action": "Create one draft PR through normal repository permissions:base main/head feat/v1.1-beta1-dashboard. No new general release authorization is needed.",
+  "comparison_url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/compare/main...feat/v1.1-beta1-dashboard?expand=1",
+  "pr_created": false,
+  "tag_created": false,
+  "release_published": false,
+  "hacs_beta_publicly_available": false,
+  "main_commit": "19af5bf4412c5f3cc3b3e07c6d756da372f81ba6",
+  "latest_stable": "v1.0.0",
+  "runtime_unchanged_since_native_tests": true,
+  "archive_hashes": {
+    "ha_energy_price_engine.zip": "0c492c7a9ddd2dfdf07f1fc6549349b578a117c85c4bcc0e9d35bfdaea1d4b26",
+    "ha_energy_price_engine-manual.zip": "482748d001f3dce2ab16d145a65883ccbe2d53a93871f303813d308a7a1b32b5"
+  },
+  "local_validation": {
+    "tests_per_core": 160,
+    "ha_cores": [
+      "2026.10.3",
+      "2026.10.4"
+    ],
+    "coverage_percent": 91,
+    "browser_cases": 35,
+    "independent_package_installs": 4,
+    "native_screenshots": 20,
+    "native_fresh_upgrade_and_restarts": "passed",
+    "known_upstream_deprecation_warnings": 2
+  },
+  "pending": [
+    "Owner-created reviewable PR and any actual required reviews",
+    "Fresh exact-source push/PR/tag checks before publication",
+    "Immutable beta tag and public prerelease without changing main/latest stable",
+    "Independent public assets/checksums/source and HACS beta/stable verification"
+  ],
+  "source_guard": "tools/verify_v11_source.py --require-native",
+  "inactive_publisher_template": "docs/contracts/publish-v11-workflow.yml",
+  "no_policy_bypass": true,
+  "production_controls_touched": false
+}

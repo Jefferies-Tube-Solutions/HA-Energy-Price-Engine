@@ -19,6 +19,7 @@ const WORDS = {
     basisIncl: "Including VAT", basisEx: "Excluding VAT", vatInfo: "Actual VAT amount (informational)",
     from: "From", to: "To", rate: "Applied tariff", component: "Component",
     amount: "øre/kWh", precision: "Amounts shown with two decimals. Totals use unrounded stored prices; rounded rows may differ by 0.01. Fixed subscriptions excluded.",
+    precisionDkk: "Amounts shown with four decimals. Totals use unrounded stored prices; rounded rows may differ by 0.0001. Fixed subscriptions excluded.",
     gaps: "Gaps are unavailable prices, never zero. Select a bar or interval to inspect its stored components.",
     verified: "Verified", rawOnly: "Raw spot is verified independently of final pricing.",
     wait: "Waiting for Nord Pool publication or complete source coverage. See the reason and next scheduled check below.",
@@ -45,6 +46,7 @@ const WORDS = {
     basisIncl: "Inklusive moms", basisEx: "Eksklusive moms", vatInfo: "Faktisk momsbeløb (oplysning)",
     from: "Fra", to: "Til", rate: "Anvendt tarif", component: "Komponent",
     amount: "øre/kWh", precision: "Beløb vises med to decimaler. Totaler bruger uafrundede gemte priser; afrundede rækker kan afvige med 0,01. Faste abonnementer er udeladt.",
+    precisionDkk: "Beløb vises med fire decimaler. Totaler bruger uafrundede gemte priser; afrundede rækker kan afvige med 0,0001. Faste abonnementer er udeladt.",
     gaps: "Huller er manglende priser, aldrig nul. Vælg en søjle eller et tidsrum for at se de gemte komponenter.",
     verified: "Verificeret", rawOnly: "Rå spot kontrolleres uafhængigt af slutprisen.",
     wait: "Afventer Nord Pool-offentliggørelse eller komplet kildedækning. Se årsag og næste planlagte kontrol nedenfor.",
@@ -58,6 +60,22 @@ const WORDS = {
 };
 const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"}[c]));
 const present = (v) => typeof v === "number" && Number.isFinite(v);
+// Share only concurrent reads on the same authenticated HA connection. No stale
+// response cache, cross-user sharing, source requests or extra backend calculations.
+const READS = new WeakMap();
+function sharedRead(hass, message) {
+  const owner = hass.connection || hass;
+  let reads = READS.get(owner);
+  if (!reads) { reads = new Map(); READS.set(owner, reads); }
+  const key = JSON.stringify(message);
+  if (!reads.has(key)) {
+    const pending = Promise.resolve().then(() => hass.callWS(message)).finally(() => {
+      if (reads.get(key) === pending) reads.delete(key);
+    });
+    reads.set(key, pending);
+  }
+  return reads.get(key);
+}
 const KEYS = ["spot", "dso", "energinet_net", "energinet_system", "supplier", "electricity_tax", "vat", "final"];
 const STYLE = `
 :host{display:block;color:var(--primary-text-color,#202b36);font-family:var(--paper-font-body1_-_font-family,Roboto,sans-serif)}
@@ -89,11 +107,14 @@ export class EnergyPriceEngineCard extends HTMLElement {
   }
   setConfig(config) {
     if (config.entity) throw new Error(WORDS.en.config);
-    const changed = this._config?.site_id !== config.site_id;
+    if (config.unit !== undefined && !["ore_kwh", "dkk_kwh"].includes(config.unit)) {
+      throw new Error("Energy Price Engine card unit must be ore_kwh or dkk_kwh");
+    }
+    const changed = !this._config || this._config.site_id !== config.site_id;
     this._config = {...config};
     if (changed) { this._site = config.site_id; this._data = undefined; this._selected = undefined; this._stamp = undefined; }
     this._render();
-    if (this.isConnected) this._load();
+    if (this.isConnected && (changed || !this._data)) this._load();
   }
   set hass(hass) {
     const entity = this._sites?.find(s => s.site_id === this._site)?.entity_id;
@@ -123,12 +144,12 @@ export class EnergyPriceEngineCard extends HTMLElement {
     this._pending = true;
     const configured = this._config.site_id;
     try {
-      this._sites = await this._hass.callWS({type: "ha_energy_price_engine/sites"});
+      this._sites = await sharedRead(this._hass, {type: "ha_energy_price_engine/sites"});
       if (!this._sites.length) throw new Error(this._words().noSites);
       if (!this._site && this._sites.length === 1) this._site = this._sites[0].site_id;
       if (!this._site) { this._error = undefined; return; }
       const site = this._site;
-      const data = await this._hass.callWS({type: "ha_energy_price_engine/price_schedule", site_id: site});
+      const data = await sharedRead(this._hass, {type: "ha_energy_price_engine/price_schedule", site_id: site});
       if (configured !== this._config.site_id || site !== this._site || !this.isConnected) return;
       if (data.schema_version !== 3) throw new Error("Unsupported Energy Price Engine dashboard schema; reload browser resources");
       this._data = data; this._error = undefined;
@@ -142,12 +163,18 @@ export class EnergyPriceEngineCard extends HTMLElement {
     if (!this._sites?.length || this._config.site_id || this._sites.length === 1) return "";
     return `<label for="site">${this._words().choose}</label><select id="site"><option value="">—</option>${this._sites.map(s => `<option value="${esc(s.site_id)}" ${s.site_id === this._site ? "selected" : ""}>${esc(s.name)}</option>`).join("")}</select>`;
   }
-  _words() { return this._hass?.locale?.language?.startsWith("da") ? WORDS.da : WORDS.en; }
+  _unit() { return this._config?.unit === "dkk_kwh" ? "DKK/kWh" : "øre/kWh"; }
+  _words() {
+    const words = this._hass?.locale?.language?.startsWith("da") ? WORDS.da : WORDS.en;
+    return {...words, amount: this._unit(), precision: this._config?.unit === "dkk_kwh" ? words.precisionDkk : words.precision};
+  }
   _format(value) {
     if (!present(value)) return "—";
     const pref = this._hass?.locale?.number_format;
     const locale = ({decimal_comma: "de-DE", space_comma: "fr-FR", comma_decimal: "en-US", quote_decimal: "de-CH", none: "en-US", system: navigator.language})[pref] || this._hass?.locale?.language || "en";
-    return new Intl.NumberFormat(locale, {minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: false}).format(Math.abs(value) < 0.005 ? 0 : value);
+    const dkk = this._config?.unit === "dkk_kwh", digits = dkk ? 4 : 2;
+    const projected = dkk ? value / 100 : value;
+    return new Intl.NumberFormat(locale, {minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: false}).format(Math.abs(projected) < 0.5 * 10 ** -digits ? 0 : projected);
   }
   _status(value) {
     const key = ["READY", "INCOMPLETE", "STALE", "ERROR"].includes(value) ? value.toLowerCase() : "incomplete";
@@ -192,12 +219,12 @@ export class EnergyPriceEngineCard extends HTMLElement {
     const bars = slots.filter(good).map(r => {
       const top = y(value(r));
       const source = key === "spot" ? "Official Nord Pool" : "Energy Price Engine";
-      const label = `${r.local_start} → ${r.local_end} · ${this._format(value(r))} øre/kWh · ${t.ready} · ${source} · ${t.checked}: ${r.raw_verified_at || "—"} · ${t.revision} ${r.revision ?? "—"}`;
+      const label = `${r.local_start} → ${r.local_end} · ${this._format(value(r))} ${this._unit()} · ${t.ready} · ${source} · ${t.checked}: ${r.raw_verified_at || "—"} · ${t.revision} ${r.revision ?? "—"}`;
       return `<rect class="bar ${key === "spot" ? "spot" : "final"}-bar" x="${x(r.start)}" y="${Math.min(top,zero)}" width="${Math.max(.6,x(r.end)-x(r.start)-.5)}" height="${Math.max(.8,Math.abs(top-zero))}" tabindex="0" role="button" data-start="${esc(r.start)}" aria-label="${esc(label)}"><title>${esc(label)}</title></rect>`;
     }).join("");
     const boundary = x(data.days[1].start);
     const now = Date.parse(data.generated_at), nx = 50 + (now-first)/(last-first)*span;
-    return `<section class="chart" data-chart="${key}"><h2>${key === "spot" ? t.raw : t.final}</h2><p class="muted">${key === "spot" ? t.ex : this._basis()} · øre/kWh</p><svg viewBox="0 0 ${width} 265" role="group" aria-label="${key === "spot" ? t.raw : t.final}">
+    return `<section class="chart" data-chart="${key}"><h2>${key === "spot" ? t.raw : t.final}</h2><p class="muted">${key === "spot" ? t.ex : this._basis()} · ${this._unit()}</p><svg viewBox="0 0 ${width} 265" role="group" aria-label="${key === "spot" ? t.raw : t.final}">
       ${ticks.map(v => `<line class="gridline" x1="50" x2="${right}" y1="${y(v)}" y2="${y(v)}"/><text class="axis" x="44" y="${y(v)+4}" text-anchor="end">${esc(this._format(v))}</text>`).join("")}
       <line class="zero" x1="50" x2="${right}" y1="${zero}" y2="${zero}"/>${bars}
       <line class="boundary" x1="${boundary}" x2="${boundary}" y1="30" y2="224"/>
@@ -217,16 +244,16 @@ export class EnergyPriceEngineCard extends HTMLElement {
         const state = present(row[k]) ? row.status : "INCOMPLETE";
         return `<tr><td>${esc(k === "final" ? t.finalLabel : t[k])}<small style="display:block">${k === "vat" ? t.vatInfo : this._basis()}</small></td><td class="numeric value">${esc(this._format(row[k]))}</td><td>${this._status(state)}</td><td class="source">${this._source(row,k)}</td></tr>`;
       }).join("")}</tbody></table></div>
-      ${row.stored_final !== row.final && present(row.stored_final) ? `<p class="notice">${t.retained}: ${esc(this._format(row.stored_final))} øre/kWh</p>` : ""}
+      ${row.stored_final !== row.final && present(row.stored_final) ? `<p class="notice">${t.retained}: ${esc(this._format(row.stored_final))} ${this._unit()}</p>` : ""}
       <p class="muted">${t.utc}: ${esc(row.start)} → ${esc(row.end)}</p><p class="muted">${t.precision}</p></section>`;
   }
   _tariffs() {
     const t = this._words();
-    return `<section class="section" data-table="tariffs"><h2>${t.grid}</h2><p class="muted">${this._data.site.dso_mode === "radius_c" ? "Radius C · " : ""}${this._data.days[0].date} · ${esc(this._data.site.timezone)} · ${this._basis()} · ${t.applied}</p><div class="scroll"><table><thead><tr><th>${t.slot}</th><th>${t.rate}</th><th>${t.status}</th><th>${t.source}</th></tr></thead><tbody>${this._data.dso_today.map(r => `<tr><td class="time">${esc(this._interval(r))}</td><td class="numeric value">${esc(this._format(r.value))}</td><td>${this._status(r.status)}</td><td class="source">${esc(r.source || t.missing)}<small>${esc(r.verified_on || r.verified_at || "")}</small>${r.valid_from ? `<small>${esc(r.valid_from)} → ${esc(r.valid_to)}</small>` : ""}</td></tr>`).join("")}</tbody></table></div></section>`;
+    return `<section class="section" data-table="tariffs"><h2>${t.grid}</h2><p class="muted">${this._unit()} · ${this._data.site.dso_mode === "radius_c" ? "Radius C · " : ""}${this._data.days[0].date} · ${esc(this._data.site.timezone)} · ${this._basis()} · ${t.applied}</p><div class="scroll"><table><thead><tr><th>${t.slot}</th><th>${t.rate}</th><th>${t.status}</th><th>${t.source}</th></tr></thead><tbody>${this._data.dso_today.map(r => `<tr><td class="time">${esc(this._interval(r))}</td><td class="numeric value">${esc(this._format(r.value))}</td><td>${this._status(r.status)}</td><td class="source">${esc(r.source || t.missing)}<small>${esc(r.verified_on || r.verified_at || "")}</small>${r.valid_from ? `<small>${esc(r.valid_from)} → ${esc(r.valid_to)}</small>` : ""}</td></tr>`).join("")}</tbody></table></div></section>`;
   }
   _schedule() {
     const t = this._words();
-    return `<section class="section" data-table="schedule"><h2>${t.schedule}</h2><p class="muted">øre/kWh · ${this._basis()} · ${t.vatInfo}</p>${this._data.days.map((day,i) => `<details ${i === 0 ? "open" : ""} data-day="${day.date}"><summary>${i === 0 ? t.today : t.tomorrow} · ${day.date} · ${day.ready_slots}/${day.expected_slots} ${t.verified.toLowerCase()} · ${this._status(day.status)}</summary>${day.reason ? `<p class="notice">${esc(day.reason)}</p>` : ""}<div class="scroll"><table><thead><tr><th>${t.slot}</th>${KEYS.map(k => `<th>${k === "final" ? t.finalLabel : t[k]}</th>`).join("")}<th>${t.status}</th><th>${t.revision}</th></tr></thead><tbody>${day.slots.map(r => `<tr class="${r.start === this._selected ? "selected" : ""}"><td class="time"><button data-start="${esc(r.start)}" title="${esc(r.start)}">${esc(this._interval(r))}</button></td>${KEYS.map(k => `<td class="numeric">${esc(this._format(r[k]))}${k === "spot" && r.raw_status !== "READY" && present(r[k]) ? " *" : ""}</td>`).join("")}<td>${this._status(r.status)}</td><td>${r.revision ?? "—"}</td></tr>`).join("")}</tbody></table></div></details>`).join("")}<p class="muted">* ${t.stale} · ${t.utc}: ${t.inspect}</p></section>`;
+    return `<section class="section" data-table="schedule"><h2>${t.schedule}</h2><p class="muted">${this._unit()} · ${this._basis()} · ${t.vatInfo}</p>${this._data.days.map((day,i) => `<details ${i === 0 ? "open" : ""} data-day="${day.date}"><summary>${i === 0 ? t.today : t.tomorrow} · ${day.date} · ${day.ready_slots}/${day.expected_slots} ${t.verified.toLowerCase()} · ${this._status(day.status)}</summary>${day.reason ? `<p class="notice">${esc(day.reason)}</p>` : ""}<div class="scroll"><table><thead><tr><th>${t.slot}</th>${KEYS.map(k => `<th>${k === "final" ? t.finalLabel : t[k]}</th>`).join("")}<th>${t.status}</th><th>${t.revision}</th></tr></thead><tbody>${day.slots.map(r => `<tr class="${r.start === this._selected ? "selected" : ""}"><td class="time"><button data-start="${esc(r.start)}" title="${esc(r.start)}">${esc(this._interval(r))}</button></td>${KEYS.map(k => `<td class="numeric">${esc(this._format(r[k]))}${k === "spot" && r.raw_status !== "READY" && present(r[k]) ? " *" : ""}</td>`).join("")}<td>${this._status(r.status)}</td><td>${r.revision ?? "—"}</td></tr>`).join("")}</tbody></table></div></details>`).join("")}<p class="muted">* ${t.stale} · ${t.utc}: ${t.inspect}</p></section>`;
   }
   _render() {
     if (!this.shadowRoot || !this._config) return;
@@ -239,9 +266,9 @@ export class EnergyPriceEngineCard extends HTMLElement {
     const open = new Set([...this.shadowRoot.querySelectorAll("details[open]")].map(e => e.dataset.day));
     const scrolls = [...this.shadowRoot.querySelectorAll(".scroll")].map(e => [e.scrollLeft,e.scrollTop]);
     const t = this._words(), d = this._data;
-    const body = d ? `<header><div><div class="eyebrow">Energy Price Engine · ${esc(d.site.area)}</div><h1>${esc(d.site.name)}</h1><div class="muted">${esc(d.site.timezone)} · øre/kWh · ${this._basis()}</div></div><button data-refresh aria-label="${t.retry}">${t.retry}</button></header><div class="body">${this._sitePicker()}<div class="health">${[[t.current,d.current],[t.next,d.next],[t.history,d.days[0]],[t.publication,d.days[1]]].map(([name,f]) => `<div><p>${name}</p>${this._status(f.status)}<p class="muted" style="margin-top:6px">${f.stored_slots}/${f.expected_slots}</p></div>`).join("")}</div>
+    const body = d ? `<header><div><div class="eyebrow">Energy Price Engine · ${esc(d.site.area)}</div><h1>${esc(d.site.name)}</h1><div class="muted">${esc(d.site.timezone)} · ${this._unit()} · ${this._basis()}</div></div><button data-refresh aria-label="${t.retry}">${t.retry}</button></header><div class="body">${this._sitePicker()}<div class="health">${[[t.current,d.current],[t.next,d.next],[t.history,d.days[0]],[t.publication,d.days[1]]].map(([name,f]) => `<div><p>${name}</p>${this._status(f.status)}<p class="muted" style="margin-top:6px">${f.stored_slots}/${f.expected_slots}</p></div>`).join("")}</div>
       ${d.availability?.code === "waiting" ? `<p class="notice activation">${esc(t.activation.replace("{time}", this._local(d.availability.available_from)))}</p>` : ""}
-      <section class="statistics"><h2>${t[d.statistics.scope] || t.unavailable} · ${this._basis()} · ${d.statistics.used_slots}/${d.statistics.day_slots}</h2><div class="chips">${["average","minimum","maximum"].map(k => `<span>${t[k]}: <strong>${this._format(present(d.statistics[k]) ? d.statistics[k] * 100 : null)}</strong> øre/kWh</span>`).join("")}</div>${d.statistics.reason ? `<p class="muted">${esc(d.statistics.reason)}</p>` : ""}</section>
+      <section class="statistics"><h2>${t[d.statistics.scope] || t.unavailable} · ${this._basis()} · ${d.statistics.used_slots}/${d.statistics.day_slots}</h2><div class="chips">${["average","minimum","maximum"].map(k => `<span>${t[k]}: <strong>${this._format(present(d.statistics[k]) ? d.statistics[k] * 100 : null)}</strong> ${this._unit()}</span>`).join("")}</div>${d.statistics.reason ? `<p class="muted">${esc(d.statistics.reason)}</p>` : ""}</section>
       ${this._error ? `<p role="alert" class="notice error">${esc(this._error)}</p>` : ""}
       ${d.days.map((day,i) => day.status !== "READY" ? `<div class="notice"><strong>${i === 0 ? t.today : t.tomorrow} · ${this._words()[day.status.toLowerCase()] || t.incomplete}</strong><p>${esc(day.reason || t.noRecord)}</p>${i === 1 && day.status === "INCOMPLETE" && ["source","publication"].includes(day.failure_stage) && day.raw_ready_slots === 0 ? `<p>${t.wait}</p>` : ""}<p>${t.update}: ${esc(this._local(d.next_scheduled_update))}</p>${day.affected_period ? `<p>${t.affected}: ${esc(day.affected_period)}</p>` : ""}${day.required_action ? `<p>${t.fix}: ${esc(day.required_action)}</p>` : ""}${day.missing_components.length ? `<p>${esc(day.missing_components.map(k => t[k] || k).join(", "))}</p>` : ""}</div>` : "").join("")}
       <div class="charts">${this._chart("spot")}${this._chart("final")}</div><p class="muted">${t.gaps} ${t.rawOnly}</p>${this._inspector()}${this._tariffs()}${this._schedule()}<footer class="footer">${t.update}: ${esc(this._local(d.next_scheduled_update))}<br>${t.generated}: ${esc(this._local(d.generated_at))} · ${t.revision} ${d.revision}</footer></div>` : `<header><h1>${t.title}</h1></header><div class="body">${this._sitePicker()}<p role="status">${esc(this._error || (this._sites?.length > 1 ? t.choose : t.loading))}</p><button data-refresh>${t.retry}</button></div>`;

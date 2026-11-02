@@ -1,3 +1,30 @@
+# v1.1 paired display units implemented
+
+Branch feat/v1.1-beta1-dashboard; resource commit a794c8c67d2c91d896bd5b60ebc6130a695af97e
+passed all six GitHub CI checks (both cores, browser, hassfest, HACS and package).
+Local resource tests:8 passed on current HA; supported resource/integration/dashboard
+subset:23 passed. Checkpoint subject: **Add independent ore and DKK card projections with shared concurrent reads**.
+
+Per-card optional unit defaults ore_kwh (two decimals); dkk_kwh divides original
+frontend amounts by100 before four-decimal formatting. All price surfaces/axes/tooltips
+use the unit; independent selection and site VAT preference remain. Unit-only changes
+render existing data without backend I/O. In-flight reads share one authenticated
+connection/message; no persistent response cache or backend arithmetic changes.
+
+Current HA producer fixture export:9 passed. Playwright/system Chromium:35 browser
+cases passed, including paired units on desktop1440/tablet820/mobile390, EN/DA,
+negative/near-zero values, VAT modes,92/96/100-quarter days, missing gaps, independent
+selection and coalesced reads. Source JSON stays byte-equivalent. Browser plugin
+unavailable. Initial added test used an unscoped locator matching both cards; fixed
+to scope the first card. No runtime defect or failing case remains in this run.
+
+README/dashboard documentation, complete two-card YAML and AGENTS scope updated.
+Next: beta metadata/test-channel tooling, native automatic cold-load/upgrade/restart
+evidence, full tests/reproducible packages and ordinary reviewable PR/publication.
+Main/tag/latest stable remain unchanged at v1.0.0. No owner systems accessed.
+
+---
+
 # v1.1.0-beta.1 — Issue20 development started
 
 New owner task supersedes the completed v1.0.0 STOP below. Dedicated branch

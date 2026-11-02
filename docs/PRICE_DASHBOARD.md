@@ -1,31 +1,85 @@
-# One bundled electricity-price card
+# Bundled electricity-price dashboard
 
-No third-party card is needed. Under **Settings → Dashboards → three-dot menu →
-Resources**, add this JavaScript module (enable Advanced mode on your HA profile if
-Resources is hidden):
+## v1.1 beta: add the card once
 
-```yaml
-url: /ha_energy_price_engine/energy-price-engine-card.js?v=1.0.0
-type: module
-```
-
-Reload the browser/app. Edit a dashboard, add a **Manual** card and paste:
+Install PE once as a HACS **Integration**. In v1.1.0-beta.1, storage-mode Lovelace
+automatically receives its bundled JavaScript module, even before the first dashboard
+visit. Add a manual card with:
 
 ```yaml
 type: custom:energy-price-engine-card
 ```
 
-One readable, loaded PE site is discovered automatically. With multiple sites the
-card offers a named selector; no technical entity ID is required. To pin a card,
-use `site_id: <id>` from the availability sensor's `site_id` attribute. This explicit
-mapping is stable for that site, including renames; resets generate a new identity.
-A complete panel-dashboard example is in [dashboard.yaml](dashboard.yaml). For a
-YAML dashboard, put the same resource under `lovelace.resources` in configuration.yaml.
+No second HACS repository or manual Resource UI step is needed. PE derives the cache
+URL from its installed manifest: `/ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0-beta.1`.
+It loads the native resource collection before listing it, adopts one existing exact
+local PE path (including old v1.0.0 URLs) in place, and preserves unrelated resources
+and their order. Restarts, site reloads and additional sites do not create duplicates.
+A registration failure logs a corrective action and leaves pricing operational.
+
+For multiple sites, select one in each card, or set its stable `site_id` explicitly.
+Renaming a site does not change its ID; an intentional reset creates a new identity.
+
+## Two cards, two units
+
+Each card independently accepts `unit: ore_kwh` (default, two decimals) or
+`unit: dkk_kwh` (four decimals). Units affect only frontend formatting. All views,
+axes, tooltips, statistics, tariff rows, selected components and quarter tables use
+the chosen unit. No intermediate rounding is applied before dividing the original
+øre value by100; unavailable values remain gaps. Canonical data, API v2, sensor units,
+VAT preference and historical revisions remain unchanged.
+
+Complete storage-dashboard YAML (use a manual card/vertical stack for just the cards):
+
+```yaml
+title: Electricity prices
+views:
+  - title: Prices
+    path: prices
+    cards:
+      - type: custom:energy-price-engine-card
+        unit: ore_kwh
+      - type: custom:energy-price-engine-card
+        unit: dkk_kwh
+```
+
+Both can select the same site; `site_id: YOUR_EXISTING_SITE_ID` is optional on each.
+Concurrent requests on the same authenticated HA connection are shared. Each card's
+site/quarter selection, expansion and unit remain independent. Switching units uses
+the already loaded snapshot without another backend request. Responses are not kept
+in a shared stale cache. [Complete example](dashboard.yaml).
+
+## YAML-managed resources and troubleshooting
+
+`lovelace.resource_mode: yaml` remains user-managed. PE serves the file and logs the
+required module URL but never edits YAML or silently injects extra JavaScript. Add
+the resource yourself, then reload Lovelace resources:
+
+```yaml
+lovelace:
+  resource_mode: yaml
+  resources:
+    - url: /ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0-beta.1
+      type: module
+```
+
+For **Custom element not found**, check Devices & services for a loaded PE integration,
+HA logs, and Settings → Dashboards → Resources (Advanced mode). There should be one
+PE module at the installed version URL. If multiple exact PE paths exist, PE reports
+the conflicting IDs and leaves them unchanged: keep one through HA's supported UI,
+then restart HA. Reload the app/browser after an upgrade. Storage permission failures
+need correction before retrying; pricing does not depend on registering the card.
+
+PE leaves its resource registered when a site unloads, is removed, or HA transiently
+reloads. After completely uninstalling PE and removing its cards, the owner may remove
+only the orphan PE URL through Resources UI, or edit their own YAML. PE never deletes
+other resources. Stable v1.0.0 still uses its documented manual Resource UI step;
+these automation/unit features require the opt-in v1.1 beta.
 
 The card shows separate raw/final graphs for today and tomorrow, today's verified
 DSO time bands, every local quarter, and a selected-quarter component/VAT/source
 inspector. Select a bar or table interval. DST repeated hours show UTC offsets;
-missing prices leave gaps. Values display øre/kWh with two decimals, while totals
+missing prices leave gaps. The default displays øre/kWh with two decimals; DKK uses four. Totals
 use unrounded stored values. Horizontal tables scroll within the card on mobile.
 
 **Full-day statistics** include all 92/96/100 calculated quarters immediately.
@@ -78,4 +132,4 @@ Their names and metadata state that fixed basis. This avoids switching long-term
 statistics under an existing identity. Diagnostic numeric entities have no statistics
 state class. No reset, historical reprice, price revision or API2 value change occurs.
 After upgrading, reload app/browser resources: internal dashboard schema3 requires the
-bundled version1.0.0 JavaScript and rejects older schema2 clients instead of mislabeling data.
+matching installed-version JavaScript and rejects older schema2 clients instead of mislabeling data.

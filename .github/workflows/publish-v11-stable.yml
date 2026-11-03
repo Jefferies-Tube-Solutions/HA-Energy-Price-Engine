@@ -1,0 +1,108 @@
+name: Publish authorized Energy Price Engine v1.1.0 Stable
+on:
+  push:
+    branches: [release/v1.1.0]
+    paths: [.github/workflows/publish-v11-stable.yml]
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+  checks: read
+concurrency:
+  group: energy-price-engine-stable-v1.1.0
+  cancel-in-progress: false
+jobs:
+  publish:
+    name: publish stable
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    outputs:
+      main_source: ${{ steps.publication.outputs.main_source }}
+      tag_object: ${{ steps.publication.outputs.tag_object }}
+      release_url: ${{ steps.publication.outputs.release_url }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14.8'
+      - uses: astral-sh/setup-uv@v6
+      - name: Validate exact candidate, native evidence, reviews and policies; merge existing PR23 normally
+        run: python tools/promote_v11_stable.py merge
+      - name: Dispatch and observe all mandatory CI against the exact resulting main commit
+        run: python tools/promote_v11_stable.py validate-main
+      - name: Rebuild clean main, verify integrity, create immutable tag and publish stable/latest
+        id: publication
+        run: python tools/promote_v11_stable.py publish
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stable-promotion-state
+          path: ${{ runner.temp }}/pe-v11-stable-state.json
+          if-no-files-found: error
+  verify-public:
+    name: Verify public stable (${{ matrix.target }})
+    needs: publish
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: ha-2026.10.3
+            lockfile: requirements-dev.lock
+          - target: ha-2026.10.4
+            lockfile: requirements-ha-current.lock
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PE_SOURCE: ${{ needs.publish.outputs.main_source }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ needs.publish.outputs.main_source }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14.8'
+      - uses: astral-sh/setup-uv@v6
+      - name: Prepare independent locked core and actual pinned HACS
+        run: |
+          uv venv
+          uv pip sync --require-hashes ${{ matrix.lockfile }}
+          uv run --no-project python tools/prepare_hacs_reference.py
+      - name: Independently verify public stable source, assets, HACS channels/update and both native layouts
+        run: uv run --no-project python tools/verify_public_v11_stable.py --expected-commit "$PE_SOURCE" --output "$RUNNER_TEMP/public-stable"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pe-stable-public-${{ matrix.target }}
+          path: ${{ runner.temp }}/public-stable/PUBLIC_RELEASE_RECEIPT.json
+          if-no-files-found: error
+  audit:
+    name: Record verified stable publication
+    needs: [publish, verify-public]
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: release/v1.1.0
+          fetch-depth: 0
+      - uses: actions/download-artifact@v5
+        with:
+          name: stable-promotion-state
+          path: ${{ runner.temp }}
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: pe-stable-public-*
+          path: public-verification
+      - name: Verify actual completed jobs, stable/latest status and all prior betas; record public evidence
+        run: python tools/promote_v11_stable.py audit
+      - name: Preserve permanent receipt on the release branch without moving the immutable main/tag source
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/receipts/v1.1.0.json
+          git commit -m 'docs: record verified public v1.1.0 stable publication'
+          git push origin HEAD:refs/heads/release/v1.1.0

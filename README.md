@@ -5,8 +5,16 @@ stores verified 15-minute electricity prices for **DK1 and DK2**. It combines
 Nord Pool spot prices, grid tariffs, Energinet charges, your supplier markup,
 electricity tax and VAT into a transparent marginal price per kWh.
 
-**Version 1.0.0** provides persistent price history and a stable read-only **API v2**.
+**Version 1.1.0** provides persistent price history and a stable read-only **API v2**.
 PE works independently of EV Charge Manager and sends no vehicle or charging commands.
+
+## Dashboard setup and display units
+
+Storage-mode dashboards automatically register the bundled card. Each card can use
+`unit: ore_kwh` or `unit: dkk_kwh`; paired cards remain independent. YAML resources
+remain user-managed. Price calculations, API v2, entity identities and stored history
+are unchanged from the approved v1.1.0-beta.1.
+[Quick start and complete two-card YAML](docs/PRICE_DASHBOARD.md).
 
 ## Installation
 
@@ -17,7 +25,7 @@ official `nordpool` integration.
 
 1. In HACS, open **Custom repositories**, add
    `https://github.com/NicolaiTandrup/HA-Energy-Price-Engine` as an **Integration**.
-2. Keep **Show beta versions off** for the stable channel. Download **v1.0.0** and
+2. Keep **Show beta versions off** for the stable channel. Download **v1.1.0** and
    restart Home Assistant. A custom repository does not require Marketplace admission.
 3. In **Settings → Devices & services → Add integration**, select **Energy Price Engine**.
 4. Name the site, select the official Nord Pool source and choose whether to display

@@ -1,0 +1,42 @@
+{
+  "version": "1.1.0",
+  "baseline_commit": "d7cb97c3b1efbed49d7f68a023c52ed6ba5fe10f",
+  "archives": {
+    "ha_energy_price_engine.zip": "cd6977f2eb20bb8e294c620e97f79fe53cc668caafc9c6f11a3ef000762e4f29",
+    "ha_energy_price_engine-manual.zip": "09a22b83b1a4889e1554d4ab0502837a0dad8027fe0a68324ff38e23407f4d53"
+  },
+  "runtime_files": {
+    "LICENSE": "283a5f80ddd97f9c1f853d3b84b5e066b3aaa45ae6a6321e6fccfb0ec2780fb1",
+    "__init__.py": "a95ceeed109a3f33350a786bb6227e733eb647e7baf136f6ebe850d364996ae2",
+    "api.py": "163fb8403525c44ad8b7eb13159f7471fd7097e59afc45d61c639f96f54ee94d",
+    "brand/icon.png": "8814c04c7c1615b4e8469e094e83ad572b425041c537891caf52c38d4d020f44",
+    "charging_cost.py": "2f44d1f7fb257334faa1e4e06d44c1768ca4f7a405d93344161c365ccfee2180",
+    "config_flow.py": "f74a988866ebc6ab4e383b7fd075db87999fdb2c73cb9803b7c3a8997d3a6537",
+    "configuration.py": "485c7adc4126afc85f7652d1b6f2861323a4e56942af80988a8249902e49dd61",
+    "const.py": "6c38f66a8d6ab5079f04841c0c62b274e01b159de563b0c0d687a428df61172f",
+    "coordinator.py": "71025f77827688b5c1c7c350c709ddd5041a86bfb199b5757b17c0ac76ddf8e7",
+    "dashboard.py": "afb90f88761b33552b4161d477b63dc3806ca90b4bb86923567085e55a22cbe2",
+    "data/supplier_offers.json": "13507c02cd77ec69349fa4229dbaa264718695e389d87b0c970b7f14c8769fc7",
+    "diagnostics.py": "cb5a412f67bcda485840ec31398ff0d813559b58cb9a1994bb6d2efa7330b7fd",
+    "ledger.py": "3fb161f450aa0e329e386c99e8498c7624f502415a0673edaaee98d76bf8acf4",
+    "localization.py": "e4c260b1109be2e2dd1e684e26f004ec4a104562fdd0bd5a2e4e122d0fbe9f79",
+    "lovelace_resource.py": "b46a2e0093096d70991dc73c29d09ae1614cfac42ef15d94863d55ef07f8ceb8",
+    "manifest.json": "573f8dd8d26bf123ae134fd78b67e249e12a832cc23c4e22e1d9bdc3768884ea",
+    "models.py": "dff2a4fa066aa23cfef7614a050a308f0ae54f8f0403d6eaa7a8d9973763f91d",
+    "money.py": "bbc47ca7ce74bb319edb170a28f754c9e7258c940c5a5f67e647283e765c1766",
+    "price_components.py": "f959606039fb6da0e50727a746c39e6b6f78c93f8c0b6e057ab193454a263a13",
+    "price_engine.py": "9d2fbdaab509a8d6a123cc5ac6e8ca039996eb409f8d60571f79b50ad7cb63f2",
+    "price_schedule.py": "5e8c3f67bef8f2b512be5c4ef3a36f15461d563388007583c2b190574661d584",
+    "price_update.py": "994ee2b86d2088771aa2c816ad15225b45b312277630b25708b11fc7797242e2",
+    "prices.py": "88ad3e664dbc1441d64537a9060fbf39d268f4f9abf7b112d36367ffaf06e4b0",
+    "sensor.py": "31586a3e64cf6411d300c6dba1673eb439d5701967918d70d4ee19b63d9f6d07",
+    "site_lifecycle.py": "bf812fbe86261c91bd1394bf560fec67ee39f42625afc1965c244fb7bf8faa84",
+    "status.py": "5f497d20b4141fa33d0b874b0d977c43a4edd0ddd368b1438e640931052d5c03",
+    "strings.json": "39726d247f2fc15d029f80e345e3b336d7b8214a147028321b76f28c2a23250d",
+    "tariff_source.py": "dfdf30b8da837403da51998f2dc61c2cd8c940702404672af29254054fba73e5",
+    "translations/da.json": "ffcbc4a537f136368a67af0e6fc7855e31eeb6179ec78e021c1015861e2b2502",
+    "translations/en.json": "39726d247f2fc15d029f80e345e3b336d7b8214a147028321b76f28c2a23250d",
+    "www/energy-price-engine-card.js": "0fdaf48f07f23b2f1aa6e2f1b48d8dfd0d85f553ba6bb2353ea08f93849277de"
+  },
+  "published": false
+}

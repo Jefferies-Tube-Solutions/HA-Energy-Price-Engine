@@ -27,3 +27,15 @@ the checkpoint subject for that commit. Commit and push throughout development;
 post meaningful progress updates to the active draft PR/issue when access permits.
 Before stopping, leave a coherent committed checkpoint and an accurate handoff.
 Never claim pending/unrun checks passed. Do not add competing handoff documents.
+
+## v1.1 dashboard scope
+
+Issue20 permits only optional native Lovelace resource registration and frontend
+ore_kwh/dkk_kwh projection over the accepted stable engine. Load the collection before
+listing; adopt only the exact local card path; preserve unrelated resources and YAML.
+Registration failures must leave pricing operational. Do not change canonical API v2,
+ledger schema/data, identities, site configuration or tariff calculations. The owner
+authorizes a reviewable v1.1 beta PR and guarded prerelease after all checks, never
+a main merge or stable/latest replacement. PAHA02-DEV visual acceptance remains owner
+work. If ordinary GitHub PR creation is rejected, record its exact gate and comparison
+URL without bypassing it; complete and preserve all independent validation first.

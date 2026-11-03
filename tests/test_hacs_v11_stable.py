@@ -1,0 +1,347 @@
+"""Pinned real HACS stable-release discovery and source-tag installation.
+
+PE_PUBLIC_RELEASE_RECEIPT supplies independently downloaded public metadata/bytes;
+without it the same workflow runs with deterministic prepublication fixtures.
+"""
+
+import base64
+import importlib
+import io
+import json
+import os
+import subprocess
+import zipfile
+from datetime import UTC, datetime, timedelta
+from importlib.metadata import version
+from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import AsyncMock, Mock, patch
+
+import pytest
+from aiogithubapi.models.release import GitHubReleaseModel
+from awesomeversion import AwesomeVersion
+
+from tools.prepare_hacs_reference import PINS
+
+from .test_hacs_workflow import candidate_tree, upstream
+
+ROOT = Path(__file__).parents[1]
+TAG = "v1.1.0"
+DOMAIN = "ha_energy_price_engine"
+
+
+def release_inputs():
+    if path := os.environ.get("PE_PUBLIC_RELEASE_RECEIPT"):
+        receipt = json.loads(Path(path).read_text())
+        with zipfile.ZipFile(receipt["source_archive"]) as archive:
+            files = {
+                "/".join(p.split("/")[1:]): archive.read(p)
+                for p in archive.namelist()
+                if not p.endswith("/")
+            }
+        return receipt, files, Path(receipt["source_archive"]).read_bytes()
+    # Stable regressions must keep testing the actual stable payload, even when
+    # the development checkout carries an opt-in beta.
+    source = io.BytesIO()
+    with zipfile.ZipFile(source, "w") as handle:
+        for name, data in candidate_tree().items():
+            handle.writestr(name, data)
+    archive = source.getvalue()
+    with zipfile.ZipFile(io.BytesIO(archive)) as source:
+        files = {name: source.read(name) for name in source.namelist() if not name.endswith("/")}
+    files["README.md"] = b"Energy Price Engine read-only stable\n"
+    archive = io.BytesIO()
+    with zipfile.ZipFile(archive, "w") as handle:
+        for path, content in files.items():
+            handle.writestr("release-source/" + path, content)
+    return (
+        {
+            "repository": {
+                "full_name": "NicolaiTandrup/HA-Energy-Price-Engine",
+                "id": 12345,
+                "default_branch": "main",
+                "archived": False,
+            },
+            "source_commit": "synthetic-validated-source",
+            "release": {"tag_name": TAG, "draft": False, "prerelease": False, "assets": []},
+        },
+        files,
+        archive.getvalue(),
+    )
+
+
+@pytest.mark.parametrize("line", list(PINS))
+@pytest.mark.parametrize("show_beta", [False, True])
+async def test_hacs_stable_discovery_upgrade_and_channel_isolation(
+    hass, tmp_path, line, show_beta, hass_client, hass_access_token
+):
+    receipt, files, archive = release_inputs()
+    main_files = files
+    if main_archive := receipt.get("main_archive"):
+        with zipfile.ZipFile(main_archive) as source:
+            main_files = {
+                "/".join(p.split("/")[1:]): source.read(p)
+                for p in source.namelist()
+                if not p.endswith("/")
+            }
+    assert not receipt["release"]["prerelease"] and not receipt["release"]["draft"]
+    assert receipt["release"]["tag_name"] == TAG
+    alias = upstream(line)
+    base = importlib.import_module(alias + ".base")
+    repo_base = importlib.import_module(alias + ".repositories.base")
+    enums = importlib.import_module(alias + ".enums")
+    hacs = base.HacsBase()
+    hacs.hass = hass
+    hacs.core.config_path = tmp_path
+    hacs.core.ha_version = AwesomeVersion(version("homeassistant"))
+    hacs.version = AwesomeVersion("2.0.5")
+    hacs.queue = SimpleNamespace(has_pending_tasks=False)
+    hacs.async_dispatch = Mock()
+    hacs.githubapi = SimpleNamespace(
+        repos=SimpleNamespace(
+            contents=SimpleNamespace(get=Mock()), releases=SimpleNamespace(list=Mock())
+        )
+    )
+    repository = receipt["repository"]["full_name"]
+    obj = SimpleNamespace(
+        full_name=repository,
+        attributes=receipt["repository"],
+        last_commit=receipt["source_commit"],
+        set_last_commit=AsyncMock(),
+    )
+
+    def tree_for(payload):
+        directories = {str(p) for name in payload for p in Path(name).parents if str(p) != "."}
+        return [
+            SimpleNamespace(
+                path=p,
+                full_path=p,
+                filename=Path(p).name,
+                is_directory=p in directories,
+                type="tree" if p in directories else "blob",
+                url="https://api.github.com/recorded-public-tree",
+            )
+            for p in sorted(set(payload) | directories)
+        ]
+
+    async def get_tree(self, ref):
+        return tree_for(files if ref == TAG else main_files)
+
+    calls = []
+
+    async def contents(*, path, **kwargs):
+        payload = files if kwargs.get("params", {}).get("ref") == TAG else main_files
+        return SimpleNamespace(
+            data=SimpleNamespace(content=base64.b64encode(payload[path]).decode())
+        )
+
+    async def download(url, **kwargs):
+        calls.append(url)
+        if url.endswith(f"/archive/refs/tags/{TAG}.zip"):
+            return archive
+        if "raw.githubusercontent.com" in url:
+            name = url.split(f"/{TAG}/", 1)[-1]
+            return files.get(name, b"Read-only beta")
+        raise AssertionError(f"Unexpected HACS download: {url}")
+
+    async def last_commits(repo):
+        repo.data.last_commit = receipt["source_commit"]
+
+    release_feed = list(receipt.get("releases", [receipt["release"]]))
+
+    async def github_method(*, method=None, **kwargs):
+        if method is hacs.githubapi.repos.releases.list:
+            return SimpleNamespace(data=[GitHubReleaseModel(r) for r in release_feed])
+        return await contents(**kwargs)
+
+    hacs.async_github_api_method = AsyncMock(side_effect=github_method)
+    hacs.async_download_file = AsyncMock(side_effect=download)
+    real_backup = repo_base.Backup
+
+    def isolated_backup(**kwargs):
+        kwargs.setdefault("backup_path", str(tmp_path / "hacs-backup") + "/")
+        return real_backup(**kwargs)
+
+    hass.data["custom_components"] = {}
+    with (
+        patch.object(
+            repo_base.HacsRepository,
+            "async_get_legacy_repository_object",
+            AsyncMock(return_value=(obj, "recorded-public-response")),
+        ),
+        patch.object(repo_base.HacsRepository, "get_tree", get_tree),
+        patch.object(repo_base.HacsRepository, "async_set_last_commits", last_commits, create=True),
+        patch.object(repo_base, "Backup", side_effect=isolated_backup),
+    ):
+        # The ordinary custom-repository add succeeds even before beta versions are shown.
+        await hacs.async_register_repository(repository, enums.HacsCategory.INTEGRATION)
+        repo = hacs.repositories.get_by_full_name(repository)
+        assert repo and repo.data.domain == DOMAIN and repo.data.config_flow
+        assert repo.data.manifest_name == "Energy Price Engine"
+        assert TAG in repo.data.published_tags and repo.data.last_version == TAG
+        assert repo.data.show_beta is False  # Fresh stable needs no beta opt-in.
+        hacs.coordinators[enums.HacsCategory.INTEGRATION] = Mock()
+        update_module = importlib.import_module(alias + ".update")
+        native_update = update_module.HacsRepositoryUpdateEntity(hacs=hacs, repository=repo)
+        repo.data.last_commit = "a1b2c3d"  # Newer main commits must never become latest.
+        assert native_update.latest_version == TAG
+        assert AwesomeVersion(TAG) > AwesomeVersion("v1.1.0-beta.1")
+        assert repo.version_to_download() == TAG
+        await repo.async_download_repository(ref=repo.version_to_download())
+        assert repo.data.installed_version == TAG and native_update.state == "off"
+        # Exercise the supported native HACS commands through authenticated local
+        # HTTP -> WebSocket, including its require_admin checks and durable write.
+        import sys
+
+        from homeassistant.components import websocket_api
+
+        hacs.data = importlib.import_module(alias + ".utils.data").HacsData(hacs)
+        hacs.common.categories = [enums.HacsCategory.INTEGRATION]
+        hass.data["hacs"] = hacs
+        with patch.dict(
+            sys.modules, {"custom_components.hacs.utils": importlib.import_module(alias + ".utils")}
+        ):
+            commands = importlib.import_module(alias + ".websocket.repository")
+            lists = importlib.import_module(alias + ".websocket.repositories")
+
+        from homeassistant.setup import async_setup_component
+
+        assert await async_setup_component(hass, "websocket_api", {})
+        for command in (
+            commands.hacs_repository_info,
+            commands.hacs_repository_beta,
+            lists.hacs_repositories_list,
+        ):
+            websocket_api.async_register_command(hass, command)
+        client = await hass_client()
+        ws = await client.ws_connect("/api/websocket")
+        await ws.receive_json()
+        await ws.send_json({"type": "auth", "access_token": hass_access_token})
+        assert (await ws.receive_json())["type"] == "auth_ok"
+        await ws.send_json(
+            {
+                "id": 1,
+                "type": "hacs/repository/beta",
+                "repository": str(repo.data.id),
+                "show_beta": show_beta,
+            }
+        )
+        result = await ws.receive_json()
+        assert result.get("success"), result
+        await ws.close()
+        saved_hacs = await importlib.import_module(alias + ".utils.store").async_load_from_store(
+            hass, "repositories"
+        )
+        assert saved_hacs[str(repo.data.id)].get("show_beta", False) is show_beta
+        repo.data.show_beta = False
+        assert native_update.latest_version == TAG
+        hacs.data.async_restore_repository(str(repo.data.id), saved_hacs[str(repo.data.id)])
+        assert repo.data.show_beta is show_beta
+        available = [
+            r["tag_name"]
+            for r in release_feed
+            if not r.get("draft") and (show_beta or not r.get("prerelease"))
+        ]
+        assert native_update.latest_version == available[0]
+        # Continue the stable-channel install/update checks with beta visibility off.
+        # Restoring beta visibility above legitimately offers a newer public beta.
+        repo.data.show_beta = False
+        await repo.common_update_data(force=True)
+
+        assert TAG in repo.data.published_tags
+        assert native_update.latest_version == TAG
+        assert native_update.installed_version == TAG
+        repo.data.selected_tag = TAG
+        assert repo.version_to_download() == TAG
+        installed = tmp_path / "custom_components" / DOMAIN
+        # Exercise a real beta.12 -> stable filesystem update, not only a clean
+        # installation pretending to have an older installed_version field.
+        if previous_asset := receipt.get("previous_hacs_asset"):
+            previous_bytes = Path(previous_asset).read_bytes()
+            prefix = ""
+        else:
+            previous_bytes = await hass.async_add_executor_job(
+                lambda: subprocess.check_output(
+                    [
+                        "git",
+                        "archive",
+                        "--format=zip",
+                        "d7cb97c3b1efbed49d7f68a023c52ed6ba5fe10f",
+                        f"custom_components/{DOMAIN}",
+                    ],
+                    cwd=ROOT,
+                )
+            )
+            prefix = f"custom_components/{DOMAIN}/"
+        installed.mkdir(parents=True, exist_ok=True)
+        with zipfile.ZipFile(io.BytesIO(previous_bytes)) as previous:
+            assert json.loads(previous.read(prefix + "manifest.json"))["version"] == "1.1.0-beta.1"
+            for name in previous.namelist():
+                if name.startswith(prefix) and not name.endswith("/"):
+                    target = installed / name.removeprefix(prefix)
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(previous.read(name))
+        repo.data.installed_version = "v1.1.0-beta.1"
+        assert native_update.installed_version == "v1.1.0-beta.1"
+        assert native_update.state == "on"
+        assert native_update.latest_version == TAG
+        from custom_components.ha_energy_price_engine.configuration import tariff_for, validate_site
+        from custom_components.ha_energy_price_engine.models import PriceSlot
+        from custom_components.ha_energy_price_engine.price_engine import PriceEngine
+
+        from .helpers import model
+
+        history_engine = PriceEngine(hass, "hacs-beta12-stable-upgrade")
+        start = datetime(2026, 10, 29, 12, tzinfo=UTC)
+        await history_engine.async_update(
+            "hacs_history",
+            [PriceSlot(start, start + timedelta(minutes=15), -0.1)],
+            tariff_for(validate_site(model(id="hacs_history"))),
+            {"kind": "recorded_test", "verified_at": start.isoformat()},
+            start,
+        )
+        history = history_engine.database.path
+        assert not history.is_relative_to(installed)
+        history_before = history.read_bytes()
+        for _ in range(2):
+            await repo.async_download_repository(ref=TAG)
+            assert history.read_bytes() == history_before
+            assert repo.data.installed and repo.data.installed_version == TAG
+            expected = {
+                str(Path(p).relative_to(f"custom_components/{DOMAIN}")): body
+                for p, body in files.items()
+                if p.startswith(f"custom_components/{DOMAIN}/")
+            }
+            assert {
+                str(p.relative_to(installed)): p.read_bytes()
+                for p in installed.rglob("*")
+                if p.is_file()
+            } == expected
+            assert json.loads((installed / "manifest.json").read_text())[
+                "version"
+            ] == TAG.removeprefix("v")
+        # Actual upstream get_releases filtering and available-version selection:
+        # normal stable users never receive a later unqualified beta or a main SHA.
+        future = {"tag_name": "v1.2.0-beta.1", "prerelease": True, "draft": False, "assets": []}
+        release_feed.insert(0, future)
+        repo.data.show_beta = False
+        await repo.common_update_data(force=True)
+        assert native_update.latest_version == TAG
+        assert future["tag_name"] not in repo.data.published_tags
+        assert native_update.state == "off"
+        repo.data.show_beta = True
+        await repo.common_update_data(force=True)
+        assert native_update.latest_version == future["tag_name"]  # Explicit beta opt-in.
+        repo.data.show_beta = False
+        await repo.common_update_data(force=True)
+        assert native_update.latest_version == TAG
+        repo.data.last_commit = "7654321"
+        assert native_update.latest_version == TAG and native_update.state == "off"
+        release_feed.pop(0)
+        await repo.uninstall()
+        assert not installed.exists()
+        assert history.read_bytes() == history_before
+        await repo.async_download_repository(ref=TAG)
+        assert history.read_bytes() == history_before
+        assert (installed / "config_flow.py").is_file()
+        assert calls.count(f"https://github.com/{repository}/archive/refs/tags/{TAG}.zip") == 4

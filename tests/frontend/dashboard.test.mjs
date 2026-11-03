@@ -148,3 +148,63 @@ for (const width of [1440,390]) for (const language of ['en','da']) {
   await page.close();
  });
 }
+
+// Two independent presentations of one exact producer snapshot, not extra sensors.
+for (const [name,width,language] of [
+ ['normal',1440,'en'],['normal',820,'en'],['normal',390,'en'],
+ ['normal',1440,'da'],['normal',820,'da'],['normal',390,'da'],
+ ['spring',390,'en'],['fall',390,'da'],['gap',390,'en'],
+ ['varied',390,'en'],['varied-ex-vat',390,'da'],['missing',390,'en'],
+]) {
+ test(`paired units ${name}/${language}/${width}: exact projection, independent state and shared reads`,async()=>{
+  const {page,card:original,errors}=await open(name,width,language);
+  const ore=original.first();
+  const initial=await page.evaluate(()=>JSON.stringify(window.fixture));
+  const calls=await page.evaluate(()=>window.wsCalls);
+  await page.evaluate(()=>{
+   const first=document.querySelector('energy-price-engine-card');
+   const second=document.createElement('energy-price-engine-card');
+   second.id='dkk';second.setConfig({unit:'dkk_kwh'});second.hass=first._hass;
+   document.body.append(second);first._load();
+  });
+  const dkk=page.locator('#dkk');await dkk.locator('.chart').first().waitFor();
+  assert.equal(await page.evaluate(()=>window.wsCalls),calls+2,'Concurrent sites/schedule reads coalesce');
+  const fixture=await page.evaluate(()=>window.fixture);
+  const slots=fixture.days.flatMap(d=>d.slots);
+  for (const [unit,card] of [['ore_kwh',ore],['dkk_kwh',dkk]]){
+   const label=unit==='dkk_kwh'?'DKK/kWh':'øre/kWh',digits=unit==='dkk_kwh'?4:2,scale=unit==='dkk_kwh'?100:1;
+   const format=v=>typeof v==='number'&&Number.isFinite(v)?new Intl.NumberFormat(language,{minimumFractionDigits:digits,maximumFractionDigits:digits,useGrouping:false}).format(Math.abs(v/scale)<0.5*10**-digits?0:v/scale):'—';
+   for(const selector of ['header','[data-chart="spot"] p','[data-chart="final"] p','[data-table="schedule"] p','[data-table="tariffs"] p','.inspector th'])assert.ok((await card.locator(selector).allTextContents()).join(' ').includes(label));
+   assert.deepEqual(await card.locator('.statistics strong').allTextContents(),['average','minimum','maximum'].map(k=>format(fixture.statistics[k]===null?null:fixture.statistics[k]*100)));
+   assert.deepEqual(await card.locator('[data-table="tariffs"] td.numeric').allTextContents(),fixture.dso_today.map(r=>format(r.value)));
+   assert.deepEqual(await card.locator('[data-table="schedule"] td.numeric').allTextContents(),slots.flatMap(r=>['spot','dso','energinet_net','energinet_system','supplier','electricity_tax','vat','final'].map(k=>format(r[k])+(k==='spot'&&r.raw_status!=='READY'&&typeof r[k]==='number'?' *':''))));
+   const count=slots.filter(r=>r.final!==null&&r.status==='READY').length;
+   assert.equal(await card.locator('[data-chart="final"] rect.bar').count(),count,'Missing quarters stay gaps');
+   const bars=await card.locator('[data-chart="spot"] rect.bar').all();
+   assert.equal(bars.length,slots.filter(r=>r.raw_spot!==null&&r.raw_status==='READY').length);
+   if(bars.length)assert.ok((await bars[0].getAttribute('aria-label')).includes(label));
+   assert.equal(await card.locator('.now').count(),2);
+  }
+  const old=await ore.locator('#quarter').inputValue();
+  const last=slots.at(-1).start;await dkk.locator('#quarter').selectOption(last);
+  assert.equal(await ore.locator('#quarter').inputValue(),old);
+  assert.equal(await dkk.locator('#quarter').inputValue(),last);
+  const before=await page.evaluate(()=>window.wsCalls);
+  await page.evaluate(()=>{const c=document.querySelector('energy-price-engine-card');c.setConfig({unit:'dkk_kwh'});c.setConfig({unit:'ore_kwh'});});
+  assert.equal(await page.evaluate(()=>window.wsCalls),before,'Unit changes render cached data without backend I/O');
+  assert.equal(await page.evaluate(()=>JSON.stringify(window.fixture)),initial,'Presentation never mutates source precision');
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
+  assert.deepEqual(errors,[]);await page.close();
+ });
+}
+test('unit validation and near-zero full-precision formatting',async()=>{
+ const {page,errors}=await open('normal',390);
+ const result=await page.evaluate(()=>{
+  const c=document.querySelector('energy-price-engine-card');let invalid=false;
+  try{c.setConfig({unit:'DKK'});}catch(e){invalid=e.message.includes('ore_kwh or dkk_kwh');}
+  c.setConfig({unit:'dkk_kwh'});
+  return {invalid,values:[-0.123456789,0.0123456789,0,undefined,NaN].map(v=>c._format(v)),source:c._data.days[0].slots[0].raw_spot};
+ });
+ assert.equal(result.invalid,true);assert.deepEqual(result.values,['-0.0012','0.0001','0.0000','—','—']);
+ assert.deepEqual(errors,[]);await page.close();
+});

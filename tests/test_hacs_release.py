@@ -23,7 +23,7 @@ from awesomeversion import AwesomeVersion
 
 from tools.prepare_hacs_reference import PINS
 
-from .test_hacs_workflow import candidate_tree, upstream
+from .test_hacs_workflow import upstream
 
 ROOT = Path(__file__).parents[1]
 TAG = "v1.0.0"
@@ -40,7 +40,14 @@ def release_inputs():
                 if not p.endswith("/")
             }
         return receipt, files, Path(receipt["source_archive"]).read_bytes()
-    files = candidate_tree()
+    # Stable regressions must keep testing the actual stable payload, even when
+    # the development checkout carries an opt-in beta.
+    archive = subprocess.check_output(
+        ["git", "archive", "--format=zip", TAG, f"custom_components/{DOMAIN}", "hacs.json"],
+        cwd=ROOT,
+    )
+    with zipfile.ZipFile(io.BytesIO(archive)) as source:
+        files = {name: source.read(name) for name in source.namelist() if not name.endswith("/")}
     files["README.md"] = b"Energy Price Engine read-only stable\n"
     archive = io.BytesIO()
     with zipfile.ZipFile(archive, "w") as handle:
@@ -228,8 +235,17 @@ async def test_hacs_stable_discovery_upgrade_and_channel_isolation(
         repo.data.show_beta = False
         assert native_update.latest_version == TAG
         hacs.data.async_restore_repository(str(repo.data.id), saved_hacs[str(repo.data.id)])
-        assert native_update.latest_version == TAG
         assert repo.data.show_beta is show_beta
+        available = [
+            r["tag_name"]
+            for r in release_feed
+            if not r.get("draft") and (show_beta or not r.get("prerelease"))
+        ]
+        assert native_update.latest_version == available[0]
+        # Continue the stable-channel install/update checks with beta visibility off.
+        # Restoring beta visibility above legitimately offers a newer public beta.
+        repo.data.show_beta = False
+        await repo.common_update_data(force=True)
 
         assert TAG in repo.data.published_tags
         assert native_update.latest_version == TAG

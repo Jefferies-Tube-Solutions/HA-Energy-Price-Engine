@@ -1,0 +1,2142 @@
+[
+  {
+    "stage": "beta",
+    "version": "1.1.0-beta.1",
+    "resources": [
+      {
+        "id": "before",
+        "url": "/local/qa-before.js",
+        "type": "module"
+      },
+      {
+        "id": "adopted",
+        "url": "/ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0-beta.1",
+        "type": "module"
+      },
+      {
+        "id": "after",
+        "url": "/local/qa-after.js",
+        "type": "module"
+      }
+    ],
+    "reload_preserved": true,
+    "sites": [
+      {
+        "entry_id": "qa-pe-site-0",
+        "settings": {
+          "id": "qa_0",
+          "name": "Fictional QA 0",
+          "nordpool_entry": "np",
+          "area": "DK2",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25,
+          "dso_mode": "manual",
+          "dated_components": [
+            {
+              "id": "supplier",
+              "amount": 3,
+              "unit": "ore/kWh",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "source": "Synthetic test-only contract",
+              "verified_on": "2026-10-23"
+            },
+            {
+              "id": "dso",
+              "amount": 20,
+              "unit": "ore/kWh",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "source": "Synthetic test-only contract",
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "setup_step": "review",
+          "display_including_vat": true
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_0_applied_dso_tariff",
+            "qa_0_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_0_current_dso_tariff_ex_vat",
+            "qa_0_dso"
+          ],
+          [
+            "sensor.fictional_qa_0_current_final_price_incl_vat",
+            "qa_0_current_final"
+          ],
+          [
+            "sensor.fictional_qa_0_current_quarter",
+            "qa_0_price_period"
+          ],
+          [
+            "sensor.fictional_qa_0_current_spot_price_ex_vat",
+            "qa_0_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_1_00_00_24_00",
+            "qa_0_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_2_unavailable",
+            "qa_0_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_3_unavailable",
+            "qa_0_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_4_unavailable",
+            "qa_0_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_0_electricity_tax",
+            "qa_0_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_0_energinet_network",
+            "qa_0_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_0_energinet_system",
+            "qa_0_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_0_including_vat",
+            "qa_0_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_0_next_quarter_final_price_incl_vat",
+            "qa_0_next_final"
+          ],
+          [
+            "sensor.fictional_qa_0_next_quarter_spot_price_ex_vat",
+            "qa_0_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_nord_pool_spot",
+            "qa_0_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_status",
+            "qa_0_availability"
+          ],
+          [
+            "sensor.fictional_qa_0_supplier_markup",
+            "qa_0_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_average_price_incl_vat",
+            "qa_0_average"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_maximum_price_incl_vat",
+            "qa_0_maximum"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_minimum_price_incl_vat",
+            "qa_0_minimum"
+          ],
+          [
+            "sensor.fictional_qa_0_vat_amount",
+            "qa_0_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_0_verified_final_price",
+            "qa_0_component_final"
+          ]
+        ],
+        "sha256": "dde17f96ee1473cc4cb20ebd47ec6f79079dbed9993fb3f925a373e101578ece",
+        "schedule_sha256": "fdc755f76636a7ec1424f5acd154980159d183ced079fdaa5b22f7194c20b3f4",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-0.ledger.sqlite3"
+      },
+      {
+        "entry_id": "qa-pe-site-1",
+        "settings": {
+          "id": "qa_1",
+          "name": "Fictional QA 1",
+          "nordpool_entry": "np",
+          "area": "DK2",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25,
+          "dso_mode": "manual",
+          "dated_components": [
+            {
+              "id": "supplier",
+              "amount": 3,
+              "unit": "ore/kWh",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "source": "Synthetic test-only contract",
+              "verified_on": "2026-10-23"
+            },
+            {
+              "id": "dso",
+              "amount": 20,
+              "unit": "ore/kWh",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "source": "Synthetic test-only contract",
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "setup_step": "review",
+          "display_including_vat": false
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_1_applied_dso_tariff",
+            "qa_1_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_1_current_dso_tariff_ex_vat",
+            "qa_1_dso"
+          ],
+          [
+            "sensor.fictional_qa_1_current_final_price_incl_vat",
+            "qa_1_current_final"
+          ],
+          [
+            "sensor.fictional_qa_1_current_quarter",
+            "qa_1_price_period"
+          ],
+          [
+            "sensor.fictional_qa_1_current_spot_price_ex_vat",
+            "qa_1_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_1_00_00_24_00",
+            "qa_1_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_2_unavailable",
+            "qa_1_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_3_unavailable",
+            "qa_1_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_4_unavailable",
+            "qa_1_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_1_electricity_tax",
+            "qa_1_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_1_energinet_network",
+            "qa_1_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_1_energinet_system",
+            "qa_1_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_1_including_vat",
+            "qa_1_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_1_next_quarter_final_price_incl_vat",
+            "qa_1_next_final"
+          ],
+          [
+            "sensor.fictional_qa_1_next_quarter_spot_price_ex_vat",
+            "qa_1_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_nord_pool_spot",
+            "qa_1_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_status",
+            "qa_1_availability"
+          ],
+          [
+            "sensor.fictional_qa_1_supplier_markup",
+            "qa_1_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_average_price_incl_vat",
+            "qa_1_average"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_maximum_price_incl_vat",
+            "qa_1_maximum"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_minimum_price_incl_vat",
+            "qa_1_minimum"
+          ],
+          [
+            "sensor.fictional_qa_1_vat_amount",
+            "qa_1_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_1_verified_final_price",
+            "qa_1_component_final"
+          ]
+        ],
+        "sha256": "ff56b086f0ab64b26bb95e4a391ffe82a39bbbdbb28843348b0d390e0c531845",
+        "schedule_sha256": "f6063499e24747975ecd53ca04c41de5aab2eb76fe57d4d1cd0112a974f45fc6",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-1.ledger.sqlite3"
+      },
+      {
+        "entry_id": "qa-pe-site-2",
+        "settings": {
+          "id": "qa_2",
+          "name": "Fictional QA 2",
+          "nordpool_entry": "np",
+          "area": "DK2",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25,
+          "dso_mode": "manual",
+          "dated_components": [
+            {
+              "id": "supplier",
+              "amount": 3,
+              "unit": "ore/kWh",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "source": "Synthetic test-only contract",
+              "verified_on": "2026-10-23"
+            },
+            {
+              "id": "dso",
+              "amount": 20,
+              "unit": "ore/kWh",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "source": "Synthetic test-only contract",
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "setup_step": "review",
+          "display_including_vat": true
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_2_applied_dso_tariff",
+            "qa_2_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_2_current_dso_tariff_ex_vat",
+            "qa_2_dso"
+          ],
+          [
+            "sensor.fictional_qa_2_current_final_price_incl_vat",
+            "qa_2_current_final"
+          ],
+          [
+            "sensor.fictional_qa_2_current_quarter",
+            "qa_2_price_period"
+          ],
+          [
+            "sensor.fictional_qa_2_current_spot_price_ex_vat",
+            "qa_2_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_1_00_00_24_00",
+            "qa_2_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_2_unavailable",
+            "qa_2_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_3_unavailable",
+            "qa_2_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_4_unavailable",
+            "qa_2_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_2_electricity_tax",
+            "qa_2_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_2_energinet_network",
+            "qa_2_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_2_energinet_system",
+            "qa_2_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_2_including_vat",
+            "qa_2_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_2_next_quarter_final_price_incl_vat",
+            "qa_2_next_final"
+          ],
+          [
+            "sensor.fictional_qa_2_next_quarter_spot_price_ex_vat",
+            "qa_2_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_nord_pool_spot",
+            "qa_2_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_status",
+            "qa_2_availability"
+          ],
+          [
+            "sensor.fictional_qa_2_supplier_markup",
+            "qa_2_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_average_price_incl_vat",
+            "qa_2_average"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_maximum_price_incl_vat",
+            "qa_2_maximum"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_minimum_price_incl_vat",
+            "qa_2_minimum"
+          ],
+          [
+            "sensor.fictional_qa_2_vat_amount",
+            "qa_2_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_2_verified_final_price",
+            "qa_2_component_final"
+          ]
+        ],
+        "sha256": "7d5021acae1097c32273b959549aadb6dfb25aa9a686efa1b5f32629a84a620b",
+        "schedule_sha256": "312200887eda2231a3400263cedd6aae5548d624f932db63179ffc3147715e67",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-2.ledger.sqlite3"
+      }
+    ]
+  },
+  {
+    "stage": "stable",
+    "version": "1.1.0",
+    "resources": [
+      {
+        "id": "before",
+        "url": "/local/qa-before.js",
+        "type": "module"
+      },
+      {
+        "id": "adopted",
+        "url": "/ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0",
+        "type": "module"
+      },
+      {
+        "id": "after",
+        "url": "/local/qa-after.js",
+        "type": "module"
+      }
+    ],
+    "reload_preserved": true,
+    "sites": [
+      {
+        "entry_id": "qa-pe-site-0",
+        "settings": {
+          "area": "DK2",
+          "dated_components": [
+            {
+              "amount": 3,
+              "id": "supplier",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            },
+            {
+              "amount": 20,
+              "id": "dso",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "display_including_vat": true,
+          "dso_mode": "manual",
+          "id": "qa_0",
+          "name": "Fictional QA 0",
+          "nordpool_entry": "np",
+          "setup_step": "review",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_0_applied_dso_tariff",
+            "qa_0_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_0_current_dso_tariff_ex_vat",
+            "qa_0_dso"
+          ],
+          [
+            "sensor.fictional_qa_0_current_final_price_incl_vat",
+            "qa_0_current_final"
+          ],
+          [
+            "sensor.fictional_qa_0_current_quarter",
+            "qa_0_price_period"
+          ],
+          [
+            "sensor.fictional_qa_0_current_spot_price_ex_vat",
+            "qa_0_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_1_00_00_24_00",
+            "qa_0_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_2_unavailable",
+            "qa_0_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_3_unavailable",
+            "qa_0_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_4_unavailable",
+            "qa_0_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_0_electricity_tax",
+            "qa_0_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_0_energinet_network",
+            "qa_0_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_0_energinet_system",
+            "qa_0_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_0_including_vat",
+            "qa_0_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_0_next_quarter_final_price_incl_vat",
+            "qa_0_next_final"
+          ],
+          [
+            "sensor.fictional_qa_0_next_quarter_spot_price_ex_vat",
+            "qa_0_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_nord_pool_spot",
+            "qa_0_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_status",
+            "qa_0_availability"
+          ],
+          [
+            "sensor.fictional_qa_0_supplier_markup",
+            "qa_0_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_average_price_incl_vat",
+            "qa_0_average"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_maximum_price_incl_vat",
+            "qa_0_maximum"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_minimum_price_incl_vat",
+            "qa_0_minimum"
+          ],
+          [
+            "sensor.fictional_qa_0_vat_amount",
+            "qa_0_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_0_verified_final_price",
+            "qa_0_component_final"
+          ]
+        ],
+        "sha256": "dde17f96ee1473cc4cb20ebd47ec6f79079dbed9993fb3f925a373e101578ece",
+        "schedule_sha256": "fdc755f76636a7ec1424f5acd154980159d183ced079fdaa5b22f7194c20b3f4",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-0.ledger.sqlite3"
+      },
+      {
+        "entry_id": "qa-pe-site-1",
+        "settings": {
+          "area": "DK2",
+          "dated_components": [
+            {
+              "amount": 3,
+              "id": "supplier",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            },
+            {
+              "amount": 20,
+              "id": "dso",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "display_including_vat": false,
+          "dso_mode": "manual",
+          "id": "qa_1",
+          "name": "Fictional QA 1",
+          "nordpool_entry": "np",
+          "setup_step": "review",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_1_applied_dso_tariff",
+            "qa_1_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_1_current_dso_tariff_ex_vat",
+            "qa_1_dso"
+          ],
+          [
+            "sensor.fictional_qa_1_current_final_price_incl_vat",
+            "qa_1_current_final"
+          ],
+          [
+            "sensor.fictional_qa_1_current_quarter",
+            "qa_1_price_period"
+          ],
+          [
+            "sensor.fictional_qa_1_current_spot_price_ex_vat",
+            "qa_1_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_1_00_00_24_00",
+            "qa_1_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_2_unavailable",
+            "qa_1_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_3_unavailable",
+            "qa_1_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_4_unavailable",
+            "qa_1_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_1_electricity_tax",
+            "qa_1_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_1_energinet_network",
+            "qa_1_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_1_energinet_system",
+            "qa_1_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_1_including_vat",
+            "qa_1_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_1_next_quarter_final_price_incl_vat",
+            "qa_1_next_final"
+          ],
+          [
+            "sensor.fictional_qa_1_next_quarter_spot_price_ex_vat",
+            "qa_1_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_nord_pool_spot",
+            "qa_1_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_status",
+            "qa_1_availability"
+          ],
+          [
+            "sensor.fictional_qa_1_supplier_markup",
+            "qa_1_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_average_price_incl_vat",
+            "qa_1_average"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_maximum_price_incl_vat",
+            "qa_1_maximum"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_minimum_price_incl_vat",
+            "qa_1_minimum"
+          ],
+          [
+            "sensor.fictional_qa_1_vat_amount",
+            "qa_1_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_1_verified_final_price",
+            "qa_1_component_final"
+          ]
+        ],
+        "sha256": "ff56b086f0ab64b26bb95e4a391ffe82a39bbbdbb28843348b0d390e0c531845",
+        "schedule_sha256": "f6063499e24747975ecd53ca04c41de5aab2eb76fe57d4d1cd0112a974f45fc6",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-1.ledger.sqlite3"
+      },
+      {
+        "entry_id": "qa-pe-site-2",
+        "settings": {
+          "area": "DK2",
+          "dated_components": [
+            {
+              "amount": 3,
+              "id": "supplier",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            },
+            {
+              "amount": 20,
+              "id": "dso",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "display_including_vat": true,
+          "dso_mode": "manual",
+          "id": "qa_2",
+          "name": "Fictional QA 2",
+          "nordpool_entry": "np",
+          "setup_step": "review",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_2_applied_dso_tariff",
+            "qa_2_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_2_current_dso_tariff_ex_vat",
+            "qa_2_dso"
+          ],
+          [
+            "sensor.fictional_qa_2_current_final_price_incl_vat",
+            "qa_2_current_final"
+          ],
+          [
+            "sensor.fictional_qa_2_current_quarter",
+            "qa_2_price_period"
+          ],
+          [
+            "sensor.fictional_qa_2_current_spot_price_ex_vat",
+            "qa_2_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_1_00_00_24_00",
+            "qa_2_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_2_unavailable",
+            "qa_2_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_3_unavailable",
+            "qa_2_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_4_unavailable",
+            "qa_2_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_2_electricity_tax",
+            "qa_2_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_2_energinet_network",
+            "qa_2_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_2_energinet_system",
+            "qa_2_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_2_including_vat",
+            "qa_2_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_2_next_quarter_final_price_incl_vat",
+            "qa_2_next_final"
+          ],
+          [
+            "sensor.fictional_qa_2_next_quarter_spot_price_ex_vat",
+            "qa_2_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_nord_pool_spot",
+            "qa_2_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_status",
+            "qa_2_availability"
+          ],
+          [
+            "sensor.fictional_qa_2_supplier_markup",
+            "qa_2_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_average_price_incl_vat",
+            "qa_2_average"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_maximum_price_incl_vat",
+            "qa_2_maximum"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_minimum_price_incl_vat",
+            "qa_2_minimum"
+          ],
+          [
+            "sensor.fictional_qa_2_vat_amount",
+            "qa_2_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_2_verified_final_price",
+            "qa_2_component_final"
+          ]
+        ],
+        "sha256": "7d5021acae1097c32273b959549aadb6dfb25aa9a686efa1b5f32629a84a620b",
+        "schedule_sha256": "312200887eda2231a3400263cedd6aae5548d624f932db63179ffc3147715e67",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-2.ledger.sqlite3"
+      }
+    ]
+  },
+  {
+    "stage": "restart",
+    "version": "1.1.0",
+    "resources": [
+      {
+        "id": "before",
+        "url": "/local/qa-before.js",
+        "type": "module"
+      },
+      {
+        "id": "adopted",
+        "url": "/ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0",
+        "type": "module"
+      },
+      {
+        "id": "after",
+        "url": "/local/qa-after.js",
+        "type": "module"
+      }
+    ],
+    "reload_preserved": true,
+    "sites": [
+      {
+        "entry_id": "qa-pe-site-0",
+        "settings": {
+          "area": "DK2",
+          "dated_components": [
+            {
+              "amount": 3,
+              "id": "supplier",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            },
+            {
+              "amount": 20,
+              "id": "dso",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "display_including_vat": true,
+          "dso_mode": "manual",
+          "id": "qa_0",
+          "name": "Fictional QA 0",
+          "nordpool_entry": "np",
+          "setup_step": "review",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_0_applied_dso_tariff",
+            "qa_0_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_0_current_dso_tariff_ex_vat",
+            "qa_0_dso"
+          ],
+          [
+            "sensor.fictional_qa_0_current_final_price_incl_vat",
+            "qa_0_current_final"
+          ],
+          [
+            "sensor.fictional_qa_0_current_quarter",
+            "qa_0_price_period"
+          ],
+          [
+            "sensor.fictional_qa_0_current_spot_price_ex_vat",
+            "qa_0_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_1_00_00_24_00",
+            "qa_0_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_2_unavailable",
+            "qa_0_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_3_unavailable",
+            "qa_0_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_4_unavailable",
+            "qa_0_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_0_electricity_tax",
+            "qa_0_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_0_energinet_network",
+            "qa_0_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_0_energinet_system",
+            "qa_0_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_0_including_vat",
+            "qa_0_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_0_next_quarter_final_price_incl_vat",
+            "qa_0_next_final"
+          ],
+          [
+            "sensor.fictional_qa_0_next_quarter_spot_price_ex_vat",
+            "qa_0_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_nord_pool_spot",
+            "qa_0_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_status",
+            "qa_0_availability"
+          ],
+          [
+            "sensor.fictional_qa_0_supplier_markup",
+            "qa_0_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_average_price_incl_vat",
+            "qa_0_average"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_maximum_price_incl_vat",
+            "qa_0_maximum"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_minimum_price_incl_vat",
+            "qa_0_minimum"
+          ],
+          [
+            "sensor.fictional_qa_0_vat_amount",
+            "qa_0_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_0_verified_final_price",
+            "qa_0_component_final"
+          ]
+        ],
+        "sha256": "dde17f96ee1473cc4cb20ebd47ec6f79079dbed9993fb3f925a373e101578ece",
+        "schedule_sha256": "fdc755f76636a7ec1424f5acd154980159d183ced079fdaa5b22f7194c20b3f4",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-0.ledger.sqlite3"
+      },
+      {
+        "entry_id": "qa-pe-site-1",
+        "settings": {
+          "area": "DK2",
+          "dated_components": [
+            {
+              "amount": 3,
+              "id": "supplier",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            },
+            {
+              "amount": 20,
+              "id": "dso",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "display_including_vat": false,
+          "dso_mode": "manual",
+          "id": "qa_1",
+          "name": "Fictional QA 1",
+          "nordpool_entry": "np",
+          "setup_step": "review",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_1_applied_dso_tariff",
+            "qa_1_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_1_current_dso_tariff_ex_vat",
+            "qa_1_dso"
+          ],
+          [
+            "sensor.fictional_qa_1_current_final_price_incl_vat",
+            "qa_1_current_final"
+          ],
+          [
+            "sensor.fictional_qa_1_current_quarter",
+            "qa_1_price_period"
+          ],
+          [
+            "sensor.fictional_qa_1_current_spot_price_ex_vat",
+            "qa_1_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_1_00_00_24_00",
+            "qa_1_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_2_unavailable",
+            "qa_1_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_3_unavailable",
+            "qa_1_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_4_unavailable",
+            "qa_1_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_1_electricity_tax",
+            "qa_1_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_1_energinet_network",
+            "qa_1_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_1_energinet_system",
+            "qa_1_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_1_including_vat",
+            "qa_1_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_1_next_quarter_final_price_incl_vat",
+            "qa_1_next_final"
+          ],
+          [
+            "sensor.fictional_qa_1_next_quarter_spot_price_ex_vat",
+            "qa_1_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_nord_pool_spot",
+            "qa_1_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_status",
+            "qa_1_availability"
+          ],
+          [
+            "sensor.fictional_qa_1_supplier_markup",
+            "qa_1_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_average_price_incl_vat",
+            "qa_1_average"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_maximum_price_incl_vat",
+            "qa_1_maximum"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_minimum_price_incl_vat",
+            "qa_1_minimum"
+          ],
+          [
+            "sensor.fictional_qa_1_vat_amount",
+            "qa_1_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_1_verified_final_price",
+            "qa_1_component_final"
+          ]
+        ],
+        "sha256": "ff56b086f0ab64b26bb95e4a391ffe82a39bbbdbb28843348b0d390e0c531845",
+        "schedule_sha256": "f6063499e24747975ecd53ca04c41de5aab2eb76fe57d4d1cd0112a974f45fc6",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-1.ledger.sqlite3"
+      },
+      {
+        "entry_id": "qa-pe-site-2",
+        "settings": {
+          "area": "DK2",
+          "dated_components": [
+            {
+              "amount": 3,
+              "id": "supplier",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            },
+            {
+              "amount": 20,
+              "id": "dso",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "display_including_vat": true,
+          "dso_mode": "manual",
+          "id": "qa_2",
+          "name": "Fictional QA 2",
+          "nordpool_entry": "np",
+          "setup_step": "review",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_2_applied_dso_tariff",
+            "qa_2_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_2_current_dso_tariff_ex_vat",
+            "qa_2_dso"
+          ],
+          [
+            "sensor.fictional_qa_2_current_final_price_incl_vat",
+            "qa_2_current_final"
+          ],
+          [
+            "sensor.fictional_qa_2_current_quarter",
+            "qa_2_price_period"
+          ],
+          [
+            "sensor.fictional_qa_2_current_spot_price_ex_vat",
+            "qa_2_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_1_00_00_24_00",
+            "qa_2_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_2_unavailable",
+            "qa_2_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_3_unavailable",
+            "qa_2_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_4_unavailable",
+            "qa_2_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_2_electricity_tax",
+            "qa_2_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_2_energinet_network",
+            "qa_2_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_2_energinet_system",
+            "qa_2_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_2_including_vat",
+            "qa_2_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_2_next_quarter_final_price_incl_vat",
+            "qa_2_next_final"
+          ],
+          [
+            "sensor.fictional_qa_2_next_quarter_spot_price_ex_vat",
+            "qa_2_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_nord_pool_spot",
+            "qa_2_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_status",
+            "qa_2_availability"
+          ],
+          [
+            "sensor.fictional_qa_2_supplier_markup",
+            "qa_2_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_average_price_incl_vat",
+            "qa_2_average"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_maximum_price_incl_vat",
+            "qa_2_maximum"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_minimum_price_incl_vat",
+            "qa_2_minimum"
+          ],
+          [
+            "sensor.fictional_qa_2_vat_amount",
+            "qa_2_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_2_verified_final_price",
+            "qa_2_component_final"
+          ]
+        ],
+        "sha256": "7d5021acae1097c32273b959549aadb6dfb25aa9a686efa1b5f32629a84a620b",
+        "schedule_sha256": "312200887eda2231a3400263cedd6aae5548d624f932db63179ffc3147715e67",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-2.ledger.sqlite3"
+      }
+    ]
+  },
+  {
+    "stage": "fresh",
+    "version": "1.1.0",
+    "resources": [
+      {
+        "id": "10fd7620577f4b39a7ad3f2c9db80b01",
+        "url": "/ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0",
+        "type": "module"
+      }
+    ],
+    "reload_preserved": true,
+    "sites": [
+      {
+        "entry_id": "qa-pe-site-0",
+        "settings": {
+          "id": "qa_0",
+          "name": "Fictional QA 0",
+          "nordpool_entry": "np",
+          "area": "DK2",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25,
+          "dso_mode": "manual",
+          "dated_components": [
+            {
+              "id": "supplier",
+              "amount": 3,
+              "unit": "ore/kWh",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "source": "Synthetic test-only contract",
+              "verified_on": "2026-10-23"
+            },
+            {
+              "id": "dso",
+              "amount": 20,
+              "unit": "ore/kWh",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "source": "Synthetic test-only contract",
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "setup_step": "review",
+          "display_including_vat": true
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_0_applied_dso_tariff",
+            "qa_0_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_0_current_dso_tariff_ex_vat",
+            "qa_0_dso"
+          ],
+          [
+            "sensor.fictional_qa_0_current_final_price_incl_vat",
+            "qa_0_current_final"
+          ],
+          [
+            "sensor.fictional_qa_0_current_quarter",
+            "qa_0_price_period"
+          ],
+          [
+            "sensor.fictional_qa_0_current_spot_price_ex_vat",
+            "qa_0_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_1_00_00_24_00",
+            "qa_0_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_2_unavailable",
+            "qa_0_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_3_unavailable",
+            "qa_0_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_4_unavailable",
+            "qa_0_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_0_electricity_tax",
+            "qa_0_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_0_energinet_network",
+            "qa_0_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_0_energinet_system",
+            "qa_0_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_0_including_vat",
+            "qa_0_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_0_next_quarter_final_price_incl_vat",
+            "qa_0_next_final"
+          ],
+          [
+            "sensor.fictional_qa_0_next_quarter_spot_price_ex_vat",
+            "qa_0_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_nord_pool_spot",
+            "qa_0_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_status",
+            "qa_0_availability"
+          ],
+          [
+            "sensor.fictional_qa_0_supplier_markup",
+            "qa_0_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_average_price_incl_vat",
+            "qa_0_average"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_maximum_price_incl_vat",
+            "qa_0_maximum"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_minimum_price_incl_vat",
+            "qa_0_minimum"
+          ],
+          [
+            "sensor.fictional_qa_0_vat_amount",
+            "qa_0_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_0_verified_final_price",
+            "qa_0_component_final"
+          ]
+        ],
+        "sha256": "dde17f96ee1473cc4cb20ebd47ec6f79079dbed9993fb3f925a373e101578ece",
+        "schedule_sha256": "fdc755f76636a7ec1424f5acd154980159d183ced079fdaa5b22f7194c20b3f4",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-0.ledger.sqlite3"
+      },
+      {
+        "entry_id": "qa-pe-site-1",
+        "settings": {
+          "id": "qa_1",
+          "name": "Fictional QA 1",
+          "nordpool_entry": "np",
+          "area": "DK2",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25,
+          "dso_mode": "manual",
+          "dated_components": [
+            {
+              "id": "supplier",
+              "amount": 3,
+              "unit": "ore/kWh",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "source": "Synthetic test-only contract",
+              "verified_on": "2026-10-23"
+            },
+            {
+              "id": "dso",
+              "amount": 20,
+              "unit": "ore/kWh",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "source": "Synthetic test-only contract",
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "setup_step": "review",
+          "display_including_vat": false
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_1_applied_dso_tariff",
+            "qa_1_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_1_current_dso_tariff_ex_vat",
+            "qa_1_dso"
+          ],
+          [
+            "sensor.fictional_qa_1_current_final_price_incl_vat",
+            "qa_1_current_final"
+          ],
+          [
+            "sensor.fictional_qa_1_current_quarter",
+            "qa_1_price_period"
+          ],
+          [
+            "sensor.fictional_qa_1_current_spot_price_ex_vat",
+            "qa_1_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_1_00_00_24_00",
+            "qa_1_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_2_unavailable",
+            "qa_1_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_3_unavailable",
+            "qa_1_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_4_unavailable",
+            "qa_1_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_1_electricity_tax",
+            "qa_1_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_1_energinet_network",
+            "qa_1_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_1_energinet_system",
+            "qa_1_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_1_including_vat",
+            "qa_1_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_1_next_quarter_final_price_incl_vat",
+            "qa_1_next_final"
+          ],
+          [
+            "sensor.fictional_qa_1_next_quarter_spot_price_ex_vat",
+            "qa_1_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_nord_pool_spot",
+            "qa_1_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_status",
+            "qa_1_availability"
+          ],
+          [
+            "sensor.fictional_qa_1_supplier_markup",
+            "qa_1_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_average_price_incl_vat",
+            "qa_1_average"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_maximum_price_incl_vat",
+            "qa_1_maximum"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_minimum_price_incl_vat",
+            "qa_1_minimum"
+          ],
+          [
+            "sensor.fictional_qa_1_vat_amount",
+            "qa_1_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_1_verified_final_price",
+            "qa_1_component_final"
+          ]
+        ],
+        "sha256": "ff56b086f0ab64b26bb95e4a391ffe82a39bbbdbb28843348b0d390e0c531845",
+        "schedule_sha256": "f6063499e24747975ecd53ca04c41de5aab2eb76fe57d4d1cd0112a974f45fc6",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-1.ledger.sqlite3"
+      },
+      {
+        "entry_id": "qa-pe-site-2",
+        "settings": {
+          "id": "qa_2",
+          "name": "Fictional QA 2",
+          "nordpool_entry": "np",
+          "area": "DK2",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25,
+          "dso_mode": "manual",
+          "dated_components": [
+            {
+              "id": "supplier",
+              "amount": 3,
+              "unit": "ore/kWh",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "source": "Synthetic test-only contract",
+              "verified_on": "2026-10-23"
+            },
+            {
+              "id": "dso",
+              "amount": 20,
+              "unit": "ore/kWh",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "source": "Synthetic test-only contract",
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "setup_step": "review",
+          "display_including_vat": true
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_2_applied_dso_tariff",
+            "qa_2_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_2_current_dso_tariff_ex_vat",
+            "qa_2_dso"
+          ],
+          [
+            "sensor.fictional_qa_2_current_final_price_incl_vat",
+            "qa_2_current_final"
+          ],
+          [
+            "sensor.fictional_qa_2_current_quarter",
+            "qa_2_price_period"
+          ],
+          [
+            "sensor.fictional_qa_2_current_spot_price_ex_vat",
+            "qa_2_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_1_00_00_24_00",
+            "qa_2_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_2_unavailable",
+            "qa_2_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_3_unavailable",
+            "qa_2_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_4_unavailable",
+            "qa_2_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_2_electricity_tax",
+            "qa_2_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_2_energinet_network",
+            "qa_2_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_2_energinet_system",
+            "qa_2_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_2_including_vat",
+            "qa_2_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_2_next_quarter_final_price_incl_vat",
+            "qa_2_next_final"
+          ],
+          [
+            "sensor.fictional_qa_2_next_quarter_spot_price_ex_vat",
+            "qa_2_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_nord_pool_spot",
+            "qa_2_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_status",
+            "qa_2_availability"
+          ],
+          [
+            "sensor.fictional_qa_2_supplier_markup",
+            "qa_2_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_average_price_incl_vat",
+            "qa_2_average"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_maximum_price_incl_vat",
+            "qa_2_maximum"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_minimum_price_incl_vat",
+            "qa_2_minimum"
+          ],
+          [
+            "sensor.fictional_qa_2_vat_amount",
+            "qa_2_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_2_verified_final_price",
+            "qa_2_component_final"
+          ]
+        ],
+        "sha256": "7d5021acae1097c32273b959549aadb6dfb25aa9a686efa1b5f32629a84a620b",
+        "schedule_sha256": "312200887eda2231a3400263cedd6aae5548d624f932db63179ffc3147715e67",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-2.ledger.sqlite3"
+      }
+    ]
+  },
+  {
+    "stage": "fresh-restart",
+    "version": "1.1.0",
+    "resources": [
+      {
+        "id": "10fd7620577f4b39a7ad3f2c9db80b01",
+        "url": "/ha_energy_price_engine/energy-price-engine-card.js?v=1.1.0",
+        "type": "module"
+      }
+    ],
+    "reload_preserved": true,
+    "sites": [
+      {
+        "entry_id": "qa-pe-site-0",
+        "settings": {
+          "area": "DK2",
+          "dated_components": [
+            {
+              "amount": 3,
+              "id": "supplier",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            },
+            {
+              "amount": 20,
+              "id": "dso",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "display_including_vat": true,
+          "dso_mode": "manual",
+          "id": "qa_0",
+          "name": "Fictional QA 0",
+          "nordpool_entry": "np",
+          "setup_step": "review",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_0_applied_dso_tariff",
+            "qa_0_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_0_current_dso_tariff_ex_vat",
+            "qa_0_dso"
+          ],
+          [
+            "sensor.fictional_qa_0_current_final_price_incl_vat",
+            "qa_0_current_final"
+          ],
+          [
+            "sensor.fictional_qa_0_current_quarter",
+            "qa_0_price_period"
+          ],
+          [
+            "sensor.fictional_qa_0_current_spot_price_ex_vat",
+            "qa_0_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_1_00_00_24_00",
+            "qa_0_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_2_unavailable",
+            "qa_0_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_3_unavailable",
+            "qa_0_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_0_dso_4_unavailable",
+            "qa_0_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_0_electricity_tax",
+            "qa_0_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_0_energinet_network",
+            "qa_0_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_0_energinet_system",
+            "qa_0_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_0_including_vat",
+            "qa_0_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_0_next_quarter_final_price_incl_vat",
+            "qa_0_next_final"
+          ],
+          [
+            "sensor.fictional_qa_0_next_quarter_spot_price_ex_vat",
+            "qa_0_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_nord_pool_spot",
+            "qa_0_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_0_status",
+            "qa_0_availability"
+          ],
+          [
+            "sensor.fictional_qa_0_supplier_markup",
+            "qa_0_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_average_price_incl_vat",
+            "qa_0_average"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_maximum_price_incl_vat",
+            "qa_0_maximum"
+          ],
+          [
+            "sensor.fictional_qa_0_today_s_minimum_price_incl_vat",
+            "qa_0_minimum"
+          ],
+          [
+            "sensor.fictional_qa_0_vat_amount",
+            "qa_0_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_0_verified_final_price",
+            "qa_0_component_final"
+          ]
+        ],
+        "sha256": "dde17f96ee1473cc4cb20ebd47ec6f79079dbed9993fb3f925a373e101578ece",
+        "schedule_sha256": "fdc755f76636a7ec1424f5acd154980159d183ced079fdaa5b22f7194c20b3f4",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-0.ledger.sqlite3"
+      },
+      {
+        "entry_id": "qa-pe-site-1",
+        "settings": {
+          "area": "DK2",
+          "dated_components": [
+            {
+              "amount": 3,
+              "id": "supplier",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            },
+            {
+              "amount": 20,
+              "id": "dso",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "display_including_vat": false,
+          "dso_mode": "manual",
+          "id": "qa_1",
+          "name": "Fictional QA 1",
+          "nordpool_entry": "np",
+          "setup_step": "review",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_1_applied_dso_tariff",
+            "qa_1_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_1_current_dso_tariff_ex_vat",
+            "qa_1_dso"
+          ],
+          [
+            "sensor.fictional_qa_1_current_final_price_incl_vat",
+            "qa_1_current_final"
+          ],
+          [
+            "sensor.fictional_qa_1_current_quarter",
+            "qa_1_price_period"
+          ],
+          [
+            "sensor.fictional_qa_1_current_spot_price_ex_vat",
+            "qa_1_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_1_00_00_24_00",
+            "qa_1_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_2_unavailable",
+            "qa_1_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_3_unavailable",
+            "qa_1_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_1_dso_4_unavailable",
+            "qa_1_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_1_electricity_tax",
+            "qa_1_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_1_energinet_network",
+            "qa_1_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_1_energinet_system",
+            "qa_1_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_1_including_vat",
+            "qa_1_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_1_next_quarter_final_price_incl_vat",
+            "qa_1_next_final"
+          ],
+          [
+            "sensor.fictional_qa_1_next_quarter_spot_price_ex_vat",
+            "qa_1_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_nord_pool_spot",
+            "qa_1_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_1_status",
+            "qa_1_availability"
+          ],
+          [
+            "sensor.fictional_qa_1_supplier_markup",
+            "qa_1_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_average_price_incl_vat",
+            "qa_1_average"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_maximum_price_incl_vat",
+            "qa_1_maximum"
+          ],
+          [
+            "sensor.fictional_qa_1_today_s_minimum_price_incl_vat",
+            "qa_1_minimum"
+          ],
+          [
+            "sensor.fictional_qa_1_vat_amount",
+            "qa_1_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_1_verified_final_price",
+            "qa_1_component_final"
+          ]
+        ],
+        "sha256": "ff56b086f0ab64b26bb95e4a391ffe82a39bbbdbb28843348b0d390e0c531845",
+        "schedule_sha256": "f6063499e24747975ecd53ca04c41de5aab2eb76fe57d4d1cd0112a974f45fc6",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-1.ledger.sqlite3"
+      },
+      {
+        "entry_id": "qa-pe-site-2",
+        "settings": {
+          "area": "DK2",
+          "dated_components": [
+            {
+              "amount": 3,
+              "id": "supplier",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            },
+            {
+              "amount": 20,
+              "id": "dso",
+              "source": "Synthetic test-only contract",
+              "unit": "ore/kWh",
+              "valid_from": "2020-01-01",
+              "valid_to": "2030-01-01",
+              "vat_included": false,
+              "vat_rate": 0.25,
+              "verified_on": "2026-10-23"
+            }
+          ],
+          "display_including_vat": true,
+          "dso_mode": "manual",
+          "id": "qa_2",
+          "name": "Fictional QA 2",
+          "nordpool_entry": "np",
+          "setup_step": "review",
+          "timezone": "Europe/Copenhagen",
+          "vat": 0.25
+        },
+        "options": {},
+        "entities": [
+          [
+            "sensor.fictional_qa_2_applied_dso_tariff",
+            "qa_2_component_dso"
+          ],
+          [
+            "sensor.fictional_qa_2_current_dso_tariff_ex_vat",
+            "qa_2_dso"
+          ],
+          [
+            "sensor.fictional_qa_2_current_final_price_incl_vat",
+            "qa_2_current_final"
+          ],
+          [
+            "sensor.fictional_qa_2_current_quarter",
+            "qa_2_price_period"
+          ],
+          [
+            "sensor.fictional_qa_2_current_spot_price_ex_vat",
+            "qa_2_current_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_1_00_00_24_00",
+            "qa_2_grid_period_1"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_2_unavailable",
+            "qa_2_grid_period_2"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_3_unavailable",
+            "qa_2_grid_period_3"
+          ],
+          [
+            "sensor.fictional_qa_2_dso_4_unavailable",
+            "qa_2_grid_period_4"
+          ],
+          [
+            "sensor.fictional_qa_2_electricity_tax",
+            "qa_2_component_electricity_tax"
+          ],
+          [
+            "sensor.fictional_qa_2_energinet_network",
+            "qa_2_component_energinet_net"
+          ],
+          [
+            "sensor.fictional_qa_2_energinet_system",
+            "qa_2_component_energinet_system"
+          ],
+          [
+            "sensor.fictional_qa_2_including_vat",
+            "qa_2_including_vat"
+          ],
+          [
+            "sensor.fictional_qa_2_next_quarter_final_price_incl_vat",
+            "qa_2_next_final"
+          ],
+          [
+            "sensor.fictional_qa_2_next_quarter_spot_price_ex_vat",
+            "qa_2_next_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_nord_pool_spot",
+            "qa_2_component_spot"
+          ],
+          [
+            "sensor.fictional_qa_2_status",
+            "qa_2_availability"
+          ],
+          [
+            "sensor.fictional_qa_2_supplier_markup",
+            "qa_2_component_supplier"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_average_price_incl_vat",
+            "qa_2_average"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_maximum_price_incl_vat",
+            "qa_2_maximum"
+          ],
+          [
+            "sensor.fictional_qa_2_today_s_minimum_price_incl_vat",
+            "qa_2_minimum"
+          ],
+          [
+            "sensor.fictional_qa_2_vat_amount",
+            "qa_2_component_vat"
+          ],
+          [
+            "sensor.fictional_qa_2_verified_final_price",
+            "qa_2_component_final"
+          ]
+        ],
+        "sha256": "7d5021acae1097c32273b959549aadb6dfb25aa9a686efa1b5f32629a84a620b",
+        "schedule_sha256": "312200887eda2231a3400263cedd6aae5548d624f932db63179ffc3147715e67",
+        "ledger_name": "ha_energy_price_engine.qa-pe-site-2.ledger.sqlite3"
+      }
+    ]
+  }
+]

@@ -15,10 +15,10 @@ from homeassistant.util import dt as dt_util
 
 from .api import PriceAPI
 from .const import DOMAIN
+from .lovelace_resource import CARD_URL, async_register_card
 from .price_engine import day_bounds
 from .status import availability, display_basis, display_price, grid_periods, quarter, statistics
 
-CARD_URL = "/ha_energy_price_engine/energy-price-engine-card.js"
 COMPONENTS = ("spot", "dso", "energinet_net", "energinet_system", "supplier", "electricity_tax")
 
 
@@ -32,6 +32,8 @@ async def async_setup_dashboard(hass):
             )
         ]
     )
+
+    await async_register_card(hass)
 
 
 def _instant(start, end, zone):

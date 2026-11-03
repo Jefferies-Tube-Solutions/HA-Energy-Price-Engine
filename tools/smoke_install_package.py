@@ -1,6 +1,7 @@
 """Extract an archive outside the checkout and load it in a fresh real HA harness."""
 
 import argparse
+import json
 import os
 import subprocess
 import sys
@@ -27,7 +28,7 @@ async def test_independent_installed_package(hass, freezer, enable_custom_integr
     root=Path(os.environ["PE_PACKAGE_ROOT"])
     assert Path(integration.__file__).resolve().is_relative_to(root)
     manifest=json.loads((Path(integration.__file__).parent/"manifest.json").read_text())
-    assert manifest["version"]=="1.0.0"
+    assert manifest["version"]==__PE_VERSION__
     freezer.move_to("2026-10-24T10:00:00Z")
     now=datetime(2026,10,24,10,tzinfo=UTC)
     from homeassistant.core import SupportsResponse
@@ -60,6 +61,12 @@ async def test_independent_installed_package(hass, freezer, enable_custom_integr
     entry=await complete_wizard(form)
     await hass.async_block_till_done()
     assert entry.state==ConfigEntryState.LOADED
+    if "lovelace" in manifest["dependencies"]:
+        from homeassistant.components.lovelace.const import LOVELACE_DATA
+        resources=hass.data[LOVELACE_DATA].resources
+        owned=[r for r in resources.async_items() if r["url"].startswith("/ha_energy_price_engine/energy-price-engine-card.js?")]
+        assert len(owned)==1 and owned[0]["type"]=="module"
+        assert owned[0]["url"].endswith("?v="+manifest["version"])
     from homeassistant.helpers import entity_registry as er
     from homeassistant.helpers.entity import EntityCategory
     registered=er.async_entries_for_config_entry(er.async_get(hass),entry.entry_id)
@@ -106,7 +113,7 @@ async def test_independent_installed_package(hass, freezer, enable_custom_integr
 """
 
 
-def smoke(archive):
+def smoke(archive, expected_version=None):
     archive = Path(archive).resolve()
     with tempfile.TemporaryDirectory(prefix="pe-independent-install-") as directory:
         root = Path(directory)
@@ -119,8 +126,13 @@ def smoke(archive):
                 if path.is_absolute() or ".." in path.parts:
                     raise ValueError("Unsafe archive path")
             candidate.extractall(destination)
+        manifest = json.loads(
+            (root / "custom_components/ha_energy_price_engine/manifest.json").read_text()
+        )
+        if expected_version is not None:
+            assert manifest["version"] == expected_version, "Unexpected package release version"
         test = root / "test_package_install.py"
-        test.write_text(TEST)
+        test.write_text(TEST.replace("__PE_VERSION__", repr(manifest["version"])))
         environment = dict(os.environ)
         environment["PYTHONPATH"] = str(root)
         environment["PE_PACKAGE_ROOT"] = str(root)
@@ -153,4 +165,6 @@ def smoke(archive):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
-    smoke(parser.parse_args().archive)
+    parser.add_argument("--expected-version")
+    args = parser.parse_args()
+    smoke(args.archive, args.expected_version)

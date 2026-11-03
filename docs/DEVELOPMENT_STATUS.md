@@ -1,3 +1,385 @@
+# v1.1.0 stable candidate accepted — guarded publisher activated
+
+Branch release/v1.1.0, existing PR23 / issue22. Known reviewed tooling checkpoint
+32375321bd37d0dae6cae6dc9631c9af854a33a2 passed all12 push/PR quality checks.
+Checkpoint subject: **Activate guarded v1.1 stable after native upgrade and final gates**.
+Main/latest remain v1.0.0 until this new exact source passes all mandatory gates.
+
+Final local validation:172 tests/core on HA2026.10.3/.4,91%coverage,zero skips,
+two known upstream HACS deprecations. Seven new gate tests reject missing PR runs,
+failed/cancelled/skipped/timed-out security checks, pending external checks and
+required reviews. Ruff/format pass. All35 browser regressions plus six real native
+HTTP/authenticated WebSocket card scenarios (EN/DA,1440/820/390px) pass.
+
+Real disposable HA booted the independently downloaded/hash-verified public beta.1,
+then upgraded to stable and restarted in a separate process. All69 original entity
+IDs,three site settings/mixed VAT preferences,schedules and three SQLite ledger
+byte hashes stayed identical. Resource ID/order persisted; only version URL changed
+to?v=1.1.0. Fresh stable cold-start,reload and separate restart retained the generated
+single resource and all fresh IDs/history. All six SQLite integrity checks=ok.
+Browser unit changes and card reads caused zero provider requests. Native QA used
+fictional contracts and a synthetic Nord Pool service stub; PE-only clock/timer
+mapping left HA auth/wall clock untouched. No owner/Pi/physical-device acceptance
+claim. Optional native camera libturbojpeg and performance warnings are unrelated.
+See [native evidence](receipts/v1.1.0-simulation.json), immutable public beta receipt,
+compact process outputs, QA scripts and six screenshot hashes.
+
+Only runtime payload change from immutable d7cb97c3b1efbed49d7f68a023c52ed6ba5fe10f
+is manifest1.1.0. Clean double builds and both outside-source native ZIP installs pass.
+Public beta source/assets/HACS channels independently verified. All14 previous release
+IDs,tag objects and asset digests preserved. Source/native guard passes locally.
+
+Activated narrow push-triggered publish-v11-stable.yml follows the tested prior stable
+flow: wait all exact-head push+PR quality/security gates and native proof; read current
+policies/reviews; mark existing PR23 ready and merge normally with expected-head SHA;
+verify identical merged tree; dispatch seven exact-main checks; only then reproducible
+archives,new immutable tag,latest-stable publication,two independent public/HACS/native
+jobs and final audit receipt. Historical workflows/releases are preserved.
+No branch-protection override,force push,release overwrite or rebrand is authorized.
+
+Next: observe this new source's CI and guarded publisher. Do not claim merge or release
+until actually verified. Complete public asset/latest/HACS checks, final handoff and
+issue22 closure only after success, then STOP before JTS Tariff Engine work.
+
+---
+
+# v1.1.0 stable promotion in progress — 3 November 2026
+
+Continuing owner-approved issue22 and existing cumulative draft PR23 on
+release/v1.1.0, baseline d7cb97c3b1efbed49d7f68a023c52ed6ba5fe10f.
+This authorization supersedes historical beta-only STOP instructions below.
+Main remains 19af5bf4412c5f3cc3b3e07c6d756da372f81ba6; no stable1.1 tag/release.
+Checkpoint subject: **Prepare metadata-only v1.1 stable and fail-closed promotion gates**.
+
+Cloud runtime is connected with enforced network policy. Python3.14.8/Node24,
+hash-locked HA2026.10.3/.4, pinned actual HACS and locked Playwright/system Chromium
+are installed. Published snapshot originally lacked dependencies and release tags;
+restored without changing lockfiles. All35 browser scenarios passed.
+Public beta source/assets/digests downloaded and checked. A public-channel regression
+incorrectly expected stable after restoring explicit beta visibility; fixed the test
+to assert the actual offered public beta, then continue stable checks with visibility
+off. Historical beta tests now use the immutable beta tree rather than stable bytes.
+Initial six Python failures were missing local tags; two remaining failures were a
+missing root prefix in the newly archived historical-beta test fixture; corrected.
+Final both-core suites passed:165/core,91%coverage,zero skips,two known upstream HACS deprecations.
+
+Only integration payload change is manifest1.1.0. New narrow stable source guard,
+candidate package hashes, dedicated HACS stable tests and v1.1 guarded publisher
+preserve historical v1.0 automation and receipts. Publisher requires native proof,
+exact push/PR workflows, ordinary PR23 merge with expected SHA, exact-main seven
+checks, clean repeated archives and all14 previous releases. Native real HA beta
+baseline has loaded three fictional sites,69 entities and real SQLite files, with
+synthetic provider service and PE-only fixed clock/relative timer mapping. Actual
+beta→stable process upgrade and separate restart passed:69 IDs,three unchanged site
+settings/schedules and three byte-identical SQLite ledgers; resource ID/order retained
+and URL updated to?v=1.1.0. Fresh-install/native UI acceptance remains in progress. No production
+systems or rebrand touched. The new publisher is NOT activated until proof is complete.
+
+Next: finish native cold-start/upgrade/restart/UI evidence, run both-core/HACS tests,
+commit native proof, activate publisher only after candidate gates, observe exact-main
+CI and independent public verification. Close issue22 only on verified publication.
+
+---
+
+# STOP — v1.1.0-beta.1 blocked by ordinary GitHub PR-creation policy
+
+Implementation, native acceptance and all six exact-source quality CI checks are
+complete. **No beta PR, tag or release was created; v1.1.0-beta.1 is not publicly
+available through HACS yet.** Do not describe the beta publication mission as complete.
+
+Branch: **feat/v1.1-beta1-dashboard**. Tested review/source checkpoint:
+**8e74c241595e6bb957b899f5c4c16399c8476356**. Final handoff subject:
+**Record the v1.1 PR permission gate and tested resumable candidate**.
+Main remains19af5bf4412c5f3cc3b3e07c6d756da372f81ba6; immutable v1.0.0 remains
+latest stable. User beta publication authorization persists; no general approval
+request is needed. No main merge, stable promotion or owner system change is allowed.
+
+## Exact outstanding gate and owner action
+
+[Ordinary draft-PR job](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41540637126/job/125603585753)
+passed source/native-proof and stable integrity guards, then GitHub rejected creation:
+
+> pull request create failed: GraphQL: GitHub Actions is not permitted to create or approve pull requests (createPullRequest)
+
+Owner action: [create one draft PR through normal permissions](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/compare/main...feat/v1.1-beta1-dashboard?expand=1),
+**base main / head feat/v1.1-beta1-dashboard**, and provide its URL. PR notes are
+prepared in [RELEASE_V11_BETA1.md](RELEASE_V11_BETA1.md). This preserves repository
+permissions; no workflow policy or protection bypass was attempted.
+[Machine-readable gate and checks](receipts/v1.1.0-beta.1-blocker.json).
+
+## Concrete tested candidate
+
+Both requested features are implemented in focused commits: a794c8c native optional
+Lovelace resources, b40acba per-card units/shared concurrent reads,5972589 metadata/
+HACS channels,8e74c24 complete native proof/review/release tooling. Default storage
+resources auto-load before inspection; one exact local manual PE URL is updated in
+place with installed-version cache busting. IDs/order/unrelated resources persist;
+duplicates/YAML/failures get precise instructions and pricing keeps running.
+Both unit configurations render independently over identical unrounded snapshots;
+all graphs/tooltips/axes/statistics/tariffs/breakdowns/tables use the selected unit.
+Unit-only changes do not request backend data; concurrent authenticated reads coalesce.
+
+Passed local160 tests per HA2026.10.3/.4,91%coverage,zero skips,two unchanged upstream
+HACS deprecations;35 EN/DA desktop/tablet/mobile browser cases;four independent ZIP
+installs;Ruff/format;clean reproducible builds from8e74c24 match native hashes.
+All six remote quality checks on8e74c24 passed: both test cores, browser35, official
+hassfest, HACS metadata and outside-source package installs. Only the separate
+ordinary PR permission action failed. No pricing/security test was ignored.
+
+[Native evidence](receipts/v1.1.0-beta.1-simulation.json) includes20 hashed screenshots,
+fresh cold install, actual public v1.0.0 package upgrade and both real HA restarts.
+Upgrade preserved69 IDs,three effective site configurations/mixed VAT choices,
+canonical schedules and both original ledger files byte-identically. Fresh setup
+retained23 IDs,No VAT preference and one identical ledger. Resource IDs/order and
+both units survived reload/restart. Three SQLite integrity checks=ok; no source calls
+from reads/unit changes; zero PE browser errors/warnings. QA harness changes remained
+temporary. All disposable HA instances are stopped; owner PAHA02-DEV visual acceptance
+is separate. Core/API2/source/SQLite/sensor/config files and dashboard data functions
+are unchanged. No production HA,Node-RED,CM,Tesla/Easee or charging control was touched.
+
+```text
+0c492c7a9ddd2dfdf07f1fc6549349b578a117c85c4bcc0e9d35bfdaea1d4b26  ha_energy_price_engine.zip
+482748d001f3dce2ab16d145a65883ccbe2d53a93871f303813d308a7a1b32b5  ha_energy_price_engine-manual.zip
+```
+
+These are candidate package hashes, not public release assets. Their provenance
+manifest must be rebuilt from the eventual exact tagged source even though runtime
+bytes remain identical. See [complete two-card YAML](dashboard.yaml),
+[registration/YAML/upgrade/uninstall guide](PRICE_DASHBOARD.md),
+[HACS beta instructions](HACS_DISTRIBUTION.md). Browser plugin unavailable; locked
+Playwright/system Chromium was used. No Pi or provider-uptime claim is made.
+
+## Resume publication after the real PR exists
+
+Do not restart development or create another PR. Read the owner-created PR and its
+actual review/security gates, confirm this branch's current head/main/stable identity,
+then save a final tested source checkpoint and wait all12 push/PR checks. The prior
+failed action is an ordinary permission gate resolved by owner PR creation, not a
+waiver for a failing quality/security check. Verify source/native proof, clean double
+builds, the same runtime hashes and all previous13 releases. Create one annotated
+v1.1.0-beta.1 tag at the exact validated source and push normally; observe all18
+push/PR/tag source checks before publication. Never move/replace an existing tag.
+
+Populate PE_SOURCE and PE_TAG_OBJECT in [inactive publisher template](contracts/publish-v11-workflow.yml)
+and copy it to .github/workflows/publish-v11.yml; change only that activation file
+and this handoff after tagging. Push the automation-only commit. The guarded helper
+checks open unmerged review PR, exact tag/source, source CI, native hashes, reproducibility
+and previous stable/beta identities; it publishes only prerelease/latest=false.
+Both fresh public jobs must pass public metadata/source/assets/SHA256, real pinned
+HACS stable+beta discovery/install/update and both native ZIP layouts on both cores.
+Observe final audit; anonymously download/verify all four assets and latest redirect.
+Update this handoff/public receipt, observe final checkpoint CI and STOP. No main merge
+or v1.1 stable work. The public-beta/HACS verification stage remains unrun until then.
+
+---
+
+# v1.1.0-beta.1 implementation and native acceptance ready for review
+
+Branch feat/v1.1-beta1-dashboard. Previous checkpoint
+59725898e6ab7719d5fe58fbf82a736e01891546 contains beta metadata; source starts
+from immutable stable19af5bf4412c5f3cc3b3e07c6d756da372f81ba6.
+Checkpoint subject: **Record v1.1 native acceptance and prepare the ordinary beta review PR**.
+
+Completed locally:160 tests per HA2026.10.3/.4,91%coverage,zero skips,two known
+upstream HACS deprecations;35 Playwright browser cases; Ruff and formatting; four
+independent clean ZIP installations (both layouts on both cores). New release-gate
+tests reject any failed/pending security check, mutated stable/main/latest identity
+and changed stable asset. Source guard/native hashes pass. Core pricing/source/API2/
+SQLite/config/sensors remain byte-identical stable; dashboard data-producing and
+permission functions are AST-identical. No canonical data or sensor-unit change.
+
+[Native receipt](receipts/v1.1.0-beta.1-simulation.json) records20 hashed images.
+Fresh beta boot loads the storage resource before the first dashboard visit, and a
+fresh browser renders both units without Resource UI setup. Actual public v1.0.0
+HACS ZIP upgrade adopts the manual PE resource in place, preserving its ID, both
+unrelated resources/order,69 entity IDs/three site settings/mixed VAT preferences,
+canonical schedules and two byte-identical PE ledgers. Native single-site reload
+keeps the global resource. Both actual HA restarts preserve resource identity,69+23
+entity IDs, VAT and all three ledger byte hashes; SQLite integrity=ok. Fresh site
+uses fictional3.75øre inclusive supplier input and No VAT display; no private terms
+are inferred. No provider requests from reads or unit changes; zero browser errors/
+warnings. QA harness corrections (shadow DOM, locale, site ordering, confirmed HTTP
+port trial) were confined to temporary files. All disposable HA instances are stopped.
+
+All runtime hashes match clean candidate5972589; candidate archives:
+
+```text
+0c492c7a9ddd2dfdf07f1fc6549349b578a117c85c4bcc0e9d35bfdaea1d4b26  ha_energy_price_engine.zip
+482748d001f3dce2ab16d145a65883ccbe2d53a93871f303813d308a7a1b32b5  ha_energy_price_engine-manual.zip
+```
+
+README/AGENTS/dashboard/HACS docs, complete two-card YAML and release notes are
+prepared. Current work adds ordinary PR preparation, a guarded prerelease helper
+and independent public verifier. [Inactive publisher template](contracts/publish-v11-workflow.yml)
+is reviewable but cannot publish by itself. The preparation action only creates or
+reuses one draft review PR. No approval, merge, tag, release or policy change occurs
+at this checkpoint. It will fail visibly if repository Actions PR creation is disabled.
+
+Next: observe this exact-source CI and ordinary PR gate. If creation is permitted,
+verify the open PR/current review policy, push a tested final source checkpoint and
+wait all12 push/PR checks. Build twice and compare native proof hashes, create one
+annotated v1.1.0-beta.1 tag at that exact source, push normally and wait all18 push/
+PR/tag checks. Populate the inactive template's PE_SOURCE/PE_TAG_OBJECT and copy it
+to .github/workflows/publish-v11.yml in an automation-only commit with this handoff.
+The helper enforces frozen source/native proof, open reviewable PR, exact tag/CI,
+reproducibility, main/latest stable1.0.0 and all13 prior release identities. Fresh
+public jobs on both cores must verify metadata/assets/checksums/source, actual HACS
+stable/beta channels and both native ZIP layouts; final audit and anonymous local
+downloads precede STOP. No retagging, asset replacement or main merge is allowed.
+
+If the ordinary PR gate is rejected, finish unaffected CI/evidence, record its exact
+job/error and owner comparison URL, and leave this concrete checkpoint unpublished.
+Do not route around GitHub permissions or repeat a general release approval request.
+The user already authorizes prerelease publication after gates; PAHA02-DEV acceptance
+before any future stable promotion stays owner work. Main/latest stable remain
+v1.0.0; no production HA, Node-RED, CM or charging control was touched.
+
+---
+
+# v1.1 beta metadata and channel validation complete locally
+
+Branch feat/v1.1-beta1-dashboard; previous feature commit
+b40acbadc95aa01a934d49acbcc857f7017b8661 passed all six remote CI checks.
+Checkpoint subject: **Validate beta metadata and preserve the stable HACS channel**.
+Manifest version is now1.1.0-beta.1. All152 tests per HA2026.10.3/.4 passed locally,
+91%coverage,zero skips,two unchanged upstream HACS deprecations. Ruff passes. The35
+frontend cases remain green; backend functions producing dashboard data are AST-
+identical stable and all other pricing/source/API/SQLite/config/entity modules are
+byte-identical. The source guard enforces that narrow runtime surface.
+
+New actual pinned HACS beta tests cover explicit opt-in and release selection, stable
+as the default, native update state, stable→beta file replacement, independent SQLite
+file retention, reinstall/uninstall and channel isolation. Stable HACS regressions
+now load the immutable actual stable source instead of relabeling beta code as1.0.0.
+Package smoke tests support an explicit expected version and verify the automatic
+resource for versions declaring lovelace. No package/user source arithmetic changed.
+
+Next: clean beta packages; native storage-resource cold start/manual1.0 upgrade,
+fresh browser paired units and restarts; durable evidence/docs; ordinary beta PR
+creation and guarded prerelease. Original public stable ZIP was downloaded again and
+its SHA verified; latest still redirects to1.0.0. Native QA stays on isolated localhost
+with recorded/synthetic providers. No owner system was contacted.
+
+---
+
+# v1.1 paired display units implemented
+
+Branch feat/v1.1-beta1-dashboard; resource commit a794c8c67d2c91d896bd5b60ebc6130a695af97e
+passed all six GitHub CI checks (both cores, browser, hassfest, HACS and package).
+Local resource tests:8 passed on current HA; supported resource/integration/dashboard
+subset:23 passed. Checkpoint subject: **Add independent ore and DKK card projections with shared concurrent reads**.
+
+Per-card optional unit defaults ore_kwh (two decimals); dkk_kwh divides original
+frontend amounts by100 before four-decimal formatting. All price surfaces/axes/tooltips
+use the unit; independent selection and site VAT preference remain. Unit-only changes
+render existing data without backend I/O. In-flight reads share one authenticated
+connection/message; no persistent response cache or backend arithmetic changes.
+
+Current HA producer fixture export:9 passed. Playwright/system Chromium:35 browser
+cases passed, including paired units on desktop1440/tablet820/mobile390, EN/DA,
+negative/near-zero values, VAT modes,92/96/100-quarter days, missing gaps, independent
+selection and coalesced reads. Source JSON stays byte-equivalent. Browser plugin
+unavailable. Initial added test used an unscoped locator matching both cards; fixed
+to scope the first card. No runtime defect or failing case remains in this run.
+
+README/dashboard documentation, complete two-card YAML and AGENTS scope updated.
+Next: beta metadata/test-channel tooling, native automatic cold-load/upgrade/restart
+evidence, full tests/reproducible packages and ordinary reviewable PR/publication.
+Main/tag/latest stable remain unchanged at v1.0.0. No owner systems accessed.
+
+---
+
+# v1.1.0-beta.1 — Issue20 development started
+
+New owner task supersedes the completed v1.0.0 STOP below. Dedicated branch
+feat/v1.1-beta1-dashboard starts from exact stable tag/main
+19af5bf4412c5f3cc3b3e07c6d756da372f81ba6, annotated object
+76f1a4a6e7471ae7c8c80ef1d899fab5dfc4737e. Issue20 read; remote main/tag verified
+unchanged, no existing v1.1 branch. Stable final handoff and receipts retained from
+release/v1.0.0. User explicitly authorizes a reviewable PR and v1.1.0-beta.1
+prerelease after all gates, not main merge or stable promotion.
+
+Checkpoint subject: **Register bundled card through the native Lovelace resource collection**.
+Global setup registers the optional card via supported storage collection APIs, awaits
+async_get_info before listing, derives version from installed metadata, adopts one
+exact local PE path in place, preserves unrelated IDs/order, serializes concurrent
+registration and logs actionable duplicate/YAML/failure instructions. Resources persist
+when one site unloads. Manifest declares lovelace dependency for supported setup order.
+No extra JS injection, direct storage edits, price code or API changes.
+
+Next: implement optional per-card ore_kwh/dkk_kwh projection and shared concurrent
+read requests; add paired desktop/tablet/mobile, precision/DST/gap/VAT tests; native
+cold-load/fresh/upgrade/restart proof; docs/two-card YAML; beta metadata and packaging;
+full two-core CI and usual guarded PR/publication. GitHub Actions PR creation was
+disabled during v1.0.0; recheck the ordinary v1.1 PR action after concrete work. Never
+bypass that gate. Main and latest stable must remain v1.0.0. Owner PAHA02-DEV acceptance
+is separate; no production HA, Node-RED or charging controls will be accessed.
+
+---
+
+# STOP — v1.0.0 Stable publicly published and verified
+
+Mission complete on 2 November 2026. [Public stable release](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/releases/tag/v1.0.0)
+is non-draft, non-prerelease and latest. Existing owner PR19 was marked ready and
+merged normally after all 12 final-source checks and ordinary repository gate review.
+No required review/protection rule was bypassed and no new PR was created.
+
+Final main / immutable v1.0.0 commit: **19af5bf4412c5f3cc3b3e07c6d756da372f81ba6**.
+Reviewed branch source: d9fed5953471728d0fea8b9e67006859266ffabf; trees match exactly.
+Annotated tag object:76f1a4a6e7471ae7c8c80ef1d899fab5dfc4737e. Release ID431957547.
+[All seven exact-main checks passed](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41522824022).
+[Publisher, both public verification jobs and final audit passed](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41522410438).
+
+The accepted beta.12 engine remains frozen: all 22 Python modules and card JS are
+byte-identical e506ccfc40b61413bd83e3ce60081a60d517348f; API v2 unchanged. Tests passed
+142 per HA2026.10.3/.4, 90% coverage, zero skips, two known upstream HACS deprecations;
+22 EN/DA desktop/mobile browser cases, official hassfest, HACS and packaging passed.
+[Native receipt](receipts/v1.0.0-simulation.json): 30 screenshots, fresh setup and
+actual public beta.12→stable upgrade, both HA restarts, all 69 original test entity
+IDs/three effective site settings/mixed VAT choices and two byte-identical ledgers
+preserved. Fresh setup retained 23 IDs, No preference, inclusive supplier input and
+one identical ledger after restart. All tested SQLite integrity checks returned ok.
+
+The independent public jobs downloaded actual stable assets, tag source, main source
+and original beta.12 asset. Actual pinned HACS2.0.5/upstream code passed four channel
+cases per core: fresh custom-repository registration and installation with beta
+visibility off, beta.12 filesystem/history update, stable updater/cache/WebSocket
+state, no newer-main SHA or future-beta leakage, reinstall/uninstall. GitHub transport
+uses the independently downloaded public metadata/bytes; no owner HA is accessed.
+Both public ZIP layouts also installed outside source on both cores, including four
+additional local installs from anonymous public downloads.
+
+[Publication receipt](receipts/v1.0.0.json) records exact source, asset IDs/digests,
+provenance, CI and public HACS evidence. [Anonymous download receipt](receipts/v1.0.0-local-public.json)
+confirms all four assets HTTP200, source/payload equivalence and latest redirect.
+SHA-256:
+
+```text
+ddbd7d09b27bd28af48e5b33bbc870bed80f797d411c1e83505bf8db90aa10c2  ha_energy_price_engine.zip
+3cde8b261e378160555fdb2d335cc897d022bcb55d96adcf06e7da2c6735fa1d  ha_energy_price_engine-manual.zip
+```
+
+HACS on PAHA02-DEV: keep/add this repository as Integration, turn Show beta versions
+off, refresh, download v1.0.0, restart HA and reload app/browser/card resources.
+Keep existing beta.12 sites, IDs, rates, overrides, VAT preference and history.
+Device info must show1.0.0. Follow [the exact guide](HACS_DISTRIBUTION.md) and
+[owner verification checklist](ACCEPTANCE.md); owner live acceptance stays unchecked.
+
+No publication blocker remains. External HACS default-catalog/brands submissions are
+separate owner work, not prerequisites for custom-repository installation. CM's
+unreleased API-v1 consumer migration remains separate. Private rates and public-rate
+validity still require real evidence; software/cloud tests establish neither public
+provider uptime nor Raspberry Pi performance. No production HA, Node-RED, vehicle,
+charger or CM repository/control was changed. Both disposable native HA instances
+are stopped. All prior beta tags/releases and development PR history were preserved.
+
+This final handoff/receipt commit is only on release/v1.0.0; main/tag remain immutable
+at the source above. Checkpoint subject: **Finalize verified v1.0.0 stable publication and permanent handoff**.
+Observe its ordinary documentation-checkpoint CI before stopping. No further feature,
+merge, tag move, release or production action is authorized by this completed mission.
+
+---
+
 # v1.0.0 reviewed publisher activated — final gates running
 
 Native acceptance and tooling checkpoint304429e5b9194936217a6098c8a9db15b8c62576

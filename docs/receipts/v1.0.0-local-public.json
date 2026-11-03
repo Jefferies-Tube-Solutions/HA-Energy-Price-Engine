@@ -1,0 +1,26 @@
+{
+  "verified_at": "2026-11-02T20:53:32.212217+00:00",
+  "source_commit": "19af5bf4412c5f3cc3b3e07c6d756da372f81ba6",
+  "public_release_url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/releases/tag/v1.0.0",
+  "public_http_assets": {
+    "ha_energy_price_engine.zip": "ddbd7d09b27bd28af48e5b33bbc870bed80f797d411c1e83505bf8db90aa10c2",
+    "ha_energy_price_engine-manual.zip": "3cde8b261e378160555fdb2d335cc897d022bcb55d96adcf06e7da2c6735fa1d",
+    "SHA256SUMS": "157b8ee58184728b2ddf32cc77cf26582012567f92779848d36a7fd6bd3c3bf4",
+    "BUILD_MANIFEST.json": "cdbe369b031dcd5114d9c4c6935afb052b13ee273c32c0b7f52f3f170174dc44"
+  },
+  "tag_object": "76f1a4a6e7471ae7c8c80ef1d899fab5dfc4737e",
+  "source_and_both_layouts_match": true,
+  "latest_redirect_verified": true,
+  "network_scope": "Anonymous public HTTPS downloads, no GitHub API transport",
+  "production_or_charging_controls_touched": false,
+  "independent_public_zip_installs": {
+    "2026.10.3": {
+      "hacs_layout": "passed",
+      "manual_layout": "passed"
+    },
+    "2026.10.4": {
+      "hacs_layout": "passed",
+      "manual_layout": "passed"
+    }
+  }
+}

@@ -1,10 +1,13 @@
-title: Energy prices
+title: Electricity prices
 views:
-  - title: Electricity prices
-    path: electricity-prices
-    icon: mdi:chart-timeline-variant
-    type: panel
+  - title: Prices
+    path: prices
     cards:
       - type: custom:energy-price-engine-card
-        # One site is automatic; several sites show a named selector.
-        # Optional: site_id: paste_the_chosen_site_id
+        unit: ore_kwh
+        # site_id: YOUR_EXISTING_SITE_ID  # optional; select in the card otherwise
+      - type: custom:energy-price-engine-card
+        unit: dkk_kwh
+        # site_id: YOUR_EXISTING_SITE_ID
+# Storage resources are registered automatically by PE v1.1.0-beta.1.
+# YAML resource mode: add the installed version module under lovelace.resources.

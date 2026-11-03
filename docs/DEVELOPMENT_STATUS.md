@@ -1,3 +1,40 @@
+# v1.1.0-beta.1 publication resumed — 3 November 2026
+
+Owner-created draft [PR21](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/pull/21)
+resolves the prior PR-creation gate. Do not create another PR or rerun that obsolete
+creation attempt. The earlier STOP below is historical and superseded by the owner's
+explicit instruction to finish tag/release checks and publication without merging main.
+
+Verified exact source: **d7cb97c3b1efbed49d7f68a023c52ed6ba5fe10f**.
+All12 push/PR checks succeeded before tagging; all18 push/PR/tag checks now succeeded.
+Immutable annotated v1.1.0-beta.1 object: **d0b3a59e39691d83ed5a61bbc16434e042b62e2a**,
+peeling to the source above. Normal Git push created the tag once; no replacement.
+PR21 stays open/draft and unmerged. Main remains19af5bf4412c5f3cc3b3e07c6d756da372f81ba6.
+
+Source/native guard passed again; clean builds from the exact source matched each
+other and the native-proof runtime/archive hashes. Existing160 tests/core,91%coverage,
+35 browser cases,20 native screenshots, fresh/public-stable upgrade/restart and SQLite
+retention evidence remain valid; no feature/runtime changes were made in this resume.
+
+Checkpoint subject: **Activate verified v1.1 beta publication from PR21 and immutable tag**.
+Only .github/workflows/publish-v11.yml and this handoff change after tagging, exactly
+as allowed by the existing guarded helper. Publisher pins the source/tag object,
+rechecks the actual review/security gates and all18 checks, main/latest stable and
+all13 prior release identities, native proof, clean reproducibility and independent
+package installs before public prerelease/latest=false creation. It never merges or
+approves a PR, changes policy, retags or replaces assets.
+
+Next: observe publisher, both fresh public verification jobs and final audit. They
+must download actual public metadata/source/assets/checksums and stable1.0.0 bytes,
+test real pinned HACS stable-default/beta-opt-in discovery/update/install and both
+native ZIP layouts on both cores. Independently download anonymously and verify all
+four assets, tag/source provenance and unchanged latest-stable redirect; record the
+permanent public receipt/handoff, observe final checkpoint CI and STOP. Publication
+has not yet happened at this checkpoint. No general release confirmation is needed.
+No production HA, Node-RED, CM or charging control operation is authorized.
+
+---
+
 # STOP — v1.1.0-beta.1 blocked by ordinary GitHub PR-creation policy
 
 Implementation, native acceptance and all six exact-source quality CI checks are

@@ -1,3 +1,55 @@
+# STOP — PE v1.1.0 Stable published and independently verified
+
+Owner-approved issue22 completed through existing cumulative PR23. No JTS Tariff
+Engine rebrand (#24),v1.2,CM,production HA,Node-RED or charging work was started.
+
+- PR23 merged normally after all12 exact candidate push/PR checks passed.
+  Reviewed source:b06b5cefa3ccf90e5aab1a06fb1fb92996303946.
+  Actual main/tag source:**931af05e0d115091e91a7c5bc8980e407c1beedd**.
+- [Seven exact-main checks](https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine/actions/runs/41655213729)
+  completed successfully,including both cores,browser,hassfest,HACS,package/integrity.
+- [Guarded publisher and final audit](https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine/actions/runs/41654571031)
+  **success**,including both independent public HA2026.10.3/.4 jobs.
+- [v1.1.0 Stable/latest](https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine/releases/tag/v1.1.0)
+  release432816327 is public,non-draft,non-prerelease. Immutable annotated tag object
+  **9499d76b5572e3189a39f86b08fff5b9d8696552** points to the exact tested main.
+  All four assets are downloadable and source/provenance/digests verified.
+- Actual pinned HACS stable selection without beta opt-in,beta.1→stable update,
+  channel isolation/reinstall/history retention and both native ZIP layouts passed
+  independently on both public jobs and again in this cloud environment.
+- All14 previous release IDs,tag objects and asset digests remain intact,including
+  v1.0.0 and public v1.1.0-beta.1. Older cumulative beta PR21 was not merged.
+
+Final local172 tests/core on HA2026.10.3/.4,91%coverage,zero skips,two unchanged
+upstream HACS deprecations;35 browser regressions and six native authenticated
+EN/DA/desktop/tablet/phone scenarios passed. Native beta→stable upgrade,reload,
+separate restart and fresh cold-start/restart preserved all69 original entity IDs,
+three site configurations/mixed VAT choices/schedules and three original SQLite
+byte hashes. All six SQLite integrity checks=ok. Native resource ID/order persisted
+and cache URL became?v=1.1.0; card reads/unit changes made zero provider requests.
+Only runtime payload change from immutable beta.1 is manifest1.1.0. API2,price math,
+VAT,sources,ledger/schema/revisions,site/sensor identities and dashboard JS are frozen.
+
+```text
+cd6977f2eb20bb8e294c620e97f79fe53cc668caafc9c6f11a3ef000762e4f29  ha_energy_price_engine.zip
+09a22b83b1a4889e1554d4ab0502837a0dad8027fe0a68324ff38e23407f4d53  ha_energy_price_engine-manual.zip
+```
+
+[Permanent public receipt](receipts/v1.1.0.json) ·
+[Native evidence and boundaries](receipts/v1.1.0-simulation.json) ·
+[Stable installation/rollback](HACS_DISTRIBUTION.md).
+Native checks used only disposable localhost HA,fictional sites/contracts and synthetic
+provider services with a PE-only clock. No owner/Pi/physical-device acceptance or
+provider uptime/catalog admission is claimed. Optional native camera/performance
+warnings are recorded separately. All disposable QA HA processes are stopped.
+
+Branch release/v1.1.0. Prior audit checkpoint74222fe records public publication;
+final handoff subject:**Record completed v1.1 stable publication and stop handoff**.
+This documentation-only checkpoint does not move main or the immutable tag.
+Observe its ordinary push CI; do not initiate more development or rebranding.
+
+---
+
 # v1.1.0 stable candidate accepted — guarded publisher activated
 
 Branch release/v1.1.0, existing PR23 / issue22. Known reviewed tooling checkpoint

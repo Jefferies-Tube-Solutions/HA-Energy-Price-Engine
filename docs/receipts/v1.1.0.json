@@ -6576,7 +6576,8 @@
     "id": 41654571031,
     "html_url": "https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine/actions/runs/41654571031",
     "publication_and_public_jobs": "success",
-    "workflow_final_conclusion": "pending audit completion"
+    "workflow_final_conclusion": "success",
+    "workflow_conclusion_observed_at": "2026-11-03T14:41:50.949072+00:00"
   },
   "validation": {
     "cores": [
@@ -6589,5 +6590,14 @@
   },
   "owner_final_verification": false,
   "production_or_charging_controls_touched": false,
-  "catalog_admission_claimed": false
+  "catalog_admission_claimed": false,
+  "independent_cloud_verification": {
+    "expected_commit": "931af05e0d115091e91a7c5bc8980e407c1beedd",
+    "core": "2026.10.3",
+    "public_source_and_all_four_assets": "passed",
+    "pinned_actual_hacs_stable_selection_and_beta1_update": "passed",
+    "both_native_zip_installs": "passed",
+    "previous_releases_verified": 14,
+    "verified_at": "2026-11-03T14:41:50.949081+00:00"
+  }
 }

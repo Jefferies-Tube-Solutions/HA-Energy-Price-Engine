@@ -1,10 +1,10 @@
-name: Publish authorized PE v1.1.0-beta.1
+name: Verify immutable public PE v1.1.0-beta.1
 on:
   push:
     branches: [feat/v1.1-beta1-dashboard]
     paths: [.github/workflows/publish-v11.yml]
 permissions:
-  contents: write
+  contents: read
   checks: read
   actions: read
   pull-requests: read
@@ -13,32 +13,30 @@ concurrency:
   cancel-in-progress: false
 env:
   PE_SOURCE: d7cb97c3b1efbed49d7f68a023c52ed6ba5fe10f
-  PE_TAG_OBJECT: d0b3a59e39691d83ed5a61bbc16434e042b62e2a
   GH_TOKEN: ${{ github.token }}
 jobs:
-  publish:
-    name: publish beta v1.1
+  integrity:
+    name: Existing public beta integrity
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: v1.1.0-beta.1
+          ref: ${{ github.sha }}
           fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: '3.14.8'
-      - uses: astral-sh/setup-uv@v6
-      - name: Verify reviewed source, all push/PR/tag checks, native evidence and prior stable/beta integrity; publish without merging
-        run: python tools/publish_v11.py publish
-      - uses: actions/upload-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           name: pe-v11-promotion-state
-          path: ${{ runner.temp }}/pe-v11-state.json
-          if-no-files-found: error
+          run-id: 41594660100
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}
+      - name: Verify original successful publication, immutable source/tag/assets, all18 checks, reviews and prior releases
+        run: python tools/audit_v11_public.py check
   verify-public:
     name: Verify public v1.1 beta (${{ matrix.target }})
-    needs: publish
+    needs: integrity
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -51,7 +49,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: v1.1.0-beta.1
+          ref: ${{ github.sha }}
           fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
@@ -62,7 +60,7 @@ jobs:
           uv venv
           uv pip sync --require-hashes ${{ matrix.lockfile }}
           uv run --no-project python tools/prepare_hacs_reference.py
-      - name: Download public beta, stable and main; test both HACS channels and native ZIP layouts
+      - name: Download unchanged public assets/source and verify both actual HACS channels with corrected cache expectations
         run: uv run --no-project python tools/verify_public_beta.py --expected-commit "$PE_SOURCE" --output "$RUNNER_TEMP/public-v11"
       - uses: actions/upload-artifact@v4
         with:
@@ -71,27 +69,35 @@ jobs:
           if-no-files-found: error
   audit:
     name: Record verified v1.1 beta
-    needs: [publish, verify-public]
+    needs: [integrity, verify-public]
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      checks: read
+      actions: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: feat/v1.1-beta1-dashboard
+          ref: ${{ github.sha }}
           fetch-depth: 0
       - uses: actions/download-artifact@v5
         with:
           name: pe-v11-promotion-state
+          run-id: 41594660100
+          github-token: ${{ github.token }}
           path: ${{ runner.temp }}
       - uses: actions/download-artifact@v5
         with:
           pattern: pe-v11-public-*
           path: public-verification
-      - name: Recheck public verification, prior versions, unchanged main/latest stable and open unmerged review PR
-        run: python tools/publish_v11.py audit
-      - name: Preserve public receipt on the beta branch only
+      - name: Require all current push/PR quality/security checks and both public verification jobs; preserve failed-check history transparently
+        run: python tools/audit_v11_public.py audit
+      - name: Save the verification receipt only on the open beta branch
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add docs/receipts/v1.1.0-beta.1.json
-          git commit -m 'docs: record verified public v1.1.0-beta.1 prerelease'
+          git commit -m 'docs: verify immutable public beta with correct HACS channel restoration'
           git push origin HEAD:refs/heads/feat/v1.1-beta1-dashboard

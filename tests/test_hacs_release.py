@@ -63,6 +63,12 @@ def release_inputs():
             },
             "source_commit": "synthetic-validated-source",
             "release": {"tag_name": TAG, "draft": False, "prerelease": False, "assets": []},
+            # A real higher beta must already exist while restoring the saved
+            # channel, not only be injected later in the isolation test.
+            "releases": [
+                {"tag_name": "v1.1.0-beta.1", "draft": False, "prerelease": True, "assets": []},
+                {"tag_name": TAG, "draft": False, "prerelease": False, "assets": []},
+            ],
         },
         files,
         archive.getvalue(),
@@ -147,6 +153,9 @@ async def test_hacs_stable_discovery_upgrade_and_channel_isolation(
         repo.data.last_commit = receipt["source_commit"]
 
     release_feed = list(receipt.get("releases", [receipt["release"]]))
+    opted_in_version = str(
+        max(AwesomeVersion(r["tag_name"]) for r in release_feed if not r["draft"])
+    )
 
     async def github_method(*, method=None, **kwargs):
         if method is hacs.githubapi.repos.releases.list:
@@ -235,8 +244,12 @@ async def test_hacs_stable_discovery_upgrade_and_channel_isolation(
         repo.data.show_beta = False
         assert native_update.latest_version == TAG
         hacs.data.async_restore_repository(str(repo.data.id), saved_hacs[str(repo.data.id)])
-        assert native_update.latest_version == TAG
+        assert native_update.latest_version == (opted_in_version if show_beta else TAG)
         assert repo.data.show_beta is show_beta
+        # The remaining filesystem assertions deliberately test stable installs;
+        # beta installation is separately exercised with the actual beta bytes.
+        repo.data.show_beta = False
+        await repo.common_update_data(force=True)
 
         assert TAG in repo.data.published_tags
         assert native_update.latest_version == TAG
@@ -312,7 +325,7 @@ async def test_hacs_stable_discovery_upgrade_and_channel_isolation(
             ] == TAG.removeprefix("v")
         # Actual upstream get_releases filtering and available-version selection:
         # normal stable users never receive a later unqualified beta or a main SHA.
-        future = {"tag_name": "v1.1.0-beta.1", "prerelease": True, "draft": False, "assets": []}
+        future = {"tag_name": "v99.0.0-beta.1", "prerelease": True, "draft": False, "assets": []}
         release_feed.insert(0, future)
         repo.data.show_beta = False
         await repo.common_update_data(force=True)

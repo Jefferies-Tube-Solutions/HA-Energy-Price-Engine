@@ -1,3 +1,47 @@
+# v1.1 beta published — correcting independent channel-verification expectation
+
+Public beta exists: https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/releases/tag/v1.1.0-beta.1
+The guarded publication job succeeded after all18 immutable-source checks, actual
+PR21 review checks, prior13 release integrity, clean reproducibility and package
+installs. Released source remains d7cb97c3b1efbed49d7f68a023c52ed6ba5fe10f;
+tag object d0b3a59e39691d83ed5a61bbc16434e042b62e2a. Main/latest stable remain1.0.0.
+
+Initial public verification on both cores failed specifically at
+tests/test_hacs_release.py#L238: the old stable-channel cache test restored beta
+visibility=True, then incorrectly demanded latest_version=v1.0.0 even though
+v1.1.0-beta.1 is now correctly available. Both False-channel cases and the separate
+beta tests were unaffected. This is a verification expectation/fixture defect, not
+a runtime change. Initial job history is preserved, not hidden or marked successful.
+[Initial workflow](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41594660100).
+
+Checkpoint subject: **Correct HACS opt-in verification while preserving immutable beta assets**.
+The test now explicitly asserts the selected channel after cache restoration, returns
+to stable for stable filesystem tests, includes an already-published higher beta in
+ordinary regression fixtures, and uses a distinct synthetic future version. All six
+local pinned-HACS stable/beta cases pass. No tests/cases are skipped. No source
+integration, native proof, version, tag or release asset changes are made.
+
+Anonymous public downloads already verified all four asset digests, tag/source payload
+equivalence, unchanged main/stable payload and latest redirect to1.0.0. Metadata hashes
+are frozen too: BUILD_MANIFEST0031cb74a8e61928243822c73b53c5f8fda0ec259bad80edf664b17e4eda94a8;
+SHA256SUMS2b4799fc8f184651a7a7437c8eeb07e2e18fd1e40a61049ce4f4631653ab95fd.
+
+The existing workflow is now verification-only: it downloads the original successful
+publisher state, requires unchanged source/tag/all four assets and every previous
+release, checks the open unmerged PR, then runs both fresh public-download/HACS/native
+package jobs with the corrected test revision. It cannot create/update a release.
+Final audit additionally requires all12 current verification-source push/PR quality
+and security checks, records both old failures and the correction, and saves a receipt
+only to the beta branch. Only the workflow, this handoff, the test and a read-only
+audit helper differ from the immutable source; runtime diffs must be empty.
+
+Next: observe both fresh public verification jobs, all current CI and final audit;
+independently confirm public downloads again, finalize the permanent receipt/handoff
+and STOP. Do not retag, replace assets, merge main or claim verification complete
+until these actual checks pass. No production HA, Node-RED or charging controls touched.
+
+---
+
 # v1.1.0-beta.1 publication resumed — 3 November 2026
 
 Owner-created draft [PR21](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/pull/21)

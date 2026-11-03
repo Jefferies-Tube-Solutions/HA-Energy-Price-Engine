@@ -29,7 +29,14 @@ def storage(hass, items, hass_storage):
 
 
 @pytest.mark.parametrize(
-    "existing", [None, CARD_URL, CARD_URL + "?v=1.0.0", CARD_URL + "?v=old#cache"]
+    "existing",
+    [
+        None,
+        CARD_URL,
+        CARD_URL + "?v=1.0.0",
+        CARD_URL + "?v=1.1.0-beta.1",
+        CARD_URL + "?v=old#cache",
+    ],
 )
 async def test_cold_start_adopts_manual_keeps_order_and_no_duplicates(hass, hass_storage, existing):
     unrelated = [
@@ -43,14 +50,14 @@ async def test_cold_start_adopts_manual_keeps_order_and_no_duplicates(hass, hass
     # No dashboard visit or resources WebSocket before PE setup.
     with patch(
         "custom_components.ha_energy_price_engine.lovelace_resource.async_get_integration",
-        AsyncMock(return_value=SimpleNamespace(version="1.1.0-beta.1")),
+        AsyncMock(return_value=SimpleNamespace(version="1.1.0")),
     ):
         await asyncio.gather(async_register_card(hass), async_register_card(hass))
         assert resources.loaded
         result = resources.async_items()
         ours = [i for i in result if i["url"].startswith(CARD_URL + "?")]
         assert len(ours) == 1 and ours[0]["type"] == "module"
-        assert ours[0]["url"] == CARD_URL + "?v=1.1.0-beta.1"
+        assert ours[0]["url"] == CARD_URL + "?v=1.1.0"
         assert [i for i in result if i not in ours] == unrelated
         if manual:
             assert result[1]["id"] == "manual"
@@ -143,7 +150,7 @@ async def test_native_yaml_mode_keeps_resources_and_still_serves_card(
     assert entry.runtime_data.price_engine.records
     assert resources.async_items() == items
     assert "lovelace_resources" not in hass_storage
-    assert "YAML-managed" in caplog.text and "?v=1.1.0-beta.1" in caplog.text
+    assert "YAML-managed" in caplog.text and "?v=1.1.0" in caplog.text
     response = await (await hass_client()).get(CARD_URL)
     assert response.status == 200 and "energy-price-engine-card" in await response.text()
     assert await hass.config_entries.async_unload(entry.entry_id)

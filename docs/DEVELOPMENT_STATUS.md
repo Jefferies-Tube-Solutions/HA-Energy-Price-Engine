@@ -1,3 +1,41 @@
+# v1.1.0 stable promotion in progress — 3 November 2026
+
+Continuing owner-approved issue22 and existing cumulative draft PR23 on
+release/v1.1.0, baseline d7cb97c3b1efbed49d7f68a023c52ed6ba5fe10f.
+This authorization supersedes historical beta-only STOP instructions below.
+Main remains 19af5bf4412c5f3cc3b3e07c6d756da372f81ba6; no stable1.1 tag/release.
+Checkpoint subject: **Prepare metadata-only v1.1 stable and fail-closed promotion gates**.
+
+Cloud runtime is connected with enforced network policy. Python3.14.8/Node24,
+hash-locked HA2026.10.3/.4, pinned actual HACS and locked Playwright/system Chromium
+are installed. Published snapshot originally lacked dependencies and release tags;
+restored without changing lockfiles. All35 browser scenarios passed.
+Public beta source/assets/digests downloaded and checked. A public-channel regression
+incorrectly expected stable after restoring explicit beta visibility; fixed the test
+to assert the actual offered public beta, then continue stable checks with visibility
+off. Historical beta tests now use the immutable beta tree rather than stable bytes.
+Initial six Python failures were missing local tags; two remaining failures were a
+missing root prefix in the newly archived historical-beta test fixture; corrected.
+Final both-core suites passed:165/core,91%coverage,zero skips,two known upstream HACS deprecations.
+
+Only integration payload change is manifest1.1.0. New narrow stable source guard,
+candidate package hashes, dedicated HACS stable tests and v1.1 guarded publisher
+preserve historical v1.0 automation and receipts. Publisher requires native proof,
+exact push/PR workflows, ordinary PR23 merge with expected SHA, exact-main seven
+checks, clean repeated archives and all14 previous releases. Native real HA beta
+baseline has loaded three fictional sites,69 entities and real SQLite files, with
+synthetic provider service and PE-only fixed clock/relative timer mapping. Actual
+beta→stable process upgrade and separate restart passed:69 IDs,three unchanged site
+settings/schedules and three byte-identical SQLite ledgers; resource ID/order retained
+and URL updated to?v=1.1.0. Fresh-install/native UI acceptance remains in progress. No production
+systems or rebrand touched. The new publisher is NOT activated until proof is complete.
+
+Next: finish native cold-start/upgrade/restart/UI evidence, run both-core/HACS tests,
+commit native proof, activate publisher only after candidate gates, observe exact-main
+CI and independent public verification. Close issue22 only on verified publication.
+
+---
+
 # STOP — v1.1.0-beta.1 blocked by ordinary GitHub PR-creation policy
 
 Implementation, native acceptance and all six exact-source quality CI checks are

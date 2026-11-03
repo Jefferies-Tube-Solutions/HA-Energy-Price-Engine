@@ -1,8 +1,8 @@
 # Bundled electricity-price dashboard
 
-## v1.1 beta: add the card once
+## v1.1 stable: add the card once
 
-Install PE once as a HACS **Integration**. In v1.1.0-beta.1, storage-mode Lovelace
+Install PE once as a HACS **Integration**. In v1.1.0, storage-mode Lovelace
 automatically receives its bundled JavaScript module, even before the first dashboard
 visit. Add a manual card with:
 
@@ -137,7 +137,7 @@ matching installed-version JavaScript and rejects older schema2 clients instead 
 
 ## v1.1 native validation
 
-[Native receipt](receipts/v1.1.0-beta.1-simulation.json) records20 hashed screenshots
+[Native receipt](receipts/v1.1.0-simulation.json) records20 hashed screenshots
 of fresh installation, actual public v1.0.0 upgrade and both restarts on disposable
 HA2026.10.4. Resource IDs/order, three original site settings,69 entity IDs and both
 original PE ledgers were preserved; all three tested ledgers passed integrity checks.
@@ -145,11 +145,11 @@ The fresh site retained23 IDs, No VAT preference and its ledger. No provider cal
 were made by card reads or unit-only changes. Browser coverage includes EN/DA,
 desktop/tablet/mobile,92/96/100-quarter days, negative/near-zero prices and gaps.
 
-[Native DKK, mobile](images/v1.1.0-beta.1/upgrade-dkk-390.png) ·
-[Native øre, desktop](images/v1.1.0-beta.1/upgrade-ore-1440.png) ·
-[Installed beta version](images/v1.1.0-beta.1/upgrade-device-version.png) ·
-[Fresh No VAT, DKK](images/v1.1.0-beta.1/fresh-dkk-390.png) ·
-[DKK after restart](images/v1.1.0-beta.1/upgrade-restarted-dkk-390.png).
+[Native DKK, mobile](images/v1.1.0/upgrade-dkk-390.png) ·
+[Native øre, desktop](images/v1.1.0/upgrade-ore-1440.png) ·
+[Installed beta version](images/v1.1.0/upgrade-device-version.png) ·
+[Fresh No VAT, DKK](images/v1.1.0/fresh-dkk-390.png) ·
+[DKK after restart](images/v1.1.0/upgrade-restarted-dkk-390.png).
 
 These are recorded/synthetic software checks, not owner PAHA02-DEV acceptance or
 Raspberry Pi/provider availability benchmarks. The Browser plugin was unavailable;

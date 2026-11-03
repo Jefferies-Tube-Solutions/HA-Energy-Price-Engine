@@ -235,8 +235,17 @@ async def test_hacs_stable_discovery_upgrade_and_channel_isolation(
         repo.data.show_beta = False
         assert native_update.latest_version == TAG
         hacs.data.async_restore_repository(str(repo.data.id), saved_hacs[str(repo.data.id)])
-        assert native_update.latest_version == TAG
         assert repo.data.show_beta is show_beta
+        available = [
+            r["tag_name"]
+            for r in release_feed
+            if not r.get("draft") and (show_beta or not r.get("prerelease"))
+        ]
+        assert native_update.latest_version == available[0]
+        # Continue the stable-channel install/update checks with beta visibility off.
+        # Restoring beta visibility above legitimately offers a newer public beta.
+        repo.data.show_beta = False
+        await repo.common_update_data(force=True)
 
         assert TAG in repo.data.published_tags
         assert native_update.latest_version == TAG

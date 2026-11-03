@@ -20,7 +20,7 @@ from awesomeversion import AwesomeVersion
 
 from tools.prepare_hacs_reference import PINS
 
-from .test_hacs_workflow import candidate_tree, upstream
+from .test_hacs_workflow import upstream
 
 ROOT = Path(__file__).parents[1]
 DOMAIN = "ha_energy_price_engine"
@@ -46,11 +46,18 @@ def inputs():
         )
         old = main
         old_prefix = f"custom_components/{DOMAIN}/"
-        content = io.BytesIO()
-        with zipfile.ZipFile(content, "w") as z:
-            for name, data in candidate_tree().items():
-                z.writestr("beta-source/" + name, data)
-        beta = content.getvalue()
+        beta = subprocess.check_output(
+            [
+                "git",
+                "archive",
+                "--format=zip",
+                "--prefix=beta-source/",
+                "d7cb97c3b1efbed49d7f68a023c52ed6ba5fe10f",
+                f"custom_components/{DOMAIN}",
+                "hacs.json",
+            ],
+            cwd=ROOT,
+        )
         feed = [
             {"tag_name": TAG, "prerelease": True, "draft": False, "assets": []},
             reference["release"],

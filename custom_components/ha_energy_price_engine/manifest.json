@@ -18,5 +18,5 @@
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/issues",
   "requirements": [],
-  "version": "1.1.0-beta.1"
+  "version": "1.1.0"
 }

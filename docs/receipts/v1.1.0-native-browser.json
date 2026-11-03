@@ -1,0 +1,50 @@
+[
+  {
+    "language": "en",
+    "width": 1440,
+    "cards": 2,
+    "quarters_per_card": 192,
+    "unit_change_provider_reads": 0,
+    "errors": []
+  },
+  {
+    "language": "en",
+    "width": 820,
+    "cards": 2,
+    "quarters_per_card": 192,
+    "unit_change_provider_reads": 0,
+    "errors": []
+  },
+  {
+    "language": "en",
+    "width": 390,
+    "cards": 2,
+    "quarters_per_card": 192,
+    "unit_change_provider_reads": 0,
+    "errors": []
+  },
+  {
+    "language": "da",
+    "width": 1440,
+    "cards": 2,
+    "quarters_per_card": 192,
+    "unit_change_provider_reads": 0,
+    "errors": []
+  },
+  {
+    "language": "da",
+    "width": 820,
+    "cards": 2,
+    "quarters_per_card": 192,
+    "unit_change_provider_reads": 0,
+    "errors": []
+  },
+  {
+    "language": "da",
+    "width": 390,
+    "cards": 2,
+    "quarters_per_card": 192,
+    "unit_change_provider_reads": 0,
+    "errors": []
+  }
+]

@@ -328,7 +328,7 @@ def publish():
             "git/tags",
             {
                 "tag": TAG,
-                "message": f"Energy Price Engine v1.1.0 Stable\nMain source: {source}\nReviewed PR23 source: {state['reviewed_source']}\nAccepted beta12: {BASELINE}",
+                "message": f"Energy Price Engine v1.1.0 Stable\nMain source: {source}\nReviewed PR23 source: {state['reviewed_source']}\nAccepted v1.1 beta.1: {BASELINE}",
                 "object": source,
                 "type": "commit",
                 "tagger": {
@@ -461,7 +461,9 @@ def audit():
         },
         "validation": {
             "cores": ["2026.10.3", "2026.10.4"],
-            "tests_per_core": state.get("tests_per_core"),
+            "tests_per_core": json.loads(Path("docs/receipts/v1.1.0-simulation.json").read_text())[
+                "tests_per_core"
+            ],
             "browser_tests": 35,
             "simulation_receipt": "docs/receipts/v1.1.0-simulation.json",
         },

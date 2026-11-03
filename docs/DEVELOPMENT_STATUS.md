@@ -1,3 +1,48 @@
+# v1.1.0 stable candidate accepted — guarded publisher activated
+
+Branch release/v1.1.0, existing PR23 / issue22. Known reviewed tooling checkpoint
+32375321bd37d0dae6cae6dc9631c9af854a33a2 passed all12 push/PR quality checks.
+Checkpoint subject: **Activate guarded v1.1 stable after native upgrade and final gates**.
+Main/latest remain v1.0.0 until this new exact source passes all mandatory gates.
+
+Final local validation:172 tests/core on HA2026.10.3/.4,91%coverage,zero skips,
+two known upstream HACS deprecations. Seven new gate tests reject missing PR runs,
+failed/cancelled/skipped/timed-out security checks, pending external checks and
+required reviews. Ruff/format pass. All35 browser regressions plus six real native
+HTTP/authenticated WebSocket card scenarios (EN/DA,1440/820/390px) pass.
+
+Real disposable HA booted the independently downloaded/hash-verified public beta.1,
+then upgraded to stable and restarted in a separate process. All69 original entity
+IDs,three site settings/mixed VAT preferences,schedules and three SQLite ledger
+byte hashes stayed identical. Resource ID/order persisted; only version URL changed
+to?v=1.1.0. Fresh stable cold-start,reload and separate restart retained the generated
+single resource and all fresh IDs/history. All six SQLite integrity checks=ok.
+Browser unit changes and card reads caused zero provider requests. Native QA used
+fictional contracts and a synthetic Nord Pool service stub; PE-only clock/timer
+mapping left HA auth/wall clock untouched. No owner/Pi/physical-device acceptance
+claim. Optional native camera libturbojpeg and performance warnings are unrelated.
+See [native evidence](receipts/v1.1.0-simulation.json), immutable public beta receipt,
+compact process outputs, QA scripts and six screenshot hashes.
+
+Only runtime payload change from immutable d7cb97c3b1efbed49d7f68a023c52ed6ba5fe10f
+is manifest1.1.0. Clean double builds and both outside-source native ZIP installs pass.
+Public beta source/assets/HACS channels independently verified. All14 previous release
+IDs,tag objects and asset digests preserved. Source/native guard passes locally.
+
+Activated narrow push-triggered publish-v11-stable.yml follows the tested prior stable
+flow: wait all exact-head push+PR quality/security gates and native proof; read current
+policies/reviews; mark existing PR23 ready and merge normally with expected-head SHA;
+verify identical merged tree; dispatch seven exact-main checks; only then reproducible
+archives,new immutable tag,latest-stable publication,two independent public/HACS/native
+jobs and final audit receipt. Historical workflows/releases are preserved.
+No branch-protection override,force push,release overwrite or rebrand is authorized.
+
+Next: observe this new source's CI and guarded publisher. Do not claim merge or release
+until actually verified. Complete public asset/latest/HACS checks, final handoff and
+issue22 closure only after success, then STOP before JTS Tariff Engine work.
+
+---
+
 # v1.1.0 stable promotion in progress — 3 November 2026
 
 Continuing owner-approved issue22 and existing cumulative draft PR23 on

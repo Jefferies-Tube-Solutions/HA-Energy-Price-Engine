@@ -6574,8 +6574,35 @@
     "id": 41596504540,
     "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41596504540",
     "integrity_and_public_jobs": "success",
-    "workflow_final_conclusion": "pending audit completion"
+    "workflow_final_conclusion": "success",
+    "final_observed_at": "2026-11-03T07:36:27.291723+00:00",
+    "completed_jobs": [
+      {
+        "name": "Existing public beta integrity",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41596504540/job/125785011789"
+      },
+      {
+        "name": "Verify public v1.1 beta (ha-2026.10.3)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41596504540/job/125785176325"
+      },
+      {
+        "name": "Verify public v1.1 beta (ha-2026.10.4)",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41596504540/job/125785176199"
+      },
+      {
+        "name": "Record verified v1.1 beta",
+        "status": "This job succeeded",
+        "url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41596504540/job/125785515024"
+      }
+    ]
   },
   "owner_acceptance": false,
-  "production_controls_touched": false
+  "production_controls_touched": false,
+  "independent_anonymous_public_receipt": {
+    "path": "docs/receipts/v1.1.0-beta.1-local-public.json",
+    "sha256": "0d15a8c65549a81bdc7c90a78dd28c266965f6d70163ce8142460b8f09a68667"
+  }
 }

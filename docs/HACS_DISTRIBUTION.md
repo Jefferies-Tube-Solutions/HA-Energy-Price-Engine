@@ -3,7 +3,7 @@
 ## Opt-in v1.1.0-beta.1
 
 The dedicated Issue20 prerelease adds automatic card resources and independent
-øre/DKK card units. Keep v1.0.0 for stable use. Once the prerelease is published,
+øre/DKK card units. Keep v1.0.0 for stable use. To install the published prerelease,
 HACS → Energy Price Engine → Show beta versions → explicitly select **v1.1.0-beta.1**
 → download → restart HA → reload the app/browser. Enabling visibility alone need not
 change HACS's selected download version. No site reset, history migration or second

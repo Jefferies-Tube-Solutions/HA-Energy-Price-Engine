@@ -1,0 +1,19 @@
+{
+  "verified_at": "2026-11-03T07:32:32.433769+00:00",
+  "tag": "v1.1.0-beta.1",
+  "tag_object": "d0b3a59e39691d83ed5a61bbc16434e042b62e2a",
+  "source_commit": "d7cb97c3b1efbed49d7f68a023c52ed6ba5fe10f",
+  "main_commit": "19af5bf4412c5f3cc3b3e07c6d756da372f81ba6",
+  "release_url": "https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/releases/tag/v1.1.0-beta.1",
+  "public_http_assets": {
+    "ha_energy_price_engine.zip": "0c492c7a9ddd2dfdf07f1fc6549349b578a117c85c4bcc0e9d35bfdaea1d4b26",
+    "ha_energy_price_engine-manual.zip": "482748d001f3dce2ab16d145a65883ccbe2d53a93871f303813d308a7a1b32b5",
+    "BUILD_MANIFEST.json": "0031cb74a8e61928243822c73b53c5f8fda0ec259bad80edf664b17e4eda94a8",
+    "SHA256SUMS": "2b4799fc8f184651a7a7437c8eeb07e2e18fd1e40a61049ce4f4631653ab95fd"
+  },
+  "public_source_payload_matches": true,
+  "main_stable_payload_preserved": true,
+  "latest_stable_redirect": "v1.0.0",
+  "network_scope": "Anonymous public HTTPS; no GitHub API or owner HA access",
+  "production_controls_touched": false
+}

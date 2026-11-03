@@ -8,12 +8,12 @@ electricity tax and VAT into a transparent marginal price per kWh.
 **Version 1.0.0** provides persistent price history and a stable read-only **API v2**.
 PE works independently of EV Charge Manager and sends no vehicle or charging commands.
 
-## v1.1 beta development
+## v1.1 beta
 
 Issue #20 adds automatic bundled-card registration for storage-mode dashboards and
 optional per-card `unit: ore_kwh` / `unit: dkk_kwh`. Two cards can display the same
-site independently. This branch targets the opt-in **v1.1.0-beta.1** prerelease;
-v1.0.0 remains the latest stable release. Publication/validation results are recorded
+site independently. The opt-in [**v1.1.0-beta.1** prerelease](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/releases/tag/v1.1.0-beta.1)
+is published and independently verified; v1.0.0 remains latest stable. Results are recorded
 in [the development handoff](docs/DEVELOPMENT_STATUS.md).
 [Quick start and complete two-card YAML](docs/PRICE_DASHBOARD.md).
 

@@ -1,3 +1,77 @@
+# STOP — v1.1.0-beta.1 publicly published and independently verified
+
+Mission complete on3 November2026. [Public prerelease](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/releases/tag/v1.1.0-beta.1),
+release ID432375464, is non-draft/prerelease=true. Main and latest stable remain
+v1.0.0 at19af5bf4412c5f3cc3b3e07c6d756da372f81ba6.
+Existing owner [PR21](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/pull/21)
+remains open/draft and unmerged. No additional PR or main merge was performed.
+
+Immutable released source: **d7cb97c3b1efbed49d7f68a023c52ed6ba5fe10f**.
+Annotated tag object: **d0b3a59e39691d83ed5a61bbc16434e042b62e2a**.
+All18 exact-source push/PR/tag CI checks passed before guarded publication.
+The [original publisher job succeeded](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41594660100/job/125779080052),
+including actual review/security checks, native/source proof, all13 previous release
+identities, clean double builds and native package installs. No retag or asset rewrite.
+
+[Independent public verification and final audit passed](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/actions/runs/41596504540)
+on both HA2026.10.3/.4. Verification-only revision9e1c7fca59ba3bd3d605d4191f9d67b3c16508fa
+passed all12 push/PR quality/security checks and all four integrity/public/audit jobs.
+It corrects an old HACS test assumption after restoring beta opt-in: a real newer
+beta should become available, while the stable channel remains1.0.0. The initial
+failed assertions and their exact correction are preserved in the public receipt;
+no case was skipped or waived. Test/verification changes are outside the released
+runtime; all integration files are byte-identical the immutable tag.
+
+[Public receipt](receipts/v1.1.0-beta.1.json) contains release/tag/source/asset identities,
+all source and verification CI URLs, actual API release feeds, both independent core
+receipts and original-failure history. Six actual pinned HACS cases/core consume the
+real downloaded public metadata/source: stable default and beta cache restoration,
+explicit beta selection, stable→beta file update, reinstall/uninstall, no false SHA
+updates or unintended beta exposure. Both actual public native ZIP layouts installed
+independently outside source on both cores.
+[Anonymous download receipt](receipts/v1.1.0-beta.1-local-public.json) confirms all four
+assets HTTP200, SHA256, tagged runtime equivalence, unchanged stable/main payload and
+latest redirect to1.0.0. All previous13 release/tag/asset identities remain preserved.
+
+```text
+0c492c7a9ddd2dfdf07f1fc6549349b578a117c85c4bcc0e9d35bfdaea1d4b26  ha_energy_price_engine.zip
+482748d001f3dce2ab16d145a65883ccbe2d53a93871f303813d308a7a1b32b5  ha_energy_price_engine-manual.zip
+```
+
+The release also contains BUILD_MANIFEST.json (source/clean state/runtime SHA256 map)
+and SHA256SUMS. Their anonymous hashes are recorded; every asset stayed unchanged
+through verification recovery. Reproduce public checks using the recorded verification
+revision and tools/verify_public_beta.py --expected-commit with the released source,
+not the initial tag's outdated postpublication test expectation.
+
+Software evidence:160 tests/core,91%coverage,zero skips,two known upstream HACS
+deprecations;35 EN/DA desktop/tablet/mobile browser cases.
+[Native proof](receipts/v1.1.0-beta.1-simulation.json):20 hashed images, automatic cold
+resources before any dashboard visit, actual public1.0.0 upgrade, fresh setup, reload
+and both HA restarts. Upgrade retains69 IDs/three effective site settings/mixed VAT
+choices/canonical schedules and two byte-identical PE ledgers; fresh setup retains23
+IDs,No preference and a third identical ledger. All SQLite integrity checks=ok.
+No provider calls from reads/unit-only changes; independent cards share concurrent
+reads. Core/API2/source/SQLite/sensor/config logic remains unchanged stable.
+
+PAHA02-DEV installation: HACS → Energy Price Engine → enable Show beta versions →
+explicitly select v1.1.0-beta.1 → download → restart HA → reload the browser/app.
+Keep existing sites/history/rates/VAT choices. The installed-version storage resource
+registers/updates automatically; no second HACS package or manual Resource UI entry.
+YAML resources remain user-managed. [Complete guide/two-card YAML](PRICE_DASHBOARD.md).
+
+No publication blocker remains. Owner PAHA02-DEV visual/hardware acceptance remains
+separate before any future stable promotion; cloud tests establish neither Pi speed
+nor source uptime/private contract validity. No production HA,Node-RED,CM,Tesla/Easee
+or charging control was accessed or changed. No stable promotion was performed.
+
+Final handoff subject: **Finalize verified v1.1.0-beta.1 publication and permanent handoff**.
+Only documentation/receipts change after the successful verification revision. Observe
+its ordinary checkpoint CI before stopping. The release/tag and main stay immutable
+at their SHAs above; do not start v1.1 stable or unrelated development.
+
+---
+
 # v1.1 beta published — correcting independent channel-verification expectation
 
 Public beta exists: https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/releases/tag/v1.1.0-beta.1

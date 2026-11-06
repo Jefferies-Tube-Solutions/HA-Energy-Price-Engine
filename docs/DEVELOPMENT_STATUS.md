@@ -10,6 +10,11 @@ to their original branches. No publication is authorized for v1.2.0.
 
 Local validation checked the nine approved source PNG hashes before downsampling
 the product icon. See the exact commit checks for HA, dashboard and packaging CI.
+The first rebrand run passed metadata and package installation, but both HA
+jobs exposed stale v1.1.0 expectations. The historical HACS test now uses
+the exact published v1.1.0 source and the YAML card test uses the installed
+version. The follow-up commit runs the same CI checks.
+
 Repository rename and GitHub About text require repository settings access. Source
 links use the current canonical repository URL until the rename can be completed.
 

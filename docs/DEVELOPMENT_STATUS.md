@@ -6,8 +6,12 @@ Checkpoint: **Link Service info to the Tariff Engine commissioning guide**.
 Adds the native service configuration link and an English overview to the
 Configure site and review steps. The existing registry test checks the link.
 Translation JSON and the exact Configure descriptions were checked locally.
-Home Assistant and package verification run in GitHub Actions. DEV rendering
-has not been checked for this change.
+All four GitHub workflows passed on `278076d8ede1f285922ef38c302164bfdfd79247`.
+Installed that exact candidate on PAHA02-DEV after backing up the installed
+component. The Home Assistant configuration check passed before restart.
+After restart, Service info displayed the native Visit action, which opened the
+README Commissioning section. Configure displayed the English overview, and
+the service page displayed live prices. DEV uses the unpublished candidate.
 
 ---
 

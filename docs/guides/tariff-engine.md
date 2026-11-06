@@ -1,6 +1,6 @@
 # JTS Tariff Engine — Human Operations Manual
 
-v1.2.0 release candidate. [AI Systems Reference](../ai/tariff-engine.md).
+Based on v1.2.0 stable. Service info and Configure enhancements are in review. [AI Systems Reference](../ai/tariff-engine.md).
 
 ## Mission Directive
 

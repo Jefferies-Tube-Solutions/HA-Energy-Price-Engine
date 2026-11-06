@@ -1,6 +1,6 @@
 # JTS Tariff Engine — AI Systems Reference
 
-v1.2.0 release candidate. [Human Operations Manual](../guides/tariff-engine.md).
+Based on v1.2.0 stable. Service info and Configure enhancements are in review. [Human Operations Manual](../guides/tariff-engine.md).
 
 ## System Registry
 

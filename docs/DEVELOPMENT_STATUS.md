@@ -26,6 +26,13 @@ the existing approved artwork. Changed README and manual paths and image
 targets were checked against the repository tree. GitHub theme/mobile rendering
 was not independently verified. Prior rebrand CI passed on `370729893cdc9ba275b71d94f7580af4a355227d`.
 
+Brand compliance checkpoint: **Check JTS brand compliance on every push and PR**.
+The downstream check pins the approved JTS source, verifies the README header,
+product manuals, gallery and artwork, and runs in read-only GitHub Actions.
+Local validation passed. Mutated theme markup, missing reciprocal links, a
+renamed Preview column and altered runtime icon bytes were each rejected.
+Visual review of the rendered result remains manual.
+
 ---
 
 # Approved PNG brand assets — 6 November 2026

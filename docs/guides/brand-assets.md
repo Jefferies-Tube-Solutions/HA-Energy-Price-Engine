@@ -23,3 +23,15 @@ If an export changes unexpectedly, recover the recorded file from that commit.
 
 Home Assistant uses a 256 × 256 downsample of the approved Tariff Engine
 icon. The README keeps the company lockup and product icon distinct.
+
+## Brand checks
+
+Run `python tools/validate_brand.py` from the repository. GitHub Actions runs
+the same check on every push and pull request. It verifies the README hierarchy,
+paired product manuals, gallery previews and the approved image checksums against
+the pinned JTS Brand System v1.1.0 source. When adopting a newly approved export,
+update the manifest and checksum pins together in the same reviewed change.
+
+Review rendered light/dark themes, mobile layout and accessibility manually.
+The automated check uses project-local files and requires no private repository
+access.

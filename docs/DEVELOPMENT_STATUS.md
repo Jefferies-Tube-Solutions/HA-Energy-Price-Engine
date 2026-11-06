@@ -20,6 +20,12 @@ The GitHub About description and active installation and support URLs use the ne
 identity. Historical release references are retained. Latest published release
 was verified as v1.1.0 after the rename.
 
+Documentation checkpoint: **Align Tariff Engine documentation with JTS Brand System**.
+The README follows the JTS layout and links the paired product manuals. It uses
+the existing approved artwork. Changed README and manual paths and image
+targets were checked against the repository tree. GitHub theme/mobile rendering
+was not independently verified. Prior rebrand CI passed on `370729893cdc9ba275b71d94f7580af4a355227d`.
+
 ---
 
 # Approved PNG brand assets — 6 November 2026

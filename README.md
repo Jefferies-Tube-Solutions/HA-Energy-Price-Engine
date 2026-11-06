@@ -13,6 +13,8 @@
 
 # JTS Tariff Engine
 
+## Mission Directive
+
 JTS Tariff Engine, formerly Energy Price Engine, is a native Home Assistant integration that calculates and
 stores verified 15-minute electricity prices for **DK1 and DK2**. It combines
 Nord Pool spot prices, grid tariffs, Energinet charges, your supplier markup,
@@ -20,17 +22,18 @@ electricity tax and VAT into a transparent marginal price per kWh.
 
 The integration provides persistent price history and a stable read-only **API v2**.
 It works independently of EV Charge Manager and sends no vehicle or charging commands.
-See the [v1.2.0 release notes](docs/RELEASE_V12.md) for the rebrand and upgrade details.
 
-## Dashboard setup and display units
+## System Registry
 
-Storage-mode dashboards automatically register the bundled card. Each card can use
-`unit: ore_kwh` or `unit: dkk_kwh`; paired cards remain independent. YAML resources
-remain user-managed. Price calculations, API v2, entity identities and stored history
-carry forward from v1.1.0.
-[Quick start and complete two-card YAML](docs/PRICE_DASHBOARD.md).
+| Component | Contract |
+| --- | --- |
+| Home Assistant | HACS custom integration with domain `ha_energy_price_engine` |
+| Price sources | Official Nord Pool for DK1 and DK2, grid tariffs, supplier markup, national charges and VAT |
+| Storage and consumers | SQLite price history and [read-only Python API v2](docs/API.md) |
+| Dashboard | Bundled Lovelace card with per-card øre/kWh or DKK/kWh display |
+| Version | The badge shows the published stable release. This branch prepares v1.2.0. |
 
-## Installation
+## Commissioning
 
 Requires Home Assistant 2026.10 or later and the official **Nord Pool** integration,
 configured for DK1/DK2 and DKK. Tested Home Assistant versions are 2026.10.3 and
@@ -52,7 +55,9 @@ official `nordpool` integration.
 [Complete installation and update guide](docs/HACS_DISTRIBUTION.md) ·
 [Manual installation](docs/HACS_DISTRIBUTION.md#manual-installation).
 
-## Prices and Diagnostics
+## Operational Protocol
+
+### Prices and Diagnostics
 
 Nine primary entities show current/next spot and final prices, today's
 average/minimum/maximum, current grid tariff and availability. Values default to
@@ -70,7 +75,10 @@ and unchanged in both modes. The nine primary sensors retain their explicitly la
 VAT basis to preserve Recorder history; API v2 always returns canonical final prices
 including VAT. See [Diagnostics](docs/DIAGNOSTICS.md).
 
-## Today and tomorrow dashboard
+### Today and tomorrow dashboard
+
+Storage-mode dashboards automatically register the card. Each card can use
+`unit: ore_kwh` or `unit: dkk_kwh` independently. YAML resources are managed by the user.
 
 The bundled read-only card shows separate raw spot and final-price graphs, every
 quarter, verified grid periods and a component/source inspector. It follows the VAT
@@ -81,7 +89,7 @@ browser/app and card resource. Daily statistics use complete verified schedule d
 including future quarters. When earlier rates are unverified, statistics explicitly
 cover the remaining day. Unknown history is never invented.
 
-## Verification and operation
+## Verification
 
 The integration owns retrieval, verification, calculation, persistence and price publishing.
 Missing or stale inputs produce **Unavailable**, never an invented zero. Availability
@@ -99,7 +107,7 @@ charges have verified effective dates: Energinet network/system defaults expire 
 verified documentation. The historical EWII household markup of 0.030 DKK/kWh ex VAT
 applies only June–September 2026; it is not a current or future default.
 
-## Consumers and support
+## Fault Isolation and Recovery
 
 The [stable read-only Python API v2](docs/API.md) exposes immutable full-precision
 DKK/kWh prices and readiness.
@@ -111,10 +119,21 @@ subscriptions, infer heating eligibility or control vehicles. Hardware performan
 and private contract/source acceptance depend on the installation; cloud benchmarks
 are not Raspberry Pi guarantees.
 
-[Latest published release](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases/latest) ·
+[Backup and rollback](docs/HACS_DISTRIBUTION.md#data-retention-and-rollback) ·
 [Troubleshooting and limitations](docs/COMPATIBILITY.md) ·
 [Implementation provenance](docs/PROVENANCE.md) ·
 [Report a problem](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/issues).
+
+## Manuals
+
+- [Human Operations Manual](docs/guides/tariff-engine.md)
+- [AI Systems Reference](docs/ai/tariff-engine.md)
+
+## Operations Log
+
+- [v1.2.0 rebrand and upgrade notes](docs/RELEASE_V12.md) · prepared for publication.
+- [Published releases](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases).
+- [Development and verification history](docs/DEVELOPMENT_STATUS.md).
 
 ## Approved artwork
 

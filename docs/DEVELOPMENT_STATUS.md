@@ -1,3 +1,16 @@
+# Service info documentation link and English Configure overview
+
+Branch: `enhancement/service-info-documentation`. Base: published v1.2.0 (`107b01cd7f19b5474420cbcddf30b923248aa30b`).
+Checkpoint: **Link Service info to the Tariff Engine commissioning guide**.
+
+Adds the native service configuration link and an English overview to the
+Configure site and review steps. The existing registry test checks the link.
+Translation JSON and the exact Configure descriptions were checked locally.
+Home Assistant and package verification run in GitHub Actions. DEV rendering
+has not been checked for this change.
+
+---
+
 # JTS Tariff Engine v1.2.0 rebrand
 
 Branch: `rebrand/jts-tariff-engine-v1.2.0`. Base main: `6281c9170e5fd479f422d963ca16ac9bf0ef0c3b`.

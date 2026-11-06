@@ -16,7 +16,9 @@ v1.2.0 release candidate. [Human Operations Manual](../guides/tariff-engine.md).
 
 The service name is the configured site name. The model is JTS Tariff Engine,
 the manufacturer is Jefferies Tube Solutions and the software version comes
-from the installed manifest. The rebrand preserves the v1.1.0 domain, site
+from the installed manifest. The service's `configuration_url` targets the README
+Commissioning section. The Configure site and review steps display an English
+product overview. The rebrand preserves the v1.1.0 domain, site
 and entity identifiers, ledger format and API v2.
 
 ## Read and validate

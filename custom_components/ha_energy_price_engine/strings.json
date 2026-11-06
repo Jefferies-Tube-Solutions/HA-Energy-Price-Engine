@@ -117,7 +117,7 @@
     "step": {
       "site": {
         "title": "1 · Site and Nord Pool",
-        "description": "Select the official Home Assistant Nord Pool integration, configured for DKK. PE automatically reads DKK/MWh excluding VAT and displays øre/kWh. DK1/DK2 use Europe/Copenhagen. Install the official source first; no legacy Nordpool integration is needed. Submitting a step saves it immediately. Closing keeps completed steps; unsent fields are not saved. The VAT display choice applies to Diagnostics and the price card. Primary sensors retain their labeled VAT basis to preserve history.",
+        "description": "JTS Tariff Engine calculates and stores verified 15-minute electricity prices for DK1 and DK2, including spot prices, grid tariffs, supplier charges, taxes and VAT.\n\nSelect the official Home Assistant Nord Pool integration, configured for DKK. PE automatically reads DKK/MWh excluding VAT and displays øre/kWh. DK1/DK2 use Europe/Copenhagen. Install the official source first; no legacy Nordpool integration is needed. Submitting a step saves it immediately. Closing keeps completed steps; unsent fields are not saved. The VAT display choice applies to Diagnostics and the price card. Primary sensors retain their labeled VAT basis to preserve history.",
         "data": {
           "name": "Site name",
           "nordpool_entry": "Official Nord Pool source",
@@ -152,7 +152,7 @@
       },
       "review": {
         "title": "Saved setup",
-        "description": "Site: **{name}**. Completed steps are saved. Check prices retries verification. Nine sensors and the bundled card show coverage, components and the corrective action for missing prices. Advanced is only for confirmed dated rates.",
+        "description": "JTS Tariff Engine calculates and stores verified 15-minute electricity prices for DK1 and DK2, including spot prices, grid tariffs, supplier charges, taxes and VAT.\n\nSite: **{name}**. Completed steps are saved. Check prices retries verification. Nine sensors and the bundled card show coverage, components and the corrective action for missing prices. Advanced is only for confirmed dated rates.",
         "menu_options": {
           "done": "Done — close setup",
           "check": "Check prices now",

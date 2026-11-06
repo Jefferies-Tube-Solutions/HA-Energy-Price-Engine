@@ -117,7 +117,7 @@
     "step": {
       "site": {
         "title": "1 · Sted og Nord Pool",
-        "description": "Vælg den officielle Home Assistant Nord Pool-integration, konfigureret til DKK. PE læser automatisk DKK/MWh uden moms og viser øre/kWh. DK1/DK2 bruger Europe/Copenhagen. Installer først den officielle kilde; en ældre Nordpool-integration er ikke nødvendig. Et indsendt trin gemmes straks. Lukning bevarer gennemførte trin; felter, der ikke er indsendt, gemmes ikke. Momsvalget gælder Diagnostik og priskortet. De almindelige sensorer beholder deres mærkede momsgrundlag af hensyn til historikken.",
+        "description": "JTS Tariff Engine calculates and stores verified 15-minute electricity prices for DK1 and DK2, including spot prices, grid tariffs, supplier charges, taxes and VAT.\n\nVælg den officielle Home Assistant Nord Pool-integration, konfigureret til DKK. PE læser automatisk DKK/MWh uden moms og viser øre/kWh. DK1/DK2 bruger Europe/Copenhagen. Installer først den officielle kilde; en ældre Nordpool-integration er ikke nødvendig. Et indsendt trin gemmes straks. Lukning bevarer gennemførte trin; felter, der ikke er indsendt, gemmes ikke. Momsvalget gælder Diagnostik og priskortet. De almindelige sensorer beholder deres mærkede momsgrundlag af hensyn til historikken.",
         "data": {
           "name": "Stedets navn",
           "nordpool_entry": "Officiel Nord Pool-kilde",
@@ -152,7 +152,7 @@
       },
       "review": {
         "title": "Gemt opsætning",
-        "description": "Sted: **{name}**. Gennemførte trin er gemt. Kontroller priser gentager verificeringen. Ni sensorer og det medfølgende kort viser dækning, komponenter og afhjælpning ved manglende priser. Avanceret bruges kun til bekræftede daterede satser.",
+        "description": "JTS Tariff Engine calculates and stores verified 15-minute electricity prices for DK1 and DK2, including spot prices, grid tariffs, supplier charges, taxes and VAT.\n\nSted: **{name}**. Gennemførte trin er gemt. Kontroller priser gentager verificeringen. Ni sensorer og det medfølgende kort viser dækning, komponenter og afhjælpning ved manglende priser. Avanceret bruges kun til bekræftede daterede satser.",
         "menu_options": {
           "done": "Færdig — luk opsætning",
           "check": "Kontroller priser nu",

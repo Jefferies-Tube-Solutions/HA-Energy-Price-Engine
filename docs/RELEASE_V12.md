@@ -1,7 +1,6 @@
 # JTS Tariff Engine v1.2.0
 
-Prepared for publication. See the [latest published release](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases/latest)
-for the version currently available to install.
+Published as a [stable release](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases/tag/v1.2.0) from main commit `107b01c`.
 
 - Energy Price Engine becomes JTS Tariff Engine in Home Assistant, HACS, the
   bundled dashboard and the documentation.

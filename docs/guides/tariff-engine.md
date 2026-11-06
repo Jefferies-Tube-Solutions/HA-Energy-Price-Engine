@@ -1,6 +1,6 @@
 # JTS Tariff Engine — Human Operations Manual
 
-v1.2.0 release candidate. [AI Systems Reference](../ai/tariff-engine.md).
+For JTS Tariff Engine v1.2.1. [AI Systems Reference](../ai/tariff-engine.md).
 
 ## Mission Directive
 
@@ -15,7 +15,9 @@ or use the manual Home Assistant ZIP. [Installation and updates](../HACS_DISTRIB
 
 Add a site, select the Nord Pool source, enter verified grid and supplier rates
 and confirm the VAT display preference. Use **Configure** to resume or edit
-setup. [Dashboard and display units](../PRICE_DASHBOARD.md).
+setup. Configure shows a short English overview of what the integration does.
+The link on **Service info** opens the README commissioning guide.
+[Dashboard and display units](../PRICE_DASHBOARD.md).
 
 ## Verification
 

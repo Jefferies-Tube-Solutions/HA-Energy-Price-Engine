@@ -84,6 +84,9 @@ class PriceSensor(CoordinatorEntity, SensorEntity):
             manufacturer="Jefferies Tube Solutions",
             model="JTS Tariff Engine",
             entry_type=DeviceEntryType.SERVICE,
+            configuration_url=(
+                "https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine#commissioning"
+            ),
             sw_version=coordinator.integration_version,
         )
         if kind == "availability":

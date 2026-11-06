@@ -1,3 +1,24 @@
+# Service info documentation link and English Configure overview
+
+Branch: `enhancement/service-info-documentation`. Base: published v1.2.0 (`107b01cd7f19b5474420cbcddf30b923248aa30b`).
+Checkpoint: **Link Service info to the Tariff Engine commissioning guide**.
+
+The public stable baseline is [v1.2.0](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases/tag/v1.2.0).
+The Service info follow-up was verified on DEV and approved for v1.2.1 stable.
+The versioned candidate runs the full GitHub checks before promotion.
+
+Adds the native service configuration link and an English overview to the
+Configure site and review steps. The existing registry test checks the link.
+Translation JSON and the exact Configure descriptions were checked locally.
+All four GitHub workflows passed on `278076d8ede1f285922ef38c302164bfdfd79247`.
+Installed that exact candidate on PAHA02-DEV after backing up the installed
+component. The Home Assistant configuration check passed before restart.
+After restart, Service info displayed the native Visit action, which opened the
+README Commissioning section. Configure displayed the English overview, and
+the service page displayed live prices. DEV uses the unpublished candidate.
+
+---
+
 # JTS Tariff Engine v1.2.0 rebrand
 
 Branch: `rebrand/jts-tariff-engine-v1.2.0`. Base main: `6281c9170e5fd479f422d963ca16ac9bf0ef0c3b`.

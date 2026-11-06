@@ -31,7 +31,7 @@ It works independently of EV Charge Manager and sends no vehicle or charging com
 | Price sources | Official Nord Pool for DK1 and DK2, grid tariffs, supplier markup, national charges and VAT |
 | Storage and consumers | SQLite price history and [read-only Python API v2](docs/API.md) |
 | Dashboard | Bundled Lovelace card with per-card øre/kWh or DKK/kWh display |
-| Version | The badge shows the published stable release. This branch prepares v1.2.0. |
+| Version | The badge shows the latest published stable release. |
 
 ## Commissioning
 
@@ -131,7 +131,8 @@ are not Raspberry Pi guarantees.
 
 ## Operations Log
 
-- [v1.2.0 rebrand and upgrade notes](docs/RELEASE_V12.md) · prepared for publication.
+- [v1.2.1 Service info and Configure notes](docs/RELEASE_V121.md).
+- [v1.2.0 rebrand and upgrade notes](docs/RELEASE_V12.md).
 - [Published releases](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases).
 - [Development and verification history](docs/DEVELOPMENT_STATUS.md).
 

@@ -1,5 +1,5 @@
 {
-  "name": "Energy Price Engine",
+  "name": "JTS Tariff Engine",
   "homeassistant": "2026.10.0",
   "render_readme": true,
   "hide_default_branch": true

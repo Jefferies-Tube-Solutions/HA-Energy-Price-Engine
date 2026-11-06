@@ -1,5 +1,5 @@
 {
-  "title": "Energy Price Engine",
+  "title": "JTS Tariff Engine",
   "config": {
     "step": {
       "site": {
@@ -109,7 +109,7 @@
     "abort": {
       "settings_saved": "Gennemførte trin er gemt.",
       "saved_reload_failed": "Trinnet er gemt, men stedet kunne ikke genindlæses. Kontroller lager og integrationslog, og åbn Konfigurer igen.",
-      "site_reset": "Dette sted og dets PE-historik er fjernet. Tilføj et nyt Energy Price Engine-sted for at starte igen.",
+      "site_reset": "Dette sted og dets PE-historik er fjernet. Tilføj et nyt JTS Tariff Engine-sted for at starte igen.",
       "already_configured": "Dette sted er allerede konfigureret."
     }
   },
@@ -222,7 +222,7 @@
     "abort": {
       "settings_saved": "Gennemførte trin er gemt.",
       "saved_reload_failed": "Trinnet er gemt, men stedet kunne ikke genindlæses. Kontroller lager og integrationslog, og åbn Konfigurer igen.",
-      "site_reset": "Dette sted og dets PE-historik er fjernet. Tilføj et nyt Energy Price Engine-sted for at starte igen.",
+      "site_reset": "Dette sted og dets PE-historik er fjernet. Tilføj et nyt JTS Tariff Engine-sted for at starte igen.",
       "already_configured": "Dette sted er allerede konfigureret."
     }
   },

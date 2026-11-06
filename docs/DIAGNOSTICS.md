@@ -1,6 +1,6 @@
 # Native device Diagnostics
 
-Open **Settings → Devices & services → Energy Price Engine → your device →
+Open **Settings → Devices & services → JTS Tariff Engine → your device →
 Diagnostic**. No dashboard or extra YAML is needed to see how the price is calculated.
 Version1.0.0 retains the complete calculation rows and saved VAT display preference. All are enabled by default.
 The nine primary entities keep their IDs and behavior. The availability
@@ -88,7 +88,7 @@ and different VAT rates rather than multiplying arbitrary source rates by 1.25.
 
 ## Native HA evidence
 
-The validated flow is **Devices & services → Energy Price Engine → device →
+The validated flow is **Devices & services → JTS Tariff Engine → device →
 Diagnostic**, inspecting current/next/missing states, opening supplier more-info,
 and observing the automatic selected-period switch. Desktop1440×1100/mobile390×1000,
 English and Danish, had no browser errors/warnings, source requests on reads or

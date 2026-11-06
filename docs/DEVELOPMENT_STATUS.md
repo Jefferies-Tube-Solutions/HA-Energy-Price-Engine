@@ -1,3 +1,20 @@
+# JTS Tariff Engine v1.2.0 rebrand
+
+Branch: `rebrand/jts-tariff-engine-v1.2.0`. Base main: `6281c9170e5fd479f422d963ca16ac9bf0ef0c3b`.
+Checkpoint: **Rebrand as JTS Tariff Engine v1.2.0**.
+
+Updated display names, service metadata, the approved product icon, installation
+guidance and the integration version. The HA domain, identifiers, pricing, API v2,
+ledger and archive names are preserved. Historical release workflows remain scoped
+to their original branches. No publication is authorized for v1.2.0.
+
+Local validation checked the nine approved source PNG hashes before downsampling
+the product icon. See the exact commit checks for HA, dashboard and packaging CI.
+Repository rename and GitHub About text require repository settings access. Source
+links use the current canonical repository URL until the rename can be completed.
+
+---
+
 # Approved PNG brand assets — 6 November 2026
 
 Owner requested project-local PNG exports from the new approved JTS Brand System.

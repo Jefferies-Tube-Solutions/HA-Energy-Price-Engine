@@ -1,4 +1,4 @@
-/* Energy Price Engine: local, dependency-free, read-only Lovelace card.
+/* JTS Tariff Engine: local, dependency-free, read-only Lovelace card.
  * Supported HA custom-card interface + authenticated HA WebSocket commands.
  * Stored amounts stay unrounded; formatting below is presentation only.
  */
@@ -27,7 +27,7 @@ const WORDS = {
     noRecord: "No verified final record for this quarter. Missing components stay unavailable; no tariffs are reconstructed on this read.",
     retained: "Retained stored amount (not currently Ready)", applied: "Applied in the stored price", utc: "UTC identity",
     config: "Use site_id only when selecting one of several sites. Entity-based card configuration was removed in beta.10.",
-    choose: "Select a price site", noSites: "No readable Energy Price Engine sites are loaded. Open Devices & services to finish setup.",
+    choose: "Select a price site", noSites: "No readable JTS Tariff Engine sites are loaded. Open Devices & services to finish setup.",
     average: "Average", minimum: "Minimum", maximum: "Maximum", full_day: "Full-day statistics", remaining_day: "Remaining-day statistics", unavailable: "Statistics unavailable",
   },
   da: {
@@ -54,7 +54,7 @@ const WORDS = {
     noRecord: "Ingen verificeret slutpris for dette kvarter. Manglende komponenter er utilgængelige; tariffer genberegnes ikke ved læsning.",
     retained: "Beholdt gemt beløb (ikke Klar nu)", applied: "Anvendt i den gemte pris", utc: "UTC-identitet",
     config: "Brug kun site_id til at vælge blandt flere steder. Entitetsbaseret kortopsætning er fjernet i beta.10.",
-    choose: "Vælg et prissted", noSites: "Ingen læsbare Energy Price Engine-steder er indlæst. Åbn Enheder og tjenester for at færdiggøre opsætningen.",
+    choose: "Vælg et prissted", noSites: "Ingen læsbare JTS Tariff Engine-steder er indlæst. Åbn Enheder og tjenester for at færdiggøre opsætningen.",
     average: "Gennemsnit", minimum: "Minimum", maximum: "Maksimum", full_day: "Heldagsstatistik", remaining_day: "Statistik for resten af dagen", unavailable: "Statistik utilgængelig",
   },
 };
@@ -108,7 +108,7 @@ export class EnergyPriceEngineCard extends HTMLElement {
   setConfig(config) {
     if (config.entity) throw new Error(WORDS.en.config);
     if (config.unit !== undefined && !["ore_kwh", "dkk_kwh"].includes(config.unit)) {
-      throw new Error("Energy Price Engine card unit must be ore_kwh or dkk_kwh");
+      throw new Error("JTS Tariff Engine card unit must be ore_kwh or dkk_kwh");
     }
     const changed = !this._config || this._config.site_id !== config.site_id;
     this._config = {...config};
@@ -151,7 +151,7 @@ export class EnergyPriceEngineCard extends HTMLElement {
       const site = this._site;
       const data = await sharedRead(this._hass, {type: "ha_energy_price_engine/price_schedule", site_id: site});
       if (configured !== this._config.site_id || site !== this._site || !this.isConnected) return;
-      if (data.schema_version !== 3) throw new Error("Unsupported Energy Price Engine dashboard schema; reload browser resources");
+      if (data.schema_version !== 3) throw new Error("Unsupported JTS Tariff Engine dashboard schema; reload browser resources");
       this._data = data; this._error = undefined;
     } catch (err) { this._data = undefined; this._error = err.message || String(err); }
     finally {
@@ -190,7 +190,7 @@ export class EnergyPriceEngineCard extends HTMLElement {
   _source(row, key) {
     const p = this._data.provenance[row.provenance];
     const part = p?.components[key];
-    const source = part?.source || (key === "spot" ? "Official Nord Pool" : key === "dso" ? p?.source.dso?.provider : key === "vat" || key === "final" ? "Energy Price Engine · stored component snapshot" : undefined);
+    const source = part?.source || (key === "spot" ? "Official Nord Pool" : key === "dso" ? p?.source.dso?.provider : key === "vat" || key === "final" ? "JTS Tariff Engine · stored component snapshot" : undefined);
     const stamp = part?.verified_on || (key === "dso" ? p?.source.dso?.fetched_at : p?.source.verified_at) || (key === "spot" ? row.raw_verified_at : undefined);
     const period = part?.valid_from ? `${part.valid_from} → ${part.valid_to}` : "";
     return `${esc(source || this._words().missing)}${stamp ? `<small>${esc(this._words().checked)}: ${esc(stamp)}</small>` : ""}${period ? `<small>${esc(period)}</small>` : ""}`;
@@ -218,7 +218,7 @@ export class EnergyPriceEngineCard extends HTMLElement {
     const ticks = [low + (high - low) * .15, low + (high - low) * .55, low + (high - low) * .9];
     const bars = slots.filter(good).map(r => {
       const top = y(value(r));
-      const source = key === "spot" ? "Official Nord Pool" : "Energy Price Engine";
+      const source = key === "spot" ? "Official Nord Pool" : "JTS Tariff Engine";
       const label = `${r.local_start} → ${r.local_end} · ${this._format(value(r))} ${this._unit()} · ${t.ready} · ${source} · ${t.checked}: ${r.raw_verified_at || "—"} · ${t.revision} ${r.revision ?? "—"}`;
       return `<rect class="bar ${key === "spot" ? "spot" : "final"}-bar" x="${x(r.start)}" y="${Math.min(top,zero)}" width="${Math.max(.6,x(r.end)-x(r.start)-.5)}" height="${Math.max(.8,Math.abs(top-zero))}" tabindex="0" role="button" data-start="${esc(r.start)}" aria-label="${esc(label)}"><title>${esc(label)}</title></rect>`;
     }).join("");
@@ -266,7 +266,7 @@ export class EnergyPriceEngineCard extends HTMLElement {
     const open = new Set([...this.shadowRoot.querySelectorAll("details[open]")].map(e => e.dataset.day));
     const scrolls = [...this.shadowRoot.querySelectorAll(".scroll")].map(e => [e.scrollLeft,e.scrollTop]);
     const t = this._words(), d = this._data;
-    const body = d ? `<header><div><div class="eyebrow">Energy Price Engine · ${esc(d.site.area)}</div><h1>${esc(d.site.name)}</h1><div class="muted">${esc(d.site.timezone)} · ${this._unit()} · ${this._basis()}</div></div><button data-refresh aria-label="${t.retry}">${t.retry}</button></header><div class="body">${this._sitePicker()}<div class="health">${[[t.current,d.current],[t.next,d.next],[t.history,d.days[0]],[t.publication,d.days[1]]].map(([name,f]) => `<div><p>${name}</p>${this._status(f.status)}<p class="muted" style="margin-top:6px">${f.stored_slots}/${f.expected_slots}</p></div>`).join("")}</div>
+    const body = d ? `<header><div><div class="eyebrow">JTS Tariff Engine · ${esc(d.site.area)}</div><h1>${esc(d.site.name)}</h1><div class="muted">${esc(d.site.timezone)} · ${this._unit()} · ${this._basis()}</div></div><button data-refresh aria-label="${t.retry}">${t.retry}</button></header><div class="body">${this._sitePicker()}<div class="health">${[[t.current,d.current],[t.next,d.next],[t.history,d.days[0]],[t.publication,d.days[1]]].map(([name,f]) => `<div><p>${name}</p>${this._status(f.status)}<p class="muted" style="margin-top:6px">${f.stored_slots}/${f.expected_slots}</p></div>`).join("")}</div>
       ${d.availability?.code === "waiting" ? `<p class="notice activation">${esc(t.activation.replace("{time}", this._local(d.availability.available_from)))}</p>` : ""}
       <section class="statistics"><h2>${t[d.statistics.scope] || t.unavailable} · ${this._basis()} · ${d.statistics.used_slots}/${d.statistics.day_slots}</h2><div class="chips">${["average","minimum","maximum"].map(k => `<span>${t[k]}: <strong>${this._format(present(d.statistics[k]) ? d.statistics[k] * 100 : null)}</strong> ${this._unit()}</span>`).join("")}</div>${d.statistics.reason ? `<p class="muted">${esc(d.statistics.reason)}</p>` : ""}</section>
       ${this._error ? `<p role="alert" class="notice error">${esc(this._error)}</p>` : ""}
@@ -281,4 +281,4 @@ export class EnergyPriceEngineCard extends HTMLElement {
 }
 if (!customElements.get("energy-price-engine-card")) customElements.define("energy-price-engine-card", EnergyPriceEngineCard);
 window.customCards = window.customCards || [];
-if (!window.customCards.some(c => c.type === "energy-price-engine-card")) window.customCards.push({type: "energy-price-engine-card", name: "Energy Price Engine", description: "Stored today/tomorrow spot, final prices, tariffs and components", preview: false});
+if (!window.customCards.some(c => c.type === "energy-price-engine-card")) window.customCards.push({type: "energy-price-engine-card", name: "JTS Tariff Engine", description: "Stored today/tomorrow spot, final prices, tariffs and components", preview: false});

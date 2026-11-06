@@ -1,6 +1,6 @@
 <p align="right">
-  <a href="https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine/releases/latest">
-    <img alt="Latest stable JTS Tariff Engine release" src="https://img.shields.io/github/v/release/Jefferies-Tube-Solutions/HA-Energy-Price-Engine?label=stable&amp;color=2ea44f">
+  <a href="https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases/latest">
+    <img alt="Latest stable JTS Tariff Engine release" src="https://img.shields.io/github/v/release/Jefferies-Tube-Solutions/jts-tariff-engine?label=stable&amp;color=2ea44f">
   </a>
 </p>
 <p align="center">
@@ -38,7 +38,7 @@ configured for DK1/DK2 and DKK. Tested Home Assistant versions are 2026.10.3 and
 official `nordpool` integration.
 
 1. In HACS, open **Custom repositories**, add
-   `https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine` as an **Integration**.
+   `https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine` as an **Integration**.
 2. Keep **Show beta versions off** for the stable channel. Download the latest stable release and
    restart Home Assistant. A custom repository does not require Marketplace admission.
 3. In **Settings → Devices & services → Add integration**, select **JTS Tariff Engine** (**Energy Price Engine** on v1.1.0 and earlier).
@@ -111,10 +111,10 @@ subscriptions, infer heating eligibility or control vehicles. Hardware performan
 and private contract/source acceptance depend on the installation; cloud benchmarks
 are not Raspberry Pi guarantees.
 
-[Latest published release](https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine/releases/latest) ·
+[Latest published release](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases/latest) ·
 [Troubleshooting and limitations](docs/COMPATIBILITY.md) ·
 [Implementation provenance](docs/PROVENANCE.md) ·
-[Report a problem](https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine/issues).
+[Report a problem](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/issues).
 
 ## Approved artwork
 

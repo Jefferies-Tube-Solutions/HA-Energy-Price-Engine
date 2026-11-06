@@ -13,10 +13,10 @@
     "lovelace",
     "websocket_api"
   ],
-  "documentation": "https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine",
+  "documentation": "https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine",
   "integration_type": "service",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine/issues",
+  "issue_tracker": "https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/issues",
   "requirements": [],
   "version": "1.2.0"
 }

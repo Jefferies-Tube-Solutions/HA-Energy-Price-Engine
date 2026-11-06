@@ -15,8 +15,10 @@ jobs exposed stale v1.1.0 expectations. The historical HACS test now uses
 the exact published v1.1.0 source and the YAML card test uses the installed
 version. The follow-up commit runs the same CI checks.
 
-Repository rename and GitHub About text require repository settings access. Source
-links use the current canonical repository URL until the rename can be completed.
+GitHub repository ID 1431473911 was renamed to `Jefferies-Tube-Solutions/jts-tariff-engine`.
+The GitHub About description and active installation and support URLs use the new
+identity. Historical release references are retained. Latest published release
+was verified as v1.1.0 after the rename.
 
 ---
 

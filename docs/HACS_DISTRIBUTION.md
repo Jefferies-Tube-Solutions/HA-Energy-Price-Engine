@@ -1,7 +1,7 @@
 # Install and update JTS Tariff Engine
 
 JTS Tariff Engine is the new name of Energy Price Engine as of v1.2.0.
-The [latest published release](https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine/releases/latest) is the version
+The [latest published release](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases/latest) is the version
 available for normal installation. See the [v1.2.0 release notes](RELEASE_V12.md)
 for the rebrand and compatibility details.
 
@@ -9,7 +9,7 @@ for the rebrand and compatibility details.
 
 1. Install HACS using its supported instructions and back up Home Assistant.
 2. HACS → **Custom repositories** → add
-   `https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine`, category **Integration**.
+   `https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine`, category **Integration**.
 3. Leave **Show beta versions off**. Download the latest stable release, then
    restart Home Assistant. Service info shows the installed version.
 4. Add the official Home Assistant **Nord Pool** integration for DK1 or DK2 and DKK.
@@ -57,7 +57,7 @@ leave it off for stable updates. Do not edit HACS storage or patch HACS globally
 ## Manual installation
 
 Download `ha_energy_price_engine-manual.zip`, `BUILD_MANIFEST.json` and `SHA256SUMS`
-from the [latest published release](https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine/releases/latest).
+from the [latest published release](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases/latest).
 Verify SHA-256 before extraction into the HA configuration directory. The result is
 `custom_components/ha_energy_price_engine/manifest.json`, containing the version you downloaded.
 Restart HA. Do not overlay a manual copy onto a HACS-managed integration.

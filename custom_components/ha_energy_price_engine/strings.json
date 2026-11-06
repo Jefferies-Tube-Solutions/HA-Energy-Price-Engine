@@ -1,5 +1,5 @@
 {
-  "title": "Energy Price Engine",
+  "title": "JTS Tariff Engine",
   "config": {
     "step": {
       "site": {
@@ -109,7 +109,7 @@
     "abort": {
       "settings_saved": "Completed steps are saved.",
       "saved_reload_failed": "The step was saved, but the site could not reload. Check storage and integration logs, then reopen Configure.",
-      "site_reset": "This site and its PE history were removed. Add a new Energy Price Engine site to start again.",
+      "site_reset": "This site and its PE history were removed. Add a new JTS Tariff Engine site to start again.",
       "already_configured": "This site is already configured."
     }
   },
@@ -222,7 +222,7 @@
     "abort": {
       "settings_saved": "Completed steps are saved.",
       "saved_reload_failed": "The step was saved, but the site could not reload. Check storage and integration logs, then reopen Configure.",
-      "site_reset": "This site and its PE history were removed. Add a new Energy Price Engine site to start again.",
+      "site_reset": "This site and its PE history were removed. Add a new JTS Tariff Engine site to start again.",
       "already_configured": "This site is already configured."
     }
   },

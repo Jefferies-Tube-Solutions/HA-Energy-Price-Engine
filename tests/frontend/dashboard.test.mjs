@@ -114,7 +114,7 @@ test('producer unload clears previously Ready graphs instead of retaining stale 
  assert.ok(await card.locator('[data-chart="final"] rect.bar').count());
  await page.evaluate(()=>{window.noSites=true;});
  await card.locator('[data-refresh]').click();
- await card.getByRole('status').filter({hasText:'No readable Energy Price Engine sites are loaded'}).waitFor();
+ await card.getByRole('status').filter({hasText:'No readable JTS Tariff Engine sites are loaded'}).waitFor();
  assert.equal(await card.locator('[data-chart]').count(),0);
  assert.equal(await card.locator('.ready').count(),0);
  assert.deepEqual(errors,[]);await page.close();

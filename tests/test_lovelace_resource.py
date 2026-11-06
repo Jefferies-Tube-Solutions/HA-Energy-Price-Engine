@@ -150,7 +150,8 @@ async def test_native_yaml_mode_keeps_resources_and_still_serves_card(
     assert entry.runtime_data.price_engine.records
     assert resources.async_items() == items
     assert "lovelace_resources" not in hass_storage
-    assert "YAML-managed" in caplog.text and "?v=1.1.0" in caplog.text
+    assert "YAML-managed" in caplog.text
+    assert f"?v={entry.runtime_data.integration_version}" in caplog.text
     response = await (await hass_client()).get(CARD_URL)
     assert response.status == 200 and "energy-price-engine-card" in await response.text()
     assert await hass.config_entries.async_unload(entry.entry_id)

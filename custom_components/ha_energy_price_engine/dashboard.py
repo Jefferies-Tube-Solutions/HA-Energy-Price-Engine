@@ -200,7 +200,7 @@ def websocket_schedule(hass, connection, msg):
     )
     if len(matches) != 1:
         connection.send_error(
-            msg["id"], "select_site", "Select one readable Energy Price Engine site"
+            msg["id"], "select_site", "Select one readable JTS Tariff Engine site"
         )
         return
     connection.send_result(msg["id"], price_schedule(matches[0]))

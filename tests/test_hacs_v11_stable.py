@@ -23,7 +23,7 @@ from awesomeversion import AwesomeVersion
 
 from tools.prepare_hacs_reference import PINS
 
-from .test_hacs_workflow import candidate_tree, upstream
+from .test_hacs_workflow import upstream
 
 ROOT = Path(__file__).parents[1]
 TAG = "v1.1.0"
@@ -40,20 +40,26 @@ def release_inputs():
                 if not p.endswith("/")
             }
         return receipt, files, Path(receipt["source_archive"]).read_bytes()
-    # Stable regressions must keep testing the actual stable payload, even when
-    # the development checkout carries an opt-in beta.
-    source = io.BytesIO()
-    with zipfile.ZipFile(source, "w") as handle:
-        for name, data in candidate_tree().items():
-            handle.writestr(name, data)
-    archive = source.getvalue()
-    with zipfile.ZipFile(io.BytesIO(archive)) as source:
-        files = {name: source.read(name) for name in source.namelist() if not name.endswith("/")}
-    files["README.md"] = b"Energy Price Engine read-only stable\n"
-    archive = io.BytesIO()
-    with zipfile.ZipFile(archive, "w") as handle:
-        for path, content in files.items():
-            handle.writestr("release-source/" + path, content)
+    # Keep this historical release test pinned to the published v1.1.0 payload.
+    source = subprocess.check_output(
+        [
+            "git",
+            "archive",
+            "--format=zip",
+            "--prefix=release-source/",
+            "931af05e0d115091e91a7c5bc8980e407c1beedd",
+            f"custom_components/{DOMAIN}",
+            "hacs.json",
+            "README.md",
+        ],
+        cwd=ROOT,
+    )
+    with zipfile.ZipFile(io.BytesIO(source)) as archive:
+        files = {
+            name.removeprefix("release-source/"): archive.read(name)
+            for name in archive.namelist()
+            if not name.endswith("/")
+        }
     return (
         {
             "repository": {
@@ -66,7 +72,7 @@ def release_inputs():
             "release": {"tag_name": TAG, "draft": False, "prerelease": False, "assets": []},
         },
         files,
-        archive.getvalue(),
+        source,
     )
 
 

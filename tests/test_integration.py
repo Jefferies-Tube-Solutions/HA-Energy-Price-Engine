@@ -43,6 +43,12 @@ async def test_native_multisite_nine_entities_device_version_and_read_only_api(
     assert len(entities) == 23 and all(e.domain == "sensor" for e in entities)
     assert not any(e.disabled for e in entities)
     devices = dr.async_entries_for_config_entry(dr.async_get(hass), home.entry_id)
+    assert len(devices) == 1
+    assert devices[0].identifiers == {(DOMAIN, "home")}
+    assert devices[0].name == home.data["name"]
+    assert devices[0].manufacturer == "Jefferies Tube Solutions"
+    assert devices[0].model == "JTS Tariff Engine"
+    assert devices[0].entry_type == dr.DeviceEntryType.SERVICE
     assert (
         devices[0].sw_version
         == json.loads(Path("custom_components/ha_energy_price_engine/manifest.json").read_text())[

@@ -1,7 +1,7 @@
 # Human guide — approved project artwork
 
 Companion: [AI reference](../ai/brand-assets.md).
-Software scope: existing PE v1.1.0; artwork source: JTS Brand System v1.1.0 commit.
+Software scope: JTS Tariff Engine v1.2.0; artwork source: JTS Brand System v1.1.0 commit.
 
 Use the [asset gallery](../../assets/brand/README.md) to choose a logo. The square
 Tariff Engine icon is the product mark; the tunnel is the JTS publisher mark.
@@ -21,6 +21,17 @@ Inspect the correct white/dark variant on its intended background. The owner
 approved the shown images and assigned Tariff artwork to this repository.
 If an export changes unexpectedly, recover the recorded file from that commit.
 
-This change affects documentation/image files only. It does not rename the
-integration, change prices, install HA branding, change release assets, or prove
-Marketplace display compliance. Runtime icon adoption is a separate task.
+Home Assistant uses a 256 × 256 downsample of the approved Tariff Engine
+icon. The README keeps the company lockup and product icon distinct.
+
+## Brand checks
+
+Run `python tools/validate_brand.py` from the repository. GitHub Actions runs
+the same check on every push and pull request. It verifies the README hierarchy,
+paired product manuals, gallery previews and the approved image checksums against
+the pinned JTS Brand System v1.1.0 source. When adopting a newly approved export,
+update the manifest and checksum pins together in the same reviewed change.
+
+Review rendered light/dark themes, mobile layout and accessibility manually.
+The automated check uses project-local files and requires no private repository
+access.

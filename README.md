@@ -1,6 +1,6 @@
 <p align="right">
-  <a href="https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine/releases/latest">
-    <img alt="Latest stable Energy Price Engine release" src="https://img.shields.io/github/v/release/Jefferies-Tube-Solutions/HA-Energy-Price-Engine?label=stable&amp;color=2ea44f">
+  <a href="https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases/latest">
+    <img alt="Latest stable JTS Tariff Engine release" src="https://img.shields.io/github/v/release/Jefferies-Tube-Solutions/jts-tariff-engine?label=stable&amp;color=2ea44f">
   </a>
 </p>
 <p align="center">
@@ -11,25 +11,29 @@
   <img src="assets/brand/tariff-engine/v1/JTS_Tariff_Engine_Icon.png" alt="Approved Tariff Engine euro and lightning product symbol" width="128">
 </p>
 
-# Home Assistant Energy Price Engine
+# JTS Tariff Engine
 
-Energy Price Engine (PE) is a native Home Assistant integration that calculates and
+## Mission Directive
+
+JTS Tariff Engine, formerly Energy Price Engine, is a native Home Assistant integration that calculates and
 stores verified 15-minute electricity prices for **DK1 and DK2**. It combines
 Nord Pool spot prices, grid tariffs, Energinet charges, your supplier markup,
 electricity tax and VAT into a transparent marginal price per kWh.
 
-**Version 1.1.0** provides persistent price history and a stable read-only **API v2**.
-PE works independently of EV Charge Manager and sends no vehicle or charging commands.
+The integration provides persistent price history and a stable read-only **API v2**.
+It works independently of EV Charge Manager and sends no vehicle or charging commands.
 
-## Dashboard setup and display units
+## System Registry
 
-Storage-mode dashboards automatically register the bundled card. Each card can use
-`unit: ore_kwh` or `unit: dkk_kwh`; paired cards remain independent. YAML resources
-remain user-managed. Price calculations, API v2, entity identities and stored history
-are unchanged from the approved v1.1.0-beta.1.
-[Quick start and complete two-card YAML](docs/PRICE_DASHBOARD.md).
+| Component | Contract |
+| --- | --- |
+| Home Assistant | HACS custom integration with domain `ha_energy_price_engine` |
+| Price sources | Official Nord Pool for DK1 and DK2, grid tariffs, supplier markup, national charges and VAT |
+| Storage and consumers | SQLite price history and [read-only Python API v2](docs/API.md) |
+| Dashboard | Bundled Lovelace card with per-card øre/kWh or DKK/kWh display |
+| Version | The badge shows the published stable release. This branch prepares v1.2.0. |
 
-## Installation
+## Commissioning
 
 Requires Home Assistant 2026.10 or later and the official **Nord Pool** integration,
 configured for DK1/DK2 and DKK. Tested Home Assistant versions are 2026.10.3 and
@@ -37,10 +41,10 @@ configured for DK1/DK2 and DKK. Tested Home Assistant versions are 2026.10.3 and
 official `nordpool` integration.
 
 1. In HACS, open **Custom repositories**, add
-   `https://github.com/NicolaiTandrup/HA-Energy-Price-Engine` as an **Integration**.
-2. Keep **Show beta versions off** for the stable channel. Download **v1.1.0** and
+   `https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine` as an **Integration**.
+2. Keep **Show beta versions off** for the stable channel. Download the latest stable release and
    restart Home Assistant. A custom repository does not require Marketplace admission.
-3. In **Settings → Devices & services → Add integration**, select **Energy Price Engine**.
+3. In **Settings → Devices & services → Add integration**, select **JTS Tariff Engine** (**Energy Price Engine** on v1.1.0 and earlier).
 4. Name the site, select the official Nord Pool source and choose whether to display
    prices including VAT. Confirm **Radius C** only if your connection uses that product;
    otherwise enter your verified grid rate. Enter your actual supplier markup in
@@ -51,7 +55,9 @@ official `nordpool` integration.
 [Complete installation and update guide](docs/HACS_DISTRIBUTION.md) ·
 [Manual installation](docs/HACS_DISTRIBUTION.md#manual-installation).
 
-## Prices and Diagnostics
+## Operational Protocol
+
+### Prices and Diagnostics
 
 Nine primary entities show current/next spot and final prices, today's
 average/minimum/maximum, current grid tariff and availability. Values default to
@@ -69,7 +75,10 @@ and unchanged in both modes. The nine primary sensors retain their explicitly la
 VAT basis to preserve Recorder history; API v2 always returns canonical final prices
 including VAT. See [Diagnostics](docs/DIAGNOSTICS.md).
 
-## Today and tomorrow dashboard
+### Today and tomorrow dashboard
+
+Storage-mode dashboards automatically register the card. Each card can use
+`unit: ore_kwh` or `unit: dkk_kwh` independently. YAML resources are managed by the user.
 
 The bundled read-only card shows separate raw spot and final-price graphs, every
 quarter, verified grid periods and a component/source inspector. It follows the VAT
@@ -80,9 +89,9 @@ browser/app and card resource. Daily statistics use complete verified schedule d
 including future quarters. When earlier rates are unverified, statistics explicitly
 cover the remaining day. Unknown history is never invented.
 
-## Verification and operation
+## Verification
 
-PE owns retrieval, verification, calculation, persistence and price publishing.
+The integration owns retrieval, verification, calculation, persistence and price publishing.
 Missing or stale inputs produce **Unavailable**, never an invented zero. Availability
 reports the affected period and corrective action. Tomorrow may be unpublished while
 today is ready; each requested API window must be fully verified to be READY.
@@ -98,22 +107,33 @@ charges have verified effective dates: Energinet network/system defaults expire 
 verified documentation. The historical EWII household markup of 0.030 DKK/kWh ex VAT
 applies only June–September 2026; it is not a current or future default.
 
-## Consumers and support
+## Fault Isolation and Recovery
 
 The [stable read-only Python API v2](docs/API.md) exposes immutable full-precision
-DKK/kWh prices and readiness. Product version **1.0.0** and API version **2** are separate.
+DKK/kWh prices and readiness.
 The unreleased EV Charge Manager consumer still needs its own
-[API v1→v2 migration](docs/INTEROPERABILITY.md); PE installation does not enable charging.
+[API v1→v2 migration](docs/INTEROPERABILITY.md).
 
-PE models variable electricity cost. It does not reconstruct invoices, allocate
+JTS Tariff Engine models variable electricity cost. It does not reconstruct invoices, allocate
 subscriptions, infer heating eligibility or control vehicles. Hardware performance
 and private contract/source acceptance depend on the installation; cloud benchmarks
 are not Raspberry Pi guarantees.
 
-[Release and compatibility notes](docs/RELEASE_V1.md) ·
+[Backup and rollback](docs/HACS_DISTRIBUTION.md#data-retention-and-rollback) ·
 [Troubleshooting and limitations](docs/COMPATIBILITY.md) ·
 [Implementation provenance](docs/PROVENANCE.md) ·
-[Report a problem](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/issues).
+[Report a problem](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/issues).
+
+## Manuals
+
+- [Human Operations Manual](docs/guides/tariff-engine.md)
+- [AI Systems Reference](docs/ai/tariff-engine.md)
+
+## Operations Log
+
+- [v1.2.0 rebrand and upgrade notes](docs/RELEASE_V12.md) · prepared for publication.
+- [Published releases](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases).
+- [Development and verification history](docs/DEVELOPMENT_STATUS.md).
 
 ## Approved artwork
 

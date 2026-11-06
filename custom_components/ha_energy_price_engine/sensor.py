@@ -81,8 +81,8 @@ class PriceSensor(CoordinatorEntity, SensorEntity):
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, coordinator.site["id"])},
             name=coordinator.site["name"],
-            manufacturer="Energy Price Engine",
-            model="Electricity pricing",
+            manufacturer="Jefferies Tube Solutions",
+            model="JTS Tariff Engine",
             entry_type=DeviceEntryType.SERVICE,
             sw_version=coordinator.integration_version,
         )

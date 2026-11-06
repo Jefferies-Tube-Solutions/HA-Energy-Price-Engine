@@ -1,3 +1,40 @@
+# JTS Tariff Engine v1.2.0 rebrand
+
+Branch: `rebrand/jts-tariff-engine-v1.2.0`. Base main: `6281c9170e5fd479f422d963ca16ac9bf0ef0c3b`.
+Checkpoint: **Rebrand as JTS Tariff Engine v1.2.0**.
+
+Updated display names, service metadata, the approved product icon, installation
+guidance and the integration version. The HA domain, identifiers, pricing, API v2,
+ledger and archive names are preserved. Historical release workflows remain scoped
+to their original branches. No publication is authorized for v1.2.0.
+
+Local validation checked the nine approved source PNG hashes before downsampling
+the product icon. See the exact commit checks for HA, dashboard and packaging CI.
+The first rebrand run passed metadata and package installation, but both HA
+jobs exposed stale v1.1.0 expectations. The historical HACS test now uses
+the exact published v1.1.0 source and the YAML card test uses the installed
+version. The follow-up commit runs the same CI checks.
+
+GitHub repository ID 1431473911 was renamed to `Jefferies-Tube-Solutions/jts-tariff-engine`.
+The GitHub About description and active installation and support URLs use the new
+identity. Historical release references are retained. Latest published release
+was verified as v1.1.0 after the rename.
+
+Documentation checkpoint: **Align Tariff Engine documentation with JTS Brand System**.
+The README follows the JTS layout and links the paired product manuals. It uses
+the existing approved artwork. Changed README and manual paths and image
+targets were checked against the repository tree. GitHub theme/mobile rendering
+was not independently verified. Prior rebrand CI passed on `370729893cdc9ba275b71d94f7580af4a355227d`.
+
+Brand compliance checkpoint: **Check JTS brand compliance on every push and PR**.
+The downstream check pins the approved JTS source, verifies the README header,
+product manuals, gallery and artwork, and runs in read-only GitHub Actions.
+Local validation passed. Mutated theme markup, missing reciprocal links, a
+renamed Preview column and altered runtime icon bytes were each rejected.
+Visual review of the rendered result remains manual.
+
+---
+
 # Approved PNG brand assets — 6 November 2026
 
 Owner requested project-local PNG exports from the new approved JTS Brand System.

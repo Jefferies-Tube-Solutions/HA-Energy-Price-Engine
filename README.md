@@ -131,6 +131,7 @@ are not Raspberry Pi guarantees.
 
 ## Operations Log
 
+- [v1.2.1 Service info and Configure notes](docs/RELEASE_V121.md).
 - [v1.2.0 rebrand and upgrade notes](docs/RELEASE_V12.md).
 - [Published releases](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases).
 - [Development and verification history](docs/DEVELOPMENT_STATUS.md).

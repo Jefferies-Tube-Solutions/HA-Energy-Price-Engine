@@ -1,6 +1,6 @@
 # JTS Tariff Engine — AI Systems Reference
 
-Based on v1.2.0 stable. Service info and Configure enhancements are in review. [Human Operations Manual](../guides/tariff-engine.md).
+For JTS Tariff Engine v1.2.1. [Human Operations Manual](../guides/tariff-engine.md).
 
 ## System Registry
 
@@ -38,4 +38,4 @@ re-read the affected interval. Reads neither fetch sources nor write history.
 CI exercises metadata, installation layouts, both supported test environments
 and dashboard scenarios. Installation-specific rates and physical hardware
 are verified separately. [Development status](../DEVELOPMENT_STATUS.md) ·
-[v1.2.0 release notes](../RELEASE_V12.md).
+[v1.2.1 release notes](../RELEASE_V121.md).

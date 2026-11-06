@@ -4,7 +4,8 @@ Branch: `enhancement/service-info-documentation`. Base: published v1.2.0 (`107b0
 Checkpoint: **Link Service info to the Tariff Engine commissioning guide**.
 
 The public stable baseline is [v1.2.0](https://github.com/Jefferies-Tube-Solutions/jts-tariff-engine/releases/tag/v1.2.0).
-The Service info follow-up was verified on DEV and remains a separate candidate.
+The Service info follow-up was verified on DEV and approved for v1.2.1 stable.
+The versioned candidate runs the full GitHub checks before promotion.
 
 Adds the native service configuration link and an English overview to the
 Configure site and review steps. The existing registry test checks the link.

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "source_repository": "Jefferies-Tube-Solutions/jts-brand-system",
+  "source_commit": "1f361188cfa1636a6cee81c20cff433787e6de23",
+  "source_version": "1.1.0",
+  "source_status": "owner-approved source commit; no new stable brand release",
+  "approved_date": "2026-11-06",
+  "files": [
+    {
+      "path": "assets/brand/jts/v4/jts-deep-space-transparent.png",
+      "source_path": "assets/jts/v4/jts-deep-space-transparent.png",
+      "sha256": "7b00a2a9abb0ed98fc41b5d794c474f10126a28815baabc93a94163b7c4d2116",
+      "bytes": 937875,
+      "width": 3506,
+      "height": 1100
+    },
+    {
+      "path": "assets/brand/jts/v4/jts-deep-space.png",
+      "source_path": "assets/jts/v4/jts-deep-space.png",
+      "sha256": "a89633bcf3f11878a77656d783ccc01e9b3495eefa6e10f85676e01c8f887786",
+      "bytes": 1065039,
+      "width": 3506,
+      "height": 1100
+    },
+    {
+      "path": "assets/brand/jts/v4/jts-icon-800.png",
+      "source_path": "assets/jts/v4/jts-icon-800.png",
+      "sha256": "6b19875a3e9803b7a68e2049fe06a5bc0abc0e062640bf288f197e787b8bdd6e",
+      "bytes": 504533,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "path": "assets/brand/jts/v4/jts-icon.png",
+      "source_path": "assets/jts/v4/jts-icon.png",
+      "sha256": "14b487341ebabc328f6eb626407cbcc60ebf841f1e47adbf70c838052757272b",
+      "bytes": 1171798,
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "assets/brand/jts/v4/jts-white-transparent.png",
+      "source_path": "assets/jts/v4/jts-white-transparent.png",
+      "sha256": "9a24e13f681bd8da3881c493005871f7d1cc53b19c02e1a3969b91e28cadd319",
+      "bytes": 1114936,
+      "width": 3506,
+      "height": 1100
+    },
+    {
+      "path": "assets/brand/tariff-engine/v1/JTS_Tariff_Engine_Full.png",
+      "source_path": "assets/products/tariff-engine/v1/JTS_Tariff_Engine_Full.png",
+      "sha256": "f9ec639d0581f2585e0e2aae9ba3c5a63a1191dabf82416d7419e0e9bd7fa17d",
+      "bytes": 1340883,
+      "width": 3520,
+      "height": 1100
+    },
+    {
+      "path": "assets/brand/tariff-engine/v1/JTS_Tariff_Engine_Full_Deep_Space_Background.png",
+      "source_path": "assets/products/tariff-engine/v1/JTS_Tariff_Engine_Full_Deep_Space_Background.png",
+      "sha256": "420b9ea0846a52e3550450c338a48775748ff4c8f3b31f406084cb53b72e5662",
+      "bytes": 871764,
+      "width": 3520,
+      "height": 1100
+    },
+    {
+      "path": "assets/brand/tariff-engine/v1/JTS_Tariff_Engine_Full_Transparent_Deep_Space.png",
+      "source_path": "assets/products/tariff-engine/v1/JTS_Tariff_Engine_Full_Transparent_Deep_Space.png",
+      "sha256": "d1841bd7e00bdf3650bed65984a205eed2df5e7a20af1dedf7c0add22db50c7a",
+      "bytes": 1261514,
+      "width": 3520,
+      "height": 1100
+    },
+    {
+      "path": "assets/brand/tariff-engine/v1/JTS_Tariff_Engine_Icon.png",
+      "source_path": "assets/products/tariff-engine/v1/JTS_Tariff_Engine_Icon.png",
+      "sha256": "3590d2f8f1767b1da892a30837d7d5d8151ef9fa51f7a3454643ab8cf3767d7f",
+      "bytes": 727269,
+      "width": 1024,
+      "height": 1024
+    }
+  ]
+}

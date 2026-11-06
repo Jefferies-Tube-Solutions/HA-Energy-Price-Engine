@@ -1,3 +1,16 @@
+<p align="right">
+  <a href="https://github.com/Jefferies-Tube-Solutions/HA-Energy-Price-Engine/releases/latest">
+    <img alt="Latest stable Energy Price Engine release" src="https://img.shields.io/github/v/release/Jefferies-Tube-Solutions/HA-Energy-Price-Engine?label=stable&amp;color=2ea44f">
+  </a>
+</p>
+<p align="center">
+  <img src="assets/brand/jts/v4/jts-white-transparent.png#gh-dark-mode-only" alt="Jefferies Tube Solutions — white text for dark theme" width="760">
+  <img src="assets/brand/jts/v4/jts-deep-space-transparent.png#gh-light-mode-only" alt="Jefferies Tube Solutions — Deep Space text for light theme" width="760">
+</p>
+<p align="center">
+  <img src="assets/brand/tariff-engine/v1/JTS_Tariff_Engine_Icon.png" alt="Approved Tariff Engine euro and lightning product symbol" width="128">
+</p>
+
 # Home Assistant Energy Price Engine
 
 Energy Price Engine (PE) is a native Home Assistant integration that calculates and
@@ -101,3 +114,7 @@ are not Raspberry Pi guarantees.
 [Troubleshooting and limitations](docs/COMPATIBILITY.md) ·
 [Implementation provenance](docs/PROVENANCE.md) ·
 [Report a problem](https://github.com/NicolaiTandrup/HA-Energy-Price-Engine/issues).
+
+## Approved artwork
+
+[Logo variants and previews](assets/brand/README.md) · [Human asset guide](docs/guides/brand-assets.md) · [AI asset contract](docs/ai/brand-assets.md). The central brand system owns the editable sources; this project keeps pinned PNG copies.

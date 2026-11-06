@@ -1,3 +1,26 @@
+# Approved PNG brand assets — 6 November 2026
+
+Owner requested project-local PNG exports from the new approved JTS Brand System.
+Branch: `brand/approved-logo-assets`; base main: `931af05e0d115091e91a7c5bc8980e407c1beedd`.
+Checkpoint: **Add approved JTS and Tariff PNG assets with pinned provenance**.
+
+Added nine byte-identical approved PNG copies, including the 800x800 company icon
+at 504533 bytes, a SHA256 manifest, a preview gallery, README imagery, and paired
+human/AI instructions. Native Blender/Python/fonts stay in the central brand set.
+Source brand commit: `1f361188cfa1636a6cee81c20cff433787e6de23` (v1.1.0 source update).
+
+Local verification: central source/PNG validator passed, all nine consumer PNG
+hashes and dimensions matched. Actual remote checks are recorded on this PR/commit;
+they are not implied by local success. No integration/runtime source changed,
+so no new runtime or physical HA acceptance is claimed. The published latest PE
+v1.1.0 release was independently verified before adding its dynamic README badge.
+Existing runtime icon, IDs, APIs, calculations, release tags and assets remain.
+
+Next: review asset-only PR and its CI; runtime branding adoption is separate.
+The historical development checkpoints below are preserved verbatim.
+
+---
+
 # v1.1.0 stable candidate accepted — guarded publisher activated
 
 Branch release/v1.1.0, existing PR23 / issue22. Known reviewed tooling checkpoint
